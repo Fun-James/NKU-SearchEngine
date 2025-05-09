@@ -6,6 +6,7 @@ from .search_suggestion import SearchSuggestion
 import json
 import os
 from collections import Counter
+import urllib.parse
 
 # 搜索历史记录文件
 SEARCH_HISTORY_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'search_history.json')
@@ -166,38 +167,46 @@ def search_results():
     
     if current_app.elasticsearch:
         try:
-            # 解析查询字符串
-            parsed_query = QueryParser.parse_query(query) if query else {"match_all": {}}
-            
-            # 构建ES查询
-            search_body = {
-                "query": {
-                    "bool": {
-                        "must": [parsed_query]
-                    }
-                },
-                "highlight": {
+            # 根据搜索类型选择不同的查询构建方式
+            if search_type == 'document':
+                # 使用文档专用搜索
+                from app.main.document_search import build_document_search_query
+                search_body = build_document_search_query(query)
+                # 添加分页
+                search_body["from"] = (page - 1) * 10
+                # 添加高亮配置
+                search_body["highlight"] = {
                     "fields": {
                         "title": {"pre_tags": ["<strong>"], "post_tags": ["</strong>"]},
                         "content": {"pre_tags": ["<strong>"], "post_tags": ["</strong>"], "fragment_size": 200, "number_of_fragments": 1}
                     }
-                },
-                "from": (page - 1) * 10,
-                "size": 10
-            }
-            
-            # 添加文档类型过滤
-            if search_type == 'document':
-                # 添加文件类型过滤条件
-                doc_extensions = [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx"]
-                search_body["query"]["bool"]["must"].append({
-                    "bool": {
-                        "should": [
-                            {"wildcard": {"url": f"*{ext}"}} for ext in doc_extensions
-                        ]
-                    }
-                })
-            elif search_type == 'webpage':
+                }
+                
+                # 添加排序
+                if sort_by != 'relevance':
+                    search_body["sort"] = [{"crawled_at": {"order": "desc" if sort_by == 'newest' else "asc"}}]
+            else:
+                # 网页搜索继续使用原来的查询解析逻辑
+                # 解析查询字符串
+                parsed_query = QueryParser.parse_query(query) if query else {"match_all": {}}
+                
+                # 构建ES查询
+                search_body = {
+                    "query": {
+                        "bool": {
+                            "must": [parsed_query]
+                        }
+                    },
+                    "highlight": {
+                        "fields": {
+                            "title": {"pre_tags": ["<strong>"], "post_tags": ["</strong>"]},
+                            "content": {"pre_tags": ["<strong>"], "post_tags": ["</strong>"], "fragment_size": 200, "number_of_fragments": 1}
+                        }
+                    },
+                    "from": (page - 1) * 10,
+                    "size": 10
+                }
+                
                 # 排除文档类型
                 doc_extensions = [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx"]
                 search_body["query"]["bool"]["must_not"] = [
@@ -234,22 +243,33 @@ def search_results():
             results = []
             for hit in resp['hits']['hits']:
                 source = hit['_source']
-                highlight = hit.get('highlight', {})                # 准备摘要
-                if 'content' in highlight:
-                    snippet = '...'.join(highlight['content'])
+                url = source.get('url', '#')
+                
+                # 解码URL和提取文件名
+                try:
+                    decoded_url = urllib.parse.unquote(url)
+                    filename = decoded_url.split('/')[-1]
+                except:
+                    decoded_url = url
+                    filename = url.split('/')[-1]
+                
+                # 准备标题：优先使用高亮的标题，如果没有就使用文件名
+                if 'title' in hit.get('highlight', {}):
+                    title = ''.join(hit['highlight']['title'])
+                else:
+                    title = filename
+                
+                # 准备摘要
+                if 'content' in hit.get('highlight', {}):
+                    snippet = '...'.join(hit['highlight']['content'])
                 else:
                     content = source.get('content', '')
-                    # 使用智能摘要提取算法
                     snippet = get_smart_snippet(content, query)
-                  # 使用高亮标题或原始标题
-                if 'title' in highlight:
-                    title = ''.join(highlight['title'])
-                else:
-                    title = source.get('title', '无标题')
                 
                 results.append({
                     'title': title,
-                    'url': source.get('url', '#'),
+                    'url': decoded_url,
+                    'filename': filename,  # 添加文件名字段
                     'snippet': snippet,
                     'score': hit['_score']
                 })
