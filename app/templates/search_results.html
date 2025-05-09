@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索结果 - {{ query }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="search-header">
+            <a href="{{ url_for('main.index') }}" class="back-link">&larr; 返回首页</a>            <h1>搜索结果: "{{ query }}"</h1>
+            <form method="GET" action="{{ url_for('main.search_results') }}" class="search-bar-results">
+                <div class="search-container">
+                    <div class="search-type-toggle">
+                        <button type="button" id="search-type-btn" class="search-type-btn" onclick="toggleSearchType()">
+                            <span id="search-type-text">{{ '文档搜索' if search_type == 'document' else '网页搜索' }}</span>
+                        </button>
+                    </div>
+                    <input type="text" id="search-input" name="query" value="{{ query }}" placeholder="输入搜索关键词..." required autocomplete="off">
+                    <input type="hidden" id="search-type" name="search_type" value="{{ search_type }}">
+                    <div id="search-suggestions" class="suggestions-box"></div>
+                    <button type="submit">搜索</button>
+                </div>
+            </form>
+        </div>
+        
+        {% if results %}
+            <div class="sort-options">
+                <span>排序方式: </span>
+                <a href="{{ url_for('main.search_results', query=query, sort='relevance', page=1) }}" class="{{ 'active' if sort_by == 'relevance' else '' }}">相关性</a> | 
+                <a href="{{ url_for('main.search_results', query=query, sort='date', page=1) }}" class="{{ 'active' if sort_by == 'date' else '' }}">日期</a>            </div>
+            
+            <p class="results-count">
+                找到约 {{ total_hits }} 条结果
+                {% if search_time %}
+                    <span class="search-time">({{ search_time|round(3) }} 秒)</span>
+                {% endif %}
+                {% if search_stats and search_stats.max_score > 0 %}
+                    <span class="search-relevance">, 最高相关度: {{ search_stats.max_score|round(2) }}</span>
+                {% endif %}
+            </p>
+            
+            {% if query_suggestion %}
+                <div class="query-suggestion">
+                    您是否要搜索: <a href="{{ url_for('main.search_results', query=query_suggestion) }}">{{ query_suggestion }}</a>
+                </div>
+            {% endif %}
+            
+            {% if clusters and clusters|length > 1 %}
+                <div class="cluster-container">
+                    <div class="cluster-header">相关主题：</div>
+                    <div class="cluster-items">
+                        {% for cluster in clusters %}
+                            <div class="cluster-item">
+                                <span class="cluster-name">{{ cluster.name }}</span>
+                                <span class="cluster-count">({{ cluster.count }})</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+              {% if total_hits > 0 %}
+            {% endif %}
+            
+            <ul class="results-list">
+                {% for result in results %}
+                <li class="result-item">
+                    <h2><a href="{{ result.url }}" target="_blank">{{ result.title }}</a></h2>
+                    <p class="result-url">{{ result.url }}</p>
+                    <p class="result-snippet">{{ result.snippet | safe }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            
+            <!-- 添加分页功能 -->
+            {% if total_hits > 10 %}
+            <div class="pagination">
+                {% set total_pages = (total_hits / 10) | round(0, 'ceil') | int %}
+                {% if page > 1 %}
+                    <a href="{{ url_for('main.search_results', query=query, page=page-1) }}">&laquo; 上一页</a>
+                {% endif %}
+                
+                {% for p in range(max(1, page-2), min(page+3, total_pages+1)) %}
+                    {% if p == page %}
+                        <span class="current-page">{{ p }}</span>
+                    {% else %}
+                        <a href="{{ url_for('main.search_results', query=query, page=p) }}">{{ p }}</a>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if page < total_pages %}
+                    <a href="{{ url_for('main.search_results', query=query, page=page+1) }}">下一页 &raquo;</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        {% elif query %}
+            <p>没有找到与 "{{ query }}" 相关的结果。</p>
+        {% else %}
+             <p>请输入关键词进行搜索。</p>
+        {% endif %}
+    </div>
+</body>
+</html>

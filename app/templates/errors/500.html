@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务器错误 - 500</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="error-container">
+            <h1 class="error-title">500</h1>
+            <h2>服务器错误</h2>
+            <p class="error-description">抱歉，服务器遇到了一个错误。</p>
+            <p>zaz已经收到此问题的通知，并将尽快解决。</p>
+            <a href="{{ url_for('main.index') }}" class="back-link">返回首页</a>
+        </div>
+    </div>
+</body>
+</html>
