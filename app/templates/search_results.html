@@ -65,8 +65,7 @@
             {% endif %}
             
             <ul class="results-list">
-                {% for result in results %}                <li class="result-item">
-                    <h2><a href="{{ result.url }}" target="_blank">{{ result.title }}</a></h2>
+                {% for result in results %}                <li class="result-item">                    <h2><a href="{{ result.url }}" target="_blank">{{ result.title | safe }}</a></h2>
                     {% if search_type == 'document' %}
                         <p class="result-info">
                             <span class="file-name">文件名: {{ result.filename }}</span>

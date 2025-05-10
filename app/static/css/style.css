@@ -15,6 +15,9 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 h1 {
@@ -330,12 +333,18 @@ button[type="submit"]:hover {
     font-size: 0.9em;
     color: #006621; /* Google-like URL color */
     margin-bottom: 5px;
-    word-break: break-all;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    display: block;
 }
 
 .result-snippet {
     font-size: 1em;
     color: #545454;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 /* 搜索结果聚类样式 */
