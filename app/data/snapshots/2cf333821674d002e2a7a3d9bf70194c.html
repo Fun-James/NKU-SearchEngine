@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>南开大学教工邮件系统 - 邮箱用户登录</title>
+<link href="/_upload/tpl/02/62/610/template610/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="/_upload/tpl/02/62/610/template610/css/login.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/_upload/tpl/02/62/610/template610/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/_upload/tpl/02/62/610/template610/js/jquery-validate.js"></script>
+<script type="text/javascript" src="/_upload/tpl/02/62/610/template610/js/jquery-cookie.js"></script>
+</head>
+<body>
+<div class="wrapper">
+	<div class="loginheader">
+	  <div class="w">
+		<div class="logo"><a href="http://www.nankai.edu.cn"><img src="/_upload/tpl/02/62/610/template610/images/logo_purple.png" /></a></div>
+		<div class="header-link">
+			<a href="https://qiye.163.com/entry/help/hot-question.htm">热点问题</a> | 
+			<a href="https://qiye.163.com/entry/help/help-client.htm" target="_blank">使用帮助</a> | 
+			<a href="https://qiye163.qiyukf.com/client?k=abab5b9989e6f898240067f40874a096&wp=1&gid=815346&robotShuntSwitch=1&robotId=9091">在线客服</a> |  
+			<a href="mailto://xxbxxb@nankai.edu.cn">意见建议</a>
+		</div>
+	  </div>
+	</div>
+
+	<div class="loginbox">
+		<div class="w">
+			<div class="loginform">
+				<div class="title">
+					<ul><li class="cur">教工邮箱</li><li><a href="https://mail.nankai.edu.cn/">学生邮箱</a></li></ul>
+				</div>
+				<form action="https://entryhz.qiye.163.com/domain/domainEntLogin" id="loginForm" method="post">
+					<input type="hidden" name="domain" value="nankai.edu.cn" />
+					<input type="hidden" name="secure" value="1" />
+					<input type="hidden" name="ch" id="ch" value="">
+					<input type="hidden" name="support_verify_code" id="support_verify_code" value="1">
+					<div class="bd">
+						<span id="msgpid" class="msg" name="msgpid"></span>
+						<div class="loginrow"><input id="account_name"  class="txt username" name="account_name" type="text" placeholder="请输入用户名" /></div>
+						<div class="loginrow"><input id="password" class="txt password" name="password" type="password"  placeholder="请输入密码" /></div>
+						<div class="loginrow loginrow_code" id="verifyCodeWrap" style="display:none;">
+							<input id="verify_code" class="txt code" name="verify_code" type="text"  placeholder="请输入验证码" />
+							<a class="codeimg" id="codeImgWrap" href="javascript:void(0);">
+                                <img src="" >
+                            </a>
+						</div>						
+					</div>	
+					<div  class="loginchk">
+						<label class="lab_chk" for="remUsername"><input id="remUsername" type="checkbox" value="1">记住用户名</label>&nbsp;&nbsp;
+						<label class="lab_chk" for="secure"><input type="checkbox" id="secure" value="1" checked="">SSL安全登录</label>&nbsp;&nbsp;
+						<label class="lab_chk" for="allsecure"><input name="all_secure" id="all_secure" type="checkbox" value="1">全程SSL</label>
+					</div>	
+					<div class="loginbtn">
+					<input id="btn_submit" class="btn" name="" type="submit" value="" />
+					</div>
+				</form>
+				<div class="links">
+					<a href="https://ems.nankai.edu.cn" target="_blank">教工邮箱注册</a>
+					<a href="https://ems.nankai.edu.cn" target="_blank">忘记密码？</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="loginfooter">南开大学 · 党委网络安全和信息化办公室 大数据管理中心<br>津教备0061号&nbsp;&nbsp;				<a href="https://beian.miit.gov.cn/" target="_blank">津ICP备12003308号-1</a>&nbsp;&nbsp;				<a class="gawb" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12010402000967">津公网安备12010402000967号</a></div>
+	</div>	
+</div>
+<script type="text/javascript" src="https://mail.qiye.163.com/js/loginjs.jsp"></script>
+    <script>
+        //根据地区修改
+        //华东地区：http://entry.qiye.163.com/domain/getverifycode.jsp
+        //华北地区：http://entryhz.qiye.163.com/domain/getverifycode.jsp
+        var verifyCodeUrl = "http://entryhz.qiye.163.com/domain/getverifycode.jsp";
+        var hl = getHl();
+		function getHl(){
+			var hl = getParam("hl");
+			if(!hl){
+				hl = cookie("hl");
+			}
+			if(hl == "en")hl = "en_US";
+			if(hl == "zh-TW")hl = "zh_TW";
+			if(hl == "zh-cn")hl = "zh_CN";
+			return hl || "zh_CN";
+		}
+		
+		var verifyCode = getQueryString("code");
+        function getId(id) {
+            return document.getElementById(id);
+        };
+        function getQueryString(e) {
+            var t = new RegExp("(^|&)" + e + "=([^&]*)(&|$)", "i");
+            var ps = window.location.search || window.location.hash;
+            var n = ps.substr(1).match(t);
+            if (n != null) {
+                return unescape(n[2]);
+            };
+            return "";
+        };
+        function changeVerifyCode() {
+            var url = verifyCodeUrl + "?_searchtime=" + new Date().getTime();
+            codeImgWrap.getElementsByTagName("img")[0].src = url;
+        };
+        var msgMap = {	
+			"input.account_name":"请输入登录帐号",
+			"input.verifyCodeMsg":"请输入验证码",
+			"input.codeError":"验证码错误",
+			"input.email":"请输入完整的邮箱地址",
+			"input.password":"请你输入密码",
+			"input.noat":"请使用不包括@部分帐号登录",
+			"input.accountlocked":"密码输入错误次数过多，请稍候再试",
+			
+			"input.account_name.en_US":"please enter your account",
+			"input.verifyCodeMsg.en_US":"please input verification code",
+			"input.codeError.en_US":"Verification code error",
+			"input.email.en_US":"please enter your email address",
+			"input.password.en_US":"please enter your password",
+			"input.noat.en_US":"please enter your account without '@'",
+			"input.accountlocked.en_US":"wrong password too many times, please try again later",
+			
+			"input.account_name.zh_TW":"請輸入登錄帳號",
+			"input.verifyCodeMsg.zh_TW":"请输入驗證碼",
+			"input.codeError.zh_TW":"驗證碼錯誤",
+			"input.email.zh_TW":"請輸入完整的郵箱地址",
+			"input.password.zh_TW":"請你輸入密碼",
+			"input.noat.zh_TW":"請使用不包括@部分的帐号登录",
+			"input.accountlocked.zh_TW":"錯誤密碼輸入次數過多，請稍後再試",
+			"ERR.LOGIN.PASSERR.zh_CN":"用户名和密码不匹配",
+			"ERR.LOGIN.IPDENY.zh_CN":"登录失败，你的IP在黑名单中，请你联系管理员",
+			"ERR.LOGIN.ILLEGALACCOUNT.zh_CN":"该帐号属于群发名单，不允许登录邮箱",
+			"ERR.LOGIN.USERNOTEXIST.zh_CN":"该帐号不存在，请你确认域名和帐号",
+			"ERR.LOGIN.SYSTEMBUSY.zh_CN":"登录系统繁忙，请您稍后再试",
+			"ERR.LOGIN.DOMAINEXPED.zh_CN":"该企业邮箱已经过期了",
+			"ERR.LOGIN.DOMAINSTATUS.zh_CN":"该企业邮箱已被禁用，请你联系客服",
+			"ERR.LOGIN.DOMAINNOTEXIST.zh_CN":"该域名还未开通企业邮箱，请联系客服",
+			"ERR.LOGIN.USERSTATUS.zh_CN":"该帐号已被禁用或已删除，请联系管理员",
+			"ERR.LOGIN.USEREXP.zh_CN":"该帐号已过期，请联系管理员",
+			"ERR.SESSIONNULL.zh_CN":"会话已经失效，请你重新登录操作",
+			"ERR.REQ.VERIFYCODE.zh_CN":"错误密码输入次数过多，请稍后再试",
+			"ERR.ILLEGAL.zh_CN":"非法操作",
+			"ERR.SYSTEM.zh_CN":"系统错误，请联系客服",
+			"ERR.PARAM.zh_CN":"参数错误",
+			"EXP_AUTH_USER_STATUS_Suspended.zh_CN":"该用户已被禁用，请联系客服",
+			"EXP_AUTH_USER_STATUS_ERROR.zh_CN":"该用户已被禁用，请联系客服",
+			"EXP_AUTH_USER_FORBIDDEN.zh_CN":"该用户已被禁用，请联系客服",
+			"EXP_AUTH_USER_NOT_FOUND.zh_CN":"用户不存在，请联系客服",
+			"EXP_AUTH_COOKIE_NOT_FOUND.zh_CN":"cookie丢失，请重新登录",
+			"EXP_AUTH_COOKIE_TIMEOUT.zh_CN":"登录信息超时，请重新登录",
+			"ERR.RIGHT.DENY.zh_CN":"对不起，您没有权限进行此操作",
+			"ERR.LOGIN.SUPERADMINERR.zh_CN":"对不起 请从主域名登录",
+			"ERR.LOGIN.USERNOTEXIS.zh_CN":"该帐号不存在，请你确认域名和帐号",
+			"SYSTEM.BUSY.zh_CN":"系统忙，请稍后再试",
+			"ERR.REQ.VERI.zh_CN":"错误密码输入次数过多，请稍后再试",
+			"ERR.LOGIN.USRSEXP.zh_CN":"该帐号已过期，请联系管理员",
+			"ERR.IM.LOGIN.IPDENY.zh_CN":"登录失败，你的IP在黑名单中，请你联系管理员",
+			"DOMAIN.NOTEXIST.zh_CN":"找不到该域名信息，请联系客服",
+
+			"ERR.LOGIN.PASSERR.zh_TW":"用戶名和密碼不匹配",
+			"ERR.LOGIN.IPDENY.zh_TW":"登錄失敗，你的IP在黑名單中，請你聯系管理員",
+			"ERR.LOGIN.ILLEGALACCOUNT.zh_TW":"該帳號屬於群發名單，不允許登錄郵箱",
+			"ERR.LOGIN.USERNOTEXIST.zh_TW":"該帳號不存在，請你確認域名和帳號",
+			"ERR.LOGIN.SYSTEMBUSY.zh_TW":"登錄系統繁忙，請您稍後再試",
+			"ERR.LOGIN.DOMAINEXPED.zh_TW":"該企業郵箱已經過期了",
+			"ERR.LOGIN.DOMAINSTATUS.zh_TW":"該企業郵箱已被禁用，請你聯系客服",
+			"ERR.LOGIN.DOMAINNOTEXIST.zh_TW":"該域名還未開通企業郵箱，請聯系客服",
+			"ERR.LOGIN.USERSTATUS.zh_TW":"該帳號已被禁用或已刪除，請聯系管理員",
+			"ERR.LOGIN.USEREXP.zh_TW":"該帳號已過期，請聯系管理員",
+			"ERR.SESSIONNULL.zh_TW":"會話已經失效，請你重新登錄操作",
+			"ERR.REQ.VERIFYCODE.zh_TW":"錯誤密碼輸入次數過多，請稍後再試",
+			"ERR.ILLEGAL.zh_TW":"非法操作",
+			"ERR.SYSTEM.zh_TW":"系統錯誤，請聯系客服",
+			"ERR.PARAM.zh_TW":"參數錯誤",
+			"EXP_AUTH_USER_STATUS_Suspended.zh_TW":"該用戶已被禁用，請聯系客服",
+			"EXP_AUTH_USER_STATUS_ERROR.zh_TW":"該用戶已被禁用，請聯系客服",
+			"EXP_AUTH_USER_FORBIDDEN.zh_TW":"該用戶已被禁用，請聯系客服",
+			"EXP_AUTH_USER_NOT_FOUND.zh_TW":"用戶不存在，請聯系客服",
+			"EXP_AUTH_COOKIE_NOT_FOUND.zh_TW":"cookie丟失，請重新登錄",
+			"EXP_AUTH_COOKIE_TIMEOUT.zh_TW":"登錄信息超時，請重新登錄",
+			"ERR.RIGHT.DENY.zh_TW":"對不起，您沒有權限進行此操作",
+			"ERR.LOGIN.SUPERADMINERR.zh_TW":"對不起 請從主域名登錄",
+			"ERR.LOGIN.USERNOTEXIS.zh_TW":"該帳號不存在，請你確認域名和帳號",
+			"SYSTEM.BUSY.zh_TW":"系統忙，請稍後再試",
+			"ERR.REQ.VERI.zh_TW":"錯誤密碼輸入次數過多，請稍後再試",
+			"ERR.LOGIN.USRSEXP.zh_TW":"該帳號已過期，請聯系管理員",
+			"ERR.IM.LOGIN.IPDENY.zh_TW":"登錄失敗，你的IP在黑名單中，請你聯系管理員",
+			"DOMAIN.NOTEXIST.zh_TW":"找不到該域名信息，請聯系客服",
+
+			"ERR.LOGIN.PASSERR.en_US":"Username and password DO NOT match",
+			"ERR.LOGIN.IPDENY.en_US":"IP in blacklist,contact the administrator",
+			"ERR.LOGIN.ILLEGALACCOUNT.en_US":"Maillist not allowed to login",
+			"ERR.LOGIN.USERNOTEXIST.en_US":"User not exits",
+			"ERR.LOGIN.SYSTEMBUSY.en_US":"System busy,try later",
+			"ERR.LOGIN.DOMAINEXPED.en_US":"corp mail has expired",
+			"ERR.LOGIN.DOMAINSTATUS.en_US":"corp mail is disabled,contact customer service",
+			"ERR.LOGIN.DOMAINNOTEXIST.en_US":"domain not exist",
+			"ERR.LOGIN.USERSTATUS.en_US":"user disabled or not exists",
+			"ERR.LOGIN.USEREXP.en_US":"user expired",
+			"ERR.SESSIONNULL.en_US":"session timeout",
+			"ERR.REQ.VERIFYCODE.en_US":"exceed password-wrong times",
+			"ERR.ILLEGAL.en_US":"illegal operation",
+			"ERR.SYSTEM.en_US":"System error,contact customer service",
+			"ERR.PARAM.en_US":"param error",
+			"EXP_AUTH_USER_STATUS_Suspended.en_US":"User disabled,contact customer service",
+			"EXP_AUTH_USER_STATUS_ERROR.en_US":"User disabled,contact customer service",
+			"EXP_AUTH_USER_FORBIDDEN.en_US":"User forbidden,contact customer service",
+			"EXP_AUTH_USER_NOT_FOUND.en_US":"User not found",
+			"EXP_AUTH_COOKIE_NOT_FOUND.en_US":"cookie not found",
+			"EXP_AUTH_COOKIE_TIMEOUT.en_US":"cookie timeout",
+			"ERR.RIGHT.DENY.en_US":"Permission denied",
+			"ERR.LOGIN.SUPERADMINERR.en_US":"try Login from main domain",
+			"ERR.LOGIN.USERNOTEXIS.en_US":"user not exists",
+			"SYSTEM.BUSY.en_US":"system busy,try later",
+			"ERR.REQ.VERI.en_US":"exceed password-wrong times",
+			"ERR.LOGIN.USRSEXP.en_US":"User expired",
+			"ERR.IM.LOGIN.IPDENY.en_US":"IP denied",
+			"DOMAIN.NOTEXIST.en_US":"domain not exists"
+        };
+		
+		function getParam(key){
+			var str = decodeURI(location.search.substring(1));
+			if(str=="")return null;
+			var arr = str.split("&");
+			for(var i=0;i<arr.length;i++){
+				if(arr[i].indexOf(key+"=")==0){
+					return arr[i].substring(key.length+1);
+				}
+			}
+			return null;
+		}
+		
+        function getMsg(code) {
+            var value = msgMap[code + "." + hl];
+            if (!value) {
+                value = msgMap[code];
+            }
+            return value;
+        };
+		
+		function setMsgpid (msg) {
+			if(getId("app-download-wrapper")){
+				getId("app-download-wrapper").style.display = 'none';
+			}
+			if(getId("err-wrapper")){
+				getId("err-wrapper").style.display = 'block';
+			}
+			getId("msgpid").innerText = msg;
+		}
+		function showError(code, element){
+			var msg = getMsg(code);
+			var msgpid = getId("msgpid");
+			if(msgpid){
+				setMsgpid(msg);
+			}else{
+				alert(msg);
+			}
+			if(element){
+				element.focus();
+			}
+		}
+		function setMsg(){
+			var msgpid = getId("msgpid");
+			if(!msgpid || msgpid.innerHTML.trim() == ""){
+				var _msg = getParam('msg');
+				var msg = cookie("ex_msg") || getMsg(_msg);
+				if(window.errMsg || !msg)return;
+				msg = msg.replaceAll("\\+", " ");
+				if(msgpid){
+					setMsgpid(msg);
+				}else{
+					alert(msg);
+				}
+				cookie("ex_msg", "");
+			}
+		}
+		
+        function execOnLoad() {
+            //检查是否有异常信息
+			setMsg();
+			
+			var verifyCodeWrap = getId("verifyCodeWrap");
+            var codeImgWrap = getId("codeImgWrap");
+            getId("codeImgWrap").onclick = function () {
+                changeVerifyCode();
+            };
+            if (verifyCode === "true") {
+                verifyCodeWrap.style.display = "block";
+                changeVerifyCode();
+            };
+            var verifyCodeInputEle = getId("verify_code");
+            verifyCodeInputEle.value = getMsg("input.verifyCodeMsg");
+            verifyCodeInputEle.onfocus = function () {
+                if (this.value == getMsg("input.verifyCodeMsg")) {
+                    this.value = "";
+                    this.className = "";
+                }
+            };
+            verifyCodeInputEle.onblur = function () {
+                if (this.value == "") {
+                    this.value = getMsg("input.verifyCodeMsg");
+                    this.className = "ipt-sample";
+                }
+            };
+
+
+           //var qrLogin = new QrLogin()
+            //qrLogin.scanCodeHandler()
+        };
+        if (window.attachEvent) {
+            window.attachEvent("onload", execOnLoad);
+        } else if (window.addEventListener) {
+            window.addEventListener("load", execOnLoad, false);
+        } else {
+            window.onload = execOnLoad;
+        };
+
+        function QrLogin() {
+
+        }
+/* cookie */
+var cookie = function (k, j, m) {
+  if (typeof j == "undefined") {
+    j = null;
+    if (document.cookie && document.cookie != "") {
+      var g = document.cookie.split(";");
+      for (var f = 0; f < g.length; f++) {
+        var h = g[f].trim();
+        if (h.substring(0, k.length + 1) == (k + "=")) {
+          j = decodeURIComponent(h.substring(k.length + 1));
+          break
+        }
+      }
+    }
+    return j
+  }
+  m = m || {};
+  if (j === null) {
+    j = "";
+    m.expires = -1
+  }
+  var b = "";
+  if (m.expires && (typeof m.expires == "number" || m.expires.toUTCString)) {
+    var d;
+    if (typeof m.expires == "number") {
+      d = new Date();
+      d.setTime(d.getTime() + (m.expires * 24 * 60 * 60 * 1000))
+    } else {
+      d = m.expires
+    }
+    b = "; expires=" + d.toUTCString()
+  }
+  var l = m.path ? "; path=" + (m.path) : "";
+  var e = m.domain ? "; domain=" + (m.domain) : "";
+  var a = m.secure ? "; secure" : "";
+  document.cookie = [k, "=", encodeURIComponent(j), b, l, e, a].join("")
+};
+
+var a = cookie("qiye_account");
+if (a) {
+  $("#remUsername")[0].checked = "checked";
+  $('#account_name').val(a);
+}
+
+$('#btn_submit').click(function (e) {
+  //e.preventDefault();
+  if (getId("remUsername").checked) {
+    var i = location.hostname;
+    cookie("qiye_account", $('#account_name').val(), {domain: i, path: "/", expires: 4})
+  } else {
+    cookie("qiye_account", "", {domain: i, path: "/", expires: 0})
+  }
+});
+
+
+        QrLogin.prototype.refreshQrCode = (function () {
+            var appCodeImg = $("#appCode");
+            return function () {
+                var imgUrl = 'https://mail.qiye.163.com/mailapp/commonweb/qrcode/getqrcode.do?p=qiyemail&w=130&h=130&r=' + new Date().getTime();
+                // var imgUrl = '/commonweb/qrcode/getqrcode.jpg?w=130&h=130&r=' + new Date().getTime() ;//测试用
+                appCodeImg.prop('src', imgUrl);
+            }
+        })()
+
+var p = /Android|webOS|iPhone|iPad|BlackBerry/i.test(navigator.userAgent);
+    
+　　if (p==false){
+     
+      var s = document.getElementById("all_secure");
+     
+      s.checked = "true";
+     }
+</script>
+</body>
+</html>
+
+ <img src="/_visitcount?siteId=121&type=1&columnId=6769" style="display:none" width="0" height="0"/>

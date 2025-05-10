@@ -6,6 +6,7 @@ import time
 import urllib3
 import ssl
 import requests
+from app import create_app  # 新增导入
 
 def main():
     # 禁用SSL警告和设置
@@ -43,21 +44,29 @@ def main():
     es = Elasticsearch('http://localhost:9200')
     if not es.ping():
         print("无法连接到Elasticsearch，请确保服务已启动")
-        return    # 创建索引
-    index_name = "nku_web"
+        return
+
+    # --- 新增：创建 Flask 应用上下文 ---
+    flask_app = create_app() 
+    # --- 应用上下文创建结束 ---
+
+    index_name = flask_app.config['INDEX_NAME']  # 修改：从 flask_app.config 获取 INDEX_NAME
     if not create_index_if_not_exists(es, index_name):
         print("创建索引失败")
         return
         
     print(f"开始爬取网页(最大 {args.max_pages} 个页面)...")
-    # 开始爬取网页
-    crawled_data = spider_main(
-        start_url=args.start_url,
-        max_pages=args.max_pages,
-        delay=args.delay,
-        respect_robots=not args.skip_robots,
-        max_depth=args.max_depth
-    )
+    
+    # --- 修改：在应用上下文中执行爬虫 ---
+    with flask_app.app_context():
+        crawled_data = spider_main(
+            start_url=args.start_url,
+            max_pages=args.max_pages,
+            delay=args.delay,
+            respect_robots=not args.skip_robots,
+            max_depth=args.max_depth
+        )
+    # --- 应用上下文结束 ---
     
     if crawled_data:
         print(f"\n爬取完成，共获取 {len(crawled_data)} 个页面")
@@ -79,7 +88,8 @@ def main():
             print(f"索引大小: {store_size:.2f} MB")
             print(f"总耗时: {elapsed_time:.2f} 秒")
             print(f"平均处理速度: {len(crawled_data) / elapsed_time:.2f} 页/秒")
-        except Exception as e:            print(f"获取索引统计信息失败: {e}")
+        except Exception as e:
+            print(f"获取索引统计信息失败: {e}")
     else:
         print("爬虫没有返回数据")
 

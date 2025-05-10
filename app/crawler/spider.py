@@ -6,6 +6,9 @@ import re
 from urllib.robotparser import RobotFileParser
 import ssl
 import urllib3
+import os
+import hashlib
+from flask import current_app
 
 # 禁用SSL警告
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -98,7 +101,8 @@ def fetch_page(url, max_retries=3):
                 'content': f'[{file_info["file_type"]}] {url}',  # 在内容中标明文件类型
                 'is_document': True,
                 'file_type': file_info['file_type'],
-                'mime_type': file_info['mime_type']
+                'mime_type': file_info['mime_type'],
+                'snapshot_path': None  # 文档类型没有HTML快照
             }
         except requests.exceptions.RequestException:
             # 如果HTTP失败，尝试HTTPS
@@ -110,7 +114,8 @@ def fetch_page(url, max_retries=3):
                     'content': f'[{file_info["file_type"]}] {url}',
                     'is_document': True,
                     'file_type': file_info['file_type'],
-                    'mime_type': file_info['mime_type']
+                    'mime_type': file_info['mime_type'],
+                    'snapshot_path': None  # 文档类型没有HTML快照
                 }
             except requests.exceptions.RequestException as e:
                 print(f"Failed to fetch document {url}: {e}")
@@ -135,14 +140,35 @@ def fetch_page(url, max_retries=3):
             content = extract_content(soup)
             links = parse_links(response.text, url)
             
+            # --- 新增：保存网页快照 ---
+            snapshot_path = None
+            try:
+                snapshot_folder = current_app.config['SNAPSHOT_FOLDER']
+                if not os.path.exists(snapshot_folder):
+                    os.makedirs(snapshot_folder)
+                
+                # 使用URL的MD5哈希值作为文件名，避免特殊字符和长度问题
+                snapshot_filename = hashlib.md5(url.encode('utf-8')).hexdigest() + '.html'
+                snapshot_path = os.path.join(snapshot_folder, snapshot_filename)
+                
+                with open(snapshot_path, 'w', encoding='utf-8') as f:
+                    f.write(response.text)
+                print(f"Saved snapshot for {url} to {snapshot_path}")
+            except Exception as e:
+                print(f"Error saving snapshot for {url}: {e}")
+                snapshot_path = None  # 如果保存失败，则路径为None
+            # --- 网页快照保存结束 ---
+
             return {
                 'url': url,  # 保留原始URL
                 'title': title,
-                'content': content,
+                'content': content,  # 这是提取后的纯文本内容
+                'html_content': response.text,  # 保留原始HTML文本
                 'links': links,
                 'is_document': False,
                 'file_type': 'webpage',
-                'mime_type': 'text/html'
+                'mime_type': 'text/html',
+                'snapshot_path': snapshot_path  # 新增快照路径
             }
         except requests.exceptions.RequestException as e:
             # 如果是最后一次尝试且使用的是HTTP，则尝试原始HTTPS
@@ -161,17 +187,35 @@ def fetch_page(url, max_retries=3):
                     content = extract_content(soup)
                     links = parse_links(response.text, url)
                     
+                    # --- 新增：保存网页快照 (HTTPS回退时) ---
+                    snapshot_path_https = None
+                    try:
+                        snapshot_folder = current_app.config['SNAPSHOT_FOLDER']
+                        if not os.path.exists(snapshot_folder):
+                            os.makedirs(snapshot_folder)
+                        snapshot_filename = hashlib.md5(url.encode('utf-8')).hexdigest() + '.html'
+                        snapshot_path_https = os.path.join(snapshot_folder, snapshot_filename)
+                        with open(snapshot_path_https, 'w', encoding='utf-8') as f:
+                            f.write(response.text)
+                        print(f"Saved snapshot for {url} (HTTPS fallback) to {snapshot_path_https}")
+                    except Exception as e_https:
+                        print(f"Error saving snapshot for {url} (HTTPS fallback): {e_https}")
+                        snapshot_path_https = None
+                    # --- 网页快照保存结束 ---
+
                     return {
                         'url': url,
                         'title': title,
                         'content': content,
+                        'html_content': response.text,  # 保留原始HTML文本
                         'links': links,
                         'is_document': False,
                         'file_type': 'webpage',
-                        'mime_type': 'text/html'
+                        'mime_type': 'text/html',
+                        'snapshot_path': snapshot_path_https  # 新增快照路径
                     }
-                except requests.exceptions.RequestException as e:
-                    print(f"Attempt {attempt + 1} failed for {url}: {e}")
+                except requests.exceptions.RequestException as e_https_final:
+                    print(f"Attempt {attempt + 1} failed for {url} (HTTPS fallback): {e_https_final}")
             else:
                 print(f"Attempt {attempt + 1} failed for {http_url}: {e}")
             
@@ -307,12 +351,13 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                 crawled_data.append({
                     'url': current_url,
                     'title': page_data['title'],
-                    'content': page_data['content'],
+                    'content': page_data['content'],  # 文档内容已经是处理过的文本或路径
                     'file_info': {
                         'file_type': page_data['file_type'],
                         'mime_type': page_data['mime_type']
                     },
-                    'crawled_at': time.strftime('%Y-%m-%d %H:%M:%S')
+                    'crawled_at': time.strftime('%Y-%m-%d %H:%M:%S'),
+                    'snapshot_path': page_data.get('snapshot_path')  # 文档类型快照路径为None
                 })
             else:
                 # page_data['content'] 是已经处理过的文本内容
@@ -321,8 +366,9 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                 crawled_data.append({
                     'url': current_url,
                     'title': page_data['title'],
-                    'content': content_text,
-                    'crawled_at': time.strftime('%Y-%m-%d %H:%M:%S')
+                    'content': content_text,  # 索引纯文本内容
+                    'crawled_at': time.strftime('%Y-%m-%d %H:%M:%S'),
+                    'snapshot_path': page_data.get('snapshot_path')  # 新增快照路径
                 })
             
             # 解析并添加新链接，设置新深度

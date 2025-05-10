@@ -204,21 +204,16 @@ def search_results():
                 # 解析查询字符串
                 parsed_query = QueryParser.parse_query(query) if query else {"match_all": {}}
 
-                # 新增：如果parsed_query是bool/must结构，转换为should（或关系），并设置minimum_should_match
-                # 假设QueryParser.parse_query(query)返回 {'multi_match': ...} 或 {'match': ...}
-                # 如果是多个term，构造should
+                # 修改：如果parsed_query是bool/must结构，直接用must，否则包装成must，实现所有term都必须命中
                 if isinstance(parsed_query, dict) and "bool" in parsed_query and "must" in parsed_query["bool"]:
-                    # 兼容老的bool/must结构
-                    should_clauses = parsed_query["bool"]["must"]
+                    must_clauses = parsed_query["bool"]["must"]
                 else:
-                    # 单一查询，包装成should
-                    should_clauses = [parsed_query]
+                    must_clauses = [parsed_query]
 
                 search_body = {
                     "query": {
                         "bool": {
-                            "should": should_clauses,
-                            "minimum_should_match": 1  # 至少匹配一个term即可
+                            "must": must_clauses
                         }
                     },
                     "highlight": {

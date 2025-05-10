@@ -1,8 +1,11 @@
+import os
+
 class Config:
     """基本配置"""
     SECRET_KEY = 'your_secret_key'  # 请务必修改为强随机值
     ELASTICSEARCH_HOST = 'http://localhost:9200'  # Elasticsearch 服务器地址
     INDEX_NAME = 'nku_web'  # Elasticsearch 索引名称
+    SNAPSHOT_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'app', 'data', 'snapshots')  # 新增：网页快照存储路径
 
     @staticmethod
     def init_app(app):
