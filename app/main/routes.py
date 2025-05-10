@@ -254,8 +254,7 @@ def search_results():
             for hit in resp['hits']['hits']:
                 source = hit['_source']
                 url = source.get('url', '#')
-                
-                # 解码URL和提取文件名
+                  # 解码URL和提取文件名
                 try:
                     decoded_url = urllib.parse.unquote(url)
                     filename = decoded_url.split('/')[-1]
@@ -263,9 +262,11 @@ def search_results():
                     decoded_url = url
                     filename = url.split('/')[-1]
                 
-                # 准备标题：优先使用高亮的标题，如果没有就使用文件名
+                # 准备标题：优先使用高亮的标题，其次是原始标题，最后才是文件名
                 if 'title' in hit.get('highlight', {}):
                     title = ''.join(hit['highlight']['title'])
+                elif 'title' in source and source['title'] and len(source['title'].strip()) > 0:
+                    title = source['title']
                 else:
                     title = filename
                 
