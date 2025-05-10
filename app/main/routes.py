@@ -203,24 +203,40 @@ def search_results():
                 # 网页搜索继续使用原来的查询解析逻辑
                 # 解析查询字符串
                 parsed_query = QueryParser.parse_query(query) if query else {"match_all": {}}
-                
-                # 构建ES查询
+
+                # 新增：如果parsed_query是bool/must结构，转换为should（或关系），并设置minimum_should_match
+                # 假设QueryParser.parse_query(query)返回 {'multi_match': ...} 或 {'match': ...}
+                # 如果是多个term，构造should
+                if isinstance(parsed_query, dict) and "bool" in parsed_query and "must" in parsed_query["bool"]:
+                    # 兼容老的bool/must结构
+                    should_clauses = parsed_query["bool"]["must"]
+                else:
+                    # 单一查询，包装成should
+                    should_clauses = [parsed_query]
+
                 search_body = {
                     "query": {
                         "bool": {
-                            "must": [parsed_query]
+                            "should": should_clauses,
+                            "minimum_should_match": 1  # 至少匹配一个term即可
                         }
                     },
                     "highlight": {
                         "fields": {
                             "title": {"pre_tags": ["<strong>"], "post_tags": ["</strong>"]},
-                            "content": {"pre_tags": ["<strong>"], "post_tags": ["</strong>"], "fragment_size": 200, "number_of_fragments": 1}
-                        }
+                            "content": {
+                                "pre_tags": ["<strong>"], 
+                                "post_tags": ["</strong>"], 
+                                "fragment_size": 300,  # 可适当调大
+                                "number_of_fragments": 1
+                            }
+                        },
+                        "require_field_match": False  # 新增：允许所有命中词高亮
                     },
                     "from": (page - 1) * 10,
                     "size": 10
                 }
-                
+
                 # 排除文档类型
                 doc_extensions = [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx"]
                 search_body["query"]["bool"]["must_not"] = [
