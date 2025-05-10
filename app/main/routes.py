@@ -51,15 +51,22 @@ def log_search_query(query):
         try:
             with open(SEARCH_HISTORY_FILE, 'r', encoding='utf-8') as f:
                 history = json.load(f)
-        except:
+                if not isinstance(history, list):
+                    history = []
+        except Exception as e:
+            current_app.logger.error(f"Error reading search history: {e}")
             history = []
     
     # 添加新查询并保存（限制大小为最近1000条）
-    history.append(query)
+    if query not in history:  # 避免重复添加相同的查询
+        history.append(query)
     history = history[-1000:]
     
-    with open(SEARCH_HISTORY_FILE, 'w', encoding='utf-8') as f:
-        json.dump(history, f, ensure_ascii=False)
+    try:
+        with open(SEARCH_HISTORY_FILE, 'w', encoding='utf-8') as f:
+            json.dump(history, f, ensure_ascii=False)
+    except Exception as e:
+        current_app.logger.error(f"Error saving search history: {e}")
 
 @main.route('/api/suggestions')
 def get_suggestions():
@@ -74,13 +81,17 @@ def get_suggestions():
             try:
                 with open(SEARCH_HISTORY_FILE, 'r', encoding='utf-8') as f:
                     history = json.load(f)
+                    if not isinstance(history, list):
+                        current_app.logger.error("Search history is not a list")
+                        history = []
+                
                 # 获取最近的20个不重复记录
                 seen = set()
                 unique_history = []
-                for query in reversed(history):
-                    if query not in seen:
-                        seen.add(query)
-                        unique_history.append(query)
+                for item in reversed(history):
+                    if item not in seen:
+                        seen.add(item)
+                        unique_history.append(item)
                         if len(unique_history) >= 20:
                             break
                 return jsonify({'suggestions': unique_history})
@@ -97,9 +108,11 @@ def get_suggestions():
         try:
             with open(SEARCH_HISTORY_FILE, 'r', encoding='utf-8') as f:
                 history = json.load(f)
+                if not isinstance(history, list):
+                    history = []
                 
             # 过滤出包含当前输入的查询
-            matching_queries = [q for q in history if query in q.lower()]
+            matching_queries = [q for q in history if q and query in q.lower()]
             
             # 统计频率并获取最常见的前10个
             counter = Counter(matching_queries)
@@ -130,14 +143,20 @@ def remove_history_item():
             return jsonify({'success': False, 'message': 'Query is required'}), 400
         
         if os.path.exists(SEARCH_HISTORY_FILE):
-            with open(SEARCH_HISTORY_FILE, 'r', encoding='utf-8') as f:
-                history = json.load(f)
-            
-            # 移除所有匹配的记录
-            history = [q for q in history if q != query]
-            
-            with open(SEARCH_HISTORY_FILE, 'w', encoding='utf-8') as f:
-                json.dump(history, f, ensure_ascii=False)
+            try:
+                with open(SEARCH_HISTORY_FILE, 'r', encoding='utf-8') as f:
+                    history = json.load(f)
+                    if not isinstance(history, list):
+                        history = []
+                
+                # 移除所有匹配的记录
+                history = [q for q in history if q != query]
+                
+                with open(SEARCH_HISTORY_FILE, 'w', encoding='utf-8') as f:
+                    json.dump(history, f, ensure_ascii=False)
+            except Exception as e:
+                current_app.logger.error(f"Error processing history file during removal: {e}")
+                return jsonify({'success': False, 'message': 'Error processing history'}), 500
         
         return jsonify({'success': True})
     except Exception as e:
@@ -310,12 +329,15 @@ def search_history():
         try:
             with open(SEARCH_HISTORY_FILE, 'r', encoding='utf-8') as f:
                 history = json.load(f)
+                if not isinstance(history, list):
+                    current_app.logger.error("Search history is not a list")
+                    history = []
                 
             # 获取最近的50个不重复查询
             unique_history = []
             seen = set()
             for query in reversed(history):
-                if query not in seen:
+                if query and query not in seen:  # 确保查询不为空
                     seen.add(query)
                     unique_history.append(query)
                     if len(unique_history) >= 50:

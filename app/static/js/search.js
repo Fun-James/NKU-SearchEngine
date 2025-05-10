@@ -70,16 +70,25 @@ document.addEventListener('DOMContentLoaded', function() {
             suggestionBox.style.display = 'none';
         }
     });
-    
-    // 获取并显示搜索历史
+      // 获取并显示搜索历史
     function showSearchHistory() {
         fetch('/api/suggestions?history=true')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('网络响应不正常');
+                }
+                return response.json();
+            })
             .then(data => {
-                displayHistory(data.suggestions);
+                if (data && data.suggestions) {
+                    displayHistory(data.suggestions);
+                } else {
+                    displayHistory([]);
+                }
             })
             .catch(error => {
                 console.error('获取搜索历史时出错:', error);
+                displayHistory([]); // 出错时显示空历史
             });
     }
     
@@ -122,38 +131,75 @@ document.addEventListener('DOMContentLoaded', function() {
         
         suggestionBox.style.display = 'block';
     }
-    
-    // 清空搜索历史
+      // 清空搜索历史
     window.clearSearchHistory = function() {
         fetch('/api/clear_history', {
             method: 'POST'
-        }).then(() => {
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('清空历史记录失败');
+            }
+            return response.json();
+        })
+        .then(() => {
             suggestionBox.innerHTML = '<div class="history-empty">暂无搜索历史</div>';
+        })
+        .catch(error => {
+            console.error('清空历史记录时出错:', error);
+            // 出错时至少尝试更新UI
+            suggestionBox.innerHTML = '<div class="history-empty">操作失败，请重试</div>';
         });
     };
-    
-    // 删除单个历史记录
+      // 删除单个历史记录
     function removeHistoryItem(query) {
+        if (!query) return; // 确保查询不为空
+        
         fetch('/api/remove_history', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ query: query })
-        }).then(() => {
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('删除历史记录失败');
+            }
+            return response.json();
+        })
+        .then(() => {
+            showSearchHistory(); // 刷新历史记录显示
+        })
+        .catch(error => {
+            console.error('删除历史记录时出错:', error);
+            // 即使出错也尝试刷新显示
             showSearchHistory();
         });
     }
-    
-    // 从后端获取搜索建议
+      // 从后端获取搜索建议
     function fetchSuggestions(query) {
+        if (!query || query.trim().length < 1) {
+            return; // 查询为空或只有空格时不发送请求
+        }
+        
         fetch(`/api/suggestions?query=${encodeURIComponent(query)}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('网络响应不正常');
+                }
+                return response.json();
+            })
             .then(data => {
-                displaySuggestions(data.suggestions);
+                if (data && data.suggestions) {
+                    displaySuggestions(data.suggestions);
+                } else {
+                    displaySuggestions([]);
+                }
             })
             .catch(error => {
                 console.error('获取搜索建议时出错:', error);
+                displaySuggestions([]); // 出错时显示空建议
             });
     }
     
