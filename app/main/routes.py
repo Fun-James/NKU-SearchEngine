@@ -156,7 +156,6 @@ def index():
 def search_results():
     query = request.args.get('query', '')
     page = request.args.get('page', 1, type=int)
-    sort_by = request.args.get('sort', 'relevance')
     search_type = request.args.get('search_type', 'webpage')
     
     if query:
@@ -181,10 +180,6 @@ def search_results():
                         "content": {"pre_tags": ["<strong>"], "post_tags": ["</strong>"], "fragment_size": 200, "number_of_fragments": 1}
                     }
                 }
-                
-                # 添加排序
-                if sort_by != 'relevance':
-                    search_body["sort"] = [{"crawled_at": {"order": "desc" if sort_by == 'newest' else "asc"}}]
             else:
                 # 网页搜索继续使用原来的查询解析逻辑
                 # 解析查询字符串
@@ -217,10 +212,6 @@ def search_results():
                     }}
                 ]
             
-            # 添加排序选项
-            if sort_by == 'date':
-                search_body["sort"] = [{"crawled_at": {"order": "desc"}}]
-            
             # 执行搜索
             resp = current_app.elasticsearch.search(
                 index=current_app.config['INDEX_NAME'],
@@ -229,7 +220,7 @@ def search_results():
             
             # 解析结果
             total_hits = resp['hits']['total']['value']
-              # 搜索统计
+            # 搜索统计
             search_time = resp.get('took', 0) / 1000  # 毫秒转为秒
             
             # 获取聚合数据和其他统计信息
@@ -295,16 +286,17 @@ def search_results():
     if query and len(results) < 5 and suggester:  # 结果较少时提供拼写建议
         try:
             query_suggestion = suggester.get_query_suggestion(query)
-        except Exception as e:            current_app.logger.error(f"Error generating query suggestion: {e}")
+        except Exception as e:
+            current_app.logger.error(f"Error generating query suggestion: {e}")
     
     return render_template('search_results.html',
-                                  query=query,
-                                  results=results,
-                                  total_hits=total_hits,
-                                  max=max,
-                                  min=min,
-                          page=page, 
-                          sort_by=sort_by,
+                          query=query,
+                          results=results,
+                          total_hits=total_hits,
+                          max=max,
+                          min=min,
+                          page=page,
+                          search_type=search_type,
                           search_time=search_time,
                           search_stats=search_stats,
                           clusters=clusters,

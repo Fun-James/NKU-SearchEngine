@@ -25,13 +25,7 @@
                 </div>
             </form>
         </div>
-        
-        {% if results %}
-            <div class="sort-options">
-                <span>排序方式: </span>
-                <a href="{{ url_for('main.search_results', query=query, sort='relevance', page=1) }}" class="{{ 'active' if sort_by == 'relevance' else '' }}">相关性</a> | 
-                <a href="{{ url_for('main.search_results', query=query, sort='date', page=1) }}" class="{{ 'active' if sort_by == 'date' else '' }}">日期</a>            </div>
-            
+          {% if results %}
             <p class="results-count">
                 找到约 {{ total_hits }} 条结果
                 {% if search_time %}
@@ -41,10 +35,9 @@
                     <span class="search-relevance">, 最高相关度: {{ search_stats.max_score|round(2) }}</span>
                 {% endif %}
             </p>
-            
-            {% if query_suggestion %}
+              {% if query_suggestion %}
                 <div class="query-suggestion">
-                    您是否要搜索: <a href="{{ url_for('main.search_results', query=query_suggestion) }}">{{ query_suggestion }}</a>
+                    您是否要搜索: <a href="{{ url_for('main.search_results', query=query_suggestion, search_type=search_type) }}">{{ query_suggestion }}</a>
                 </div>
             {% endif %}
             
@@ -79,22 +72,21 @@
             
             <!-- 添加分页功能 -->
             {% if total_hits > 10 %}
-            <div class="pagination">
-                {% set total_pages = (total_hits / 10) | round(0, 'ceil') | int %}
+            <div class="pagination">                {% set total_pages = (total_hits / 10) | round(0, 'ceil') | int %}
                 {% if page > 1 %}
-                    <a href="{{ url_for('main.search_results', query=query, page=page-1) }}">&laquo; 上一页</a>
+                    <a href="{{ url_for('main.search_results', query=query, page=page-1, search_type=search_type) }}">&laquo; 上一页</a>
                 {% endif %}
                 
                 {% for p in range(max(1, page-2), min(page+3, total_pages+1)) %}
                     {% if p == page %}
                         <span class="current-page">{{ p }}</span>
                     {% else %}
-                        <a href="{{ url_for('main.search_results', query=query, page=p) }}">{{ p }}</a>
+                        <a href="{{ url_for('main.search_results', query=query, page=p, search_type=search_type) }}">{{ p }}</a>
                     {% endif %}
                 {% endfor %}
                 
                 {% if page < total_pages %}
-                    <a href="{{ url_for('main.search_results', query=query, page=page+1) }}">下一页 &raquo;</a>
+                    <a href="{{ url_for('main.search_results', query=query, page=page+1, search_type=search_type) }}">下一页 &raquo;</a>
                 {% endif %}
             </div>
             {% endif %}

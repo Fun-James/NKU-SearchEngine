@@ -193,29 +193,7 @@ button[type="submit"]:hover {
     font-family: monospace;
 }
 
-/* 排序选项样式 */
-.sort-options {
-    margin: 10px 0;
-    font-size: 14px;
-    color: #666;
-}
-
-.sort-options a {
-    color: #1a0dab;
-    text-decoration: none;
-    padding: 3px 5px;
-}
-
-.sort-options a:hover {
-    text-decoration: underline;
-}
-
-.sort-options a.active {
-    font-weight: bold;
-    color: #00529b;
-    background-color: #f0f7ff;
-    border-radius: 3px;
-}
+/* 搜索时间样式 */
 
 .search-time {
     color: #767676;
