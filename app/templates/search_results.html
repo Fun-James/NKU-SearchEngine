@@ -58,10 +58,24 @@
             {% endif %}
             
             <ul class="results-list">
-                {% for result in results %}                <li class="result-item">                    <h2><a href="{{ result.url }}" target="_blank">{{ result.title | safe }}</a></h2>
-                    {% if search_type == 'document' %}
+                {% for result in results %}
+                <li class="result-item">
+                    <h2>
+                        <a href="{{ result.url }}" target="_blank">
+                            {{ result.title | safe }}
+                            {% if (result.is_attachment or search_type == 'document') and result.file_type and result.file_type != '未知文档' %}
+                                [{{ result.file_type }}]
+                            {% endif %}
+                        </a>
+                    </h2>
+                    {% if result.is_attachment or search_type == 'document' %}
                         <p class="result-info">
-                            <span class="file-name">文件名: {{ result.filename }}</span>
+                            {% if result.filename %}
+                                <span class="file-name">文件名: {{ result.filename }}</span>
+                            {% endif %}
+                            {% if result.file_type and result.file_type != '未知文档' %}
+                                <span class="file-type">文件类型: {{ result.file_type }}</span>
+                            {% endif %}
                         </p>
                     {% endif %}
                     <p class="result-url">{{ result.url }}</p>

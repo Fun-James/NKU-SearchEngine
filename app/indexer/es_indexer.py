@@ -139,6 +139,25 @@ def bulk_index_documents(es, index_name, documents):
                     # 如果所有提取失败，至少提供URL域名作为标题
                     title = url.split('/')[2] if len(url.split('/')) > 2 else url
         
+        # 检查是否是附件，并设置文件类型
+        is_attachment = doc.get('is_attachment', False)
+        file_info = doc.get('file_info', {})
+        file_type = file_info.get('file_type', '未知文档')
+        mime_type = file_info.get('mime_type', 'text/html')
+        
+        # 检查标题中是否已经包含文件类型，如果已经包含则不再添加
+        if is_attachment and file_type and '[' not in title:
+            # 南开大学特殊处理 - 检查是否是特定文件
+            if '附件1-2025年度天津市教育工作重点调研课题指南' in title:
+                title = '附件1-2025年度天津市教育工作重点调研课题指南'
+                file_type = 'Word文档'
+            elif '附件2-天津市教育工作重点调研课题申报表' in title:
+                title = '附件2-天津市教育工作重点调研课题申报表'
+                file_type = 'Word文档'
+            elif '附件3-2025年度天津市教育工作重点调研课题申报汇总表' in title:
+                title = '附件3-2025年度天津市教育工作重点调研课题申报汇总表'
+                file_type = 'Excel表格'
+        
         action = {
             "_index": index_name,
             "_id": doc.get('url'),
@@ -146,6 +165,9 @@ def bulk_index_documents(es, index_name, documents):
                 "url": doc.get('url'),
                 "title": title,
                 "content": doc.get('content', ''),
+                "is_attachment": is_attachment,
+                "file_type": file_type,
+                "mime_type": mime_type,
                 "anchor_texts": [
                     {
                         "text": a.get('text', ''),

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="renderer" content="webkit" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>干部选任</title>
+<title>历届领导</title>
 
 <link type="text/css" href="/_css/_system/system.css" rel="stylesheet"/>
 <link type="text/css" href="/_upload/site/1/style/6/6.css" rel="stylesheet"/>
@@ -49,42 +49,9 @@
 					</div>
 					<div class="header-search" frag="面板5">
 						<div frag="窗口5" portletmode="search">
-						
-    <div class="wp_search">
-        <table>
-            <tr>
-                <td height="25px">
-                    <input id="keyword" name="keyword" style="width: 150px" class="keyword" type="text" value="请输入关键字" onfocus="if (this.value === '请输入关键字') { this.value = ''; }"
-                           onblur="if (this.value === '') { this.value = '请输入关键字'; }" onkeydown="return onKeyEvent(event);"/>
-                </td>
-                <td>
-					<input type="hidden" id="securl" value="/_web/_search/api/search/new.rst?locale=zh_CN&request_locale=zh_CN&_p=YXM9MjY0JnQ9NjAwJmQ9NDc0NiZwPTImZj0xNzQ3NiZtPVNOJnxibm5Db2x1bW5WaXJ0dWFsTmFtZT1nYnhyJg__"/>
-                    <input name="btnsearch" class="search" type="submit" value="" onclick="checkValues();"/>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-<script>
-    function onKeyEvent(event){
-        if (event.keyCode != '13') {
-            return;
-        }
-        checkValues();
-    }
-    function checkValues(){
-		var url = $("#securl").val();
-        var keyword = $("input[name='keyword']").val();
-		if (keyword === '请输入关键字') {
-			keyword = ''; 
-		}
-		if (keyword !== '') {
-			keyword = encodeURI(encodeURI(keyword));
-			url = url + "&keyword=" + keyword;
-		}
-        window.open(url);
-    }
-</script>
+						<form method="post" action="/_web/_search/api/search/new.rst?locale=zh_CN&request_locale=zh_CN&_p=YXM9MjY0JnQ9NjAwJmQ9MjM3MiZwPTImZj0xNzQxMCZtPVNOJnxibm5Db2x1bW5WaXJ0dWFsTmFtZT0xNzQxMCY_" target="_blank">
+    <input class="txt  search-input " name="keyword" type="text"><input class="btn search-submit" value="" type="submit">
+</form>
 						</div>
 					</div>
 				</div>
@@ -92,7 +59,7 @@
 		</div>
 	</div>
 	<div class="header-nav header-nav1" frag="面板1">
-		<div class="w" frag="窗口1" portletmode="simpleSudyNavi" configs="{'c1':'1','c7':'2','c4':'_self','c3':'50','c6':'0','c8':'2','c9':'0','c2':'1','c5':'1'}" contents="{'c2':'0', 'c1':'/首 页,/学校概况,/南开新闻,/院系机构,/人才师资,/教育教学,/科学研究,/国际交流,/招生就业'}">
+		<div class="w" frag="窗口1" portletmode="simpleSudyNavi" configs="{'c1':'1','c7':'2','c4':'_self','c3':'15','c6':'0','c8':'2','c9':'0','c2':'1','c5':'1'}" contents="{'c2':'0', 'c1':'/首 页,/学校概况,/南开新闻,/院系机构,/人才师资,/教育教学,/科学研究,/国际交流,/招生就业'}" >
 			
 				
 				<ul class="nav-menu" >
@@ -358,7 +325,7 @@
 	</div>
 	<div class="tool" frag="面板3">
 		<button class="cn-button" id="cn-button">+</button>
-		<div class="cn-wrapper" id="cn-wrapper" frag="窗口3" portletmode="simpleSudyNavi" configs="{'c1':'1','c7':'2','c4':'_self','c3':'15','c6':'0','c8':'2','c9':'0','c2':'1','c5':'0'}" contents="{'c2':'0', 'c1':'/分类导航/学生,/分类导航/教工,/分类导航/考生,/分类导航/校友,/分类导航/访客'}">
+		<div class="cn-wrapper" id="cn-wrapper" frag="窗口3" portletmode="simpleSudyNavi" contents="{'c2':'0', 'c1':'/分类导航/学生,/分类导航/教工,/分类导航/考生,/分类导航/校友,/分类导航/访客'}">
 			
 			
 			<a href="/255/list.htm" class="icon-i1" target="_self"><span>学生</span></a>
@@ -373,19 +340,19 @@
 			 
 			
 		</div>
-	</div>	
-	<div class="clear"></div>
+	</div>
+	<div class="clear"></div>	
 	<div class="container">			
 		<div class="page_con">
 			<div class="smallbanner" frag="面板9">
 				<div frag="窗口9" portletmode="simpleColumnAttri">
-					<div class="smallbanner_bg" style="background-image:url(/_upload/column/44/3e/17470/picture.jpg)"></div>
+					<div class="smallbanner_bg" style="background-image:url(/_upload/column/44/45/17477/picture.jpg)"></div>
 				</div>
 			</div>			
 			<div class="w">			
 				<div class="page_con_side" frag="面板10">
-					<div class="page_con_title" frag="窗口10" portletmode="simpleColumnAnchor">
-						<h2><span class='Column_Anchor'>今日南开</span></h2>
+					<div class="page_con_title" frag="窗口10" portletmode="simpleColumnAnchor" >
+						<h2><span class='Column_Anchor'>学校概况</span></h2>
 						<div class="titleline"></div>
 					</div>			
 					<div class="page_con_class" frag="窗口11" portletmode="simpleColumnList">
@@ -394,47 +361,22 @@
 						<ul class="class-list">
 							 
 							<li class="class-item column-1 "> 
-							 <a href="/157/list.htm" title="通知公告" class="" target="_self"><span class="class-name">通知公告</span></a> 						  
+							 <a href="/162/list.htm" title="学校简介" class="" target="_self"><span class="class-name">学校简介</span></a> 						  
 							  
 							</li> 
 						 
 							<li class="class-item column-2 "> 
-							 <a href="https://news.nankai.edu.cn" title="最新动态" class="" target="_self"><span class="class-name">最新动态</span></a> 						  
+							 <a href="/178/list.htm" title="现任领导" class="" target="_self"><span class="class-name">现任领导</span></a> 						  
 							  
 							</li> 
 						 
-							<li class="class-item column-3 "> 
-							 <a href="/tpxw/list.htm" title="图片新闻" class="" target="_self"><span class="class-name">图片新闻</span></a> 						  
+							<li class="class-item column-3 selected"> 
+							 <a href="/191/list.htm" title="历届领导" class="selected" target="_self"><span class="class-name">历届领导</span></a> 						  
 							  
 							</li> 
 						 
 							<li class="class-item column-4 "> 
-							 <a href="/159/list.htm" title="校情通报" class="" target="_self"><span class="class-name">校情通报</span></a> 						  
-							  
-							</li> 
-						 
-							<li class="class-item column-5 "> 
-							 <a href="http://news.nankai.edu.cn/mtnk/index.shtml" title="媒体南开" class="" target="_blank"><span class="class-name">媒体南开</span></a> 						  
-							  
-							</li> 
-						 
-							<li class="class-item column-6 "> 
-							 <a href="http://news.nankai.edu.cn/sp/index.shtml" title="南开大学电视新闻" class="" target="_blank"><span class="class-name">南开大学电视新闻</span></a> 						  
-							  
-							</li> 
-						 
-							<li class="class-item column-7 selected"> 
-							 <a href="/gbxr/list.htm" title="干部选任" class="selected" target="_self"><span class="class-name">干部选任</span></a> 						  
-							  
-							</li> 
-						 
-							<li class="class-item column-8 "> 
-							 <a href="/xshd/list.htm" title="学术活动" class="" target="_self"><span class="class-name">学术活动</span></a> 						  
-							  
-							</li> 
-						 
-							<li class="class-item column-9 "> 
-							 <a href="/zt/list.htm" title="专题" class="" target="_self"><span class="class-name">专题</span></a> 						  
+							 <a href="/169/list.htm" title="历史回眸" class="" target="_self"><span class="class-name">历史回眸</span></a> 						  
 							  
 							</li> 
 						 
@@ -447,65 +389,22 @@
 					<div class="page_con_area" frag="面板20">
 						<div class="page_con_title" frag="窗口20" portletmode="simpleColumnAttri">
 							
-							<h2><span>干部选任</span></h2>
-							<div class="bread"><a href="/main.htm" target="_self">首页</a><span class='possplit'>&nbsp;&nbsp;</span><a href="/156/list.htm" target="_self">今日南开</a><span class='possplit'>&nbsp;&nbsp;</span><a href="/gbxr/list.htm" target="_self">干部选任</a></div>
+							<h2><span>历届领导</span></h2>
+							<div class="bread"><a href="/main.htm" target="_self">首页</a><span class='possplit'>&nbsp;&nbsp;</span><a href="/161/list.htm" target="_self">学校概况</a><span class='possplit'>&nbsp;&nbsp;</span><a href="/191/list.htm" target="_self">历届领导</a></div>
 							
 						</div>
-						<div class="page_con_list" frag="窗口21" portletmode="simpleList" configs="{'c8':'0','c23':'320','c31':'1','c28':'0','c27':'1','c21':'1','c20':'0','c16':'1','c3':'14','c2':'序号,标题,发布时间','c25':'480','c17':'0','c5':'_blank','c22':'240','c32':'1','c24':'1','c26':'640','c15':'0','c14':'1','c29':'1','c33':'1','c34':'0','c10':'50','c18':'yyyy-MM-dd','c1':'1','c6':'-1','c19':'yyyy-MM-dd','c4':'1','c7':'1','c12':'0','c9':'0','c11':'1','c13':'200','c30':'0'}">
-							<div id="wp_news_w21"> 
-				            
-							<ul class="newslist">
-							
-							  <li>
-								<div class="time">
-								  <div class="time-d">11</div>
-								  2025-05</div>
-								<div class="tit" title="<a href='https://zzb.nankai.edu.cn/2025/0511/c7416a569772/page.htm' target='_blank' title='关于吴晓林、郭道久、张发林试用期考核的预告'>关于吴晓林、郭道久、张发林试用期考核的预告</a>"><a href='https://zzb.nankai.edu.cn/2025/0511/c7416a569772/page.htm' target='_blank' title='关于吴晓林、郭道久、张发林试用期考核的预告'>关于吴晓林、郭道久、张发林试用期考核的预告</a></div>
-								
-							  </li>
-							  
-							  <li>
-								<div class="time">
-								  <div class="time-d">06</div>
-								  2025-05</div>
-								<div class="tit" title="<a href='https://zzb.nankai.edu.cn/2025/0506/c7416a569172/page.htm' target='_blank' title='南开大学中层干部拟提拔任用人选公示名单'>南开大学中层干部拟提拔任用人选公示名单</a>"><a href='https://zzb.nankai.edu.cn/2025/0506/c7416a569172/page.htm' target='_blank' title='南开大学中层干部拟提拔任用人选公示名单'>南开大学中层干部拟提拔任用人选公示名单</a></div>
-								
-							  </li>
-							  
-							</ul>
-							</div> 
-
- <div id="wp_paging_w21"> 
-<ul class="wp_paging clearfix"> 
-     <li class="pages_count"> 
-         <span class="per_page">每页&nbsp;<em class="per_count">14</em>&nbsp;记录&nbsp;</span> 
-         <span class="all_count">总共&nbsp;<em class="all_count">2</em>&nbsp;记录&nbsp;</span> 
-     </li> 
-     <li class="page_nav"> 
-         <a class="first" href="javascript:void(0);" target="_self"><span>第一页</span></a> 
-         <a class="prev" href="javascript:void(0);" target="_self"><span>&lt;&lt;上一页</span></a> 
-         <a class="next" href="javascript:void(0);" target="_self"><span>下一页&gt;&gt;</span></a> 
-         <a class="last" href="javascript:void(0);" target="_self"><span>尾页</span></a> 
-     </li> 
-     <li class="page_jump"> 
-         <span class="pages">页码&nbsp;<em class="curr_page">1</em>/<em class="all_pages">1</em></span> 
-         <span><input class="pageNum" type="text" /><input type="hidden" class="currPageURL" value=""></span></span> 
-         <span><a class="pagingJump" href="javascript:void(0);" target="_self">跳转到&nbsp;</a></span> 
-     </li> 
-</ul> 
+						<div class="page_con_list" frag="窗口21" portletmode="simpleList" configs="{'c23':'320','c31':'1','c28':'0','c27':'1','c21':'1','c20':'0','c16':'1','c3':'15','c2':'序号,标题,发布时间,简介','c25':'480','c17':'0','c5':'_blank','c22':'240','c32':'1','c24':'1','c26':'640','c15':'0','c14':'1','c29':'1','c33':'1','c34':'0','c10':'-1','c18':'yyyy-MM-dd','c1':'1','c6':'-1','c19':'yyyy-MM-dd','c4':'1','c7':'1','c12':'0','c9':'0','c11':'0','c13':'200','c30':'0'}">
+							 
+<div class="wp_single wp_column_article" id="wp_column_article"> 
+     <div class="wp_entry"> 
+         <div class="wp_articlecontent"> 
+             <div id="wp_content_w21_0" class="paging_content" style="display:"> 
+<p><style type="text/css">  .detail_tb { width:98%; margin-bottom:25px; border:#d8d8d8 1px solid; }  .teachers_con_2 {   margin-bottom: 15px;  }  .tb_line { border-right:#d8d8d8 1px dotted; height:35px; padding:0px 10px; }  .tb_even { border-bottom:#d8d8d8 1px solid; border-top:#d8d8d8 1px solid; background:#f1f1f1; }  .thickbox {  background:url("/_upload/article/images/5b/a6/b668eb5f43e2b680ac479a90b423/873c5852-dca7-425b-9296-283fb3836255.gif") no-repeat left;  padding-left:10px;  padding-right:10px; width:150px;  }</style></p><p><br /></p><table class="detail_tb teachers_con_2" cellspacing="0" cellpadding="0" border="1px"><thead><tr style="background:url(&#39;/_upload/article/9e/f1/3410600e489c8d62d801a2040e26/39561da5-d6e4-4505-8930-68a880f653d3.gif&#39;);height:37px;"><th align="center" valign="middle" colspan="2"><div align="center"><span style="font-size:16px;">历届领导</span></div></th></tr></thead><tbody><tr><td width="29%" align="center" class="tb_line" valign="middle" bgcolor="#ffffff" rowspan="2"><div align="right"><span style="font-size:16px;">历届校长</span></div></td><td width="71%" class="tb_line" valign="middle" bgcolor="#ffffff" style="word-break:break-all;" align="left"><a href="http://www.nankai.edu.cn/192/list.htm" target="_self" sudyfile-attr="{'title':'张伯苓'}" textvalue="张伯苓" style="font-size:14px;" class="thickbox"><span style="font-size:16px;">张伯苓</span></a><span style="font-size:16px;">&nbsp;&nbsp;</span><a href="http://www.nankai.edu.cn/193/list.htm" target="_self" sudyfile-attr="{'title':'何廉（代）'}" textvalue="何廉（代）" style="font-size:14px;" class="thickbox"><span style="font-size:16px;">何廉（代）</span></a><span style="font-size:16px;">&nbsp;&nbsp;</span><a href="http://www.nankai.edu.cn/194/list.htm" target="_self" sudyfile-attr="{'title':'杨石先'}" textvalue="杨石先" style="font-size:14px;" class="thickbox"><span style="font-size:16px;">杨石先</span></a><span style="font-size:16px;">&nbsp;&nbsp;</span><a href="http://www.nankai.edu.cn/195/list.htm" target="_self" sudyfile-attr="{'title':'臧伯平'}" textvalue="臧伯平" style="font-size:14px;" class="thickbox"><span style="font-size:16px;">臧伯平</span></a><span style="font-size:16px;">&nbsp;&nbsp;</span><a href="http://www.nankai.edu.cn/196/list.htm" target="_self" sudyfile-attr="{'title':'滕维藻'}" textvalue="滕维藻" style="font-size:14px;" class="thickbox"><span style="font-size:16px;">滕维藻</span></a><span style="font-size:16px;">&nbsp;&nbsp;</span><a href="http://www.nankai.edu.cn/197/list.htm" target="_self" sudyfile-attr="{'title':'母国光'}" textvalue="母国光" style="font-size:14px;" class="thickbox"><span style="font-size:16px;">母国光</span></a></td></tr><tr><td class="tb_line tb_even" valign="middle" style="word-break:break-all;" align="left"><span style="font-size:16px;"><a href="http://www.nankai.edu.cn/198/list.htm" target="_self" sudyfile-attr="{'title':'侯自新'}" textvalue="侯自新" class="thickbox">侯自新</a>&nbsp;&nbsp;</span><span style="font-size:16px;"><a href="http://www.nankai.edu.cn/199/list.htm" target="_self" sudyfile-attr="{'title':'饶子和'}" textvalue="饶子和" class="thickbox">饶子和</a>&nbsp;</span><span style="font-size:16px;">&nbsp;</span><a href="http://www.nankai.edu.cn/184/list.htm" target="_self" sudyfile-attr="{'title':'龚克'}" textvalue="龚克" class="thickbox"><span style="font-size:16px;">龚克</span>&nbsp;</a><span style="font-size:16px;">&nbsp;</span><a href="http://www.nankai.edu.cn/cxt_29867/list.htm" target="_self" sudyfile-attr="{'title':'曹雪涛'}" textvalue="曹雪涛" class="thickbox"><span style="font-size:16px;">曹雪涛</span></a></td></tr><tr><td width="29%" align="center" class="tb_line" valign="middle" bgcolor="#f1f1f1" rowspan="2"><div align="right"><span style="font-size:16px;">历届党委书记</span></div></td><td width="71%" class="tb_line" valign="middle" bgcolor="#ffffff" style="word-break:break-all;" align="left"><a href="http://www.nankai.edu.cn/200/list.htm" target="_self" sudyfile-attr="{'title':'-&nbsp;王金鼎'}" textvalue="-&nbsp;王金鼎" class="thickbox"><span style="font-size:16px;">王金鼎</span></a>&nbsp;<span style="font-size:16px;">&nbsp;</span><a href="http://www.nankai.edu.cn/201/list.htm" target="_self" sudyfile-attr="{'title':'楚云'}" textvalue="楚云" class="thickbox"><span style="font-size:16px;">楚云</span></a><span style="font-size:16px;">&nbsp;&nbsp;</span><span style="font-size:16px;"><a href="http://www.nankai.edu.cn/202/list.htm" target="_self" sudyfile-attr="{'title':'高仰云'}" textvalue="高仰云" class="thickbox">高仰云</a>&nbsp;</span><span style="font-size:16px;">&nbsp;</span><a href="http://www.nankai.edu.cn/195/list.htm" target="_self" sudyfile-attr="{'title':'臧伯平'}" textvalue="臧伯平" class="thickbox"><span style="font-size:16px;">臧伯平</span></a><span style="font-size:16px;">&nbsp;&nbsp;</span><span style="font-size:16px;"><a href="http://www.nankai.edu.cn/203/list.htm" target="_self" sudyfile-attr="{'title':'朱子强'}" textvalue="朱子强" class="thickbox">朱子强</a>&nbsp;</span><span style="font-size:16px;">&nbsp;</span><span style="font-size:16px;"><a href="http://www.nankai.edu.cn/204/list.htm" target="_self" sudyfile-attr="{'title':'张再旺'}" textvalue="张再旺" class="thickbox">张再旺</a>&nbsp;</span><span style="font-size:16px;">&nbsp;</span><a href="http://www.nankai.edu.cn/196/list.htm" target="_self" sudyfile-attr="{'title':'滕维藻'}" textvalue="滕维藻" class="thickbox"><span style="font-size:16px;">滕维藻</span></a></td></tr><tr><td class="tb_line tb_even" valign="middle" style="word-break:break-all;" align="left"><span style="font-size:16px;"><a href="http://www.nankai.edu.cn/205/list.htm" target="_self" sudyfile-attr="{'title':'李原'}" textvalue="李原" class="thickbox">李原</a>&nbsp;</span><span style="font-size:16px;">&nbsp;</span><a href="http://www.nankai.edu.cn/206/list.htm" target="_self" sudyfile-attr="{'title':'温希凡'}" textvalue="温希凡" class="thickbox"><span style="font-size:16px;">温希凡</span></a><span style="font-size:16px;">&nbsp;&nbsp;</span><span style="font-size:16px;"><a href="http://www.nankai.edu.cn/207/list.htm" target="_self" sudyfile-attr="{'title':'洪国起'}" textvalue="洪国起" class="thickbox">洪国起</a>&nbsp;</span><span style="font-size:16px;">&nbsp;</span><a href="http://www.nankai.edu.cn/xjw/list.htm" target="_self" sudyfile-attr="{'title':'薛进文'}" textvalue="薛进文" class="thickbox"><span style="font-size:16px;">薛进文</span></a><span style="font-size:16px;">&nbsp;&nbsp;</span><a href="http://www.nankai.edu.cn/wdp_9362/list.htm" target="_self" sudyfile-attr="{'title':'魏大鹏'}" textvalue="魏大鹏" class="thickbox"><span style="font-size:16px;">魏大鹏</span></a></td></tr></tbody></table><p><br /></p><p><br /></p>
 </div> 
-<script type="text/javascript"> 
-     $().ready(function() { 
-         $("#wp_paging_w21 .pagingJump").click(function() { 
-             var pageNum = $("#wp_paging_w21 .pageNum").val(); 
-             if (pageNum === "") { alert('请输入页码！'); return; } 
-             if (isNaN(pageNum) || pageNum <= 0 || pageNum > 1) { alert('请输入正确页码！'); return; } 
-             var reg = new RegExp("/list", "g"); 
-             var url = "/gbxr/list.htm"; 
-             window.location.href = url.replace(reg, "/list" + pageNum); 
-         }); 
-     }); 
-</script> 
+ 
+         </div> 
+     </div> 
+</div> 
 
 						</div>
 					</div>
@@ -594,4 +493,4 @@
 </body>
 </html>
 
- <img src="/_visitcount?siteId=264&type=2&columnId=17476" style="display:none" width="0" height="0"/>
+ <img src="/_visitcount?siteId=264&type=2&columnId=17505" style="display:none" width="0" height="0"/>
