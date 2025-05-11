@@ -26,11 +26,11 @@ def main():
     
     # 解析命令行参数
     parser = argparse.ArgumentParser(description='爬取并索引南开大学网站')
-    parser.add_argument('--max-pages', type=int, default=100, help='最大爬取页面数量')
+    parser.add_argument('--max-pages', type=int, default=50, help='最大爬取页面数量')
     parser.add_argument('--delay', type=float, default=0.5, help='爬取延迟(秒)')
     parser.add_argument('--start-url', type=str, default="https://www.nankai.edu.cn/", help='起始URL')
     parser.add_argument('--skip-robots', action='store_true', help='忽略robots.txt')
-    parser.add_argument('--max-depth', type=int, default=4, help='最大爬取深度')
+    parser.add_argument('--max-depth', type=int, default=5, help='最大爬取深度')
     parser.add_argument('--use-http', action='store_true', help='使用HTTP而非HTTPS')
     args = parser.parse_args()
     

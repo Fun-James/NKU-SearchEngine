@@ -1,16 +1,14 @@
 from app.crawler.spider import fetch_page, get_file_info
-from app.indexer.es_indexer import get_es_client, bulk_index_documents
+from app.indexer.es_indexer import get_es_client, index_documents
 from elasticsearch import Elasticsearch
 import json
 
 # 测试文档URL列表
 test_urls = [
-    # 使用之前发现的文档URL
-    "https://www.nankai.edu.cn/_upload/article/files/bb/cd/feb4822194347a6fa415f145d8178/aa88e797-00f8-41e3-87bd-cbe02c5060ba.xls",
-    "https://www.nankai.edu.cn/_upload/article/files/bb/cd/feb4822194347a6fa415f145d8178/9f583c07-ee68-4c37-ae17-f222f76e5dc5.doc",
-    "http://xb.nankai.edu.cn/upload/20250114075920/%E5%8D%97%E5%BC%80%E5%A4%A7%E5%AD%A62025%E5%B9%B4%E5%AF%92%E5%81%87%E5%80%BC%E7%8F%AD%E8%A1%A8.pdf",
-    # 测试JSON格式的URL
-    "https://www.nankai.edu.cn/2025/0403/c17471a566126/{'title':'附件1-2025年度天津市教育工作重点调研课题指南.docx'}"
+    # 添加一些已知的文档URL，比如：
+    "https://cc.nankai.edu.cn/2021/0325/c13297a310964/page.pdf",
+    "https://cc.nankai.edu.cn/2021/0325/c13297a310965/page.doc",
+    # 添加更多文档URL...
 ]
 
 def test_document_crawler():
@@ -43,7 +41,8 @@ def test_document_indexing():
     if not es:
         print("无法连接到Elasticsearch")
         return
-      # 收集所有成功爬取的文档
+    
+    # 收集所有成功爬取的文档
     documents = []
     for url in test_urls:
         page_info = fetch_page(url)
@@ -52,16 +51,8 @@ def test_document_indexing():
     
     if documents:
         # 索引文档
-        try:
-            # 获取索引名称
-            from app import create_app
-            app = create_app()
-            with app.app_context():
-                index_name = app.config['INDEX_NAME']
-                bulk_index_documents(es, index_name, documents)
-                print(f"成功索引文档到 {index_name}")
-        except Exception as e:
-            print(f"索引文档失败: {e}")
+        indexed = index_documents(documents)
+        print(f"成功索引 {indexed} 个文档")
     else:
         print("没有找到可索引的文档")
 
