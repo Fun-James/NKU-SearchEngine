@@ -25,7 +25,7 @@ def clean_filename(filename):
 
 def build_document_search_query(query_text):
     """
-    构建文档搜索查询 - 增强版
+    构建文档搜索查询 - 仅文件名搜索版
     
     参数:
     - query_text: 搜索关键词
@@ -35,15 +35,8 @@ def build_document_search_query(query_text):
     """
     doc_extensions = [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx"]
     
-    # 创建文档名称匹配条件
-    # 1. 对于URL的最后一部分(文件名)进行匹配
-    # 2. 同时匹配原始查询和URL编码后的查询
-    # 3. 对于URL中包含查询词的文档提高相关度
-    # 4. 对标题和内容中包含查询词的文档提高权重
-    
+    # URL编码查询词，用于匹配编码后的URL
     encoded_query = urllib.parse.quote(query_text)
-      # 将查询拆分为词组，用于多词匹配
-    query_terms = query_text.split()
     
     search_body = {
         "query": {
@@ -60,24 +53,19 @@ def build_document_search_query(query_text):
                     }
                 ],
                 "should": [
-                    # 标题中包含查询词的权重最高
-                    {"match_phrase": {"title": {"query": query_text, "boost": 15}}},
-                    {"match": {"title": {"query": query_text, "boost": 10, "fuzziness": "AUTO"}}},
+                    # 文件URL中包含查询词 - 多种匹配方式增加命中率
+                    {"wildcard": {"url": f"*{query_text}*"}},
+                    {"wildcard": {"url": f"*{encoded_query}*"}},
                     
-                    # 文件名中包含查询词
-                    {"wildcard": {"url": {"value": f"*/{query_text}*", "boost": 8}}},
-                    {"wildcard": {"url": {"value": f"*/{encoded_query}*", "boost": 8}}},
+                    # 文件名部分匹配查询词
+                    {"match": {"url": {"query": query_text, "analyzer": "standard"}}},
                     
-                    # URL任意部分包含查询词
-                    {"wildcard": {"url": {"value": f"*{query_text}*", "boost": 3}}},
-                    {"wildcard": {"url": {"value": f"*{encoded_query}*", "boost": 3}}},
-                    
-                    # 内容中包含查询词
-                    {"match_phrase": {"content": {"query": query_text, "boost": 6}}},
-                    {"match": {"content": {"query": query_text, "boost": 4, "fuzziness": "AUTO"}}}
+                    # 标题中包含查询词（文件名被提取为标题）
+                    {"match": {"title": {"query": query_text, "boost": 2}}}
                 ],
-                "minimum_should_match": 0  # 至少满足should中的一个条件
-            }        },
+                "minimum_should_match": 1  # 至少满足should中的一个条件
+            }
+        },
         "size": 10
     }
     

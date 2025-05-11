@@ -369,7 +369,9 @@ def search_results():
                     clusters=clusters,
                     page=page,
                     search_type=search_type,
-                    query_suggestion=query_suggestion)
+                    query_suggestion=query_suggestion,
+                    max=max,
+                    min=min)
             else:
                 total_hits = 0
             
@@ -401,14 +403,14 @@ def search_results():
                           query=query,
                           results=results,
                           total_hits=total_hits,
-                          max=max,
-                          min=min,
                           page=page,
                           search_type=search_type,
                           search_time=search_time,
                           search_stats=search_stats,
                           clusters=clusters,
-                          query_suggestion=query_suggestion)
+                          query_suggestion=query_suggestion,
+                          max=max,
+                          min=min)
 
 @main.route('/search/history')
 def search_history():
