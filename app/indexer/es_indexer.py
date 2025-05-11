@@ -104,12 +104,47 @@ def bulk_index_documents(es, index_name, documents):
     """批量索引文档"""
     actions = []
     for doc in documents:
+        # 获取标题，并进行处理
+        title = doc.get('title', '')
+        
+        # 如果标题为空或太短，尝试从URL中提取一个有意义的标题
+        if not title or len(title.strip()) < 3:
+            url = doc.get('url', '')
+            try:
+                from urllib.parse import unquote, urlparse
+                import re
+                
+                # 解析URL
+                parsed_url = urlparse(url)
+                path = parsed_url.path
+                
+                # 尝试从路径中提取有意义的部分作为标题
+                if path and len(path) > 1:
+                    path_parts = path.split('/')
+                    # 获取最后一个非空的部分
+                    for part in reversed(path_parts):
+                        if part.strip():
+                            # 移除扩展名和特殊字符
+                            title_candidate = re.sub(r'\.(html?|php|asp|aspx|jsp)$', '', part)
+                            title_candidate = re.sub(r'[_\-]', ' ', title_candidate)
+                            if title_candidate and len(title_candidate) > 3:
+                                title = title_candidate
+                                break
+                    
+                # 如果仍然没有合适的标题，使用域名作为标题
+                if not title or len(title.strip()) < 3:
+                    title = f"来自 {parsed_url.netloc} 的网页"
+            except:
+                if url:
+                    # 如果所有提取失败，至少提供URL域名作为标题
+                    title = url.split('/')[2] if len(url.split('/')) > 2 else url
+        
         action = {
             "_index": index_name,
             "_id": doc.get('url'),
             "_source": {
                 "url": doc.get('url'),
-                "title": doc.get('title', ''),
+                "title": title,
                 "content": doc.get('content', ''),
                 "anchor_texts": [
                     {

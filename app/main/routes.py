@@ -5,6 +5,7 @@ from .result_clustering import cluster_search_results, get_smart_snippet
 from .search_suggestion import SearchSuggestion
 import json
 import os
+import re
 from collections import Counter
 import urllib.parse
 
@@ -269,17 +270,29 @@ def search_results():
                 try:
                     decoded_url = urllib.parse.unquote(url)
                     filename = decoded_url.split('/')[-1]
+                    # 处理文件名，移除扩展名和特殊字符
+                    cleaned_filename = re.sub(r'\.(html|htm|php|asp|aspx|jsp)$', '', filename)
+                    cleaned_filename = re.sub(r'[_\-]', ' ', cleaned_filename)
                 except:
                     decoded_url = url
                     filename = url.split('/')[-1]
+                    cleaned_filename = filename
                 
-                # 准备标题：优先使用高亮的标题，其次是原始标题，最后才是文件名
+                # 准备标题：优先使用索引中的原始标题，其次是高亮标题，最后才是文件名
                 if 'title' in hit.get('highlight', {}):
                     title = ''.join(hit['highlight']['title'])
-                elif 'title' in source and source['title'] and len(source['title'].strip()) > 0:
-                    title = source['title']
+                elif source.get('title') and len(source.get('title').strip()) > 0:
+                    title = source.get('title')
+                elif cleaned_filename and len(cleaned_filename) > 0:
+                    title = cleaned_filename
                 else:
-                    title = filename
+                    # 如果都没有，尝试从URL解析出有意义的标题
+                    parsed_url = urllib.parse.urlparse(url)
+                    path_parts = parsed_url.path.split('/')
+                    if len(path_parts) > 2:
+                        title = f"{parsed_url.netloc} - {path_parts[-2]}"
+                    else:
+                        title = parsed_url.netloc
                 
                 # 准备摘要
                 if 'content' in hit.get('highlight', {}):

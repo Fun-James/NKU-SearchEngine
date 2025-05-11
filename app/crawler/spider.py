@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import time
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, unquote
 import re
 from urllib.robotparser import RobotFileParser
 import ssl
@@ -88,16 +88,29 @@ def fetch_page(url, max_retries=3):
         print(f"尝试使用HTTP协议: {http_url}")
     else:
         http_url = url
-    
-    # 检查是否是文档类型
+      # 检查是否是文档类型
     file_info = get_file_info(url)
     if file_info:
         try:
             # 对于文档类型，只获取头信息，不下载文件内容
             response = session.head(http_url, headers=headers, timeout=30)
+            
+            # 提取文件名并解码
+            filename = url.split('/')[-1]
+            try:
+                decoded_filename = urllib.parse.unquote(filename)
+                # 移除文件扩展名
+                title = re.sub(r'\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$', '', decoded_filename, flags=re.IGNORECASE)
+                # 将下划线和连字符替换为空格
+                title = re.sub(r'[_-]', ' ', title)
+                # 添加文件类型提示
+                title = f"{title} [{file_info['file_type']}]"
+            except:
+                title = f"{filename} [{file_info['file_type']}]"
+                
             return {
                 'url': url,
-                'title': url.split('/')[-1],  # 使用文件名作为标题
+                'title': title,  # 使用处理后的文件名作为标题
                 'content': f'[{file_info["file_type"]}] {url}',  # 在内容中标明文件类型
                 'is_document': True,
                 'file_type': file_info['file_type'],
@@ -226,13 +239,32 @@ def fetch_page(url, max_retries=3):
 
 def extract_title(soup):
     """提取页面标题"""
-    if soup.title:
-        return soup.title.string.strip()
+    # 尝试从title标签获取标题
+    if soup.title and soup.title.string and len(soup.title.string.strip()) > 0:
+        title = soup.title.string.strip()
+        # 处理常见标题后缀，如 "- 南开大学"
+        title = re.sub(r'\s*[-_|]\s*南开大学\s*$', '', title)
+        return title
+        
     # 尝试从h1标签提取标题
     h1 = soup.find('h1')
-    if h1:
+    if h1 and h1.get_text() and len(h1.get_text().strip()) > 0:
         return h1.get_text().strip()
-    return "无标题"
+        
+    # 尝试从header中查找最大的标题
+    for tag in ['h2', 'h3', 'h4']:
+        header = soup.find(tag)
+        if header and header.get_text() and len(header.get_text().strip()) > 0:
+            return header.get_text().strip()
+            
+    # 尝试查找页面的第一个大字体文本
+    for tag in ['strong', 'b', '.title', '.header', '.heading']:
+        element = soup.select_one(tag)
+        if element and element.get_text() and len(element.get_text().strip()) > 0:
+            return element.get_text().strip()
+            
+    # 如果都没找到有效标题，则返回一个默认值
+    return "南开大学网页"
 
 def extract_content(soup):
     """提取页面中的有用内容"""
