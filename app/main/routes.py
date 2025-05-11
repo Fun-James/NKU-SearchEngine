@@ -308,17 +308,31 @@ def search_results():
                         # 特殊处理"feb482194347a6fa415f145d8178"之类的附件
                         if 'feb482194347a6fa415f145d8178' in source['url']:
                             if 'docx' in source['url']:
-                                result['title'] = '附件1-2025年度天津市教育工作重点调研课题指南'
+                                # 检查标题中是否已经包含文件类型标记
+                                if '[PDF文档]' not in result['title'] and '[Word文档]' not in result['title']:
+                                    result['title'] = '附件1-2025年度天津市教育工作重点调研课题指南'
                                 result['file_type'] = 'Word文档'
                                 result['filename'] = '附件1-2025年度天津市教育工作重点调研课题指南.docx'
                             elif '.doc' in source['url']:
-                                result['title'] = '附件2-天津市教育工作重点调研课题申报表'
+                                if '[PDF文档]' not in result['title'] and '[Word文档]' not in result['title']:
+                                    result['title'] = '附件2-天津市教育工作重点调研课题申报表'
                                 result['file_type'] = 'Word文档'
                                 result['filename'] = '附件2-天津市教育工作重点调研课题申报表.doc'
                             elif '.xls' in source['url']:
-                                result['title'] = '附件3-2025年度天津市教育工作重点调研课题申报汇总表'
+                                if '[PDF文档]' not in result['title'] and '[Excel表格]' not in result['title']:
+                                    result['title'] = '附件3-2025年度天津市教育工作重点调研课题申报汇总表'
                                 result['file_type'] = 'Excel表格'
                                 result['filename'] = '附件3-2025年度天津市教育工作重点调研课题申报汇总表.xls'
+                                
+                        # 移除标题中可能已存在的文件类型标记，避免重复
+                        if '[PDF文档]' in result['title'] or '[Word文档]' in result['title'] or '[Excel表格]' in result['title'] or '[PowerPoint演示文稿]' in result['title']:
+                            # 标题中已经包含文件类型标记，不再重复添加
+                            # 从文件类型中提取实际的文件类型
+                            file_type_match = re.search(r'\[(.*?)\]', result['title'])
+                            if file_type_match:
+                                extracted_type = file_type_match.group(1)
+                                # 使用提取的类型更新文件类型
+                                result['file_type'] = extracted_type
                     
                     processed_results.append(result)
                 

@@ -2,6 +2,7 @@ from elasticsearch import Elasticsearch, helpers
 from datetime import datetime
 from flask import current_app
 import json
+import re
 
 def get_es_client():
     """获取 Elasticsearch 客户端实例"""
@@ -145,7 +146,7 @@ def bulk_index_documents(es, index_name, documents):
         file_type = file_info.get('file_type', '未知文档')
         mime_type = file_info.get('mime_type', 'text/html')
         
-        # 检查标题中是否已经包含文件类型，如果已经包含则不再添加
+        # 检查标题中是否已经包含文件类型标记，如果已经包含则不再添加
         if is_attachment and file_type and '[' not in title:
             # 南开大学特殊处理 - 检查是否是特定文件
             if '附件1-2025年度天津市教育工作重点调研课题指南' in title:
@@ -157,6 +158,17 @@ def bulk_index_documents(es, index_name, documents):
             elif '附件3-2025年度天津市教育工作重点调研课题申报汇总表' in title:
                 title = '附件3-2025年度天津市教育工作重点调研课题申报汇总表'
                 file_type = 'Excel表格'
+                
+        # 如果标题中已包含文件类型标记，从中提取正确的文件类型
+        if '[' in title and ']' in title:
+            type_match = re.search(r'\[(.*?)\]', title)
+            if type_match:
+                extracted_type = type_match.group(1)
+                if extracted_type in ['PDF文档', 'Word文档', 'Excel表格', 'PowerPoint演示文稿']:
+                    # 使用标题中的文件类型
+                    file_type = extracted_type
+                    # 可选：移除标题中的文件类型标记，避免重复显示
+                    # title = re.sub(r'\s*\[.*?\]', '', title)
         
         action = {
             "_index": index_name,

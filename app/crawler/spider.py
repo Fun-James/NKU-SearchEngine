@@ -939,7 +939,11 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                             if meaningful_filename:
                                 base_title = os.path.splitext(meaningful_filename)[0]
                                 base_title = re.sub(r'[_-]', ' ', base_title)
-                                attachment_data['title'] = f"{base_title} [{attachment_data['file_type']}]"
+                                # 检查标题中是否已包含文件类型标记
+                                if not re.search(r'\[.+?\]', base_title):
+                                    attachment_data['title'] = f"{base_title}"  # 不添加文件类型标记
+                                else:
+                                    attachment_data['title'] = base_title  # 已包含标记，直接使用
                                 attachment_data['filename'] = meaningful_filename
                             
                             crawled_data.append({
@@ -997,7 +1001,12 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                                         elif file_ext in ['.ppt', '.pptx']:
                                             file_type = 'PowerPoint演示文稿'
                                             
-                                        attachment_data['title'] = f"{base_title}"  # 移除文件类型标记
+                                        # 检查标题中是否已包含文件类型标记
+                                        if not re.search(r'\[.+?\]', base_title):
+                                            attachment_data['title'] = f"{base_title}"  # 不添加文件类型标记
+                                        else:
+                                            attachment_data['title'] = base_title  # 已包含标记，直接使用
+                                            
                                         attachment_data['filename'] = meaningful_filename
                                         attachment_data['file_type'] = file_type
                                     # 如果没有有意义的文件名但有链接文本

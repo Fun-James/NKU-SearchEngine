@@ -62,9 +62,13 @@
                 <li class="result-item">
                     <h2>
                         <a href="{{ result.url }}" target="_blank">
-                            {{ result.title | safe }}
-                            {% if (result.is_attachment or search_type == 'document') and result.file_type and result.file_type != '未知文档' %}
-                                [{{ result.file_type }}]
+                            {% if "[" in result.title and "]" in result.title %}
+                                {{ result.title | safe }}
+                            {% else %}
+                                {{ result.title | safe }}
+                                {% if (result.is_attachment or search_type == 'document') and result.file_type and result.file_type != '未知文档' %}
+                                    [{{ result.file_type }}]
+                                {% endif %}
                             {% endif %}
                         </a>
                     </h2>
