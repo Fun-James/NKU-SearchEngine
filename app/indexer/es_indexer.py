@@ -17,81 +17,59 @@ def get_es_client():
     return current_app.elasticsearch
 
 def create_index_if_not_exists(es, index_name):
-    """如果索引不存在，则创建它"""
-    if not es.indices.exists(index=index_name):
-        # 使用IK分词器的索引映射
-        body = {
-            "settings": {
-                "index": {
-                    "number_of_shards": 1,
-                    "number_of_replicas": 0,
-                    "max_ngram_diff": 3,
-                    "analysis": {
-                        "analyzer": {
-                            "nku_analyzer": {
-                                "type": "custom",
-                                "tokenizer": "ik_max_word",
-                                "filter": ["lowercase", "trim", "unique"]
-                            }
-                        }
-                    }
-                }
-            },
-            "mappings": {
-                "properties": {
-                    "url": {"type": "keyword"},
-                    "title": {
-                        "type": "text",
-                        "analyzer": "nku_analyzer",
-                        "search_analyzer": "ik_smart",
-                        "fields": {
-                            "raw": {
-                                "type": "keyword"
-                            }
+    """如果索引不存在，则创建索引"""
+    try:
+        if not es.indices.exists(index=index_name):
+            # 定义索引的设置，包括自定义分析器
+            settings = {
+                "analysis": {
+                    "analyzer": {
+                        "nku_analyzer": {
+                            "type": "custom",
+                            "tokenizer": "ik_max_word",
+                            "filter": [
+                                "lowercase",
+                                "trim",
+                                "nku_shingle_filter",  # 添加 shingle 过滤器
+                                "unique"
+                            ]
                         }
                     },
-                    "content": {
-                        "type": "text",
-                        "analyzer": "nku_analyzer",
-                        "search_analyzer": "ik_smart",
-                        "term_vector": "with_positions_offsets"
-                    },
-                    "file_type": {
-                        "type": "keyword"
-                    },
-                    "mime_type": {
-                        "type": "keyword"
-                    },
-                    "is_document": {
-                        "type": "boolean"
-                    },
-                    "anchor_texts": {
-                        "type": "nested",
-                        "properties": {
-                            "text": {
-                                "type": "text",
-                                "analyzer": "nku_analyzer",
-                                "search_analyzer": "ik_smart"
-                            },
-                            "href": {
-                                "type": "keyword"
-                            }
+                    "filter": {
+                        "nku_shingle_filter": {    # 定义 shingle 过滤器
+                            "type": "shingle",
+                            "min_shingle_size": 2,
+                            "max_shingle_size": 2,
+                            "output_unigrams": True
                         }
-                    },
-                    "crawled_at": {
-                        "type": "date",
-                        "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
                     }
                 }
             }
-        }
-        try:
-            es.indices.create(index=index_name, body=body)
-            print(f"Index '{index_name}' created successfully.")
-        except Exception as e:
-            print(f"Failed to create index '{index_name}': {e}")
-            return False
-    return True
+            
+            # 定义索引的映射
+            mappings = {
+                "properties": {
+                    "url": {"type": "keyword"},
+                    "title": {"type": "text", "analyzer": "nku_analyzer", "search_analyzer": "ik_smart"},
+                    "content": {"type": "text", "analyzer": "nku_analyzer", "search_analyzer": "ik_smart"},
+                    "anchor_text": {"type": "text", "analyzer": "nku_analyzer", "search_analyzer": "ik_smart"},
+                    "pagerank": {"type": "rank_feature"},
+                    "last_modified": {"type": "date"},
+                    "file_type": {"type": "keyword"},  # 新增字段，用于存储文件类型
+                    "mime_type": {"type": "keyword"},  # 新增字段，用于存储MIME类型
+                    "is_document": {"type": "boolean"} # 新增字段，标记是否为文档
+                }
+            }
+            
+            es.indices.create(index=index_name, settings=settings, mappings=mappings)
+            print(f"索引 \'{index_name}\' 创建成功，并应用了自定义分析器和映射。")
+            return True
+        else:
+            # print(f"索引 \'{index_name}\' 已存在。")
+            return True
+    except Exception as e:
+        print(f"创建或检查索引 \'{index_name}\' 失败: {e}")
+        return False
 
 def index_document(es, index_name, doc_id, document_body):
     """将单个文档存入 Elasticsearch"""

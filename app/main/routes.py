@@ -200,8 +200,7 @@ def search_results():
                         "content": {"pre_tags": ["<strong>"], "post_tags": ["</strong>"], "fragment_size": 200, "number_of_fragments": 1}
                     }
                 }
-            else:
-                # 网页搜索继续使用原来的查询解析逻辑
+            else:                # 网页搜索继续使用原来的查询解析逻辑
                 # 解析查询字符串
                 parsed_query = QueryParser.parse_query(query) if query else {"match_all": {}}
 
@@ -233,15 +232,23 @@ def search_results():
                     "size": 10
                 }
 
-                # 排除文档类型
+                # 网页搜索模式下严格排除所有文档类型
                 doc_extensions = [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx"]
-                search_body["query"]["bool"]["must_not"] = [
+                must_not_clauses = [
+                    # 排除URL包含文件扩展名的结果
                     {"bool": {
                         "should": [
                             {"wildcard": {"url": f"*{ext}"}} for ext in doc_extensions
                         ]
-                    }}
+                    }},
+                    # 排除已标记为文档的结果
+                    {"term": {"is_document": True}},
+                    # 排除URL中含有常见文档下载参数的结果
+                    {"wildcard": {"url": "*download*"}},
+                    {"wildcard": {"url": "*attachment*"}},
+                    {"wildcard": {"url": "*file=*"}}
                 ]
+                search_body["query"]["bool"]["must_not"] = must_not_clauses
             
             # 执行搜索
             resp = current_app.elasticsearch.search(
