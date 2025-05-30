@@ -1,5 +1,6 @@
 /**
- * 搜索建议和历史记录功能的JavaScript文件
+ * 智能搜索建议和历史记录功能的JavaScript文件
+ * 支持自动补全、相关查询、热门搜索等功能
  */
 
 // 声明为全局函数
@@ -24,136 +25,246 @@ window.toggleSearchType = function() {
     }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('search-input');
-    const suggestionBox = document.getElementById('search-suggestions');
-    
-    if (!searchInput || !suggestionBox) return;
-    
-    let debounceTimer;
-    let isShowingHistory = false;
-    
-    // 监听搜索框点击事件
-    searchInput.addEventListener('click', function() {
-        if (this.value.trim() === '') {
-            showSearchHistory();
-        }
-    });
-    
-    // 监听搜索框获得焦点事件
-    searchInput.addEventListener('focus', function() {
-        if (this.value.trim() === '') {
-            showSearchHistory();
-        }
-    });
-    
-    // 监听输入事件，实现防抖
-    searchInput.addEventListener('input', function() {
-        const query = this.value.trim();
+// 搜索建议管理器
+class SearchSuggestionManager {
+    constructor() {
+        this.searchInput = null;
+        this.suggestionBox = null;
+        this.debounceTimer = null;
+        this.isShowingHistory = false;
+        this.currentSuggestions = [];
+        this.selectedIndex = -1; // 用于键盘导航
         
-        clearTimeout(debounceTimer);
-        
-        if (!query) {
-            showSearchHistory();
-            return;
-        }
-        
-        isShowingHistory = false;
-        debounceTimer = setTimeout(() => {
-            fetchSuggestions(query);
-        }, 300);
-    });
+        this.init();
+    }
     
-    // 点击页面其他地方时隐藏建议框
-    document.addEventListener('click', function(e) {
-        if (e.target !== searchInput && !suggestionBox.contains(e.target)) {
-            suggestionBox.style.display = 'none';
+    init() {
+        document.addEventListener('DOMContentLoaded', () => {
+            this.searchInput = document.getElementById('search-input');
+            this.suggestionBox = document.getElementById('search-suggestions');
+            
+            if (!this.searchInput || !this.suggestionBox) return;
+            
+            this.bindEvents();
+            this.loadHotSearches(); // 初始加载热门搜索
+        });
+    }
+    
+    bindEvents() {
+        // 搜索框点击事件
+        this.searchInput.addEventListener('click', () => {
+            if (this.searchInput.value.trim() === '') {
+                this.showSearchHistory();
+            }
+        });
+        
+        // 搜索框获得焦点事件
+        this.searchInput.addEventListener('focus', () => {
+            if (this.searchInput.value.trim() === '') {
+                this.showSearchHistory();
+            }
+        });
+        
+        // 输入事件，实现防抖
+        this.searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            
+            clearTimeout(this.debounceTimer);
+            this.selectedIndex = -1; // 重置选择索引
+            
+            if (!query) {
+                this.showSearchHistory();
+                return;
+            }
+            
+            this.isShowingHistory = false;
+            this.debounceTimer = setTimeout(() => {
+                this.fetchIntelligentSuggestions(query);
+            }, 200); // 减少延迟以提供更快的响应
+        });
+        
+        // 键盘导航支持
+        this.searchInput.addEventListener('keydown', (e) => {
+            this.handleKeyNavigation(e);
+        });
+        
+        // 点击页面其他地方时隐藏建议框
+        document.addEventListener('click', (e) => {
+            if (e.target !== this.searchInput && !this.suggestionBox.contains(e.target)) {
+                this.hideSuggestions();
+            }
+        });
+    }
+    
+    handleKeyNavigation(e) {
+        const items = this.suggestionBox.querySelectorAll('.suggestion-item, .history-item .history-text');
+        
+        switch (e.key) {
+            case 'ArrowDown':
+                e.preventDefault();
+                this.selectedIndex = Math.min(this.selectedIndex + 1, items.length - 1);
+                this.updateSelection(items);
+                break;
+            case 'ArrowUp':
+                e.preventDefault();
+                this.selectedIndex = Math.max(this.selectedIndex - 1, -1);
+                this.updateSelection(items);
+                break;
+            case 'Enter':
+                e.preventDefault();
+                if (this.selectedIndex >= 0 && items[this.selectedIndex]) {
+                    const text = items[this.selectedIndex].textContent || items[this.selectedIndex].dataset.query;
+                    this.searchInput.value = text;
+                    this.searchInput.form.submit();
+                } else {
+                    this.searchInput.form.submit();
+                }
+                break;
+            case 'Escape':
+                this.hideSuggestions();
+                break;
         }
-    });
-      // 获取并显示搜索历史
-    function showSearchHistory() {
+    }
+    
+    updateSelection(items) {
+        // 清除所有选中状态
+        items.forEach(item => item.classList.remove('selected'));
+        
+        // 设置当前选中项
+        if (this.selectedIndex >= 0 && items[this.selectedIndex]) {
+            items[this.selectedIndex].classList.add('selected');
+            // 滚动到可见区域
+            items[this.selectedIndex].scrollIntoView({ block: 'nearest' });
+        }
+    }
+    
+    showSearchHistory() {
         fetch('/api/suggestions?history=true')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('网络响应不正常');
                 }
                 return response.json();
-            })
-            .then(data => {
+            })            .then(data => {
                 if (data && data.suggestions) {
-                    displayHistory(data.suggestions);
+                    this.displayHistory(data.suggestions);
                 } else {
-                    displayHistory([]);
+                    this.displayHistory([]);
                 }
             })
             .catch(error => {
                 console.error('获取搜索历史时出错:', error);
-                displayHistory([]); // 出错时显示空历史
+                this.displayHistory([]);
             });
     }
-    
-    // 显示搜索历史
-    function displayHistory(history) {
-        if (!history || history.length === 0) {
-            suggestionBox.innerHTML = '<div class="history-empty">暂无搜索历史</div>';
-            suggestionBox.style.display = 'block';
-            return;
+      displayHistory(history) {
+        this.suggestionBox.innerHTML = '';
+        this.isShowingHistory = true;
+        this.selectedIndex = -1;
+        
+        // 创建历史记录部分
+        if (history && history.length > 0) {
+            const historyHeader = document.createElement('div');
+            historyHeader.className = 'suggestion-section-header';
+            historyHeader.innerHTML = `
+                <span>搜索历史</span>
+                <button onclick="clearSearchHistory()" class="clear-history">清空历史</button>
+            `;
+            this.suggestionBox.appendChild(historyHeader);
+            
+            history.slice(0, 8).forEach(item => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                const itemContent = document.createElement('span');
+                itemContent.className = 'history-text';
+                itemContent.textContent = item;
+                itemContent.dataset.query = item;
+                itemContent.onclick = () => {
+                    this.searchInput.value = item;
+                    this.searchInput.form.submit();
+                };
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-history';
+                deleteBtn.innerHTML = '×';
+                deleteBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    this.removeHistoryItem(item);
+                };
+                
+                historyItem.appendChild(itemContent);
+                historyItem.appendChild(deleteBtn);
+                this.suggestionBox.appendChild(historyItem);
+            });
+        } else {
+            this.suggestionBox.innerHTML = '<div class="history-empty">暂无搜索历史</div>';
         }
         
-        suggestionBox.innerHTML = '<div class="history-header">搜索历史 <button onclick="clearSearchHistory()" class="clear-history">清空历史</button></div>';
-        isShowingHistory = true;
-        
-        history.forEach(item => {
-            const historyItem = document.createElement('div');
-            historyItem.className = 'history-item';
-            
-            // 创建历史记录的文本和操作按钮
-            const itemContent = document.createElement('span');
-            itemContent.className = 'history-text';
-            itemContent.textContent = item;
-            itemContent.onclick = () => {
-                searchInput.value = item;
-                searchInput.form.submit();
-            };
-            
-            const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'delete-history';
-            deleteBtn.innerHTML = '×';
-            deleteBtn.onclick = (e) => {
-                e.stopPropagation();
-                removeHistoryItem(item);
-            };
-            
-            historyItem.appendChild(itemContent);
-            historyItem.appendChild(deleteBtn);
-            suggestionBox.appendChild(historyItem);
-        });
-        
-        suggestionBox.style.display = 'block';
-    }
-      // 清空搜索历史
-    window.clearSearchHistory = function() {
-        fetch('/api/clear_history', {
-            method: 'POST'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('清空历史记录失败');
+        this.suggestionBox.style.display = 'block';
+    }      fetchIntelligentSuggestions(query) {
+        if (!query || query.trim().length < 1) {
+            return;
+        }
+        // 只获取基础建议
+        fetch(`/api/suggestions?query=${encodeURIComponent(query)}&simple=true`)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.suggestions) {
+                this.displaySimpleSuggestions(data.suggestions);
+            } else {
+                this.displaySimpleSuggestions([]);
             }
-            return response.json();
-        })
-        .then(() => {
-            suggestionBox.innerHTML = '<div class="history-empty">暂无搜索历史</div>';
         })
         .catch(error => {
-            console.error('清空历史记录时出错:', error);
-            // 出错时至少尝试更新UI
-            suggestionBox.innerHTML = '<div class="history-empty">操作失败，请重试</div>';
+            console.error('获取建议时出错:', error);
+            this.displaySimpleSuggestions([]);
         });
-    };
-      // 删除单个历史记录
-    function removeHistoryItem(query) {
-        if (!query) return; // 确保查询不为空
+    }
+
+    displaySimpleSuggestions(suggestions) {
+        this.suggestionBox.innerHTML = '';
+        this.isShowingHistory = false;
+        this.selectedIndex = -1;
+        if (suggestions && suggestions.length > 0) {
+            suggestions.slice(0, 8).forEach(suggestion => {
+                const item = this.createSuggestionItem(suggestion, 'simple');
+                this.suggestionBox.appendChild(item);
+            });
+            this.suggestionBox.style.display = 'block';
+        } else {
+            this.hideSuggestions();
+        }
+    }
+
+    createSuggestionItem(text, type) {
+        const item = document.createElement('div');
+        item.className = `suggestion-item ${type}-suggestion`;
+        item.textContent = text;
+        item.dataset.query = text;
+        // 只保留💡和🔗图标
+        const icon = document.createElement('span');
+        icon.className = 'suggestion-icon';
+        if (type === 'related') {
+            icon.textContent = '🔗';
+        } else {
+            icon.textContent = '💡';
+        }
+        item.prepend(icon);
+        item.addEventListener('click', () => {
+            this.searchInput.value = text;
+            this.searchInput.form.submit();
+        });
+        return item;
+    }
+    
+    hideSuggestions() {
+        this.suggestionBox.style.display = 'none';
+        this.selectedIndex = -1;
+    }
+    
+    removeHistoryItem(query) {
+        if (!query) return;
         
         fetch('/api/remove_history', {
             method: 'POST',
@@ -169,64 +280,40 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(() => {
-            showSearchHistory(); // 刷新历史记录显示
+            this.showSearchHistory(); // 刷新历史记录显示
         })
         .catch(error => {
             console.error('删除历史记录时出错:', error);
-            // 即使出错也尝试刷新显示
-            showSearchHistory();
+            this.showSearchHistory();
         });
     }
-      // 从后端获取搜索建议
-    function fetchSuggestions(query) {
-        if (!query || query.trim().length < 1) {
-            return; // 查询为空或只有空格时不发送请求
+}
+
+// 清空搜索历史（全局函数）
+window.clearSearchHistory = function() {
+    fetch('/api/clear_history', {
+        method: 'POST'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('清空历史记录失败');
         }
-        
-        fetch(`/api/suggestions?query=${encodeURIComponent(query)}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('网络响应不正常');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data && data.suggestions) {
-                    displaySuggestions(data.suggestions);
-                } else {
-                    displaySuggestions([]);
-                }
-            })
-            .catch(error => {
-                console.error('获取搜索建议时出错:', error);
-                displaySuggestions([]); // 出错时显示空建议
-            });
-    }
-    
-    // 显示搜索建议
-    function displaySuggestions(suggestions) {
-        if (!suggestions || suggestions.length === 0) {
-            if (!isShowingHistory) {
-                suggestionBox.innerHTML = '';
-                suggestionBox.style.display = 'none';
-            }
-            return;
+        return response.json();
+    })
+    .then(() => {
+        const suggestionBox = document.getElementById('search-suggestions');
+        if (suggestionBox) {
+            suggestionBox.innerHTML = '<div class="history-empty">暂无搜索历史</div>';
         }
-        
-        suggestionBox.innerHTML = '';
-        suggestions.forEach(suggestion => {
-            const item = document.createElement('div');
-            item.className = 'suggestion-item';
-            item.textContent = suggestion;
-            
-            item.addEventListener('click', () => {
-                searchInput.value = suggestion;
-                searchInput.form.submit();
-            });
-            
-            suggestionBox.appendChild(item);
-        });
-        
-        suggestionBox.style.display = 'block';
-    }
-});
+    })
+    .catch(error => {
+        console.error('清空历史记录时出错:', error);
+        const suggestionBox = document.getElementById('search-suggestions');
+        if (suggestionBox) {
+            suggestionBox.innerHTML = '<div class="history-empty">操作失败，请重试</div>';
+        }
+    });
+};
+
+// 初始化搜索建议管理器
+const searchManager = new SearchSuggestionManager();

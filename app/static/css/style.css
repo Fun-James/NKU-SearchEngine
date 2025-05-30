@@ -9,13 +9,13 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px; /* 从1000px进一步增加到1200px */
     margin: auto;
     background: #fff;
-    padding: 20px;
+    padding: 40px; /* 从30px增加到40px，提供更多空间 */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    overflow: hidden;
+    overflow: visible; /* 允许下拉菜单显示 */
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
@@ -30,7 +30,11 @@ h1 {
     position: relative;
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px; /* 从30px增加到40px */
+    width: 100%;
+    max-width: 900px; /* 从700px增加到900px，提供更大的搜索区域 */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .search-type-toggle {
@@ -59,21 +63,25 @@ h1 {
 
 input[type="text"] {
     flex-grow: 1;
-    padding: 10px;
+    padding: 15px 20px; /* 进一步增加内边距，提供更舒适的输入体验 */
     border: 1px solid #ddd;
     border-radius: 4px 0 0 4px;
     font-size: 16px;
     z-index: 1;
+    min-width: 400px; /* 从300px增加到400px，确保有足够的输入空间 */
+    max-width: 600px; /* 设置最大宽度，避免在大屏幕上过宽 */
 }
 
 button[type="submit"] {
-    padding: 10px 20px;
+    padding: 15px 30px; /* 与输入框的内边距保持一致 */
     background-color: #00529b; /* NKU Blue */
     color: white;
     border: none;
     border-radius: 0 4px 4px 0;
     cursor: pointer;
     font-size: 16px;
+    white-space: nowrap; /* 防止按钮文字换行 */
+    min-width: 80px; /* 确保按钮有最小宽度 */
 }
 
 button[type="submit"]:hover {
@@ -84,26 +92,207 @@ button[type="submit"]:hover {
 .suggestions-box {
     position: absolute;
     top: 100%;
-    left: 0;
-    width: calc(100% - 100px); /* 减去按钮宽度 */
+    left: 0; /* 改为从容器左边开始，与搜索框完全对齐 */
+    right: 0; /* 延伸到容器右边 */
     background: #fff;
     border: 1px solid #ddd;
     border-top: none;
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     display: none;
-    z-index: 10;
-    max-height: 300px;
+    z-index: 1000; /* 确保显示在最上层 */
+    max-height: 500px; /* 从450px增加到500px */
     overflow-y: auto;
+    font-size: 14px;
+    margin-top: 1px; /* 添加小间距避免重叠 */
 }
 
+/* 建议项目样式 */
 .suggestion-item {
-    padding: 8px 12px;
+    padding: 15px 20px; /* 进一步增加内边距，提供更舒适的交互体验 */
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+    font-size: 15px; /* 保持较大的字体大小 */
+    min-height: 48px; /* 增加最小高度，确保更好的点击区域 */
 }
 
-.suggestion-item:hover {
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item.selected {
     background-color: #f0f7ff;
+}
+
+.suggestion-item .suggestion-icon {
+    margin-right: 8px;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* 不同类型建议的样式 */
+.autocomplete-suggestion {
+    font-weight: 500;
+}
+
+.related-suggestion {
+    color: #5f6368;
+}
+
+.spell-check-suggestion {
+    color: #1a73e8;
+    font-style: italic;
+}
+
+.hot-search-item {
+    color: #ea4335;
+}
+
+/* 内容关联建议样式 */
+.content-suggestion {
+    background: linear-gradient(90deg, #f8f9ff 0%, #fff 100%);
+    border-left: 3px solid #667eea;
+    color: #667eea;
+    font-weight: 500;
+}
+
+.content-suggestion:hover {
+    background: linear-gradient(90deg, #e6e9ff 0%, #f0f7ff 100%);
+}
+
+.content-suggestion .suggestion-icon {
+    color: #667eea;
+    font-size: 14px;
+    opacity: 1;
+}
+
+/* 内容关联头部样式 */
+.content-header {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border-bottom: 1px solid #667eea;
+}
+
+.content-header span {
+    color: #fff;
+}
+
+/* 建议分组头部样式 */
+.suggestion-section-header {
+    padding: 12px 20px; /* 与建议项的内边距保持一致 */
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e8eaed;
+    font-size: 13px; /* 保持字体大小 */
+    font-weight: 600;
+    color: #5f6368;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px; /* 增加最小高度 */
+}
+
+.suggestion-section-header:first-child {
+    border-top: none;
+}
+
+.hot-searches-header {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.spell-check-header {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+/* 历史记录样式 */
+.history-item {
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+.history-item:hover {
+    background-color: #f5f5f5;
+}
+
+.history-text {
+    flex-grow: 1;
+    cursor: pointer;
+    padding: 4px 0;
+    color: #5f6368;
+}
+
+.history-text:hover,
+.history-text.selected {
+    color: #1a73e8;
+}
+
+.delete-history {
+    background: none;
+    border: none;
+    color: #9aa0a6;
+    cursor: pointer;
+    padding: 4px 6px;
+    border-radius: 3px;
+    margin-left: 8px;
+    font-size: 14px;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+}
+
+.delete-history:hover {
+    background-color: #f1f3f4;
+    opacity: 1;
+    color: #d93025;
+}
+
+.clear-history {
+    background: none;
+    border: 1px solid #dadce0;
+    color: #1a73e8;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    transition: all 0.2s ease;
+}
+
+.clear-history:hover {
+    background-color: #f8f9fa;
+    border-color: #1a73e8;
+}
+
+.history-empty {
+    padding: 20px;
+    text-align: center;
+    color: #9aa0a6;
+    font-style: italic;
+}
+
+/* 滚动条样式 */
+.suggestions-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.suggestions-box::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.suggestions-box::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.suggestions-box::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
 }
 
 /* 首页搜索提示样式 */
@@ -621,4 +810,70 @@ button[type="submit"]:hover {
     font-size: 18px;
     color: #666;
     margin-bottom: 30px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        max-width: 95%;
+        padding: 20px 15px;
+        margin: 10px auto;
+    }
+    
+    .search-container {
+        max-width: 100%;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .search-type-toggle {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .search-type-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    input[type="text"] {
+        min-width: unset;
+        width: 100%;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+    
+    button[type="submit"] {
+        width: 100%;
+        border-radius: 4px;
+    }
+    
+    .suggestions-box {
+        left: 0;
+        right: 0;
+        max-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px 10px;
+    }
+    
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+    
+    .suggestion-item {
+        padding: 15px 15px; /* 在移动设备上保持充足的内边距 */
+        font-size: 14px;
+        min-height: 44px; /* 确保移动设备上的触摸友好性 */
+    }
+    
+    .suggestion-section-header {
+        padding: 12px 15px; /* 与建议项保持一致的内边距 */
+        font-size: 12px;
+    }
 }

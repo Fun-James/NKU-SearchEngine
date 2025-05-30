@@ -2,10 +2,11 @@ from flask import render_template, request, current_app, redirect, url_for, flas
 from . import main
 from .query_parser_new import QueryParser  # Changed from query_parser to query_parser_new
 from .result_clustering import cluster_search_results, get_smart_snippet
-from .search_suggestion import SearchSuggestion
+from .intelligent_search_suggestion import IntelligentSearchSuggestion  # 使用新的智能建议系统
 import json
 import os
 import re
+import time
 from collections import Counter
 import urllib.parse
 
@@ -18,7 +19,7 @@ suggester = None
 def init_search_suggester():
     """初始化搜索建议工具"""
     global suggester
-    suggester = SearchSuggestion()
+    suggester = IntelligentSearchSuggestion()
     
     # 从历史记录加载词典
     history = []
@@ -66,27 +67,31 @@ def log_search_query(query):
     try:
         with open(SEARCH_HISTORY_FILE, 'w', encoding='utf-8') as f:
             json.dump(history, f, ensure_ascii=False)
+        
+        # 同时更新智能搜索建议器
+        global suggester
+        if suggester:
+            suggester.record_search(query)
     except Exception as e:
         current_app.logger.error(f"Error saving search history: {e}")
 
 @main.route('/api/suggestions')
 def get_suggestions():
-    """API接口：根据用户输入获取搜索建议或历史记录"""
-    query = request.args.get('query', '').lower()
+    """API接口：根据用户输入获取智能搜索建议"""
+    query = request.args.get('query', '').strip()
+    suggestion_type = request.args.get('type', 'all')
     show_history = request.args.get('history', 'false').lower() == 'true'
-    
+    simple = request.args.get('simple', 'false').lower() == 'true'
+    global suggester
+    # 只保留历史和基础建议
     if show_history:
-        # 返回最近的搜索历史
         history = []
         if os.path.exists(SEARCH_HISTORY_FILE):
             try:
                 with open(SEARCH_HISTORY_FILE, 'r', encoding='utf-8') as f:
                     history = json.load(f)
                     if not isinstance(history, list):
-                        current_app.logger.error("Search history is not a list")
                         history = []
-                
-                # 获取最近的20个不重复记录
                 seen = set()
                 unique_history = []
                 for item in reversed(history):
@@ -95,15 +100,30 @@ def get_suggestions():
                         unique_history.append(item)
                         if len(unique_history) >= 20:
                             break
-                return jsonify({'suggestions': unique_history})
+                return jsonify({'suggestions': unique_history, 'type': 'history'})
             except Exception as e:
-                current_app.logger.error(f"Error loading search history: {e}")
-                return jsonify({'suggestions': []})
-    
-    # 原有的搜索建议逻辑
-    if not query or len(query) < 2:
-        return jsonify({'suggestions': []})
-    
+                return jsonify({'suggestions': [], 'type': 'history'})
+    # 智能搜索建议
+    if suggester and query and len(query) >= 1:
+        try:
+            autocomplete = suggester.get_autocomplete_suggestions(query, max_suggestions=8)
+            related = suggester.get_related_queries(query, max_suggestions=5)
+            if simple:
+                # 只返回自动补全和相关
+                suggestions = autocomplete + related
+                # 去重
+                seen = set()
+                unique_suggestions = []
+                for s in suggestions:
+                    if s not in seen:
+                        seen.add(s)
+                        unique_suggestions.append(s)
+                return jsonify({'suggestions': unique_suggestions[:8], 'type': 'simple'})
+            else:
+                return jsonify({'autocomplete': autocomplete, 'related': related, 'type': 'basic'})
+        except Exception as e:
+            return jsonify({'suggestions': [], 'type': 'simple'})
+    # 回退到基础建议逻辑
     suggestions = []
     if os.path.exists(SEARCH_HISTORY_FILE):
         try:
@@ -111,17 +131,12 @@ def get_suggestions():
                 history = json.load(f)
                 if not isinstance(history, list):
                     history = []
-                
-            # 过滤出包含当前输入的查询
-            matching_queries = [q for q in history if q and query in q.lower()]
-            
-            # 统计频率并获取最常见的前10个
+            matching_queries = [q for q in history if q and query.lower() in q.lower()]
             counter = Counter(matching_queries)
-            suggestions = [item[0] for item in counter.most_common(10)]
+            suggestions = [item[0] for item in counter.most_common(8)]
         except Exception as e:
-            current_app.logger.error(f"Error generating suggestions: {e}")
-    
-    return jsonify({'suggestions': suggestions})
+            suggestions = []
+    return jsonify({'suggestions': suggestions, 'type': 'basic'})
 
 @main.route('/api/clear_history', methods=['POST'])
 def clear_history():
@@ -133,6 +148,33 @@ def clear_history():
     except Exception as e:
         current_app.logger.error(f"Error clearing search history: {e}")
         return jsonify({'success': False}), 500
+
+@main.route('/api/hot_searches')
+def get_hot_searches():
+    """获取热门搜索"""
+    try:
+        limit = request.args.get('limit', 10, type=int)
+        time_window = request.args.get('hours', 24, type=int)
+        
+        if suggester:
+            hot_searches = suggester.get_hot_searches(max_results=limit, time_window_hours=time_window)
+            return jsonify({
+                'success': True,
+                'hot_searches': hot_searches
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'hot_searches': [],
+                'message': 'Search suggester not initialized'
+            })
+    except Exception as e:
+        current_app.logger.error(f"Error getting hot searches: {e}")
+        return jsonify({
+            'success': False,
+            'hot_searches': [],
+            'message': str(e)
+        }), 500
 
 @main.route('/api/remove_history', methods=['POST'])
 def remove_history_item():
@@ -149,8 +191,7 @@ def remove_history_item():
                     history = json.load(f)
                     if not isinstance(history, list):
                         history = []
-                
-                # 移除所有匹配的记录
+                  # 移除所有匹配的记录
                 history = [q for q in history if q != query]
                 
                 with open(SEARCH_HISTORY_FILE, 'w', encoding='utf-8') as f:
@@ -163,6 +204,176 @@ def remove_history_item():
     except Exception as e:
         current_app.logger.error(f"Error removing history item: {e}")
         return jsonify({'success': False}), 500
+
+@main.route('/api/content_suggestions')
+def get_content_suggestions():
+    """API接口：获取基于内容的智能搜索建议"""
+    query = request.args.get('query', '').strip()
+    suggestion_type = request.args.get('type', 'all')  # all, semantic, domain, contextual, trending
+    max_suggestions = request.args.get('max', 10, type=int)
+    
+    if not query:
+        return jsonify({
+            'success': False,
+            'message': 'Query parameter is required',
+            'suggestions': []
+        }), 400
+    
+    global suggester
+    if not suggester:
+        return jsonify({
+            'success': False,
+            'message': 'Search suggester not initialized',
+            'suggestions': []
+        }), 500
+    
+    try:
+        # 更新搜索上下文
+        suggester.update_search_context(query)
+        
+        if suggestion_type == 'semantic':
+            # 语义相关建议
+            suggestions = suggester._get_semantic_suggestions(query, max_suggestions)
+            return jsonify({
+                'success': True,
+                'type': 'semantic',
+                'suggestions': suggestions,
+                'description': '基于语义相似度的搜索建议'
+            })
+        elif suggestion_type == 'domain':
+            # 领域知识建议
+            suggestions = suggester._get_domain_suggestions(query, max_suggestions)
+            return jsonify({
+                'success': True,
+                'type': 'domain',
+                'suggestions': suggestions,
+                'description': '基于领域知识图谱的搜索建议'
+            })
+        elif suggestion_type == 'contextual':
+            # 上下文相关建议
+            suggestions = suggester._get_contextual_suggestions(query, max_suggestions)
+            return jsonify({
+                'success': True,
+                'type': 'contextual',
+                'suggestions': suggestions,
+                'description': '基于搜索上下文的个性化建议'
+            })
+        elif suggestion_type == 'trending':
+            # 趋势相关建议
+            suggestions = suggester._get_trending_suggestions(query, max_suggestions)
+            return jsonify({
+                'success': True,
+                'type': 'trending',
+                'suggestions': suggestions,
+                'description': '基于当前热门趋势的搜索建议'
+            })
+        else:
+            # 综合内容建议
+            all_suggestions = suggester.get_content_suggestions(query, max_suggestions)
+            return jsonify({
+                'success': True,
+                'type': 'comprehensive',
+                'suggestions': all_suggestions,
+                'description': '综合内容关联搜索建议'
+            })
+            
+    except Exception as e:
+        current_app.logger.error(f"Error getting content suggestions: {e}")
+        return jsonify({
+            'success': False,
+            'message': f'Error generating suggestions: {str(e)}',
+            'suggestions': []
+        }), 500
+
+@main.route('/api/semantic_relations')
+def get_semantic_relations():
+    """API接口：获取查询词的语义关联关系"""
+    query = request.args.get('query', '').strip()
+    
+    if not query:
+        return jsonify({
+            'success': False,
+            'message': 'Query parameter is required',
+            'relations': {}
+        }), 400
+    
+    global suggester
+    if not suggester:
+                return jsonify({
+            'success': False,
+            'message': 'Search suggester not initialized',
+            'relations': {}
+        }), 500
+    
+    try:
+        # 获取语义关键词
+        keywords_with_weights = suggester.extract_semantic_keywords(query)
+        keywords = [word for word, weight in keywords_with_weights]
+        
+        # 获取相关的语义关系
+        relations = {}
+        for keyword in keywords:
+            if keyword in suggester.semantic_relations:
+                relations[keyword] = list(suggester.semantic_relations[keyword].keys())[:5]
+        
+        # 获取领域知识关联
+        domain_relations = {}
+        for keyword in keywords:
+            if keyword in suggester.domain_knowledge:
+                domain_relations[keyword] = suggester.domain_knowledge[keyword][:5]
+        
+        return jsonify({
+            'success': True,
+            'query': query,
+            'keywords': keywords,
+            'semantic_relations': relations,
+            'domain_relations': domain_relations,
+            'total_relations': len(suggester.semantic_relations)
+        })
+        
+    except Exception as e:
+        current_app.logger.error(f"Error getting semantic relations: {e}")
+        return jsonify({
+            'success': False,
+            'message': f'Error getting relations: {str(e)}',
+            'relations': {}
+        }), 500
+
+@main.route('/api/build_content_index', methods=['POST'])
+def build_content_index():
+    """API接口：构建内容索引以支持语义关联"""
+    try:
+        data = request.get_json()
+        documents = data.get('documents', [])
+        
+        if not documents:
+            return jsonify({
+                'success': False,
+                'message': 'No documents provided'
+            }), 400
+        
+        global suggester
+        if not suggester:
+            return jsonify({
+                'success': False,
+                'message': 'Search suggester not initialized'
+            }), 500
+        
+        # 构建语义关系
+        suggester.build_semantic_relations(documents)
+        
+        return jsonify({
+            'success': True,
+            'message': f'Successfully built content index from {len(documents)} documents',
+            'relations_count': len(suggester.semantic_relations)
+        })
+        
+    except Exception as e:
+        current_app.logger.error(f"Error building content index: {e}")
+        return jsonify({
+            'success': False,
+            'message': f'Error building index: {str(e)}'
+        }), 500
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -397,12 +608,14 @@ def search_results():
             clusters = cluster_search_results(results)
         except Exception as e:
             current_app.logger.error(f"Error clustering results: {e}")
-    
-    # 检查是否有拼写建议
+      # 检查是否有拼写建议
     query_suggestion = None
     if query and len(results) < 5 and suggester:  # 结果较少时提供拼写建议
         try:
-            query_suggestion = suggester.get_query_suggestion(query)
+            # 使用相关查询作为建议
+            related_queries = suggester.get_related_queries(query, max_suggestions=3)
+            if related_queries:
+                query_suggestion = related_queries[0]  # 使用第一个相关查询作为建议
         except Exception as e:
             current_app.logger.error(f"Error generating query suggestion: {e}")
     

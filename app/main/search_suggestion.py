@@ -1,24 +1,48 @@
 """
-搜索建议和拼写纠正模块
+搜索建议和拼写纠正模块 - 商用级智能推荐系统
 """
 import difflib
 import re
-from collections import Counter
+import json
+import time
+from collections import Counter, defaultdict
+from datetime import datetime, timedelta
+import jieba
+import jieba.analyse
 
 class SearchSuggestion:
     """
-    提供搜索建议和拼写纠正功能
+    提供搜索建议和拼写纠正功能 - 商用级智能推荐系统
     """
     
     def __init__(self, dictionary_path=None):
         """
-        初始化搜索建议
+        初始化搜索建议系统
         
         参数:
         - dictionary_path: 可选，字典文件的路径
         """
+        # 基础词典和频率统计
         self.word_dict = set()
         self.word_freq = Counter()
+        self.query_freq = Counter()
+        
+        # 前缀匹配字典：用于快速自动补全
+        self.prefix_dict = defaultdict(set)
+        
+        # 相关查询映射：基于共现的相关查询
+        self.related_queries = defaultdict(set)
+        
+        # 搜索时间戳：用于趋势分析
+        self.search_timestamps = defaultdict(list)
+        
+        # 热门搜索缓存
+        self.hot_searches_cache = None
+        self.hot_searches_cache_time = 0
+        self.cache_duration = 300  # 5分钟缓存
+        
+        # 初始化jieba分词
+        jieba.initialize()
         
         # 加载字典 (如果提供)
         if dictionary_path:
@@ -28,6 +52,7 @@ class SearchSuggestion:
                         word = line.strip().lower()
                         if word:
                             self.word_dict.add(word)
+                            self._build_prefix_index(word)
             except Exception as e:
                 print(f"Error loading dictionary: {e}")
                 

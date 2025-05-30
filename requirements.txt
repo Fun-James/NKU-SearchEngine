@@ -8,3 +8,5 @@ python-dotenv>=0.19.2
 lxml>=4.8.0  # 用于更快的HTML解析
 Werkzeug>=2.0.0  # Flask依赖
 urllib3>=1.26.9  # requests和elasticsearch的依赖
+pypinyin>=0.40.0
+pycorrector>=0.5.0
