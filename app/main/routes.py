@@ -3,6 +3,7 @@ from . import main
 from .query_parser_new import QueryParser  # Changed from query_parser to query_parser_new
 from .result_clustering import cluster_search_results, get_smart_snippet
 from .intelligent_search_suggestion import IntelligentSearchSuggestion  # 使用新的智能建议系统
+from .personalized_ranking import PersonalizedRanking  # 新增：个性化排序
 from app.main.search_suggestion import SearchSuggestion
 from app.indexer.search_history_indexer import SearchHistoryIndexer
 
@@ -20,13 +21,15 @@ SEARCH_HISTORY_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), '
 suggester = None
 search_suggestion = None
 history_indexer = None
+personalized_ranker = None  # 新增：个性化排序器
 
 def init_search_suggester():
     """初始化搜索建议工具"""
-    global suggester, search_suggestion, history_indexer
+    global suggester, search_suggestion, history_indexer, personalized_ranker
     suggester = IntelligentSearchSuggestion()
     search_suggestion = SearchSuggestion()
     history_indexer = SearchHistoryIndexer()
+    personalized_ranker = PersonalizedRanking()  # 新增：初始化个性化排序器
     
     # 确保搜索历史索引存在
     if current_app.elasticsearch:
@@ -50,8 +53,8 @@ def init_search_suggester():
 @main.before_app_request
 def before_request():
     """在每个请求之前检查搜索建议器是否已初始化"""
-    global suggester
-    if suggester is None:
+    global suggester, personalized_ranker
+    if suggester is None or personalized_ranker is None:
         init_search_suggester()
 
 def log_search_query(query, search_type='webpage'):
@@ -183,11 +186,11 @@ def get_suggestions():
                                     }
                                 }
                             }
-                        }
-                    )
+                        }                    )
                     content_options = content_suggest.get('suggest', {}).get('content_completion', [])
                     if content_options:
-                        for option in content_options[0].get('options', []):                    es_suggestions.append(option['text'])
+                        for option in content_options[0].get('options', []):
+                            es_suggestions.append(option['text'])
                     
                     # 将 ES 建议添加到总建议列表
                     suggestions.extend(es_suggestions)
@@ -679,13 +682,24 @@ def search_results():
                                 result['file_type'] = extracted_type
                     
                     processed_results.append(result)
-                
-                # 将搜索结果传递给模板
+                  # 将搜索结果传递给模板
                 results = processed_results
                 total_hits = resp['hits']['total']['value']
                 search_stats = {
                     'max_score': resp['hits']['max_score'] or 0
                 }
+                
+                # 个性化排序 (新增)
+                user_college = session.get('college')
+                user_role = session.get('role')
+                personalization_stats = {}
+                
+                if personalized_ranker and user_college and user_role:
+                    # 应用个性化排序
+                    results = personalized_ranker.rerank_results(results, user_college, user_role)
+                    # 获取个性化统计信息
+                    personalization_stats = personalized_ranker.get_personalization_stats(results, user_college, user_role)
+                    current_app.logger.info(f"Applied personalized ranking for {user_college}-{user_role}, avg score: {personalization_stats.get('avg_personalized_score', 0):.3f}")
                 
                 # 增加智能摘要生成
                 if len(processed_results) > 3:
@@ -693,8 +707,7 @@ def search_results():
                     clusters = cluster_search_results(processed_results)
                 else:
                     clusters = None
-                
-                # 分析是否提供搜索建议
+                  # 分析是否提供搜索建议
                 if int(total_hits) == 0 and total_hits < 5 and len(query) > 2:
                     # 尝试生成查询建议
                     if suggester:
@@ -704,7 +717,7 @@ def search_results():
                 else:
                     query_suggestion = None
                 
-                return render_template('search_results.html', 
+                return render_template('search_results.html',
                     query=query, 
                     results=results, 
                     total_hits=total_hits, 
@@ -714,6 +727,9 @@ def search_results():
                     page=page,
                     search_type=search_type,
                     query_suggestion=query_suggestion,
+                    personalization_stats=personalization_stats,  # 新增：个性化统计信息
+                    user_college=user_college,  # 新增：用户学院
+                    user_role=user_role,  # 新增：用户身份
                     max=max,
                     min=min)
             else:
@@ -734,11 +750,11 @@ def search_results():
             clusters = cluster_search_results(results)
         except Exception as e:
             current_app.logger.error(f"Error clustering results: {e}")
-      # 检查是否有拼写建议
+    
+    # 检查是否有拼写建议
     query_suggestion = None
     if query and len(results) < 5 and suggester:  # 结果较少时提供拼写建议
-        try:
-            # 使用相关查询作为建议
+        try:            # 使用相关查询作为建议
             related_queries = suggester.get_related_queries(query, max_suggestions=3)
             if related_queries:
                 query_suggestion = related_queries[0]  # 使用第一个相关查询作为建议
@@ -755,6 +771,9 @@ def search_results():
                           search_stats=search_stats,
                           clusters=clusters,
                           query_suggestion=query_suggestion,
+                          personalization_stats=locals().get('personalization_stats', {}),  # 新增：个性化统计信息
+                          user_college=session.get('college'),  # 新增：用户学院
+                          user_role=session.get('role'),  # 新增：用户身份
                           max=max,
                           min=min)
 
@@ -928,3 +947,47 @@ def get_es_suggestions():
 def logout():
     session.clear()
     return redirect(url_for('main.login'))
+
+@main.route('/api/personalization_info')
+def get_personalization_info():
+    """API接口：获取当前用户的个性化信息"""
+    user_college = session.get('college')
+    user_role = session.get('role')
+    
+    if not user_college or not user_role:
+        return jsonify({
+            'success': False,
+            'message': '用户未登录或信息不完整'
+        }), 401
+    
+    global personalized_ranker
+    if not personalized_ranker:
+        return jsonify({
+            'success': False,
+            'message': '个性化排序器未初始化'
+        }), 500
+    
+    # 获取用户相关的关键词
+    college_keywords = personalized_ranker.college_keywords.get(user_college, [])
+    role_keywords = personalized_ranker.role_keywords.get(user_role, [])
+    
+    # 获取相关域名权重
+    relevant_domains = {}
+    for domain, weights in personalized_ranker.domain_weights.items():
+        if user_college in weights:
+            relevant_domains[domain] = weights[user_college]
+    
+    return jsonify({
+        'success': True,
+        'user_info': {
+            'college': user_college,
+            'role': user_role
+        },
+        'personalization_config': {
+            'college_keywords': college_keywords[:10],  # 只显示前10个
+            'role_keywords': role_keywords,
+            'relevant_domains': relevant_domains,
+            'total_college_keywords': len(college_keywords),
+            'total_role_keywords': len(role_keywords)
+        }
+    })

@@ -24,8 +24,7 @@
                     <button type="submit">搜索</button>
                 </div>
             </form>
-        </div>
-          {% if results %}
+        </div>          {% if results %}
             <p class="results-count">
                 找到约 {{ total_hits }} 条结果
                 {% if search_time %}
@@ -33,6 +32,14 @@
                 {% endif %}
                 {% if search_stats and search_stats.max_score > 0 %}
                     <span class="search-relevance">, 最高相关度: {{ search_stats.max_score|round(2) }}</span>
+                {% endif %}
+                {% if user_college and user_role %}
+                    <span class="personalization-info">
+                        | 已为 {{ user_college }}-{{ user_role }} 个性化排序
+                        {% if personalization_stats and personalization_stats.avg_personalized_score > 0 %}
+                            (匹配度: {{ (personalization_stats.avg_personalized_score * 100)|round(1) }}%)
+                        {% endif %}
+                    </span>
                 {% endif %}
             </p>
               {% if query_suggestion %}
@@ -51,6 +58,25 @@
                                 <span class="cluster-count">({{ cluster.count }})</span>
                             </div>
                         {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            
+            <!-- 个性化统计信息显示 -->
+            {% if personalization_stats and personalization_stats.total_results > 0 %}
+                <div class="personalization-stats">
+                    <h4>个性化排序统计信息</h4>
+                    <div class="stat-item">
+                        学院匹配: <span class="stat-value">{{ personalization_stats.college_matched }}</span> 个结果
+                    </div>
+                    <div class="stat-item">
+                        身份匹配: <span class="stat-value">{{ personalization_stats.role_matched }}</span> 个结果
+                    </div>
+                    <div class="stat-item">
+                        域名匹配: <span class="stat-value">{{ personalization_stats.domain_matched }}</span> 个结果
+                    </div>
+                    <div class="stat-item">
+                        平均个性化分数: <span class="stat-value">{{ (personalization_stats.avg_personalized_score * 100)|round(1) }}%</span>
                     </div>
                 </div>
             {% endif %}
@@ -80,10 +106,20 @@
                             {% if result.file_type and result.file_type != '未知文档' %}
                                 <span class="file-type">文件类型: {{ result.file_type }}</span>
                             {% endif %}
-                        </p>
-                    {% endif %}
+                        </p>                    {% endif %}
                     <p class="result-url">{{ result.url }}</p>
                     <p class="result-snippet">{{ result.snippet | safe }}</p>
+                    
+                    <!-- 个性化分数显示（调试信息） -->
+                    {% if result.personalized_score is defined and result.personalized_score > 0 %}
+                        <p class="personalization-debug" style="font-size: 0.8em; color: #666; margin-top: 5px;">
+                            个性化分数: {{ (result.personalized_score * 100)|round(1) }}% 
+                            | 原始分数: {{ result.score|round(2) }}
+                            {% if result.final_score is defined %}
+                                | 综合分数: {{ result.final_score|round(3) }}
+                            {% endif %}
+                        </p>
+                    {% endif %}
                 </li>
                 {% endfor %}
             </ul>
