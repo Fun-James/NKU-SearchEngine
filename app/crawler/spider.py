@@ -43,6 +43,7 @@ def normalize_url(url):
 
 def get_file_info(url):
     """获取文件类型信息"""
+    # 只定义我们感兴趣的文档类型
     doc_types = {
         '.pdf': ('application/pdf', 'PDF文档'),
         '.doc': ('application/msword', 'Word文档'),
@@ -62,7 +63,7 @@ def get_file_info(url):
     
     # 如果URL中包含文件参数，也尝试检测
     if not file_ext:
-        # 检查常见的文件下载参数
+        # 更新正则表达式以匹配指定的扩展名
         patterns = [
             r'[?&]file=(.*\.(pdf|doc|docx|xls|xlsx|ppt|pptx))', # ?file=xxx.pdf
             r'/(attachment|download|file)/.*\.(pdf|doc|docx|xls|xlsx|ppt|pptx)', # /attachment/xxx.pdf
@@ -171,8 +172,7 @@ def fetch_page(url, max_retries=3):
             title = extract_title(soup)
             content = extract_content(soup)
             links, attachments, potential_attachment_pages = parse_links(response.text, url)
-            
-            # --- 新增：保存网页快照 ---
+              # --- 新增：保存网页快照 ---
             snapshot_path = None
             try:
                 snapshot_folder = current_app.config['SNAPSHOT_FOLDER']
@@ -183,8 +183,20 @@ def fetch_page(url, max_retries=3):
                 snapshot_filename = hashlib.md5(url.encode('utf-8')).hexdigest() + '.html'
                 snapshot_path = os.path.join(snapshot_folder, snapshot_filename)
                 
-                with open(snapshot_path, 'w', encoding='utf-8') as f:
-                    f.write(response.text)
+                # 使用更安全的编码方式写入文件
+                try:
+                    with open(snapshot_path, 'w', encoding='utf-8', errors='ignore') as f:
+                        f.write(response.text)
+                except UnicodeEncodeError:
+                    # 如果UTF-8失败，尝试其他编码
+                    try:
+                        with open(snapshot_path, 'w', encoding='gbk', errors='ignore') as f:
+                            f.write(response.text)
+                    except:
+                        # 最后尝试二进制模式
+                        with open(snapshot_path, 'wb') as f:
+                            f.write(response.text.encode('utf-8', errors='ignore'))
+                
                 print(f"Saved snapshot for {url} to {snapshot_path}")
             except Exception as e:
                 print(f"Error saving snapshot for {url}: {e}")
@@ -562,14 +574,18 @@ def fetch_attachment(url, session=None):
             '.xls': ('application/vnd.ms-excel', 'Excel表格'),
             '.xlsx': ('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Excel表格'),
             '.ppt': ('application/vnd.ms-powerpoint', 'PowerPoint演示文稿'),
-            '.pptx': ('application/vnd.openxmlformats-officedocument.presentationml.presentation', 'PowerPoint演示文稿')
-        }
+            '.pptx': ('application/vnd.openxmlformats-officedocument.presentationml.presentation', 'PowerPoint演示文稿')        }
         
         file_type = '未知文档'
         mime_type = content_type
         
         if file_ext in doc_types:
             _, file_type = doc_types[file_ext]
+        
+        # 如果是未知文档类型，直接忽略，不编入索引
+        if file_type == '未知文档':
+            print(f"忽略未知文档类型: {url}")
+            return None
         
         # 提取文件标题（去除扩展名）
         title = os.path.splitext(filename)[0]
@@ -901,10 +917,14 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                 for attachment in attachments_from_page:
                     if attachment not in visited_attachments:
                         visited_attachments.add(attachment)
-                        
-                        # 获取附件信息，使用专门的附件处理函数
+                          # 获取附件信息，使用专门的附件处理函数
                         attachment_data = fetch_attachment(attachment, session)
                         if attachment_data:
+                            # 检查文件类型，忽略未知文档
+                            if attachment_data.get('file_type') == '未知文档':
+                                print(f"跳过未知文档类型附件: {attachment}")
+                                continue
+                                
                             # 从当前页面提取可能的附件名称线索
                             # 查找标签或文本中含有此附件URL的内容
                             possible_attachment_names = []
@@ -989,8 +1009,7 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                                         base_title = os.path.splitext(meaningful_filename)[0]
                                         base_title = re.sub(r'[_-]', ' ', base_title)
                                         file_ext = os.path.splitext(meaningful_filename)[1].lower()
-                                        
-                                        # 设置文件类型
+                                          # 设置文件类型
                                         file_type = '未知文档'
                                         if file_ext in ['.pdf']:
                                             file_type = 'PDF文档'
@@ -1000,6 +1019,11 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                                             file_type = 'Excel表格'
                                         elif file_ext in ['.ppt', '.pptx']:
                                             file_type = 'PowerPoint演示文稿'
+                                        
+                                        # 如果是未知文档类型，跳过不处理
+                                        if file_type == '未知文档':
+                                            print(f"跳过未知文档类型: {attachment_url}")
+                                            continue
                                             
                                         # 检查标题中是否已包含文件类型标记
                                         if not re.search(r'\[.+?\]', base_title):
