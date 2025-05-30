@@ -207,9 +207,92 @@ class SearchSuggestionManager {
         }
         
         this.suggestionBox.style.display = 'block';
-    }      fetchIntelligentSuggestions(query, isPinyin = false) {
+    }    async fetchIntelligentSuggestions(query, isPinyin = false) {
         if (!query) return;
         
+        try {
+            // 首先尝试使用 ES completion suggester
+            const esSuggestions = await this.fetchESCompletionSuggestions(query);
+            
+            // 然后获取传统建议作为补充
+            const params = new URLSearchParams({
+                query: query,
+                simple: true,
+                pinyin: isPinyin
+            });
+            
+            const traditionalResponse = await fetch(`/api/suggestions?${params}`);
+            const traditionalData = await traditionalResponse.json();
+            
+            // 合并 ES 和传统建议
+            let allSuggestions = [];
+            
+            // 添加拼写纠正（如果有）
+            if (traditionalData.correction) {
+                allSuggestions.push({ 
+                    text: traditionalData.correction, 
+                    type: 'correction', 
+                    icon: '✍️',
+                    source: 'traditional'
+                });
+            }
+            
+            // 添加 ES completion 建议
+            if (esSuggestions && esSuggestions.length > 0) {
+                allSuggestions.push(...esSuggestions.map(s => ({
+                    text: s.text,
+                    type: 'es-completion',
+                    icon: '🔍',
+                    source: 'elasticsearch',
+                    score: s.score || 0
+                })));
+            }
+            
+            // 添加传统建议
+            if (traditionalData.suggestions && traditionalData.suggestions.length > 0) {
+                allSuggestions.push(...traditionalData.suggestions.map(s => ({
+                    text: s,
+                    type: 'suggestion',
+                    icon: '💡',
+                    source: 'traditional'
+                })));
+            }
+            
+            // 去重并限制数量
+            allSuggestions = this.deduplicateAndLimit(allSuggestions, 8);
+            
+            this.displaySuggestions(allSuggestions);
+            
+        } catch (error) {
+            console.error('获取智能建议时出错:', error);
+            // 降级到传统建议
+            this.fetchTraditionalSuggestions(query, isPinyin);
+        }
+    }
+    
+    async fetchESCompletionSuggestions(query) {
+        try {
+            const response = await fetch('/api/es_suggestions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query: query })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`ES API 响应错误: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            return data.suggestions || [];
+        } catch (error) {
+            console.warn('ES completion suggester 不可用，使用传统建议:', error);
+            return [];
+        }
+    }
+    
+    fetchTraditionalSuggestions(query, isPinyin = false) {
         const params = new URLSearchParams({
             query: query,
             simple: true,
@@ -221,19 +304,34 @@ class SearchSuggestionManager {
         .then(data => {
             if (data.correction) {
                 this.displaySuggestions([
-                    { text: data.correction, type: 'correction', icon: '✍️' },
-                    ...data.suggestions.map(s => ({ text: s, type: 'suggestion', icon: '💡' }))
+                    { text: data.correction, type: 'correction', icon: '✍️', source: 'traditional' },
+                    ...data.suggestions.map(s => ({ text: s, type: 'suggestion', icon: '💡', source: 'traditional' }))
                 ]);
             } else {
                 this.displaySuggestions(
-                    data.suggestions.map(s => ({ text: s, type: 'suggestion', icon: '💡' }))
+                    data.suggestions.map(s => ({ text: s, type: 'suggestion', icon: '💡', source: 'traditional' }))
                 );
             }
         })
         .catch(error => {
-            console.error('获取建议时出错:', error);
+            console.error('获取传统建议时出错:', error);
             this.displaySuggestions([]);
         });
+    }
+    
+    deduplicateAndLimit(suggestions, limit = 8) {
+        const seen = new Set();
+        const result = [];
+        
+        for (const suggestion of suggestions) {
+            const text = suggestion.text.toLowerCase().trim();
+            if (!seen.has(text) && result.length < limit) {
+                seen.add(text);
+                result.push(suggestion);
+            }
+        }
+        
+        return result;
     }
 
     displaySuggestions(suggestions) {
@@ -252,8 +350,7 @@ class SearchSuggestionManager {
             this.hideSuggestions();
         }
     }
-    
-    createSuggestionItem(suggestion) {
+      createSuggestionItem(suggestion) {
         const item = document.createElement('div');
         item.className = `suggestion-item ${suggestion.type}-suggestion`;
         
@@ -265,8 +362,22 @@ class SearchSuggestionManager {
         text.className = 'suggestion-text';
         text.textContent = suggestion.text;
         
+        // 添加来源标识
+        const source = document.createElement('span');
+        source.className = 'suggestion-source';
+        if (suggestion.source === 'elasticsearch') {
+            source.textContent = 'ES';
+            source.title = 'Elasticsearch 智能补全';
+        } else if (suggestion.source === 'traditional') {
+            source.textContent = '传统';
+            source.title = '传统建议算法';
+        }
+        
         item.appendChild(icon);
         item.appendChild(text);
+        if (suggestion.source) {
+            item.appendChild(source);
+        }
         
         item.addEventListener('click', () => {
             this.searchInput.value = suggestion.text;

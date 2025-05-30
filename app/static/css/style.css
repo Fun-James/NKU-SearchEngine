@@ -134,6 +134,29 @@ button[type="submit"]:hover {
     opacity: 0.7;
 }
 
+/* 建议来源标识样式 */
+.suggestion-source {
+    margin-left: auto;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 3px;
+    background-color: #f1f3f4;
+    color: #5f6368;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.es-completion-suggestion .suggestion-source {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.suggestion-item:hover .suggestion-source {
+    opacity: 1;
+}
+
 /* 不同类型建议的样式 */
 .autocomplete-suggestion {
     font-weight: 500;
@@ -146,6 +169,30 @@ button[type="submit"]:hover {
 .spell-check-suggestion {
     color: #1a73e8;
     font-style: italic;
+}
+
+.correction-suggestion {
+    color: #1a73e8;
+    font-style: italic;
+    background-color: #f0f7ff;
+    border-left: 3px solid #1a73e8;
+}
+
+.es-completion-suggestion {
+    background: linear-gradient(90deg, #f0f8ff 0%, #fff 100%);
+    border-left: 3px solid #4285f4;
+    color: #4285f4;
+    font-weight: 500;
+}
+
+.es-completion-suggestion:hover {
+    background: linear-gradient(90deg, #e3f2fd 0%, #f0f7ff 100%);
+}
+
+.es-completion-suggestion .suggestion-icon {
+    color: #4285f4;
+    font-size: 14px;
+    opacity: 1;
 }
 
 .hot-search-item {

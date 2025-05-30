@@ -4,6 +4,7 @@ from .query_parser_new import QueryParser  # Changed from query_parser to query_
 from .result_clustering import cluster_search_results, get_smart_snippet
 from .intelligent_search_suggestion import IntelligentSearchSuggestion  # 使用新的智能建议系统
 from app.main.search_suggestion import SearchSuggestion
+from app.indexer.search_history_indexer import SearchHistoryIndexer
 
 import json
 import os
@@ -18,12 +19,18 @@ SEARCH_HISTORY_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), '
 # 初始化搜索建议工具
 suggester = None
 search_suggestion = None
+history_indexer = None
 
 def init_search_suggester():
     """初始化搜索建议工具"""
-    global suggester, search_suggestion
+    global suggester, search_suggestion, history_indexer
     suggester = IntelligentSearchSuggestion()
     search_suggestion = SearchSuggestion()
+    history_indexer = SearchHistoryIndexer()
+    
+    # 确保搜索历史索引存在
+    if current_app.elasticsearch:
+        history_indexer.ensure_index_exists(current_app.elasticsearch)
     
     # 从历史记录加载词典
     history = []
@@ -38,7 +45,7 @@ def init_search_suggester():
         suggester.load_search_history(history)
         search_suggestion.load_search_history(history)
         
-    return suggester, search_suggestion
+    return suggester, search_suggestion, history_indexer
 
 @main.before_app_request
 def before_request():
@@ -47,7 +54,7 @@ def before_request():
     if suggester is None:
         init_search_suggester()
 
-def log_search_query(query):
+def log_search_query(query, search_type='webpage'):
     """记录搜索查询，用于生成搜索建议"""
     # 确保data目录存在
     os.makedirs(os.path.dirname(SEARCH_HISTORY_FILE), exist_ok=True)
@@ -74,9 +81,21 @@ def log_search_query(query):
             json.dump(history, f, ensure_ascii=False)
         
         # 同时更新智能搜索建议器
-        global suggester
+        global suggester, history_indexer
         if suggester:
             suggester.record_search(query)
+            
+        # 索引到 Elasticsearch 搜索历史
+        if history_indexer and current_app.elasticsearch:
+            from flask import session
+            user_session = session.get('user_id', 'anonymous')
+            history_indexer.index_search_query(
+                current_app.elasticsearch, 
+                query, 
+                search_type, 
+                user_session
+            )
+            
     except Exception as e:
         current_app.logger.error(f"Error saving search history: {e}")
 
@@ -111,13 +130,69 @@ def get_suggestions():
                 return jsonify({'suggestions': unique_history, 'type': 'history'})
             except Exception as e:
                 return jsonify({'suggestions': [], 'type': 'history'})
-    
-    # 智能搜索建议和纠错
+      # 智能搜索建议和纠错
     if suggester and search_suggestion and query and len(query) >= 1:
         try:
             # 获取各种建议
             suggestions = []
             correction = None
+              # 首先尝试获取 ES Completion Suggester 建议
+            try:
+                es = current_app.elasticsearch
+                if es:
+                    es_suggestions = []
+                    
+                    # 获取搜索历史建议
+                    if history_indexer:
+                        history_suggestions = history_indexer.get_query_suggestions(es, query, size=3)
+                        for hs in history_suggestions:
+                            suggestions.append(hs['text'])
+                    
+                    # 获取标题建议
+                    title_suggest = es.search(
+                        index=current_app.config['INDEX_NAME'],
+                        body={
+                            "suggest": {
+                                "title_completion": {
+                                    "prefix": query,
+                                    "completion": {
+                                        "field": "title_suggest",
+                                        "size": 5,
+                                        "skip_duplicates": True
+                                    }
+                                }
+                            }
+                        }
+                    )
+                    title_options = title_suggest.get('suggest', {}).get('title_completion', [])
+                    if title_options:
+                        for option in title_options[0].get('options', []):
+                            es_suggestions.append(option['text'])
+                    
+                    # 获取内容建议
+                    content_suggest = es.search(
+                        index=current_app.config['INDEX_NAME'],
+                        body={
+                            "suggest": {
+                                "content_completion": {
+                                    "prefix": query,
+                                    "completion": {
+                                        "field": "content_suggest",
+                                        "size": 5,
+                                        "skip_duplicates": True
+                                    }
+                                }
+                            }
+                        }
+                    )
+                    content_options = content_suggest.get('suggest', {}).get('content_completion', [])
+                    if content_options:
+                        for option in content_options[0].get('options', []):                    es_suggestions.append(option['text'])
+                    
+                    # 将 ES 建议添加到总建议列表
+                    suggestions.extend(es_suggestions)
+            except Exception as e:
+                current_app.logger.error(f"ES completion suggester error: {e}")
             
             if is_pinyin:
                 # 如果是拼音输入，优先使用拼音建议
@@ -128,14 +203,18 @@ def get_suggestions():
                 autocomplete = suggester.get_autocomplete_suggestions(query, max_suggestions=5)
                 suggestions.extend(autocomplete)
                 
-                # 检查是否需要纠错
-                correction = search_suggestion.get_query_suggestion(query)
+                # 检查是否需要纠错 - 只有在查询较短且可能有错误时才检查
+                if len(query) <= 10:  # 只对较短的查询进行纠错检查
+                    potential_correction = search_suggestion.get_query_suggestion(query)
+                    # 确保纠正建议确实不同且有意义
+                    if potential_correction and potential_correction.lower() != query.lower():
+                        correction = potential_correction
             
             # 去重
             seen = set()
             unique_suggestions = []
             for s in suggestions:
-                if s not in seen:
+                if s and s.strip() and s not in seen:
                     seen.add(s)
                     unique_suggestions.append(s)
             
@@ -144,6 +223,7 @@ def get_suggestions():
                 'type': 'intelligent'
             }
             
+            # 只有在确实有有意义的纠正时才添加
             if correction:
                 response['correction'] = correction
             
@@ -417,9 +497,8 @@ def search_results():
     query = request.args.get('query', '')
     page = request.args.get('page', 1, type=int)
     search_type = request.args.get('search_type', 'webpage')
-    
     if query:
-        log_search_query(query)
+        log_search_query(query, search_type)
     
     results = []
     total_hits = 0
@@ -688,3 +767,111 @@ def search_history():
             current_app.logger.error(f"Error loading search history: {e}")
             
     return render_template('search_history.html', history=history)
+
+@main.route('/api/es_suggestions', methods=['GET', 'POST'])
+def get_es_suggestions():
+    """使用 Elasticsearch Completion Suggester 获取建议"""
+    if request.method == 'POST':
+        data = request.get_json()
+        query = data.get('query', '').strip() if data else ''
+        suggestion_type = data.get('type', 'all') if data else 'all'
+        size = data.get('size', 8) if data else 8
+    else:
+        query = request.args.get('query', '').strip()
+        suggestion_type = request.args.get('type', 'all')
+        size = request.args.get('size', 8, type=int)
+    
+    if not query or len(query) < 1:
+        return jsonify({'suggestions': [], 'type': 'elasticsearch_completion'})
+    
+    try:
+        es = current_app.elasticsearch
+        if not es:
+            return jsonify({'suggestions': [], 'error': 'Elasticsearch not available'})
+        suggestions = []
+        
+        # 首先获取搜索历史建议
+        if suggestion_type in ['history', 'all'] and history_indexer:
+            try:
+                history_suggestions = history_indexer.get_query_suggestions(es, query, size=3)
+                suggestions.extend(history_suggestions)
+            except Exception as e:
+                current_app.logger.error(f"Search history suggestion error: {e}")
+        
+        if suggestion_type in ['title', 'all']:
+            # 从文档标题获取建议
+            try:
+                title_suggest = es.search(
+                    index=current_app.config['INDEX_NAME'],
+                    body={
+                        "suggest": {
+                            "title_completion": {
+                                "prefix": query,
+                                "completion": {
+                                    "field": "title_suggest",
+                                    "size": size,
+                                    "skip_duplicates": True
+                                }
+                            }
+                        }
+                    }
+                )
+                title_options = title_suggest.get('suggest', {}).get('title_completion', [])
+                if title_options:
+                    for option in title_options[0].get('options', []):
+                        suggestions.append({
+                            'text': option['text'],
+                            'score': option.get('_score', 0),
+                            'source': 'title'
+                        })
+            except Exception as e:
+                current_app.logger.error(f"Title suggestion error: {e}")
+        
+        if suggestion_type in ['content', 'all']:
+            # 从文档内容获取建议
+            try:
+                content_suggest = es.search(
+                    index=current_app.config['INDEX_NAME'],
+                    body={
+                        "suggest": {
+                            "content_completion": {
+                                "prefix": query,
+                                "completion": {
+                                    "field": "content_suggest",
+                                    "size": size,
+                                    "skip_duplicates": True
+                                }
+                            }
+                        }
+                    }
+                )
+                content_options = content_suggest.get('suggest', {}).get('content_completion', [])
+                if content_options:
+                    for option in content_options[0].get('options', []):
+                        suggestions.append({
+                            'text': option['text'],
+                            'score': option.get('_score', 0),
+                            'source': 'content'
+                        })
+            except Exception as e:
+                current_app.logger.error(f"Content suggestion error: {e}")
+        
+        # 按分数排序并去重
+        seen = set()
+        unique_suggestions = []
+        for suggestion in sorted(suggestions, key=lambda x: x.get('score', 0), reverse=True):
+            if suggestion['text'] not in seen:
+                seen.add(suggestion['text'])
+                unique_suggestions.append(suggestion)
+                if len(unique_suggestions) >= size:
+                    break
+        
+        return jsonify({
+            'suggestions': unique_suggestions,
+            'type': 'elasticsearch_completion',
+            'total': len(unique_suggestions)
+        })
+        
+    except Exception as e:
+        current_app.logger.error(f"Elasticsearch completion suggestion error: {e}")
+        return jsonify({'suggestions': [], 'error': str(e)})

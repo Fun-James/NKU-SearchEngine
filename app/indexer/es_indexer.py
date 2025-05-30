@@ -3,6 +3,8 @@ from datetime import datetime
 from flask import current_app
 import json
 import re
+import jieba
+import jieba.analyse
 
 def get_es_client():
     """获取 Elasticsearch 客户端实例"""
@@ -45,8 +47,7 @@ def create_index_if_not_exists(es, index_name):
                     }
                 }
             }
-            
-            # 定义索引的映射
+              # 定义索引的映射
             mappings = {
                 "properties": {
                     "url": {"type": "keyword"},
@@ -57,7 +58,23 @@ def create_index_if_not_exists(es, index_name):
                     "last_modified": {"type": "date"},
                     "file_type": {"type": "keyword"},  # 新增字段，用于存储文件类型
                     "mime_type": {"type": "keyword"},  # 新增字段，用于存储MIME类型
-                    "is_document": {"type": "boolean"} # 新增字段，标记是否为文档
+                    "is_document": {"type": "boolean"}, # 新增字段，标记是否为文档
+                    
+                    # Completion Suggester 字段
+                    "title_suggest": {
+                        "type": "completion",
+                        "analyzer": "ik_smart",
+                        "preserve_separators": True,
+                        "preserve_position_increments": True,
+                        "max_input_length": 50
+                    },
+                    "content_suggest": {
+                        "type": "completion", 
+                        "analyzer": "ik_smart",
+                        "preserve_separators": True,
+                        "preserve_position_increments": True,
+                        "max_input_length": 50
+                    }
                 }
             }
             
@@ -147,6 +164,9 @@ def bulk_index_documents(es, index_name, documents):
                     file_type = extracted_type
                     # 可选：移除标题中的文件类型标记，避免重复显示
                     # title = re.sub(r'\s*\[.*?\]', '', title)
+          # 生成 Completion Suggester 所需的建议输入
+        title_suggestions = generate_suggest_input(title, None)
+        content_suggestions = generate_suggest_input(None, doc.get('content', ''))
         
         action = {
             "_index": index_name,
@@ -164,7 +184,15 @@ def bulk_index_documents(es, index_name, documents):
                         "href": a.get('href', '')
                     } for a in doc.get('anchor_texts', []) if a.get('text') and a.get('href')
                 ],
-                "crawled_at": doc.get('crawled_at')
+                "crawled_at": doc.get('crawled_at'),
+                "title_suggest": {
+                    "input": title_suggestions,
+                    "weight": 10  # 标题权重较高
+                },
+                "content_suggest": {
+                    "input": content_suggestions,
+                    "weight": 5   # 内容权重较低
+                }
             }
         }
         actions.append(action)
@@ -193,6 +221,52 @@ def test_analyzer(es, text):
     except Exception as e:
         print(f"Analyzer test failed: {e}")
         return []
+
+def generate_suggest_input(title, content):
+    """生成用于 completion suggester 的输入数据"""
+    suggestions = []
+    
+    # 从标题生成建议
+    if title and len(title.strip()) > 0:
+        # 完整标题
+        title_clean = title.strip()
+        if len(title_clean) >= 2:
+            suggestions.append(title_clean)
+        
+        # 分词后的重要词汇
+        try:
+            title_words = list(jieba.cut(title_clean))
+            for word in title_words:
+                word_clean = word.strip()
+                if len(word_clean) >= 2 and word_clean not in ['的', '和', '与', '或', '在', '是', '有', '了', '都']:
+                    suggestions.append(word_clean)
+        except:
+            pass
+    
+    # 从内容中提取关键词
+    if content and len(content.strip()) > 0:
+        try:
+            # 提取关键词，限制数量避免过多
+            keywords = jieba.analyse.extract_tags(content, topK=5, withWeight=False)
+            for keyword in keywords:
+                keyword_clean = keyword.strip()
+                if len(keyword_clean) >= 2:
+                    suggestions.append(keyword_clean)
+        except:
+            pass
+    
+    # 去重并过滤，限制长度
+    unique_suggestions = []
+    seen = set()
+    for s in suggestions:
+        s_clean = s.strip()
+        if (len(s_clean) >= 2 and len(s_clean) <= 50 and 
+            s_clean not in seen and 
+            not s_clean.isdigit()):  # 排除纯数字
+            seen.add(s_clean)
+            unique_suggestions.append(s_clean)
+    
+    return unique_suggestions[:10]  # 限制每个文档最多10个建议
 
 # 示例：如何使用这个模块
 if __name__ == '__main__':

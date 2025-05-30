@@ -110,8 +110,7 @@ class SearchSuggestion:
         for py in self.pinyin_dict:
             if py.startswith(pinyin):
                 suggestions.update(self.pinyin_dict[py])
-        
-        # 3. 模糊匹配（编辑距离<=2的拼音）
+          # 3. 模糊匹配（编辑距离<=2的拼音）
         for py in self.pinyin_dict:
             if distance(pinyin, py) <= 2:
                 suggestions.update(self.pinyin_dict[py])
@@ -119,7 +118,7 @@ class SearchSuggestion:
         # 按词频排序
         return sorted(suggestions, key=lambda x: self.word_freq.get(x, 0), reverse=True)[:max_suggestions]
     
-    def get_word_suggestions(self, word, max_suggestions=3, threshold=0.7):
+    def get_word_suggestions(self, word, max_suggestions=3, threshold=0.85):
         """
         为给定词找到最相似的词，支持拼音和错别字纠正
         
@@ -133,38 +132,58 @@ class SearchSuggestion:
         """
         if not word or len(word) < 2:
             return []
+        
+        # 如果词已经在词典中且频率较高，不需要纠正
+        if word in self.word_dict and self.word_freq.get(word, 0) >= 2:
+            return []
             
         suggestions = set()
+        word_lower = word.lower()
         
         # 1. 如果输入是拼音，尝试转换为中文
         if all(c.isalpha() for c in word):
             pinyin_suggestions = self.get_pinyin_suggestions(word)
             suggestions.update(pinyin_suggestions)
+        else:
+            # 2. 基于编辑距离的错别字纠正（更严格的条件）
+            for dict_word in self.word_dict:
+                # 跳过相同的词
+                if dict_word == word or dict_word == word_lower:
+                    continue
+                
+                edit_dist = distance(word_lower, dict_word.lower())
+                
+                # 根据词长度调整编辑距离阈值
+                max_edit_distance = 1 if len(word) <= 3 else 2
+                
+                if edit_dist <= max_edit_distance:
+                    # 计算相似度
+                    similarity = difflib.SequenceMatcher(None, word_lower, dict_word.lower()).ratio()
+                    
+                    # 提高相似度阈值，确保只有真正相似的词才被建议
+                    if similarity >= threshold:
+                        suggestions.add(dict_word)
         
-        # 2. 基于编辑距离的错别字纠正
-        for dict_word in self.word_dict:
-            # 计算编辑距离
-            if distance(word, dict_word) <= 2:
-                suggestions.add(dict_word)
-            
-            # 计算相似度
-            similarity = difflib.SequenceMatcher(None, word, dict_word).ratio()
-            if similarity > threshold:
-                suggestions.add(dict_word)
-        
-        # 按频率和相似度排序
+        # 如果没有找到足够相似的建议，返回空列表
+        if not suggestions:
+            return []
+          # 按频率和相似度排序
         scored_suggestions = []
         for sugg in suggestions:
             # 计算综合得分（结合编辑距离和字频）
-            edit_dist = distance(word, sugg)
+            edit_dist = distance(word_lower, sugg.lower())
             freq_score = self.word_freq.get(sugg, 0)
-            similarity = difflib.SequenceMatcher(None, word, sugg).ratio()
-            score = (similarity * 0.4 + freq_score * 0.4 + (1 / (edit_dist + 1)) * 0.2)
+            similarity = difflib.SequenceMatcher(None, word_lower, sugg.lower()).ratio()
+            
+            # 调整评分权重，优先考虑相似度
+            score = (similarity * 0.6 + (freq_score / 10.0) * 0.3 + (1 / (edit_dist + 1)) * 0.1)
             scored_suggestions.append((sugg, score))
         
-        # 排序并返回结果
+        # 排序并返回结果，只返回得分较高的建议
         scored_suggestions.sort(key=lambda x: x[1], reverse=True)
-        return [sugg for sugg, _ in scored_suggestions[:max_suggestions]]
+        filtered_suggestions = [(sugg, score) for sugg, score in scored_suggestions if score > 0.8]
+        
+        return [sugg for sugg, _ in filtered_suggestions[:max_suggestions]]
     
     def get_query_suggestion(self, query):
         """
@@ -187,16 +206,26 @@ class SearchSuggestion:
         for word in original_words:
             if len(word) > 1:  # 对多字词进行纠正
                 suggestions = self.get_word_suggestions(word)
-                if suggestions and suggestions[0] != word:
-                    suggested_words.append(suggestions[0])
-                    has_corrections = True
+                if suggestions and len(suggestions) > 0:
+                    # 只有当建议词与原词确实不同时才进行替换
+                    best_suggestion = suggestions[0]
+                    if best_suggestion.lower() != word.lower():
+                        suggested_words.append(best_suggestion)
+                        has_corrections = True
+                    else:
+                        suggested_words.append(word)
                 else:
                     suggested_words.append(word)
             else:
                 suggested_words.append(word)
         
+        # 只有在确实有有意义的纠正时才返回建议
         if has_corrections:
-            return ''.join(suggested_words)
+            suggested_query = ''.join(suggested_words)
+            # 确保建议查询与原查询确实不同
+            if suggested_query.lower() != query.lower():
+                return suggested_query
+        
         return None
 
 # 测试代码
