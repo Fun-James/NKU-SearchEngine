@@ -1,6 +1,3 @@
-"""
-搜索建议和拼写纠正模块 - 商用级智能推荐系统
-"""
 import difflib
 import re
 import json
@@ -45,8 +42,7 @@ class SearchSuggestion:
         self.hot_searches_cache = None
         self.hot_searches_cache_time = 0
         self.cache_duration = 300  # 5分钟缓存
-        
-        # 初始化jieba分词
+          # 初始化jieba分词
         jieba.initialize()
         
         # 加载字典 (如果提供)
@@ -64,9 +60,24 @@ class SearchSuggestion:
         full_pinyin = ''.join(lazy_pinyin(word))
         self.pinyin_dict[full_pinyin].add(word)
         
-        # 获取首字母
-        initials = ''.join([p[0] if p else '' for p in lazy_pinyin(word)])
-        if len(initials) > 1:
+        # 获取拼音列表，用于更精确的匹配
+        pinyin_list = lazy_pinyin(word)
+        
+        # 为每个拼音音节建立索引
+        for i, py in enumerate(pinyin_list):
+            if py:
+                # 单个拼音音节
+                self.pinyin_dict[py].add(word)
+                
+                # 从这个位置开始的拼音组合
+                for j in range(i + 1, min(i + 3, len(pinyin_list) + 1)):  # 最多组合2个音节
+                    combined = ''.join(pinyin_list[i:j])
+                    if len(combined) > 1:  # 避免单字符索引
+                        self.pinyin_dict[combined].add(word)
+        
+        # 获取首字母（仅用于长词的快速匹配）
+        initials = ''.join([p[0] if p else '' for p in pinyin_list])
+        if len(initials) > 2:  # 只为3个字符以上的首字母建立索引
             self.pinyin_dict[initials].add(word)
     
     def load_search_history(self, history):
@@ -81,7 +92,7 @@ class SearchSuggestion:
             words = list(jieba.cut(query.lower()))
             for word in words:
                 if len(word) > 1:  # 忽略单字词
-                    self.word_dict.add(word)
+                    self.word_dict.add(word)                    
                     self.word_freq[word] += 1
                     self.build_pinyin_index(word)  # 构建拼音索引
     
@@ -102,23 +113,28 @@ class SearchSuggestion:
         pinyin = pinyin.lower()
         suggestions = set()
         
-        # 1. 完全匹配
+        # 1. 完全匹配（最高优先级）
         if pinyin in self.pinyin_dict:
             suggestions.update(self.pinyin_dict[pinyin])
         
-        # 2. 前缀匹配
-        for py in self.pinyin_dict:
-            if py.startswith(pinyin):
-                suggestions.update(self.pinyin_dict[py])
-          # 3. 模糊匹配（编辑距离<=2的拼音）
-        for py in self.pinyin_dict:
-            if distance(pinyin, py) <= 2:
-                suggestions.update(self.pinyin_dict[py])
+        # 2. 前缀匹配（仅对较长的输入进行前缀匹配）
+        if len(pinyin) >= 2:
+            for py in self.pinyin_dict:
+                # 只匹配以输入拼音开头，且长度相近的拼音
+                if py.startswith(pinyin) and len(py) <= len(pinyin) + 3:
+                    suggestions.update(self.pinyin_dict[py])
+        
+        # 3. 模糊匹配（仅对2字符以上的输入，且编辑距离=1）
+        if len(pinyin) >= 2:
+            for py in self.pinyin_dict:
+                # 只对长度相近的拼音进行模糊匹配
+                if abs(len(py) - len(pinyin)) <= 1 and distance(pinyin, py) == 1:
+                    suggestions.update(self.pinyin_dict[py])
         
         # 按词频排序
         return sorted(suggestions, key=lambda x: self.word_freq.get(x, 0), reverse=True)[:max_suggestions]
     
-    def get_word_suggestions(self, word, max_suggestions=3, threshold=0.85):
+    def get_word_suggestions(self, word, max_suggestions=3, threshold=0.8):
         """
         为给定词找到最相似的词，支持拼音和错别字纠正
         
@@ -227,34 +243,3 @@ class SearchSuggestion:
                 return suggested_query
         
         return None
-
-# 测试代码
-if __name__ == "__main__":
-    suggester = SearchSuggestion()
-    
-    # 模拟搜索历史
-    test_history = [
-        "南开大学计算机学院",
-        "南开大学招生",
-        "南开大学软件学院",
-        "计算机科学",
-        "人工智能专业",
-        "数据科学"
-    ]
-    
-    suggester.load_search_history(test_history)
-    
-    # 测试词建议
-    test_words = ["计算机", "计算及", "南凯大学", "数据"]
-    for word in test_words:
-        suggestions = suggester.get_word_suggestions(word)
-        print(f"'{word}' 的建议词: {suggestions}")
-    
-    # 测试查询建议
-    test_queries = ["南凯大学计算及", "人工智力"]
-    for query in test_queries:
-        suggestion = suggester.get_query_suggestion(query)
-        if suggestion:
-            print(f"原始查询: '{query}' -> 建议查询: '{suggestion}'")
-        else:
-            print(f"查询 '{query}' 无需更正")

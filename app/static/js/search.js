@@ -211,8 +211,8 @@ class SearchSuggestionManager {
         if (!query) return;
         
         try {
-            // 首先尝试使用 ES completion suggester
-            const esSuggestions = await this.fetchESCompletionSuggestions(query);
+            // 首先尝试使用 ES completion suggester，传递拼音标识
+            const esSuggestions = await this.fetchESCompletionSuggestions(query, isPinyin);
             
             // 然后获取传统建议作为补充
             const params = new URLSearchParams({
@@ -241,10 +241,11 @@ class SearchSuggestionManager {
             if (esSuggestions && esSuggestions.length > 0) {
                 allSuggestions.push(...esSuggestions.map(s => ({
                     text: s.text,
-                    type: 'es-completion',
-                    icon: '🔍',
+                    type: s.source === 'pinyin_conversion' ? 'pinyin-chinese' : 'es-completion',
+                    icon: s.source === 'pinyin_conversion' ? '🔤' : '🔍',
                     source: 'elasticsearch',
-                    score: s.score || 0
+                    score: s.score || 0,
+                    originalPinyin: s.original_pinyin
                 })));
             }
             
@@ -269,15 +270,17 @@ class SearchSuggestionManager {
             this.fetchTraditionalSuggestions(query, isPinyin);
         }
     }
-    
-    async fetchESCompletionSuggestions(query) {
+      async fetchESCompletionSuggestions(query, isPinyin = false) {
         try {
             const response = await fetch('/api/es_suggestions', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ query: query })
+                body: JSON.stringify({ 
+                    query: query,
+                    pinyin: isPinyin  // 传递拼音标识
+                })
             });
             
             if (!response.ok) {
@@ -285,6 +288,16 @@ class SearchSuggestionManager {
             }
             
             const data = await response.json();
+            
+            // 如果是拼音输入，优先显示拼音转换的结果
+            if (isPinyin && data.suggestions) {
+                // 将拼音转换的建议排在前面
+                const pinyinConversions = data.suggestions.filter(s => s.source === 'pinyin_conversion');
+                const otherSuggestions = data.suggestions.filter(s => s.source !== 'pinyin_conversion');
+                
+                return [...pinyinConversions, ...otherSuggestions];
+            }
+            
             return data.suggestions || [];
         } catch (error) {
             console.warn('ES completion suggester 不可用，使用传统建议:', error);
@@ -349,8 +362,7 @@ class SearchSuggestionManager {
         } else {
             this.hideSuggestions();
         }
-    }
-      createSuggestionItem(suggestion) {
+    }    createSuggestionItem(suggestion) {
         const item = document.createElement('div');
         item.className = `suggestion-item ${suggestion.type}-suggestion`;
         
@@ -362,12 +374,29 @@ class SearchSuggestionManager {
         text.className = 'suggestion-text';
         text.textContent = suggestion.text;
         
+        // 如果是拼音转换的建议，添加原始拼音显示
+        if (suggestion.type === 'pinyin-chinese' && suggestion.originalPinyin) {
+            const pinyinHint = document.createElement('span');
+            pinyinHint.className = 'pinyin-hint';
+            pinyinHint.textContent = ` (${suggestion.originalPinyin})`;
+            pinyinHint.style.opacity = '0.6';
+            pinyinHint.style.fontSize = '0.9em';
+            text.appendChild(pinyinHint);
+        }
+        
         // 添加来源标识
         const source = document.createElement('span');
         source.className = 'suggestion-source';
         if (suggestion.source === 'elasticsearch') {
-            source.textContent = 'ES';
-            source.title = 'Elasticsearch 智能补全';
+            if (suggestion.type === 'pinyin-chinese') {
+                source.textContent = '拼音';
+                source.title = '拼音转换结果';
+                source.style.backgroundColor = '#fff3cd';
+                source.style.color = '#856404';
+            } else {
+                source.textContent = 'ES';
+                source.title = 'Elasticsearch 智能补全';
+            }
         } else if (suggestion.source === 'traditional') {
             source.textContent = '传统';
             source.title = '传统建议算法';

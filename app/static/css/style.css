@@ -134,6 +134,22 @@ button[type="submit"]:hover {
     opacity: 0.7;
 }
 
+/* 拼音转换建议样式 */
+.pinyin-chinese-suggestion {
+    background-color: #fffbf0;
+    border-left: 3px solid #ffc107;
+}
+
+.pinyin-chinese-suggestion:hover {
+    background-color: #fff3cd;
+}
+
+.pinyin-hint {
+    color: #856404;
+    font-style: italic;
+    margin-left: 4px;
+}
+
 /* 建议来源标识样式 */
 .suggestion-source {
     margin-left: auto;

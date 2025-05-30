@@ -790,7 +790,23 @@ def get_es_suggestions():
             return jsonify({'suggestions': [], 'error': 'Elasticsearch not available'})
         suggestions = []
         
-        # 首先获取搜索历史建议
+        # 检测是否为拼音输入
+        is_pinyin = all(c.isalpha() or c.isspace() for c in query) and any(c.isalpha() for c in query)
+        
+        # 如果是拼音输入，先获取拼音对应的中文建议
+        if is_pinyin and search_suggestion:
+            try:
+                pinyin_suggestions = search_suggestion.get_pinyin_suggestions(query, max_suggestions=5)
+                for chinese_word in pinyin_suggestions:
+                    suggestions.append({
+                        'text': chinese_word,
+                        'score': 1.0,
+                        'source': 'pinyin_conversion',
+                        'original_pinyin': query
+                    })
+            except Exception as e:
+                current_app.logger.error(f"Pinyin conversion error: {e}")
+          # 首先获取搜索历史建议
         if suggestion_type in ['history', 'all'] and history_indexer:
             try:
                 history_suggestions = history_indexer.get_query_suggestions(es, query, size=3)
@@ -801,58 +817,72 @@ def get_es_suggestions():
         if suggestion_type in ['title', 'all']:
             # 从文档标题获取建议
             try:
-                title_suggest = es.search(
-                    index=current_app.config['INDEX_NAME'],
-                    body={
-                        "suggest": {
-                            "title_completion": {
-                                "prefix": query,
-                                "completion": {
-                                    "field": "title_suggest",
-                                    "size": size,
-                                    "skip_duplicates": True
+                # 对于拼音输入，同时搜索拼音转换后的中文词汇
+                search_queries = [query]
+                if is_pinyin and search_suggestion:
+                    pinyin_chinese = search_suggestion.get_pinyin_suggestions(query, max_suggestions=3)
+                    search_queries.extend(pinyin_chinese)
+                
+                for search_query in search_queries:
+                    title_suggest = es.search(
+                        index=current_app.config['INDEX_NAME'],
+                        body={
+                            "suggest": {
+                                "title_completion": {
+                                    "prefix": search_query,
+                                    "completion": {
+                                        "field": "title_suggest",
+                                        "size": size,
+                                        "skip_duplicates": True
+                                    }
                                 }
                             }
                         }
-                    }
-                )
-                title_options = title_suggest.get('suggest', {}).get('title_completion', [])
-                if title_options:
-                    for option in title_options[0].get('options', []):
-                        suggestions.append({
-                            'text': option['text'],
-                            'score': option.get('_score', 0),
-                            'source': 'title'
-                        })
+                    )
+                    title_options = title_suggest.get('suggest', {}).get('title_completion', [])
+                    if title_options:
+                        for option in title_options[0].get('options', []):
+                            suggestions.append({
+                                'text': option['text'],
+                                'score': option.get('_score', 0),
+                                'source': 'title'
+                            })
             except Exception as e:
                 current_app.logger.error(f"Title suggestion error: {e}")
         
         if suggestion_type in ['content', 'all']:
             # 从文档内容获取建议
             try:
-                content_suggest = es.search(
-                    index=current_app.config['INDEX_NAME'],
-                    body={
-                        "suggest": {
-                            "content_completion": {
-                                "prefix": query,
-                                "completion": {
-                                    "field": "content_suggest",
-                                    "size": size,
-                                    "skip_duplicates": True
+                # 对于拼音输入，同时搜索拼音转换后的中文词汇
+                search_queries = [query]
+                if is_pinyin and search_suggestion:
+                    pinyin_chinese = search_suggestion.get_pinyin_suggestions(query, max_suggestions=3)
+                    search_queries.extend(pinyin_chinese)
+                
+                for search_query in search_queries:
+                    content_suggest = es.search(
+                        index=current_app.config['INDEX_NAME'],
+                        body={
+                            "suggest": {
+                                "content_completion": {
+                                    "prefix": search_query,
+                                    "completion": {
+                                        "field": "content_suggest",
+                                        "size": size,
+                                        "skip_duplicates": True
+                                    }
                                 }
                             }
                         }
-                    }
-                )
-                content_options = content_suggest.get('suggest', {}).get('content_completion', [])
-                if content_options:
-                    for option in content_options[0].get('options', []):
-                        suggestions.append({
-                            'text': option['text'],
-                            'score': option.get('_score', 0),
-                            'source': 'content'
-                        })
+                    )
+                    content_options = content_suggest.get('suggest', {}).get('content_completion', [])
+                    if content_options:
+                        for option in content_options[0].get('options', []):
+                            suggestions.append({
+                                'text': option['text'],
+                                'score': option.get('_score', 0),
+                                'source': 'content'
+                            })
             except Exception as e:
                 current_app.logger.error(f"Content suggestion error: {e}")
         
