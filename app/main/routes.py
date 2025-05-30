@@ -1,4 +1,4 @@
-from flask import render_template, request, current_app, redirect, url_for, flash, jsonify
+from flask import render_template, request, current_app, redirect, url_for, flash, jsonify, session
 from . import main
 from .query_parser_new import QueryParser  # Changed from query_parser to query_parser_new
 from .result_clustering import cluster_search_results, get_smart_snippet
@@ -484,8 +484,24 @@ def build_content_index():
             'message': f'Error building index: {str(e)}'
         }), 500
 
+@main.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        college = request.form.get('college')
+        role = request.form.get('role')
+        if college and role:
+            session['college'] = college
+            session['role'] = role
+            return redirect(url_for('main.index'))
+        else:
+            flash('请填写完整信息！')
+    return render_template('login.html')
+
+# 修改index和search_results，未登录时重定向到login
 @main.route('/', methods=['GET', 'POST'])
 def index():
+    if not session.get('college') or not session.get('role'):
+        return redirect(url_for('main.login'))
     if request.method == 'POST':
         query = request.form.get('query')
         if query:
@@ -494,6 +510,8 @@ def index():
 
 @main.route('/search')
 def search_results():
+    if not session.get('college') or not session.get('role'):
+        return redirect(url_for('main.login'))
     query = request.args.get('query', '')
     page = request.args.get('page', 1, type=int)
     search_type = request.args.get('search_type', 'webpage')
@@ -905,3 +923,8 @@ def get_es_suggestions():
     except Exception as e:
         current_app.logger.error(f"Elasticsearch completion suggestion error: {e}")
         return jsonify({'suggestions': [], 'error': str(e)})
+
+@main.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('main.login'))
