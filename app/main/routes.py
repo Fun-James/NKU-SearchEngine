@@ -3,6 +3,8 @@ from . import main
 from .query_parser_new import QueryParser  # Changed from query_parser to query_parser_new
 from .result_clustering import cluster_search_results, get_smart_snippet
 from .intelligent_search_suggestion import IntelligentSearchSuggestion  # 使用新的智能建议系统
+from app.main.search_suggestion import SearchSuggestion
+
 import json
 import os
 import re
@@ -15,11 +17,13 @@ SEARCH_HISTORY_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), '
 
 # 初始化搜索建议工具
 suggester = None
+search_suggestion = None
 
 def init_search_suggester():
     """初始化搜索建议工具"""
-    global suggester
+    global suggester, search_suggestion
     suggester = IntelligentSearchSuggestion()
+    search_suggestion = SearchSuggestion()
     
     # 从历史记录加载词典
     history = []
@@ -32,8 +36,9 @@ def init_search_suggester():
     
     if history:
         suggester.load_search_history(history)
+        search_suggestion.load_search_history(history)
         
-    return suggester
+    return suggester, search_suggestion
 
 @main.before_app_request
 def before_request():
@@ -82,7 +87,10 @@ def get_suggestions():
     suggestion_type = request.args.get('type', 'all')
     show_history = request.args.get('history', 'false').lower() == 'true'
     simple = request.args.get('simple', 'false').lower() == 'true'
-    global suggester
+    is_pinyin = request.args.get('pinyin', 'false').lower() == 'true'
+    
+    global suggester, search_suggestion
+    
     # 只保留历史和基础建议
     if show_history:
         history = []
@@ -103,26 +111,47 @@ def get_suggestions():
                 return jsonify({'suggestions': unique_history, 'type': 'history'})
             except Exception as e:
                 return jsonify({'suggestions': [], 'type': 'history'})
-    # 智能搜索建议
-    if suggester and query and len(query) >= 1:
+    
+    # 智能搜索建议和纠错
+    if suggester and search_suggestion and query and len(query) >= 1:
         try:
-            autocomplete = suggester.get_autocomplete_suggestions(query, max_suggestions=8)
-            related = suggester.get_related_queries(query, max_suggestions=5)
-            if simple:
-                # 只返回自动补全和相关
-                suggestions = autocomplete + related
-                # 去重
-                seen = set()
-                unique_suggestions = []
-                for s in suggestions:
-                    if s not in seen:
-                        seen.add(s)
-                        unique_suggestions.append(s)
-                return jsonify({'suggestions': unique_suggestions[:8], 'type': 'simple'})
+            # 获取各种建议
+            suggestions = []
+            correction = None
+            
+            if is_pinyin:
+                # 如果是拼音输入，优先使用拼音建议
+                pinyin_suggestions = search_suggestion.get_pinyin_suggestions(query)
+                suggestions.extend(pinyin_suggestions)
             else:
-                return jsonify({'autocomplete': autocomplete, 'related': related, 'type': 'basic'})
+                # 获取普通建议
+                autocomplete = suggester.get_autocomplete_suggestions(query, max_suggestions=5)
+                suggestions.extend(autocomplete)
+                
+                # 检查是否需要纠错
+                correction = search_suggestion.get_query_suggestion(query)
+            
+            # 去重
+            seen = set()
+            unique_suggestions = []
+            for s in suggestions:
+                if s not in seen:
+                    seen.add(s)
+                    unique_suggestions.append(s)
+            
+            response = {
+                'suggestions': unique_suggestions[:8],
+                'type': 'intelligent'
+            }
+            
+            if correction:
+                response['correction'] = correction
+            
+            return jsonify(response)
         except Exception as e:
+            current_app.logger.error(f"Error generating suggestions: {e}")
             return jsonify({'suggestions': [], 'type': 'simple'})
+    
     # 回退到基础建议逻辑
     suggestions = []
     if os.path.exists(SEARCH_HISTORY_FILE):

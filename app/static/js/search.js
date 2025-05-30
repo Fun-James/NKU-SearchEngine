@@ -33,7 +33,9 @@ class SearchSuggestionManager {
         this.debounceTimer = null;
         this.isShowingHistory = false;
         this.currentSuggestions = [];
-        this.selectedIndex = -1; // 用于键盘导航
+        this.selectedIndex = -1;
+        this.lastQuery = '';
+        this.lastPinyinQuery = '';
         
         this.init();
     }
@@ -46,7 +48,7 @@ class SearchSuggestionManager {
             if (!this.searchInput || !this.suggestionBox) return;
             
             this.bindEvents();
-            this.loadHotSearches(); // 初始加载热门搜索
+            this.loadHotSearches();
         });
     }
     
@@ -68,9 +70,10 @@ class SearchSuggestionManager {
         // 输入事件，实现防抖
         this.searchInput.addEventListener('input', (e) => {
             const query = e.target.value.trim();
+            this.lastQuery = query;
             
             clearTimeout(this.debounceTimer);
-            this.selectedIndex = -1; // 重置选择索引
+            this.selectedIndex = -1;
             
             if (!query) {
                 this.showSearchHistory();
@@ -79,8 +82,10 @@ class SearchSuggestionManager {
             
             this.isShowingHistory = false;
             this.debounceTimer = setTimeout(() => {
-                this.fetchIntelligentSuggestions(query);
-            }, 200); // 减少延迟以提供更快的响应
+                // 检查是否是拼音输入
+                const isPinyin = /^[a-zA-Z]+$/.test(query);
+                this.fetchIntelligentSuggestions(query, isPinyin);
+            }, 200);
         });
         
         // 键盘导航支持
@@ -202,33 +207,44 @@ class SearchSuggestionManager {
         }
         
         this.suggestionBox.style.display = 'block';
-    }      fetchIntelligentSuggestions(query) {
-        if (!query || query.trim().length < 1) {
-            return;
-        }
-        // 只获取基础建议
-        fetch(`/api/suggestions?query=${encodeURIComponent(query)}&simple=true`)
+    }      fetchIntelligentSuggestions(query, isPinyin = false) {
+        if (!query) return;
+        
+        const params = new URLSearchParams({
+            query: query,
+            simple: true,
+            pinyin: isPinyin
+        });
+        
+        fetch(`/api/suggestions?${params}`)
         .then(response => response.json())
         .then(data => {
-            if (data && data.suggestions) {
-                this.displaySimpleSuggestions(data.suggestions);
+            if (data.correction) {
+                this.displaySuggestions([
+                    { text: data.correction, type: 'correction', icon: '✍️' },
+                    ...data.suggestions.map(s => ({ text: s, type: 'suggestion', icon: '💡' }))
+                ]);
             } else {
-                this.displaySimpleSuggestions([]);
+                this.displaySuggestions(
+                    data.suggestions.map(s => ({ text: s, type: 'suggestion', icon: '💡' }))
+                );
             }
         })
         .catch(error => {
             console.error('获取建议时出错:', error);
-            this.displaySimpleSuggestions([]);
+            this.displaySuggestions([]);
         });
     }
 
-    displaySimpleSuggestions(suggestions) {
+    displaySuggestions(suggestions) {
         this.suggestionBox.innerHTML = '';
         this.isShowingHistory = false;
         this.selectedIndex = -1;
+        this.currentSuggestions = suggestions;
+        
         if (suggestions && suggestions.length > 0) {
-            suggestions.slice(0, 8).forEach(suggestion => {
-                const item = this.createSuggestionItem(suggestion, 'simple');
+            suggestions.forEach((suggestion, index) => {
+                const item = this.createSuggestionItem(suggestion);
                 this.suggestionBox.appendChild(item);
             });
             this.suggestionBox.style.display = 'block';
@@ -236,25 +252,27 @@ class SearchSuggestionManager {
             this.hideSuggestions();
         }
     }
-
-    createSuggestionItem(text, type) {
+    
+    createSuggestionItem(suggestion) {
         const item = document.createElement('div');
-        item.className = `suggestion-item ${type}-suggestion`;
-        item.textContent = text;
-        item.dataset.query = text;
-        // 只保留💡和🔗图标
+        item.className = `suggestion-item ${suggestion.type}-suggestion`;
+        
         const icon = document.createElement('span');
         icon.className = 'suggestion-icon';
-        if (type === 'related') {
-            icon.textContent = '🔗';
-        } else {
-            icon.textContent = '💡';
-        }
-        item.prepend(icon);
+        icon.textContent = suggestion.icon;
+        
+        const text = document.createElement('span');
+        text.className = 'suggestion-text';
+        text.textContent = suggestion.text;
+        
+        item.appendChild(icon);
+        item.appendChild(text);
+        
         item.addEventListener('click', () => {
-            this.searchInput.value = text;
+            this.searchInput.value = suggestion.text;
             this.searchInput.form.submit();
         });
+        
         return item;
     }
     
