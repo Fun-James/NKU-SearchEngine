@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" /> 
+    <title>南开大学大型仪器管理平台</title>
+    <base href="http://less.nankai.edu.cn/public/">
+    <link href="http://less.nankai.edu.cn/public/assets/css/bootstrap.css?_v=e3498318e6e3031f3399ef335679fad7bac09103" rel="stylesheet">
+    <link href="http://less.nankai.edu.cn/public/assets/css/site.css?_v=e3498318e6e3031f3399ef335679fad7bac09103" rel="stylesheet">
+    <link href="http://less.nankai.edu.cn/public/assets/css/font-awesome.css?_v=e3498318e6e3031f3399ef335679fad7bac09103" rel="stylesheet">
+    <script data-main="http://less.nankai.edu.cn/public/assets/js/main.js?_v=e3498318e6e3031f3399ef335679fad7bac09103" src="http://less.nankai.edu.cn/public/assets/js/require.js?_v=e3498318e6e3031f3399ef335679fad7bac09103"></script>
+    <!--[if lt IE 9]>
+    <script src="http://less.nankai.edu.cn/public/assets/js/html5shiv.js?_v=e3498318e6e3031f3399ef335679fad7bac09103"></script>
+    <script src="http://less.nankai.edu.cn/public/assets/js/respond.js?_v=e3498318e6e3031f3399ef335679fad7bac09103"></script>
+    <script src="http://less.nankai.edu.cn/public/assets/js/jquery.low.js?_v=e3498318e6e3031f3399ef335679fad7bac09103"></script>
+    <![endif]-->
+</head>
+<body class="">
+    <div id="header"><div class="header">
+    <div class="header-top"></div>
+    <div class="container container-header" >
+        <div class="row head-row" >
+            <div class="col-xs-6">
+                <span class="font">南开大学大型仪器管理平台</span><br/>
+                <span class="font-en">NANKAI UNIVERSITY</span>
+            </div>
+            <div class="col-xs-6 search-wrap">
+                <form method="post" action="search" class="navbar-form" role="search" name="search">
+                    <div class="search pull-right">
+                        <div class="col-xs-12 form-group search-block">
+                            <input type="text"  class="form-control search-input" name="searchtext"  placeholder="搜索仪器" id="search-input"  >
+                            <button type="submit" class="btn search-btn">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    <div id="wrap">
+        <div id="navbar"><div class="navbar-style">
+	<div class="container container-nav">
+		<nav class="navbar navbar-default" role="navigation">
+			    <ul class="nav navbar-nav ">
+			       <li class="active"><a href="index">首页</a></li>
+				   <li class=""><a href="intro">平台简介</a></li>
+				   <li class=""><a href="equipments">仪器分类</a></li>
+				   <li class=""><a href="download">文件下载</a></li>
+				   <li class=""><a href="notices">平台公告</a></li>
+				   <li class=""><a href="contact">联系我们</a></li>
+			    </ul>
+		</nav>
+	</div>
+</div>
+</div>
+        <div id="body"><div class="mainbody index-mainbody" >
+	<div class="container container-index">
+		<div class="row">
+		  	<div class="col-xs-9 shuffling-img">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+					    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+					    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+					    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+					</ol>
+					<div class="carousel-inner">
+					    <div class="item active">
+					      	<img src="assets/img/600M核磁.jpg" alt="">
+					    </div>
+					  	<div class="item">
+				          	<img src="assets/img/偏光显微镜.jpg" alt="">
+	         		 	</div>
+	         		   	<div class="item">
+				          	<img src="assets/img/液质联用仪.png" alt="">			        
+	         		 	</div>
+					</div>
+				</div>
+		  	</div>
+		  	<div class="col-xs-3 login-wrap">
+		  		<div class='login-box'>
+	<p class='title-font'>进入仪器预约系统</p>
+	<form class='login-form' method="post"  role="form" action="http://less.nankai.edu.cn/lims/login">
+	  	<div class="form-group">
+	    	<label class="user-font" for="exampleInputEmail1">用户名</label>
+	    	<input type="text" class="form-control " id="inputUser" name="token">
+            <select class="selectpicker-less selectpicker" name="token_backend" id="backends"></select>
+	  	</div>
+	  	<div class="form-group">
+	   	 	<label class="user-password" for="exampleInputPassword1">密码</label>
+	    	<input type="password" class="form-control" id="inputPassword" name="password">
+	  	</div>
+	  	<div class="login-btn">
+	  				 	<p class="login-user-btn">
+		 		<a href="http://less.nankai.edu.cn/lims/!labs/signup">注册新用户<a>
+		 	</p>
+		 			  	<button type="submit" name="submit" value="登录" class="btn btn-default">登录</button>
+		</div>
+	</form>
+</div>
+<!--[if IE 8]> 
+<style>
+.selectpicker .caret{
+    margin-top:-5px !important;
+}
+</style>
+<![endif]-->
+<script>
+require(['jquery'],function(){
+    $.getJSON(
+        'ajax/index/get-backends',
+        {},
+        function (response) {
+            $('#backends').append(response.view);
+ /*           require(['bootstrap-select', 'css!../css/bootstrap-select'], function(){
+                $('.selectpicker').selectpicker();
+            });*/
+    });
+    //南大首页登录框，不需要登录后同步显示用户信息
+    // var remote_url = "current_user";
+    // check_current_user();
+    // var interval = setInterval(function() {
+    //     check_current_user(interval);
+    // }, 1000);
+
+    // function check_current_user(interval){
+    //     $.ajax({  
+    //         url:remote_url,
+    //         dataType:'jsonp',  
+    //         jsonp:'callback',  
+    //         success:function(result) {
+    //             if(!result.name || !result.img) return; 
+    //             $.ajax({
+    //                 url: "ajax/people/current",
+    //                 data: {
+    //                     'name':result.name,
+    //                     'img':result.img,
+    //                 }
+    //             }).done(function(data) {
+    //                 $('.login-box').replaceWith(data);
+    //             });
+    //             if(interval) clearInterval(interval);
+    //         },
+    //     });
+    // }
+});
+</script>
+		  		<div>
+					<a href="http://yiqi.tju.edu.cn" class="btn tju-entry" > 
+						<img class="tjy-img" data-retina="true" src="../../assets/img/tjulogo1.png">&nbsp;&nbsp;
+						<span class="tju-font">天津大学仪器平台</span>
+					</a>
+				</div>
+				<!-- <div  onclick="window.open('http://yiqi.tju.edu.cn')" class=" btn tju-entry">
+					<div class='row'>
+						<div id="tjulogo" class="col-xs-4 tjy-img-size" >
+						</div>
+						<div class="col-xs-8 tju-font">
+							天津大学仪器平台
+						</div>
+					</div>
+				</div> -->
+		  	</div>
+		</div>
+
+		<div class="row notice-row">
+			<div class="col-xs-4 notice-title" >
+				<span class="notice-title-font">平台公告</span><br/>
+				<span class="notice-title-en-font"><a href="notices">more</a></span>
+			</div>
+			<div class="col-xs-8 notice-contents">
+									<div class="notice-content" >
+						<a href="notice?id=101">
+						关于学校大型仪器平台系统升级的通知 （2018年09月04日）</a>
+					</div>
+									<div class="notice-content" >
+						<a href="notice?id=100">
+						关于锁定大型仪器平台数据的通知 （2018年09月01日）</a>
+					</div>
+									<div class="notice-content" >
+						<a href="notice?id=99">
+						关于仪器管理平台暑假期间暂停测试费充值的通知 （2018年07月24日）</a>
+					</div>
+									<div class="notice-content" >
+						<a href="notice?id=98">
+						关于锁定大仪平台2018年1月-6月收费记录的通知 （2018年07月03日）</a>
+					</div>
+							</div>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+    <div class="container" >
+        <div class="row">
+            <div class="col-xs-6 footer-left">
+                <span class="footer-font">联系我们：南开大学实验室设备处</span>
+            </div>
+            <div class="col-xs-6 footer-right">
+                <div class="footer-right-fonts">
+                    <p>电话：022-23503143、022-23508813</p>
+                    <p>传真：022-23503143</p>
+                    <p>邮箱：nkyqpt@nankai.edu.cn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	/*require(['jquery'], function($){
+		require(['bootstrap-select', 'css!../css/bootstrap-select'], function(){
+       	$('.selectpicker').selectpicker();
+   		});
+	});*/
+</script>
+</div>
+    </div>
+</body>
+</html>

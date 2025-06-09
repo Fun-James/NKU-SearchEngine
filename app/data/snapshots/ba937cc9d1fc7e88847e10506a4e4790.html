@@ -1,0 +1,62 @@
+<html class="no-js">
+<head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>操作失败</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="柳叶湖畔,Mr.zhao" />
+    <meta name="copyright" content="2014 LYH Company Website Management System" />
+    <meta name="MSSmartTagsPreventParsing" content="True" />
+    <meta http-equiv="MSThemeCompatible" content="Yes" />
+<style type="text/css">
+    .tip {margin:6rem 0 0 0;}
+    .tip .icon {
+        width: 80px;
+        height: 80px;
+        background-color: #f66262;
+        border-radius: 100%;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        color: #fff;
+        font-size: 80px;
+        text-align: center;
+        line-height: 80px;
+    }
+    .icon {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        border-radius: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+        border: 4px solid #f66262;
+        margin: 15px auto 5px auto;
+    }
+    .dec_txt{font-size:1rem;color:#999;text-align:center;margin:2rem 0 0 0;}
+    .jump{font-size:.8rem;color:#999;text-align:center;margin:2rem 0 0 0;}
+    .jump a{font-size:.8rem;color:#999;}
+</style>
+</head>
+<body>
+<div class="tip">
+    <div class="icon">!</div>
+    <div class="dec_txt">
+                文章不存在    </div>
+</div>
+<div class="jump">
+    <a href="javascript:history.back();">返回</a>，页面将在<b id="wait">3</b>后自动<a id="href" href="javascript:history.back(-1);">跳转</a>
+</div>
+<script type="text/javascript">
+    (function(){
+        var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+        var interval = setInterval(function(){
+            var time = --wait.innerHTML;
+            if(time <= 0) {
+                location.href = href;
+                clearInterval(interval);
+            };
+        }, 1000);
+    })();
+</script>
+</body>
+</html>

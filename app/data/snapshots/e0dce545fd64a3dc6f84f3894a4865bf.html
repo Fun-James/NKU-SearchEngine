@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="keywords" content="南开大学文学院，文学国家级实验教学示范中心，开放式实验教学与实验室管理系统，开放式虚拟仿真实验教学中心，虚拟仿真实验教学，文学示范中心，wxylab">
+    <meta name="description" content="南开大学文学院，文学国家级实验教学示范中心，开放式实验教学与实验室管理系统，开放式虚拟仿真实验教学中心，虚拟仿真实验教学，文学示范中心，wxylab">
+	<title>南开大学文学国家级实验教学示范中心</title>
+    <link rel="stylesheet" href="/virexp/s/site_themes/default/css/style.css"/>
+    <link rel="stylesheet" href="/virexp/s/site_themes/default/css/shadowbox.css"/>
+    <script type="text/javascript" src="/virexp/s/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/virexp/s/site_themes/default/js/jquery.SuperSlide.2.1.js"></script>
+    <script type="text/javascript" src="/virexp/s/site_themes/default/js/js_toolBackTop.js"></script>
+    <script type="text/javascript" src="/virexp/s/site_themes/default/js/main.js"></script>
+    <script type="text/javascript" src="/virexp/s/site_themes/default/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/virexp/s/ckplayer/ckplayer.js" charset="utf-8"></script>
+    <style type="text/css">
+        .btn-page{font-size: 12px;margin:20px auto;height:20px;}
+        .btn-page li{float:left;width:20px;*+width:19px;height:20px;border-right:1px solid #D2D2D2;line-height: 20px;text-align: center;border:1px solid #D2D2D2;border-right:none;}
+        .btn-page li a{display:block;}
+    </style>
+    
+    <script type="text/javascript" src="/virexp/s/site_themes/default/focus/focusflash.js"></script>
+	<script type="text/javascript" src="/virexp/s/site_themes/default/jwplayer/jwplayer5.7.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/virexp/s/ckplayer/ckplayer.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/virexp/s/site_themes/default/js/shadowbox.js"></script>
+	<script type="text/javascript" src="/virexp/s/site_themes/default/js/common.js"></script>
+    <!--HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries-->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<script>
+    // $(function(){
+    // $(".Category-nav ul div").hide();
+    // $(".lm a").click(function(){
+    //     $(this).parent().next().toggle();
+    // });
+    // })
+</script>
+    <script type="text/javascript">
+        function getObject(objectId) {
+            if(document.getElementById && document.getElementById(objectId)) {
+                return document.getElementById(objectId);
+            }
+            else if (document.all && document.all(objectId)) {
+                return document.all(objectId);
+            }
+            else if (document.layers && document.layers[objectId]) {
+                return document.layers[objectId];
+            }
+            else {
+                return false;
+            }
+        }
+
+        function showHide(e,objname){
+        var obj = getObject(objname);
+        if(obj.style.display == "none"){
+            obj.style.display = "block";
+        }else{
+            obj.style.display = "none";
+        }
+    }
+</script>
+<div class="header">
+	<div class="bn">
+		<a class="left_href" href="/virexp/"></a>
+		<a class="right_href"></a>
+	</div>
+</div>
+<div class="top-nav">
+        <div class="navs wid1000" >
+            <ul class="nav">
+                    <li class="m">
+                        <h3><a href="https://wxylabxf.nankai.edu.cn/virexp/">首页</a></h3>
+                    </li>
+                                                    <li class="m">
+                                                        <h3>
+                                                            <a href="/virexp/sysyd/">
+                                                                实验室预定
+                                                            </a>
+                                                        </h3>
+                                                     </li>
+                                                    <li class="m">
+                                                        <h3>
+                                                            <a href="/virexp/xsgwyd/">
+                                                                工位预定
+                                                            </a>
+                                                        </h3>
+                                                     </li>
+                                                    <li class="m">
+                                                        <h3>
+                                                            <a href="/virexp/sbzj/">
+                                                                设备租借
+                                                            </a>
+                                                        </h3>
+                                                     </li>
+                        <li class="m"><h3><a href="/virexp/prepare_login" target="_blank" hidefocus="false">实验入口</a></h3></li>
+                </ul>
+
+
+        </div>
+</div>
+<style>
+.aCur{
+	background: #a30682;color: #fff !important;
+}
+</style>
+<script type="text/javascript">
+        $(function(){
+            $(".btn-page").css("width",$(".btn-page li").size()*($(".btn-page li").width()+1)+1)
+            $(".btn-page li").last().css("border-right","1px solid #D2D2D2");
+				var href = window.location.pathname;
+				var cook = $.cookie("clickUrl");
+				
+				if(href=='/virexp/'){
+					$('.nav li').eq(0).addClass("aCur");
+				}else{
+					$(".nav a").each(function(){
+						 if($.cookie("clickUrl") != null ){
+							  if($.cookie("clickUrl") == $(this).attr("href")){
+								$(".nav a").removeClass("aCur");
+								if($(this).parents('.m').length>0){
+									$(this).addClass("aCur")
+									$(this).parents('.m').addClass("aCur")	
+								}else{
+								}
+							}
+						 }
+					});
+				}
+					
+				
+					
+				
+
+            	$(".nav a").click(function(){
+            	    var clickUrl = $(this).attr("href");
+            	    $.cookie("clickUrl",clickUrl)
+            	});
+
+        })
+    </script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        jQuery(".nav").slide({
+            type:"menu", //效果类型
+            titCell:".m", // 鼠标触发对象
+            targetCell:".sub", // 效果对象，必须被titCell包含
+            delayTime:300, // 效果时间
+            triggerTime:0, //鼠标延迟触发时间
+            returnjsj:false//on返回初始位置
+        });
+        $(".navBar > ul > li").each(function(){
+            if($(this).find('h3').siblings('ul.sub').length != 0){
+                $(this).addClass('arrow-right');
+            }
+        });
+
+    });
+</script>
+	    <div class="Category wid950">
+
+
+            <div class="Category-fr">
+                <div class="Category-fr-title"  style="margin:0 auto 10px;width:950px;">
+                    <h3 style="margin:0 auto;width:950px;">冯欢</h3>
+                </div>
+                <div class="Article-nr" style="margin:0 auto;width:950px;">
+                	<p><p><img alt="" src="/virexp/userfiles/image/f.jpg" style="width: 321px; height: 450px;" /></p>
+
+<p>&nbsp;</p>
+
+<p><strong>教育背景：</strong></p>
+
+<p>2003.9-2007.6，南开大学哲学系，哲学</p>
+
+<p>2007.9-2009.6，南开大学文学院，艺术设计学</p>
+
+<p>2011.9-2015.6，南开大学文学院，文艺学</p>
+
+<p><strong>科研成果：</strong></p>
+
+<p>《以彩陶用色为例浅析中国传统色彩审美心理之根源》，第一作者，2014年12月中，青年与社会（CN53-1037/c）</p>
+
+<p>《西方早期与中国先秦色彩观念比较及其对绘画的影响》，第一作者，2015年1月，流行色（CN 31-1175）</p>
+
+<p>《 CorelDRAW图形设计基础》，南京大学出版社2010年版，负责编写第6、8章</p>
+
+<p>《色彩:视觉化叙事中的新力量》，第一作者，2015年3月，中国图书评论（CN21-1035/G2&nbsp;）</p>
+
+<p>《先秦色彩观念研究》， 2015年6月，博士论文</p>
+
+<p>《城市商务区色彩规划设计方法初探》，第二作者 ，2016年12月，2016中国色彩学术年会论文集</p>
+
+<p>《现代城市滨水区空间色彩的构成》 第二作者，2015年12月，2015中国色彩学术年会论文集</p>
+
+<p>《唐卡色彩应用系统探析》第二作者， 2014年11月，2014年中国流行色协会学术年会论文集</p>
+</p>
+                </div>
+
+            </div>
+            <div style="clear:both"></div>
+	    </div>
+<style type="text/css">
+    .footer1{width: 100%;}
+    .footer1 .speedLink{width: 950px;height:180px; margin: 0 auto;padding-top:30px;}
+    .footer1 .speedLink .linkList{width: 130px;height:30px;float:left;}
+    .footer1 .footer-nr{width: 650px; height:55px;margin: 0 auto;color:#fff;}
+    .footer1 .speedLink .linkList ul li h3 a{font-family: "Microsoft YaHei","Times New Roman",Georgia,serif;color:#666 !important;}
+    .footer1 .speedLink .linkList ul li a{font-family:'宋体';color:#8B8787 !important;}
+    .footer1 .speedLink .beCenter{margin:0 auto;width:690px;}
+</style>
+<footer class="footer1">
+    <div class="kong">
+        <div class="speedLink">
+        	<div class="beCenter clearfix">
+	            <div class="linkList" style="margin-left: 40px">
+	                <ul>
+	                    <li><h3><a href="javascript:void(0);" target="_blank"><b>实验室预定</b></a></h3></li>
+	                    <li><a href="javascript:void(0);" target="_blank">设备租借</a></li>
+	                    <li><a href="javascript:void(0);" target="_blank">人机环境同步平台</a></li>
+	                    <li><a href="/virexp/glyxzyk/" target="_blank">资源库</a></li>
+	                    <li><a href="/virexp/szkcy/" target="_blank">数字课程</a></li>
+	                </ul>
+	            </div>
+	         </div>
+        </div>
+    </div>
+    <div class="foot_top">
+        <div class="foot_box">
+            <div class="foot_nr">
+                <a class="hb-1" href="">承建单位：南开大学</a>
+                <span>地址：天津南开区卫津路94号范孙楼407室</span>
+            </div>
+            <div class="foot_nr">
+                <a class="hb-1" href="http://www.rainier.net.cn/">支持单位：北京润尼尔网络科技有限公司</a>
+                <a class="hb-2">网站访问量：181749次&emsp;&nbsp;推荐使用：IE9.0以上浏览器</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--toolBackTop-->
+<div style="display:none;" class="back-to" id="toolBackTop">
+    <a title="返回顶部" onclick="window.scrollTo(0,0);return false;" href="#top" class="back-top">
+        返回顶部
+    </a>
+</div>
+</body>
+<script type="text/javascript">jQuery(".sys").slide({delayTime:0 });</script>
+</html>

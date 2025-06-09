@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>采购招标管理信息平台-忘记密码</title>
+<script type="text/javascript" src="/script/jquery.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery-migrate-1.4.1.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery-migrate-3.3.0.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.base64.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.dragsort.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/layui/layui.js?v=20250411" charset="utf-8"></script>
+        <script type="text/javascript" src="/script/json2.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/layui_exts/loading/loading.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/Public.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/CheckText.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/qTip2/jquery.qtip.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/qTip2/ZcPophint.js?v=20250411"></script>
+        <link rel="stylesheet" type="text/css" href="/plugs/qTip2/jquery.qtip.css?v=20250411"></link>
+        <link rel="stylesheet" type="text/css" href="/style/style41.css?v=20250411">
+        <link rel="stylesheet" type="text/css" href="/plugs/layui/css/layui.css?v=20250411" media="all">
+        <link rel="stylesheet" type="text/css" href="/style/regist.css?v=20250411">
+        <script type="text/javascript" src="/plugs/formValidator/formValidator.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/formValidator/formValidatorRegex.js?v=20250411"></script>
+        <style type="text/css">
+.header.background {
+    background: #f7f7f7;
+    height: 118px;
+}
+
+.header.nr {
+    margin-top: 30px;
+}
+
+.header.nr.bt {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.user.icon {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    background: url("/images/regist/user.png") no-repeat center center;
+}
+
+.zhfs {
+    width: 285px;
+    height: 70px;
+    cursor: pointer;
+    margin: 20px;
+    background: white;
+}
+
+.zhfs:hover {
+    background-color: #bcc5f3;
+}
+
+.gl {
+    color: #fa4719;
+}
+
+.gl.lj {
+    cursor: pointer;
+}
+
+/**重写css样式*/
+.steps{
+    margin-bottom: 30px;
+    text-align: center;
+}
+.regist .steps ul{
+    width: 100%;
+}
+.regist .steps ul li{
+    float: none;
+    display: inline-block;
+}
+.regist .item {text-align: center;} 
+
+
+ 
+@media screen and (max-width: 750px){
+    .regist .steps ul li{
+        display: none
+    }
+    .regist .steps.steps-4 ul li.active{
+        display: block;
+    }
+}
+@media screen and (max-width:1190px){
+    .regist{width: auto;}
+}
+</style>
+<script type="text/javascript">
+    $(function() {
+        $.formValidator.initConfig({
+            formID : "dataForm",
+            theme : 'zc',
+            onError : function(msg) {
+                alert(msg);
+            },
+            inIframe : true
+        });
+        $("#password").formValidator({
+            onShow:"6-20位字符，建议由字母、数字和符号两种以上组合",
+            onFocus:"6-20位字符，建议由字母、数字和符号两种以上组合",
+            onCorrect:""
+        }).inputValidator({
+            min:6,
+            max:20,
+            onErrorMin:"密码长度太短",
+            onError:"密码长度太短"
+        });
+        
+        $("#mm").formValidator({
+            onShow : "请再次输入密码",
+            onFocus : "请再次输入密码",
+            onCorrect : ""
+        }).inputValidator({
+            min : 1,
+            max : 20,
+            onError : "确认密码不能为空,请确认"
+        }).compareValidator({
+            desID : "password",
+            operateor : "=",
+            onError : "2次密码不一致,请确认"
+        });
+        $("#btSubmit").click(function() {
+            var varAction = "/xt/dxmmzh/resetMm.htm";
+            $("#dataForm").attr("action", varAction).attr("target", "_self").submit();
+        });
+        $("#dlh").formValidator({
+            onShow : "请输入用户账号",
+            onFocus : "请输入用户账号",
+            onCorrect : ""
+        }).inputValidator({
+            min : 1,
+            onError : "账号不允许为空！"
+        });
+        
+        $("#yzm").formValidator({
+            onShow : "请输入验证码",
+            onFocus : "请输入验证码",
+            onCorrect : ""
+        }).inputValidator({
+            min : 1,
+            max : 5,
+            onError : "验证码不允许为空"
+        }).ajaxValidator({
+            dataType : "json",
+            async : true,
+            type : "post",
+            data : $('#dataForm').serialize(),
+            url : "/xt/dxmmzh/checkYzm.htm",
+            success : function(data) {
+                if (data.status == 1) return true;
+                yzmMsg = data.msg;
+                refreshVerify();
+                return yzmMsg;
+            },
+            buttons : $("#btNext"),
+            error : function(jqXHR, textStatus, errorThrown) {
+                alert("服务器没有返回数据，可能服务器忙，请重试" + errorThrown);
+            },
+            onError : "验证码错误！",
+            onWait : "正在对验证码进行校验，请稍候..."
+        });
+
+        //提交用户信息，选择找回方式
+        $("#btNext").click(function() {
+            var varAction = "/xt/dxmmzh/chooseMmzhfs.htm";
+            $("#dataForm").attr("action", varAction).attr("target", "_self").submit();
+        });
+        $("#dxyzm").focus(function(){
+            $("#tsxx").text("");
+        });
+    });
+    function refreshVerify() {
+        var varAction = "/xt/dxmmzh/refreshVerify.htm";
+        $.ajax({
+            type : "post",
+            url : varAction,
+            cache : true,
+            data : $('#dataForm').serialize(),
+            async : true,
+            timeout : 5000,
+            dataType : "json",
+            error : function(request) {
+                alert("网络异常");
+            },
+            success : function(data) {
+                if (data.status == 1) {
+                    $("#imgVerify").attr("src",
+                            "data:image/jpg;base64," + data.base64);
+                } else {
+                    alert(data.msg);
+                }
+            }
+        });
+    }
+    function toLogin() {
+        window.location.href = "/home/login.htm";
+    }
+    function gyssqrbg(){
+        window.location.href = "/jc/gyssqrbg/gyssqrbg.htm";
+    }
+
+    function sendDxyzm(){
+        var txyzm = $("#txyzm").val();
+        if(txyzm==""||txyzm==undefined){
+            alert("请先输入图形验证码");
+            return;
+        }
+        var varAction = "/xt/dxmmzh/sendDxyzm.htm";
+        $.ajax({
+            cache : true,
+            type : "post",
+            url : varAction,
+            data : $("#dataForm").serialize(),
+            async : true,
+            dataType : "json",
+            timeout : 5000,
+            error : function(request) {
+                alert("网络异常");
+            },
+            success : function(data) {
+                if(data.status==1){
+                    $("#mmzhid").val(data.mmzhid);
+                    $("#tsxx").text("短信验证码已发送至"+data.targetNum);
+                    var time = 60;
+                    //重新发送倒计时60s
+                    $("#hqyzm").prop("disabled",true);
+                    $("#hqyzm").css("background-color","#EE9572");
+                    $("#hqyzm").val("重新发送(60s)");
+                    var set = setInterval(function() {
+                        time--;
+                        $("#hqyzm").val("重新发送("+time+"s)");
+                        if(time == 0) {
+                            $("#hqyzm").val("重新发送");
+                            $("#hqyzm").prop("disabled",false);
+                            $("#hqyzm").css("background-color","#ff5000");
+                            clearInterval(set);
+                        }
+                    }, 1000);
+                }else{
+                    $("#tsxx").text(data.msg);
+                    refreshVerify();
+                }
+            }
+        });
+    }
+    function checkDxyzm(){
+        if($("#mmzhid").val()==""){
+            $("#tsxx").text("请先获取验证码");
+            return;
+        }
+        if($("#dxyzm").val()==""){
+            $("#tsxx").text("请输入验证码");
+            return;
+        }
+        var varAction = "/xt/dxmmzh/checkDxyzm.htm";
+        $.ajax({
+            cache : true,
+            type : "post",
+            url : varAction,
+            data : $("#dataForm").serialize(),
+            async : true,
+            dataType : "json",
+            timeout : 5000,
+            error : function(request) {
+                alert("网络异常");
+            },
+            success : function(data) {
+                
+                if(data.status==1){
+                    $("#dataForm").attr("action", "/xt/dxmmzh/resetPwd.htm").attr("target", "_self").submit();
+                }else{
+                    $("#tsxx").text(data.msg);
+                }
+            }
+        });
+    }
+    function yjzh(){
+        var varAction = "/xt/mmzh/submitMmzh.htm"
+        $("#dataForm").attr("action", varAction).attr("target", "_self").submit();
+    }
+    function dxzh(){
+        var varAction = "/xt/dxmmzh/submitMmzh.htm";
+        $("#dataForm").attr("action", varAction).attr("target", "_self").submit();
+    }
+</script>
+</head>
+<body>
+    <form id="dataForm" name="dataForm" method="post">
+        <input type="hidden" id="mmzhym" name="mmzhym" value="1" />
+        <div class="header background">
+            <div class="regist">
+                <div class="header">
+                    <div class="header nr">
+                        <div style="float:left;">
+                            <span class="user icon"></span>
+                        </div>
+                        <div style="float:left;">
+                            <span class="header nr bt">采购招标管理信息平台|</span>
+                            <span class="header nr bt gl">找回密码</span>
+                        </div>
+                        <div style="float:right;">
+                        <span>已有账号？</span>
+                            <span class="gl lj" onclick="toLogin()">立即登录 ></span>
+                        </div>
+                        <br>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div id="showDiv" class="regist" style="width: auto;">
+            <div class="steps steps-4" style="">
+    <ul>
+        <li class="active">
+            <i>1</i>
+            <span>填写用户信息</span>
+        </li>
+        <li>
+            <i>2</i>
+            <span>找回密码</span>
+        </li>
+        <li>
+            <i>3</i>
+            <span>重置密码</span>
+        </li>
+        <li>
+            <i class="iconfont"> &radic; </i>
+            <span>重置成功</span>
+        </li>
+    </ul>
+</div>
+<div style="width: 500px;margin: 0 auto;">
+	<div class="item">
+	    <span class="label" style="width: 75px;">
+ 用户账号：
+	    </span>
+	    <div class="fl item-ifo">
+	        <div class="o-intelligent-regName">
+	            <input id="dlh" name="dlh" class="text" type="text" />
+	            <i class="i-pass"></i>
+	        </div>
+	        <div id="dlhTip" class="tip"></div>
+	    </div>
+	</div>
+	<div class="item">
+	    <span class="label" style="width: 75px;">
+	        验证码：
+	    </span>
+	    <div class="fl item-ifo" >
+	        <div class="o-intelligent-regName">
+	            <input id="yzm" name="yzm" class="text" type="text" style="width: 158px;" />
+	            <i class="i-pass"></i>
+	        </div>
+	        <div class="yzm" style="float: left;">
+	            <img id="imgVerify"  width="80px" height="34px" onclick="refreshVerify()" alt="验证码" class="hand" src="data:image/jpg;base64,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" />
+	        </div>
+	    </div>
+	        <div id="yzmTip" class="tip" ></div>
+	</div>
+	<div class="item">
+	    <span class="label">&nbsp;</span>
+	</div>
+</div>
+<div class="btm-panel">
+    <input type="button" class="bigBtn-btn" id="btNext" value="下一步" style="background-color: #ff5000;width: 275px;height: 44px;line-height: 44px;">
+</div></div>
+    </form>
+</body>
+</html>

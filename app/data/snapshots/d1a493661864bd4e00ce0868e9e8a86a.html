@@ -1,0 +1,347 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1">
+    <meta name="renderer" content="webkit">
+    <link rel="icon" href="./xds/favicon.ico" type="image/x-icon">
+    <link href="./xds/resources/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/bootstrap-3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./xds/resources/css/index.css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.core.css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.bootstrap.css">
+    <link href="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./xds/resources/css/loaders.css">
+    <script type="text/javascript" src="./xds/bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="./xds/resources/js/vendor/district-picker/district.picker.css">
+    <style type="text/css" media="screen">
+    .alertify-buttons {
+        padding: 14px 15px 15px;
+        background: #F5F5F5;
+        border-top: 1px solid #DDD;
+        border-radius: 0 0 6px 6px;
+        box-shadow: inset 0 1px 0 #FFF;
+    }
+
+    .alertify-message {
+        padding: 15px;
+        margin: 0;
+    }
+    .login-btn-item {
+        width: 100px;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+    .slh {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+    .niu{
+        margin-left: 10px;
+        background-color: #812358;
+        color:#fff;
+        border-radius: 5px;
+    }
+    .empty{
+        margin:60px auto;
+        text-align: center;
+    }
+    .empty img{
+        width:250px;
+    }
+    [v-cloak] {
+        display: none;
+    }
+    </style>
+    <title>南开大学选调生系统</title>
+</head>
+
+<body class="bodyloaded" style="background-color: #f3f3f3">
+    <section class="header"></section>
+    <div class="main-content" id="gridBody" v-cloak>
+        <div class="banner-content badg" style="padding-top:0;padding-bottom:0;background-color: #f3f3f3">
+            <!-- 先隐藏掉，不要删除 -->
+            <!-- <form id="search-form" class="form-horizontal clearfix">
+                <div class="form-group col-sm-3" style="margin-left:0;margin-right:0;padding:0;">
+                    <div class="input-group">
+                        <div class="input-group-addon query-label">关键词</div>
+                        <input class="form-control" name="key" id="keyword" type="text" placeholder="请输入学号或姓名">
+                    </div>
+                </div>
+                <div class="form-group col-sm-3" style="margin-left:0;margin-right:0;">
+                    <div class="input-group">
+                        <div class="input-group-addon query-label">毕业年份</div>
+                        <select name="" id="year" class="form-control">
+                            <option value="0">请选择</option>
+                            <option :value="item.id" v-for="item in years">
+                                {{item.cate_name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-sm-3" style="margin-left:0;margin-right:0;padding:0;">
+                    <div class="input-group">
+                        <div class="input-group-addon query-label">工作省市</div>
+                        <select name="" id="pro" class="form-control">
+                            <option value="0">请选择</option>
+                            <option :value="item.id" v-for="item in pros">
+                                {{item.region_name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-sm-3" style="margin-left:0;margin-right:0;padding:0;">
+                    <div class="input-group">
+                        <input class="form-control niu" value="搜索" type="button">
+                    </div>
+                </div>
+            </form> -->
+
+
+            <ul  class="xuandiaobang">
+                <li v-for="item in newlist4">
+                    <a :href="'bangDetail.html?type=2&id='+item.id+'&active=0'">
+                        <div class="item-pic">
+                            <template v-if="item.headimg">
+                                <img :src="item.headimg_name | imgsrc"> 
+                            </template>
+                            <template v-else>
+                                <img src="./xds/resources/images/moren.png" alt="">
+                            </template>
+                        </div>
+                        
+                        <!-- <span class="sex">
+                            <template v-if="item.sex==1">
+                                <img src="./xds/resources/images/male.png" alt="">
+                            </template>
+                            <template v-else>
+                                <img src="./xds/resources/images/female.png" alt="">
+                            </template>
+                        </span> -->
+
+                        <h4>{{item.realname}}</h4>
+                        <p>{{item.department_id_name}}</p>
+                        <p>{{item.biye_name}}届{{item.xueli_name}}毕业生</p>
+                        <p v-if="item.work_province_name">工作地点： {{item.work_province_name}} {{item.work_city_name}}
+                                    <!-- {{item.work_address}} -->
+                        </p>
+                        <p v-else>工作地点：暂无数据</p>
+                    </a>
+                </li>
+                <div class="empty" v-show="newlist4.length==0"> 
+                    <img src="./xds/resources/images/is_kong.png" alt="">
+                </div>
+            </ul>
+            <div align="center" class="clearfix">
+                <div class="pages_wrapper" id="footpage"></div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <section class="footer"></section>
+
+    <script src="./xds/resources/js/vendor/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script src="./xds/bower_components/nivo-slider/jquery.nivo.slider.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-paginator.js"></script>
+    <script src="./xds/resources/js/vendor/template.js"></script>
+    <script src="./xds/resources/js/vendor/template-util.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="./xds/bower_components/bootstrapValidator/dist/js/bootstrapValidator.js"></script>
+    <script src="./xds/resources/js/vendor/alertify/js/alertify.js"></script>
+    <script src="./xds/resources/js/vendor/ajaxfileupload.js"></script>
+    <script src="./xds/resources/js/vendor/district-picker/jquery.district.picker.js"></script>
+    <script src="./xds/resources/js/vendor/common.js"></script>
+    <script src="./xds/resources/js/vendor/page2.js "></script>
+    <script src="./xds/resources/js/vendor/config.js"></script>
+    <script src="./xds/resources/js/vendor/api.js"></script>
+    <script src="./xds/resources/js/vendor/vue.min.js"></script>
+    <script src="./xds/resources/js/vendor/wx_get_openid.js"></script>
+    
+    <script>
+        $(".header").load("../public/header.html");
+        $(".footer").load("../public/footer.html");
+        var size = 20;
+        var cpage = $.getUrlParam("page");
+        cpage = parseInt(cpage);
+        if(!cpage || cpage < 1){
+            cpage = 1;
+        }
+
+        var school_id = sessionStorage.getItem("school_id");
+        //var school_id = 'd0c53db1-d4fc-7aa1-59d9-ff9bc97b5bb0';
+        var vm = new Vue({
+            el: "#gridBody",
+            data: {
+                newlist4: [], //招录公告
+                pros:[],
+                years:[],
+                keyword:'',
+                allpage:0,
+                pagesize:size,
+            },
+            updated:function(){
+                var onPagechange = function (page) {
+                    // console.log('当前点击页码', page);
+                    // window.location.href = $.UrlUpdateParams(window.location.href, 'page', page);
+                    window.location.href = "bangList.html?active=0&page="+page;
+                }
+                var obj = {
+                    wrapid: 'footpage', //页面显示分页器容器id
+                    total: vm.total, //总条数
+                    pagesize: vm.pagesize, //每页显示10条
+                    currentPage: cpage, //当前页
+                    onPagechange: onPagechange,
+                    //btnCount:7 页数过多时，显示省略号的边界页码按钮数量，可省略，且值是大于5的奇数
+                }
+                if (vm.allpage > 0) {
+                    console.log(1111);
+                    $('#footpage').css('opacity',1);
+                    pagination.init(obj);
+                }else{
+                    console.log(2222);
+                    $('#footpage').css('opacity',0);
+                }
+
+                // $('#gridBody').css('min-height',$(window).height()-300);
+            },
+            filters: {
+                imgsrc:function(obj){
+                    // return 'http:' + obj + '!150auto';
+                    return obj;
+                },
+                year:function(value) {
+                    if (value == 0) {
+                        return "";
+                    }
+                    var date = new Date(value * 1000);
+                    Y = date.getFullYear();
+                    return Y;
+                },
+                month:function(value) {
+                    if (value == 0) {
+                        return "";
+                    }
+                    var date = new Date(value * 1000);
+                    M = date.getMonth();
+                    var month = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+                    return month[M]+"月";
+                },
+                day:function(value) {
+                    if (value == 0) {
+                        return "";
+                    }
+                    var date = new Date(value * 1000);
+                    D = date.getDate();
+                    return D;
+                },
+                zanwu:function(value) {
+                    if(value == null || value=="" || value == undefined || value == "0"){
+                        return "暂无数据";
+                    }else{
+                        return value;
+                    }
+                },
+            },
+        })
+
+        //榜样风采请求
+        request();
+
+        $('#keyword').change(function(){
+            vm.keyword=$(this).val();
+        })
+        function request(){
+            var year = $('#year').val();
+            var pro = $('#pro').val();
+            http('POST', '/Selectstu/getPastList', {
+                "school_id": school_id,
+                "page": cpage,
+                "size": size,
+                'province_id':pro,
+                'biye':year,
+                'keywords':vm.keyword
+            }, function (e) {
+                console.log(e,555);
+                vm.newlist4 = e.data.list;
+                vm.total = e.data.count;
+                vm.allpage = e.data.allpage;
+            });
+        }
+
+
+        $('.niu').click(function(){
+            request();
+        })
+
+        //毕业年份
+        http('POST', '/Selectstu/getbiye', {'school_id':school_id}, function (e) {
+            console.log(e,6666);
+            vm.years = e.data;
+        });
+
+        //工作地点(省)
+        http3('POST', '/Systemregion/getlist', {"parent_id":0}, function(e){
+            vm.pros=e.data.list;
+           console.log(e,888);
+        });
+    </script>
+
+
+
+<!--     <script type="text/html" id="gridTpl">
+        {{if content.length>0}} {{each content as v }}
+        <li class="article-item clearfix">
+            {{if v.type=='选调政策' || v.type =='选调心声'}}
+            <a href="./xds/news/detail/{{v.id}}" style="color:#333;">
+                    <i class="fa fa-dot-circle-o" style="color:#812358"></i> {{if v.top==1}}<b style="color:#812358;">【置顶】</b>{{/if}} {{v.title}}
+                    <label style="float:right">{{v.createTime}}</label>
+                </a> {{else}}
+            <div class="item-pic  pull-left">
+                <div class="date-time text-c">{{#v.createTimeStr}}</div>
+            </div>
+            <div class="item-intro">
+                <a href="./xds/news/detail/{{v.id}}" class="item-title">
+                        {{if v.top==1}}<b style="color:#812358;">【置顶】</b>{{/if}} {{v.title}}
+                        </a>
+                <div class="item-desc add-ellipsis2 slh">{{#v.content}}</div>
+            </div>
+            {{/if}}
+        </li>
+        {{/each}} {{else}}
+        <li class="no-data">暂无查询结果</li>
+        {{/if}}
+    </script>
+    <script type="text/html" id="ly-gridTpl">
+        {{if content.length>0}} {{each content as v }}
+        <li class="article-item clearfix">
+            <div class="item-pic  pull-left">
+                <div class="date-time text-c">{{#v.createTimeStr}}</div>
+            </div>
+            <div class="item-intro">
+                <a href="./xds/news/detail/{{v.id}}" class="item-title">
+                {{v.createUserName}}:{{v.content}}
+            </a>
+                <div class="item-desc add-ellipsis2 slh">{{#v.content}}</div>
+            </div>
+        </li>
+        {{/each}} {{else}}
+        <li class="no-data">暂无查询结果</li>
+        {{/if}}
+    </script>
+    <script type="text/html" id="by-gridTpl">
+        {{if content.length>0}} {{each content as v }}
+        <li class="article-item clearfix">
+            <div class="item-pic  pull-left">
+                <img src="/xds{{v.img}}" style="width:175px" onerror="onerror=null;src='./xds/resources/images/default-picture.png'">
+            </div>
+        </li>
+        {{/each}} {{else}}
+        <li class="no-data">暂无查询结果</li>
+        {{/if}}
+    </script> -->
+</body>
+
+</html>

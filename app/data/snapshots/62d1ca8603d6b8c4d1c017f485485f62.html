@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>专家注册</title>
+<script type="text/javascript" src="/script/jquery.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery-migrate-1.4.1.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery-migrate-3.3.0.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.base64.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.dragsort.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/layui/layui.js?v=20250411" charset="utf-8"></script>
+        <script type="text/javascript" src="/script/json2.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/layui_exts/loading/loading.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/Public.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.base64.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/CheckText.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/qTip2/jquery.qtip.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/qTip2/ZcPophint.js?v=20250411"></script>
+        <link rel="stylesheet" type="text/css" href="/plugs/qTip2/jquery.qtip.css?v=20250411"></link>
+        <script type="text/javascript" src="/script/swfobject.js?v=20250411"></script>
+        <link rel="stylesheet" type="text/css" href="/style/style41.css?v=20250411">
+        <link rel="stylesheet" type="text/css" href="/plugs/layui/css/layui.css?v=20250411" media="all">
+        <script type="text/javascript" src="/plugs/autocomplete/autocomplete.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/autocomplete/thickbox.js?v=20250411"></script>
+        <link rel="stylesheet" type="text/css" href="/plugs/autocomplete/thickbox.css?v=20250411">
+        <script language='javascript' type='text/javascript' src='/plugs/My97DatePicker/WdatePicker.js'></script></head>
+<body>
+	<form id="dataForm" name="dataForm" method="post">
+	<!--专家注册时区分学校入口还是企业入口  -->
+	    <!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>选择校内、校外</title>
+<script type="text/javascript" src="/script/jquery.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery-migrate-1.4.1.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery-migrate-3.3.0.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.base64.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.dragsort.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/layui/layui.js?v=20250411" charset="utf-8"></script>
+        <script type="text/javascript" src="/script/json2.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/layui_exts/loading/loading.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/Public.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.base64.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/CheckText.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/qTip2/jquery.qtip.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/qTip2/ZcPophint.js?v=20250411"></script>
+        <link rel="stylesheet" type="text/css" href="/plugs/qTip2/jquery.qtip.css?v=20250411"></link>
+        <script type="text/javascript" src="/script/swfobject.js?v=20250411"></script>
+        <link rel="stylesheet" type="text/css" href="/style/style41.css?v=20250411">
+        <link rel="stylesheet" type="text/css" href="/plugs/layui/css/layui.css?v=20250411" media="all">
+        <script type="text/javascript" src="/plugs/autocomplete/autocomplete.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/autocomplete/thickbox.js?v=20250411"></script>
+        <link rel="stylesheet" type="text/css" href="/plugs/autocomplete/thickbox.css?v=20250411">
+        <script language='javascript' type='text/javascript' src='/plugs/My97DatePicker/WdatePicker.js'></script><script type="text/javascript">
+        function xzZjzcrk(zjlb){
+        	if (zjlb == "1") {//校内专家
+        		var varAction="https://nkzbb.nankai.edu.cn/sso/index.htm";
+        		window.location.href = varAction;
+			}else{//校外专家
+				var varAction="/zjzc.htm";
+            	window.open(varAction,"_self");
+			}
+        }
+        function shieldOnclick(){
+            event.cancelBubble=true;
+        }
+        </script>
+        <style type="text/css">
+            
+            body {
+	            width: 100%;
+	            height: 100%;
+	            overflow: hidden;
+	        }
+            
+            .zdyzm{
+	             height: 500px;
+	             margin-top:60px;
+	             background-color:#f0f6fb;
+	             text-align:center;	
+	             
+	        }
+	        .zdyzm .zcrk{
+	            display:inline-block;
+	        }
+	         .xnzj {
+	               width:410px;
+	               height:260px;
+	               float: left;
+	               margin-top: 30px;
+	               margin-right: 50px;
+	          }
+	          .xwzj {
+	              width:410px;
+	              height:260px;
+	              float: left;	
+	              margin-top: 30px;
+	              margin-left: 50px;
+	          }
+	          .zcfs{
+	              font-size: 18px;
+	              font-weight: 700;
+	              text-align: left;
+	              
+	          }
+	          .zcxz{
+	              font-size: 14px;
+	              font-weight: 400;
+	              text-align: left;
+	              
+	          }
+	          .xwzj:hover{
+	              box-shadow: #ccc 10px 10px 10px;  
+	              cursor: pointer;
+	          }
+	          .xnzj:hover{
+	              box-shadow: #ccc 10px 10px 10px;  
+	              cursor: pointer;
+	          }
+	          
+	            
+	           .xnzj {
+	               background: url('/images/2/icon/icon_zjzc_mk_xnzj.png') center center no-repeat ;
+	           }
+	          
+	           .xwzj {
+	               background: url('/images/2/icon/icon_zjzc_mk_xwzj.png') center center no-repeat ;
+	           }
+            
+        </style>
+</head>
+<body>
+	<form id="dataForm" name="dataForm" method="post">
+		<div class="zdyzm">
+		    <div class="zcrk">
+		        <div class="zcfs"> <br>请选择注册方式</div><br>
+		        <div class="zcxz">
+		            1、本校教职工注册成为专家时，请点击"校内教师注册成为评审专家"注册入口。<br><br>
+		            2、校外人员要注册成为专家时，请点击"校外人员注册成为评审专家"注册入口。
+		        </div>
+				<div class="xnzj" onclick="xzZjzcrk('1')">
+					<span class="title" onclick="shieldOnclick()"></span>
+				</div>
+				<div class="xwzj" onclick="xzZjzcrk('2')">
+					<span class="title1" onclick="shieldOnclick()"></span>
+				</div>
+		    </div>
+		</div>
+	</form>
+</body>
+</html></form>
+</body>
+</html>

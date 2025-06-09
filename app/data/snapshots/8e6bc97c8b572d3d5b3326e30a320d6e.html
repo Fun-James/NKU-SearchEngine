@@ -1,0 +1,440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta name="renderer" content="webkit" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+	南开大学大型仪器管理平台</title>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+<base href="http://less.nankai.edu.cn/lims/" />
+<link rel="shortcut icon" href="cache/c502bc7d2e9624f92f6d3acf9e5892ec.ico" type="image/x-icon" />
+<link rel="apple-touch-icon" href="cache/67b17c875e6260fec984b138deb7ea1d.png" />
+<link href="cache/bbdb995c29d547cdf236a6621aa45375.css?v=20110816" rel="stylesheet" type="text/css" /><link href="cache/e5a594f5e3529f8890cb5c2c9989a4fb.css?v=20110816" rel="stylesheet" type="text/css" /><link href="cache/a4657e1d274765b3d6abf601597f014a.css?v=20110816" rel="stylesheet" type="text/css" /><link href="cache/ed168a90736449f21a14d72f4a56ba25.css?v=20110816" rel="stylesheet" type="text/css" /><link href="cache/8eea0c55e399b7b9f8b89ba33d42ce18.css?v=20110816" rel="stylesheet" type="text/css" /><link href="cache/d1b3c851cddb9a21c369bbba3038712a.css?v=20110816" rel="stylesheet" type="text/css" /><script src="cache/44a9cf22705e3c8c2e8302fa870973d6.js?v=20110817" type="text/javascript"></script><script src="cache/09ca532bbfeef05e50039da8004bb31f.js?v=20110817" type="text/javascript"></script><script src="cache/24bea7146bd193545e5c4e3c2f7ff472.js?v=20110817" type="text/javascript"></script><script src="cache/5bdf9ac987d14129264be779390fa1ef.js?v=20110817" type="text/javascript"></script><script src="cache/536aae49620ce2bf68ea26b747bb9aa8.js?v=20110817" type="text/javascript"></script><script src="cache/64a8e457945e4dbc6b0b54b2c7083851.js?v=20110817" type="text/javascript"></script><script src="cache/aef8088632ad689784b2a4d400ac736c.js?v=20110817" type="text/javascript"></script><script src="cache/a3253ce3ff1eca76ca6d4cedf5513c59.js?v=20110817" type="text/javascript"></script><script src="cache/291b3c97081b7baad4d3e8fa62a22415.js?v=20110817" type="text/javascript"></script><script src="cache/afb7c897c4c8f93d8f33d3b47fe16c68.js?v=20110817" type="text/javascript"></script><script>
+(function($){
+    Q['mousewheelEventDuration'] = 0.2;
+	Q['24hour'] = 1;
+	// 系统时区与utc的时间差
+	Q['utc_offset'] = 28800000;
+})(jQuery);
+</script>
+
+
+</head>
+<body>
+	<table width="100%" height="100%">
+	<tr>
+	<td class="top" colspan="2" height="32">
+		<div id="header">
+			<div class="header_content"
+                        >
+				<div id="top_menu" class="float_right"><div class="top_menu_item" style="height:auto;line-height:inherit">
+	<a class="link" href="#">语言</a>
+	<select name="top_locale" class="middle"><option value="zh_CN" selected="selected">中文</option><option value="en_US">English</option></select></div>
+<span class="separator">&#160;</span>
+<span class="top_menu_contact">
+	<span class="label">客服</span>
+	<strong>400-017-KONG</strong>
+		<span class="phone">(400-017-5664)</span>
+	</span>
+<span class="separator">&#160;</span>
+<div class="top_menu_item">
+	<a class="link link_help link_fade" href="#" onclick="(function($,t){$(t).toggle();$(this).toggleClass('link_fade');}).apply(this, [jQuery, '#tips_683a3ca3b0ed1']); return false;">提示</a>
+	<div id="tips_683a3ca3b0ed1" class="tip ">
+		<div class="description">
+	<p>请您阅读用户手册及<a href="#" q-object="new_user_register" q-event="click" class="blue" q-src="http://less.nankai.edu.cn/lims/!labs/signup" >注册须知</a>, 并按要求填写注册信息。
+    </p>
+</div>
+<p>&#160;</p>
+<script>
+jQuery(function($){
+	var $notip = $("a#notip");
+	$notip.click( function() {
+		var $this = $(this);
+		var $tip = $this.parents(".tip");
+		$tip.hide();
+		Q.trigger({
+			object: "notip",
+			event: "click",
+			data: {
+				"path": "tips/!labs/signup"
+			},
+			url: "http://less.nankai.edu.cn/lims/index"
+		});
+		return false;
+	});
+});
+</script>
+	</div>
+</div>
+<span class="separator">&#160;</span>
+<div class="top_menu_item">
+		<a class="link link_login" href="http://less.nankai.edu.cn/lims/login">登录</a>
+</div>
+&#160;
+
+<script>
+jQuery(function($){
+	var selector = $("select[name=top_locale]");
+	selector.change(function() {
+		save_language_change($(this).val());
+	})
+
+	function save_language_change(val) {
+		Q.trigger({
+			object: 'save_language',
+			event: 'change',
+			url: 'http://less.nankai.edu.cn/lims/index',
+			global: false,
+			data: {
+				language: val
+			},
+			success : function(data, status, xhr) {
+                window.location.reload();      
+            }
+        });
+	}
+})
+</script>
+</div>
+				<a href="http://less.nankai.edu.cn/lims/"><img class="float_left" src="cache/06a2cb08607261bef01466fbeaa28e38.png" usemap="#logo_map"/></a>
+			</div>
+		</div>
+	</td>
+	</tr>
+	<tr>
+				<td id="sidebar" class="top" width="194">
+			<div class="sidebar_wrapper">
+				<div class="sidebar_content">
+					<div class="hr_1">&#160;</div>
+<div class="sidebar_body">
+<div class="padding_1 sidebar_item sidebar_home"><div class="padding_1 center">
+<h1><a href="http://less.nankai.edu.cn/">主页</a></h1>
+</div>
+</div><div class="padding_1 sidebar_item sidebar_signup"><div class="padding_1 center">
+	<h1>
+		<a href="http://less.nankai.edu.cn/lims/!labs/signup">
+		注册新用户		</a>
+	</h1>
+</div>
+</div><div class="padding_1 sidebar_item sidebar_lab_signup"><div class="padding_1 center">
+	<h1><a href="http://less.nankai.edu.cn/lims/!labs/signup/lab">注册新课题组</a></h1>
+</div>
+</div><div class="hr_1 sidebar_item sidebar_bottom">&#160;</div>
+</div>
+				</div>
+			</div>
+		</td>
+				<td id="center" class="top" width="100%">
+			<div class="center_content">
+								<div style="padding-top:3px">
+				<script>
+jQuery(function($){
+       var $center = $('#center');
+       $center.css('vertical-align', 'middle');
+       $center.find('.center_content').css({width: '600px', margin: 'auto', paddingBottom: '2em'});
+
+		var height = $('.signup_body').offset().top - $center.offset().top ;
+		$center.css('vertical-align', 'baseline');
+		$center.css('padding-top', height +'px');
+});
+</script>
+<div class="form padding_2 signup_body">
+<table class="form">
+	<tbody>
+	<tr>
+		<td class="top icon">
+			<img src="images/icons/signup_big.png" />
+		</td>
+		<td class="top lpadding_1">
+			<form method="post" autocomplete="off" action="http://less.nankai.edu.cn/lims/!labs/signup">
+            				 		<table class="form">
+				<tbody>
+					<tr>
+					<th colspan="2" class="legend">1. 登录信息</th>
+					<td>
+												<input class="hide" name="verify_token" value="3dad103a7404911d41fe4defc4c137f3" />
+					</td>
+					</tr>
+										<tr>
+						<td class="label right nowrap middle" width="70px">登录帐号</td>
+						<td class="middle">
+															<input name="token" 
+class="text  user_token" 
+size="25" 
+value="" 
+ />
+	<span class="separator middle">@</span><select name="token_backend" class="dropdown middle monitor"><option value="ids.nankai" selected="selected">一卡通用户</option><option value="database%yiqi.tju">天津大学本地用户</option><option value="ids.tju%yiqi.tju">天津大学一卡通用户</option></select>								&#160;<span class="require ">*必填</span>
+														</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="middle description">
+										                登录帐号只可使用: 字母、数字、“-”、“_”、“.”和“@”等字符						</td>
+					</tr>
+										                    					<tr class="nowrap toggle:token_backend hide_on:ids.nankai hide_on:database%yiqi.tju hide_on:ids.tju%yiqi.tju">
+						<td class="label right nowrap">密码</td>
+						<td class="middle"><input name="passwd" type="password" class="text" size="40" value="" />
+						&#160;<span class="require ">*必填</span>
+						</td>
+					</tr>
+					<tr class="toggle:token_backend hide_on:ids.nankai hide_on:database%yiqi.tju hide_on:ids.tju%yiqi.tju">
+						<td class="label right nowrap">确认密码</td>
+						<td class="middle"><input name="confirm_passwd" type="password" class="text" size="40" value="" />
+							&#160;<span class="require ">*必填</span>
+						</td>
+
+					</tr>
+                    <tr class="description toggle:token_backend hide_on:ids.nankai hide_on:database%yiqi.tju hide_on:ids.tju%yiqi.tju">
+                        <td></td>
+                        <td colspan="3">8-24个字符，必须包含数字和大小写字母</td>
+                    </tr>
+										<tr><td colspan="2" class="hr_2">&#160;</td></tr>
+					<tr>
+					  <th colspan="2" class="legend">2. 个人信息</td>
+					</tr>
+					<tr class="nowrap">
+						<td class="label right nowrap">姓名</td>
+						<td class="middle"><input name="name" class="text name" size="40" value="" />
+							&#160;<span class="require ">*必填</span>
+						</td>
+					</tr>
+					<tr class="nowrap">
+						<td class="label right nowrap">性别</td>
+						<td class="middle">
+							<span class="gender readonly" style="display:block">
+								                            	<select name="gender" class="middle dropdown"><option value="-1" selected="selected">--</option><option value="0">男</option><option value="1">女</option></select>                            	                            </span>
+							                        </td>
+
+					</tr>
+					<tr class="nowrap">
+						<td class="label middle right nowrap">人员类型</td>
+												<td class="middle">
+							<span class="member_type">
+															<select name="member_type" class="dropdown"><option value="-1" selected="selected">--</option><optgroup label="学生"><option value="0">本科生</option><option value="1">硕士研究生</option><option value="2">博士研究生</option><option value="3">其他</option></optgroup><optgroup label="教师"><option value="10">课题负责人(PI)</option><option value="11">科研助理</option><option value="12">PI助理/实验室管理员</option><option value="13">其他</option></optgroup><optgroup label="其他"><option value="20">技术员</option><option value="21">博士后</option><option value="22">其他</option></optgroup></select>							&#160;<span class="require ">*必填</span>
+														</span>
+						</td>
+					</tr>
+					<tr><td colspan="2" class="hr_1">&#160;</td></tr>
+											<tr class="group">
+							<td class="right nowrap middle">所属单位</td>
+							<td class="top nowrap">
+								<span class="remote_group">
+																<script type="text/javascript"> Q.require_js("cache/4d0dce8b300c6e044a6f65aabaa68ada.js?v=20110817","application:widgets/tag_selector"); </script><div class="tag_selector text_like  tag_selector_683a3ca3b46a1">
+<input type="hidden" name="root_id" value="2" /><input type="hidden" name="group_id" value="2" /><div class="nowrap">
+		<div class="tag_selector_link tag_selector_first">
+		   <a href="#" class="tag_link prevent_default" q-tag-id="0">
+	全部</a>
+	</div><div class="tag_selector_link tag_selector_more tooltip:请点击 tooltip_position:left">&#160;</div></div>
+</div>
+<script>
+Q.js_ready('application:widgets/tag_selector', function(){
+	var opt = {"uniqid":"tag_selector_683a3ca3b46a1","tag_name":"tag_group","root_id":"2","url":"http:\/\/less.nankai.edu.cn\/lims\/tags","name":"group_id","ajax":true};
+	jQuery('.' + opt.uniqid).tagSelector(opt);
+});
+</script>
+																</span>
+															</td>
+						</tr>
+										<tr><td colspan="2" class="hr_1">&#160;</td></tr>
+										<tr class="nowrap">
+						<td class="label middle right top nowrap">学号/工号</td>
+						<td class="middle"><input name="ref_no" class="text ref_no" size="40" value="" />
+							&#160;<span class="require ">*必填</span>
+						</td>
+					</tr>
+										                    					<tr>
+						<td class="label right nowrap">专业</td>
+						<td class="middle"><input name="major" class="text major" size="40" value="" />
+													</td>
+					</tr>
+                    					<tr class="nowrap">
+						<td class="label right nowrap">单位名称</td>
+						<td class="middle"><input name="organization" class="text organization" size="40" value="" />
+													</td>
+					</tr>
+															<tr class="lab">
+						<td class="right nowrap top">课题组</td>
+						<td class="top">
+							<input id="labsel_683a3ca3b52f8_lab" name="lab_id" type="hidden" value="0" />
+<input id="labsel_683a3ca3b52f8_lab_name" class="text middle select_on_focus autocomplete:http://less.nankai.edu.cn/lims/!labs/autocomplete/lab autocomplete_alt:#labsel_683a3ca3b52f8_lab" size="40" value="" q-tooltip="请输入关键字并选择"  />
+							&#160;<span class="require ">*必填</span>
+
+													<td>
+					</tr>
+                    <tr>
+                        <td class="right nowrap middle">所在时间</td>
+                        <td class="middle">
+                        <input id="checkbox683a3ca3b53fd" name="has_dfrom" type="checkbox" class="middle monitor"/>                        <input name="dfrom" class="text toggle_status:has_dfrom enable_on:on date middle" value="" q-date_format="$year/$month/$day"/>
+                        -
+                        <input id="checkbox683a3ca3b544d" name="has_dto" type="checkbox" class="middle monitor"/>                        <input name="dto" class="text toggle_status:has_dto enable_on:on date middle" value="" q-date_format="$year/$month/$day"/>
+                                                </td>
+                    </tr>
+										<tr><td colspan="2" class="hr_2">&#160;</td></tr>
+					<tr class="nowrap">
+					  <th colspan="2" class="legend">3. 联系方式</td>
+					</tr>
+                    <tr class="nowrap">
+						<td class="label right nowrap">电子邮箱</td>
+						<td class="middle"><input name="email" class="text email" size="40" value="" />
+							&#160;<span class="require ">*必填</span>
+						</td>
+					</tr>
+											<tr class="nowrap">
+						<td class="label right nowrap middle">联系电话</td>
+						<td class="middle"><input name="phone" class="text phone" size="40" value="" />
+							&#160;<span class="require ">*必填</span>
+						</td>
+					</tr>
+					                        										<tr>
+						<td class="label right nowrap middle">地址</td>
+						<td class="middle"><input name="address" class="text address" size="40" value="" />
+													</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="hr_1">&#160;</td>
+					</tr>
+                    					<tr class="nowrap">
+						<td></td>
+						<td>
+							<span class="signup_button">
+							<input type="submit" name="submit" class="button button_signup" value="注册" />
+														</span>
+						</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			</form>
+		</td>
+	</tr>
+	</tbody>
+</table>
+</div>
+
+<script>
+	jQuery(function($){
+                    Q.trigger({
+                object: 'new_user_register',
+                event: 'click',
+                url: 'http://less.nankai.edu.cn/lims/!labs/signup'
+            });
+        		var $token = "";
+		var $form = "";
+		//如果有token则抓取远程用户信息，否则当输入完登录信息后尝试登录
+		if($token) {
+			if(!$form){
+				$('input.text').attr('disabled', 'disabled');
+				$('span.signup_button').hide();
+				get_remote_info();
+			}
+		}
+		else{
+			$('input[name="token"],input[name="passwd"],select[name="token_backend"]').change(function(){
+				try_login();
+			});
+		}
+
+		//直接注册新用户，输入用户名和密码后尝试登录
+		function try_login(){
+			var $user_name = $('input[name="token"]').val();
+			var $backend = $('select[name="token_backend"]').val();
+			var $passwd = $('input[name="passwd"]').val();
+
+			if($user_name && $passwd && ( $backend!=undefined && $backend!='database')){
+				var $user_token = $user_name + '|' + $backend;
+
+				Q.trigger({
+					object: 'try_login',
+					event: 'click',
+					data: {'token':$user_token, 'passwd':$passwd},
+				});
+			}
+		}
+
+		//获取远程信息
+		function get_remote_info(){
+			Q.trigger({
+				object: 'get_remote_user',
+				event: 'click',
+				success: function(data){
+					var  $user_info = data.user_info;
+					if($user_info){
+						$('input.name').val($user_info.name);
+						$('input.ref_no').val($user_info.ref_no);
+						$('input.organization').val($user_info.organization);
+						$('input.major').val($user_info.major);
+						$('input.email').val($user_info.email);
+						$('input.phone').val($user_info.phone);
+						$('input.address').val($user_info.address);
+					}
+					$('input.text').removeAttr('disabled');
+					$('span.signup_button').show();
+				}
+			});
+		}
+
+		$('input.info_sync').click(function(){
+			get_remote_info();
+		});
+	});
+</script>
+				</div>
+			</div>
+		</td>
+	</tr>
+	<tr>
+	<td class="bottom" colspan="2" height="28">
+	<div id="footer"><div class="footer_content">
+        <script type="text/javascript">(function(){Q.jslamda_1c9d43acfe2d61b1c39af6ce4e1c0b28=function(_oO){var server_time = _oO[0]; /*JSFORMATED*/
+
+jQuery(function($){var utc_offset=Q['utc_offset']|0;var d=new Date();var local_offset=server_time*1000-d.getTime();var last_remote_time=0;var offset=local_offset+utc_offset;setInterval(function(){var local_utc=moment().utc();var remote_time=local_utc+offset;var diff=remote_time-last_remote_time;remote_time=last_remote_time+(Math.round(diff/1000)*1000);last_remote_time=remote_time;var nd=new Date(remote_time);var time=moment(nd).utc().format('YYYY/MM/DD HH:mm:ss');$('#footer_time').html(time);},1000);})};Q.jslamda_1c9d43acfe2d61b1c39af6ce4e1c0b28([1748647075]);})();</script>        <script type="text/javascript">(function(){Q.jslamda_baec6461b0d69dde1b861aefbe375d8a=function(_oO){var decode_url = _oO[0]; /*JSFORMATED*/
+
+(function($){if(Q.browser.msie&&Q.browser.version<8){$('img[src*=base64]').livequery(function(){$(this).attr('src',decode_url+"?code="+encodeURIComponent($(this).attr('src')));});}})(jQuery);};Q.jslamda_baec6461b0d69dde1b861aefbe375d8a(["http:\/\/less.nankai.edu.cn\/lims\/icon\/decode"]);})();</script>		<div class="clearfix">
+	<div class="float_left">
+		<span class="description middle"><small>release-2.24.1</small></span>
+		<span class="separator middle">&#160;</span>	
+	</div>
+	<div class="float_left">	
+		<span class="email">
+			<a href="mailto:nkyqpt@nankai.edu.cn"><small>nkyqpt@nankai.edu.cn</small></a>
+		</span>
+		<span class="separator middle">&#160;</span>
+	</div>	
+	<div class="float_right">
+		<span class="separator middle">&#160;</span>
+		<span class="copyright middle">
+		<a href="http://www.geneegroup.com" target="_blank"><strong>基理科技</strong></a> &#169; 2025 版权所有. 保留所有权利.		</span>
+		<span class="separator middle">&#160;</span>
+		<div class="footer_browser_suggestion middle">
+<a class="label" onclick="jQuery(this).next().toggle(); return false">建议更换浏览器</a>
+<div class="tip">
+    <h4>更换网络浏览器的建议</h4>
+    <p class="description">我们检测到您的系统使用了过时的网络浏览器，存在安全隐患。为了保证您浏览时的安全以及获得最佳的浏览效果, 我们强烈建议您更换为以下浏览器。</p>
+    <div class="hr_1">&#160;</div>
+    <div class="clearfix">
+    	<span class="nowrap inline_block"><img class="middle" src="images/browsers/firefox_s.gif" />&#160;<a class="middle" href="software/Firefox_ZH_3.6.13.exe"><strong>火狐浏览器</strong></a></span>
+    	<div class="hr_1">&#160;</div>
+    	<span class="nowrap inline_block"><img class="middle" src="images/browsers/chrome_s.gif" />&#160;<a class="middle" href="http://www.google.com/chrome/"><strong>谷歌Chrome浏览器</strong></a></span>
+    	<div class="hr_1">&#160;</div>
+    	<span class="nowrap inline_block"><img class="middle" src="images/browsers/safari_s.gif" />&#160;<a class="middle" href="http://www.apple.com/safari/download/"><strong>苹果Safari浏览器</strong></a></span>
+    </div>
+    <div class="hr_1">&#160;</div>
+    <div class="right">
+		        <a href="http://less.nankai.edu.cn/lims/!labs/signup?nobrowstip=1" style="color: #633" confirm="您确定不想尝试一下其他浏览器吗?">我不要更换浏览器&#187;</a>
+    </div>
+</div>
+</div>
+<span class="separator middle">&#160;</span>		<span class="description middle"><small><strong><span id='footer_time'>2025/05/31 07:17:55</span></strong></small></span>
+	</div>
+</div>
+	</div></div>
+	</td>
+	</tr>
+	</table>
+	<script src="cache/45bbe2a74be18b057b5a7bc69d7b1781.js?v=20110817" type="text/javascript"></script></body>
+</html>
+

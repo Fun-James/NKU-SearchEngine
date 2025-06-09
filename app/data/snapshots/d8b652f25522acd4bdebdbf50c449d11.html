@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1">
+    <meta name="renderer" content="webkit">
+    <link rel="icon" href="./xds/favicon.ico" type="image/x-icon">
+    <link href="./xds/resources/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/bootstrap-3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./xds/resources/css/index.css" />
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.core.css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.bootstrap.css">
+    <link href="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./xds/resources/css/loaders.css">
+    <script type="text/javascript" src="./xds/bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="./xds/resources/js/vendor/district-picker/district.picker.css">
+    <title>南开大学选调生系统</title>
+    <style type="text/css" media="screen">
+    .alertify-buttons {
+        padding: 14px 15px 15px;
+        background: #F5F5F5;
+        border-top: 1px solid #DDD;
+        border-radius: 0 0 6px 6px;
+        box-shadow: inset 0 1px 0 #FFF;
+    }
+
+    .alertify-message {
+        padding: 15px;
+        margin: 0;
+    }
+
+    .login-btn-item {
+        width: 100px;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+    </style>
+    <style type="text/css">
+    [v-cloak] {
+        display: none;
+    }
+    .question_types {
+        display: flex;
+    }
+    .question_type {
+        border-left: 1px solid #D9D9D9;
+        border-top: 1px solid #D9D9D9;
+        border-bottom: 1px solid #D9D9D9;
+        box-sizing: border-box;
+        width: 120px;
+        line-height: 48px;
+        font-size: 18px;
+        color: #595959;
+        text-align: center;
+        cursor: pointer;
+    }
+    .question_type.first {
+        border-radius: 4px 0px 0px 4px;
+    }
+    .question_type.last {
+        border-right: 1px solid #D9D9D9;
+        border-radius: 0px 4px 4px 0px;
+    }
+    .question_type.active {
+        color: #812358;
+        background: #ECD0E0;
+        border-color: #ECD0E0;
+    }
+    .question_item {
+        border-bottom: 1px solid #f3f3f3;
+        padding: 20px 0;
+        cursor: pointer;
+    }
+    .question_titile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 22px;
+    }
+    .question_icon {
+        display: inline-block;
+        text-align: center;
+        color: #FFF;
+        font-size: 16px;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        background: linear-gradient(139deg, #ED923B 0%, #FFC069 100%);
+        border-radius: 10px 10px 0px 10px;
+        margin-right: 20px;
+    }
+    .question_icon.answer {
+        background: linear-gradient(317deg, #8AE438 0%, #52C41A 100%);
+    }
+    .question_title_text {
+        font-size: 20px;
+        color: #222;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 1000px;
+    }
+    .question_answer {
+        display: flex;
+        align-items: flex-start;
+        margin: 0;
+    }
+    .question_answer .answer_text {
+        max-width: 1070px;
+        font-size: 16px;
+        color: #999999;
+        margin-top: 5px;
+    }
+    .ask {
+        background-color: #812358;
+        color: #FFF;
+        text-align: center;
+        width: 210px;
+        height: 48px;
+        line-height: 48px;
+        font-size: 20px;
+        margin: 24px auto;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="file"] {
+        display: none;
+    }
+    .ask_infos {
+        text-align: center;
+    }
+    .ask_infos i {
+        color: #FAAD14;
+        font-size: 72px;
+    }
+    .ask_infos i.type1 {
+        color: #74C041;
+    }
+    .ask_infos h1 {
+        color: #000000;
+        font-size: 24px;
+        margin: 24px 0 16px;
+    }
+    .ask_infos p {
+        color: rgba(0,0,0,0.45);
+        font-size: 14px;
+    }
+    .user_head {
+        width:84px;
+        height:84px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    .loginIn2>div {
+        height: 100px;
+        background: #fff;
+        z-index: 9999;
+        border: 1px solid #d2d2d2;
+        padding: 17px 20px;
+        box-sizing: border-box;
+    }
+    .loginIn2>div>div{
+        float: left;
+        text-align: center;
+    }
+    .banner-content {
+        position: relative;
+    }
+    .ask {
+        position: absolute;
+        right: 32px;
+        top: 24px;
+        margin: 0;
+    }
+    </style>
+</head>
+
+<body class="body" style="background: #F0F1F6;">
+    <section class="header"></section>
+    <div class="main-content" id="gridBody" v-cloak>
+        <div class="banner-content badg" style="padding: 24px 32px;">
+            <ul class="question_types">
+                <li class="question_type first" onclick="changeType(1)" :class="{'active': nowType === 1}">全部</li>
+                <li class="question_type" onclick="changeType(2)" :class="{'active': nowType === 2}">常见问题</li>
+                <li class="question_type" onclick="changeType(3)" :class="{'active': nowType === 3}">最新提问</li>
+                <li class="question_type last" onclick="changeType(4)" :class="{'active': nowType === 4}">热门问题</li>
+            </ul>
+            <template v-if="newlist1.length <= 0">
+                <h6 class="kong" style="padding-bottom: 40px;">
+                    <img src="xds/resources/images/is_kong1.png" alt="">
+                    <span>暂无数据</span>
+                </h6>
+            </template>
+            <template v-else>
+                <div style="overflow: hidden">
+                    <ul style="width:100%;">
+                        <li class="question_item" v-for="item in newlist1">
+                            <a :href="`onlineQuestionDetail.html?active=12&id=${item.id}`">
+                                <div class="question_titile">
+                                    <span class="question_title_text" :title="item.remarks">
+                                        <span class="question_icon">问</span> {{item.remarks}}
+                                    </span>
+                                    <span style="color: #999999;">{{item.addtime | time}}</span>
+                                </div>
+                                <p class="question_answer">
+                                    <span class="question_icon answer">答</span>
+                                    <span class="answer_text">{{item.answerDetail ? item.answerDetail.remarks_formathtml : ''}}</span>
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div align="center" class="clearfix">
+                    <div class="pages_wrapper" id="footpage"></div>
+                </div>
+            </template>
+            <div class="ask">我要提问</div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="baomingModel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-lg" style="width:600px;" v-watermark="watermark">
+                <div class="modal-content  modal-style-reset">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">在线提问</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal bv-form" role="form" id="form_baoming" novalidate="novalidate">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-2">
+                                        <img class="user_head" src="./xds/resources/images/touxiang.png" alt="">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <el-input
+                                            style="margin-bottom: 10px;"
+                                            :autosize="{ minRows: 6, maxRows: 6}"
+                                            type="textarea"
+                                            placeholder="写下你的问题，准确的描述问题，更容易得到解答"
+                                            :row="6"
+                                            resize="none"
+                                            v-model="remarks"
+                                            maxlength="200"
+                                            show-word-limit
+                                        ></el-input>
+                                        <el-upload
+                                            list-type="picture-card"
+                                            accept=".jpg,.png,.jpeg"
+                                            :on-change="handlePicPick"
+                                            :auto-upload="false"
+                                            :limit="3"
+                                            :file-list="fileList"
+                                            :on-exceed="handleExceed"
+                                            :on-remove="handleRemove"
+                                        >
+                                            <i class="el-icon-plus"></i>
+                                            <div slot="tip" class="el-upload__tip">添加咨询图片，最多支持添加3张，且不超过5MB</div>
+                                        </el-upload>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="col-sm-12"><span class="star">*</span>联系电话：</label>
+                                <div class="col-sm-12">
+                                  <input class="form-control" placeholder="请输入" :value="linkphone" name="phone" id="phone" data-bv-field="phone">
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="button" d="" class="pku-btn big-btn" id="baomingSubmit">提交</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <el-dialog
+            title=""
+            :visible.sync="dialogVisible"
+            width="600px">
+            <div class="ask_infos">
+                <template v-if="infoType === 1">
+                    <i class="el-icon-warning"></i>
+                    <h1>信息提示</h1>
+                    <p>学校已将在线提问功能关闭，暂时无法提问哦！</p>
+                </template>
+                <template v-else>
+                    <i class="el-icon-success type1"></i>
+                    <h1>提交成功</h1>
+                    <p>您的问题已成功提交给学校老师，请耐心等待回复!</p>
+                </template>
+            </div>
+        </el-dialog>
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" style="z-index: 1111;" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content loginIn2" style="padding:20px;margin-top:100%;z-index: 1;">
+                <div style="line-height: 45px;">
+                    <div class="login_studenty login_js">
+                        <a href="javascript:;"><span></span>教职工</a>
+                    </div>
+                    <div class="silde"></div>
+                    <div class="login_studenty login_zxs">
+                        <a href="javascript:;"><span></span>在校生</a>
+                    </div>
+                    <div class="silde"></div>
+                    <div class="login_studentw login_xds">
+                        <a   href="javascript:;"><span></span>选调生</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <section class="footer"></section>
+    <script src="./xds/resources/js/vendor/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script src="./xds/bower_components/nivo-slider/jquery.nivo.slider.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-paginator.js"></script>
+    <script src="./xds/resources/js/vendor/template.js"></script>
+    <script src="./xds/resources/js/vendor/template-util.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="./xds/bower_components/bootstrapValidator/dist/js/bootstrapValidator.js"></script>
+    <script src="./xds/resources/js/vendor/alertify/js/alertify.js"></script>
+    <script src="./xds/resources/js/vendor/ajaxfileupload.js"></script>
+    <script src="./xds/resources/js/vendor/district-picker/jquery.district.picker.js"></script>
+    <script src="./xds/resources/js/vendor/common.js"></script>
+    <script src="./xds/resources/js/vendor/page2.js "></script>
+    <script src="./xds/resources/js/vendor/config.js"></script>
+    <script src="./xds/resources/js/vendor/api.js"></script>
+    <script src="./xds/resources/js/vendor/vue.min.js"></script>
+    <script src="./xds/resources/js/vendor/wx_get_openid.js"></script>
+    <!-- 引入新版vue -->
+    <script src="./xds/resources/js/vendor/vue@2.6.14.min.js"></script>
+    <!-- 引入elementui -->
+    <link rel="stylesheet" href="./xds/resources/js/vendor/elementui/lib-master/theme-chalk/index.css">
+    <script src="./xds/resources/js/vendor/elementui/lib-master/index.js"></script>
+    <!-- 引入水印 -->
+    <script src="./xds/resources/js/vendor/watermark.js"></script>
+    <style>
+        .el-upload--picture-card {
+            width: 100px;
+            height: 100px;
+            line-height: 114px;
+        }
+        .el-upload-list--picture-card .el-upload-list__item {
+            width: 100px;
+            height: 100px;
+        }
+        /* 水印样式 */
+        .water-mark {
+            display: inline-block;
+            overflow: hidden;
+            position: absolute;
+            left: 0%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            /* 允许穿透 */
+            pointer-events: none;
+            background-repeat: repeat;
+            background-size: 200px;
+        }
+    </style>
+</body>
+<script>
+
+$(".header").load("../public/header.html");
+$(".footer").load("../public/footer.html");
+var school_id = sessionStorage.getItem("school_id");
+var stu_id = sessionStorage.getItem('userid')||'';
+var keywords = $.getUrlParam("keywords") || "";
+var nowTime=Number(JSON.stringify(Date.parse(new Date())).substr(0,10));
+var size = 15;
+var cpage = $.getUrlParam("page");
+cpage = parseInt(cpage);
+if(!cpage || cpage < 1){
+    cpage = 1;
+}
+var vm = new Vue({
+    el: "#gridBody",
+    data() {
+        return {
+            newlist1: [], //招录公告
+            total:0,
+            pagesize:size,
+            keywords: keywords,
+            nowType: 1,
+            fileList: [],
+            linkphone: '',
+            fileArray: [],
+            remarks: '',
+            dialogVisible: false,
+            infoType: 1,
+            watermark: { // 水印设置
+                className: '.water-mark',
+                text: '',
+                font: '30px normal'
+            } 
+        }
+    },
+    updated:function(){
+        var onPagechange = function (page) {
+            window.location.href = "activitySign.html?active=11&page="+page+"&keywords="+keywords;
+        }
+        var obj = {
+            wrapid: 'footpage', //页面显示分页器容器id
+            total: vm.total, //总条数
+            pagesize: vm.pagesize, //每页显示10条
+            currentPage: cpage, //当前页
+            onPagechange: onPagechange,
+            //btnCount:7 页数过多时，显示省略号的边界页码按钮数量，可省略，且值是大于5的奇数
+        }
+        if (vm.allpage > 0) {
+            console.log(obj);
+            pagination.init(obj);
+        }
+        $('#gridBody').css('min-height',$(window).height()-360);
+    },
+    filters: {
+        time:function(value){
+            if (value == 0) {
+                return "";
+            }
+            var date = new Date(value * 1000);
+            Y = date.getFullYear() + '-';
+            M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+            D = (date.getDate()< 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+            h = (date.getHours() < 10 ? '0' + (date.getHours()) : date.getHours())  + ':';
+            m = (date.getMinutes() < 10 ? '0' + (date.getMinutes()) : date.getMinutes()) ;
+            s = date.getSeconds();
+            return Y + M + D+h+m;
+        },
+    },
+    methods: {
+        // 文件校验
+        validatePic(file, fileList) {
+            let fileExtentArr = file.name.split('.')
+            let lastItem = fileExtentArr[fileExtentArr.length - 1].toLowerCase()
+            if (lastItem != 'jpg' && lastItem != 'jpeg' && lastItem != 'png') { // 文件类型校验
+                this.$message({
+                    type: 'warning',
+                    message: '请选择正确格式的文件'
+                })
+                this.fileList = fileList.filter(item => item.uid !== file.uid);
+                return false
+            }
+            if (file.size > 20 * 1024 * 1024) { // 文件大小校验
+                this.$message({
+                    type: 'warning',
+                    message: '文件大小不能超过5M'
+                })
+                this.fileList = fileList.filter(item => item.uid !== file.uid);
+                return false
+            }
+            return true
+        },
+        handlePicPick (file, fileList) {
+            let validate = this.validatePic(file, fileList);
+            if (!validate) return false;
+            var formFile = new FormData();
+            formFile.append("type", 1);
+            formFile.append("input_name", file.raw);
+            this.uploadRequest(formFile).then(e => {
+                if (e.code == 0) {
+                    this.$message({
+                        type: 'success',
+                        message: '上传成功'
+                    })
+                    let obj = { uid: file.uid, id: e.data.id };
+                    this.fileArray.push(obj);
+                } else {
+                    this.fileList = fileList.filter(item => item.uid !== file.uid);
+                }
+            })
+        },
+        handleExceed() {
+            this.$message({ type: "warning", message: `最多上传 3 个文件` });
+        },
+        handleRemove(file, fileList) {
+            this.fileList = fileList;
+            this.fileArray = this.fileArray.filter(item => item.uid !== file.uid);
+        },
+        // 文件上传
+        uploadRequest(formFile) {
+            let that = this;
+            return new Promise((reslove,reject) => {
+                myHttp2("POST", '/Systemresource/newuploadfile',formFile,function(e) {
+                    if (e.code == 0) {
+                        reslove(e);
+                    } else {
+                        that.$message({
+                            message: `上传失败！`,
+                            type: 'error',
+                            customClass: "myMessageClass"
+                        })
+                        reject(e);
+                    }
+                })
+            })
+        }
+    },
+})
+
+function getList () {
+    http('POST', '/teacherqa/getlist', {
+        "type":vm.nowType,
+        "school_id": school_id,
+        "page": cpage,
+        "size": size
+    }, function(e) {
+        vm.newlist1 = e.data.list;
+        vm.total = e.data.count;
+        vm.allpage = e.data.allpage;
+    });
+}
+getList();
+function changeType (type) {
+    vm.nowType = type;
+    getList();
+}
+http('post','/User/detail',{"id":stu_id}, function (e) {
+    if (e.code === 0) {
+        if (!is_wxempty(e.data.headimg)) {
+            $(".user_head").attr("src", e.data.headimg_name);
+        }
+        // 拼接水印内容
+        var watermark = e.data.realname + ' ' + e.data.studentid
+        // 设置水印内容
+        vm.watermark.text = watermark
+    }
+});
+$('.ask').click(function () {
+    http('POST', '/teacherqa/getseting', { "school_id": school_id }, function(e) {
+        if (e.code === 0) {
+            // 是否登录
+            if (is_wxempty(stu_id)) {
+                $('.bs-example-modal-sm').modal('show')
+                return false
+            }
+            if (!is_wxempty(e.data.question_time)) {
+                let timeArr = e.data.question_time.split(' - ');
+                let ask_start_time = new Date(timeArr[0]).getTime();
+                let ask_end_time = new Date(timeArr[1]).getTime();
+                let nowTime = new Date().getTime();
+                if (nowTime > ask_start_time && nowTime < ask_end_time) {
+                    $('#baomingModel').modal('show');
+                } else {
+                    vm.infoType = 1;
+                    vm.dialogVisible = true;
+                }
+            } else {
+                $('#baomingModel').modal('show');
+            }
+        } else alertify.error(e.msg);
+    });
+})
+$('#baomingSubmit').click(function () {
+    if (is_wxempty(vm.remarks.trim())) {
+        alertify.error("问题不能为空！");
+        return false
+    }
+    if (vm.remarks.trim().length >200) {
+        alertify.error("问题超出最大字数限制！");
+        return false
+    }
+    var phone =$('#phone').val();
+    var fileLists = vm.fileArray.map(item => { return item.id }).join(',');
+    if (is_wxempty(phone)) {
+        alertify.error("手机号不能为空！");
+        return false;
+    }
+    var zhengze = /^[1][0,1,2,3,4,5,6,7,8,9][0-9]{9}$/;
+    if(!zhengze.test(phone)){
+        alertify.error("手机号格式不正确！");
+        return false;
+    }
+    http('post','/teacherqa/add',{"school_id":school_id,"remarks":vm.remarks,phone:phone,picture:fileLists}, parseBao);
+    function parseBao(e){
+        if (e.code == 0) {
+            $('#baomingModel').modal('hide');
+            vm.infoType = 2;
+            vm.dialogVisible = true;
+            // 清空提问内容
+            vm.remarks = vm.$options.data().remarks
+            vm.fileList = vm.$options.data().fileList
+            vm.linkphone = vm.$options.data().linkphone
+            getList();
+        } else {
+            alertify.error(e.msg);
+        }
+    }
+});
+$(document).on("click", ".searchBtn", function() {
+    var title1 = $("#search_keywords").val();
+    keywords = title1;
+    window.location.href = "activitySign.html?active=11&keywords=" + keywords;
+})
+function myHttp2(method, api, data, success, error) {
+    var login_admin_school_id = sessionStorage.getItem("school_id") || '';
+    var login_admin_school_code = sessionStorage.getItem("login_admin_school_code") || '';
+    var login_user_id = sessionStorage.getItem("userid") || 1;
+    var token = sessionStorage.getItem("token") || 1;
+    data = data || {};
+    data.append("login_user_id", login_user_id);
+    data.append("login_admin_school_id", login_admin_school_id);
+    data.append("login_admin_school_code", login_admin_school_code);
+    var base64 = new Base64();
+    $.ajax({
+        headers: {'auth': "Baisc "+base64.encode(apiuser+":"+apipass), 'token': token},
+        url: host + api,
+        type: method,        
+        data: data,
+        dataType: 'json',
+        processData: false,//用于对data参数进行序列化处理 这里必须false
+        contentType: false, //必须
+        success: function (response) {
+            success(response);
+        },
+        error: function (response) {
+            if (error != null) {
+                error(response);
+            }
+        }
+    });
+}
+</script>
+</html>

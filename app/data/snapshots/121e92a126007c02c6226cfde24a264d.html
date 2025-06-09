@@ -1,0 +1,162 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+<title>南开大学文学国家级实验教学示范中心</title>
+<link rel="icon" type="image/gif" href="/virexp/s/icon/16.gif" />   
+<link href="/virexp/s/themes/default/css/login.css" rel="stylesheet" type="text/css"></link>    <script type="text/javascript" src="/virexp/s/jquery/jquery.min.js"></script>
+<script src="/virexp/s/jquery/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="/virexp/s/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/virexp/s/jquery/jquery.easing.min.js"></script>
+<script type="text/javascript" src="/virexp/s/jquery/tabber.js"></script>
+<script type="text/javascript" src="/virexp/s/js/date.js"></script>
+
+<script type="text/javascript" src="/virexp/s/layer/v3.0.3/layer/layer.js"></script>
+<script type="text/javascript" src="/virexp/s/layer/layer_func.js"></script>
+
+<link href="/virexp/s/select2/v4.0.0/css/select2.css" rel="stylesheet" type="text/css"  />
+<script type="text/javascript" src="/virexp/s/select2/v4.0.0/js/select2.full.js"></script>
+<script type="text/javascript" src="/virexp/s/select2/v4.0.0/js/i18n/zh-CN.js"></script>
+
+<script type="text/javascript" src="/virexp/s/select2/select2_func.js"></script>
+<script type="text/javascript" src="/virexp/s/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="/virexp/context_path.js"></script>
+<script type="text/javascript" src="/virexp/i18n.js"></script>
+<script type="text/javascript" src="/virexp/s/js/common.js"></script>
+<script type="text/javascript" src="/virexp/s/js/validation.js"></script>
+<script type="text/javascript" src="/virexp/s/jquery/jquery.pngFix.js"></script>
+
+<script type=text/javascript src="/virexp/s/themes/default/js/pagecommon.js"></script>
+
+<script type=text/javascript src="/virexp/s/js/lavalamp.min.js"></script>
+<script type=text/javascript src="/virexp/s/js/xixi.js"></script>
+<script type="text/javascript">
+</script>
+<script type="text/javascript" src="/virexp/s/js/rsa/base64.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/virexp/s/js/rsa/jsbn.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/virexp/s/js/rsa/prng4.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/virexp/s/js/rsa/rng.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/virexp/s/js/rsa/rsa.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/virexp/s/themes/default/js/placeholderfriend.js"></script>
+<script type="text/javascript">
+    window.onload=function(){
+        $.cookie("currentLi",null);
+        $(document).pngFix();
+        document.loginForm.elements['account'].focus();
+        var oldUserFormOnsubmit = document.loginForm.onsubmit;
+        document.loginForm.onsubmit = function(){
+            var check = oldUserFormOnsubmit();
+            var check2 = true;
+            if(check&&check2){
+                rsa();
+                bupticetCommon.emptyOnUnload();
+                bupticetCommon.disableSubmit();
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    
+    var checkSubmitFlg = false;
+    function validateForm_loginForm() {
+        $('.errorMessage').hide();
+        form = document.getElementById("loginForm");
+        clearErrorMessages(form);
+        clearErrorLabels(form);
+        if(checkSubmitFlg ==true){
+            return false;
+        }
+        checkSubmitFlg = true;
+        var errors = false;
+        if (form.elements['account']) {
+            field = form.elements['account'];
+            var error = "\n\t\t\t\t帐号或邮箱必须填写\n\t\t\t";
+            if (field.value != null && (field.value == "" || field.value.replace(/^\s+|\s+$/g,"").length == 0)) {
+                addError(field, error);
+                errors = true;
+            }
+        }
+        if (form.elements['password']) {
+            field = form.elements['password'];
+            var error = "\n\t\t\t\t密码必须填写\n\t\t\t";
+            if (field.value != null && (field.value == "" || field.value.replace(/^\s+|\s+$/g,"").length == 0)) {
+                addError(field, error);
+                errors = true;
+            }
+        }
+        if(errors == true){
+            checkSubmitFlg = false;
+        }
+        return !errors;
+    }
+
+    function rsa(){
+        var rsaKey = new RSAKey();
+        rsaKey.setPublic(b64tohex("AKsMqXzbEJpxrDRsUgVPkNWz5Q0XsMpUOpP6/9JGW+BIwNLcVe7aFkToNLHc32w4OyRWEt8mrrAUK6PYOElkCEtNfPbUIeTOT8gNJAi4SSPCHBR/eQusi5yk3zMx4p390zc3xSDIeNsjmMRP1tKqsVGLeAHqrGt/6aUR8U+q6cSL"), b64tohex("AQAB"));
+        var enPassword = hex2b64(rsaKey.encrypt($("#loginForm_password").val()));
+        $("#loginForm_password").val(enPassword);
+    }
+
+    function change(){
+        checkImg("/virexp/getPIC?"+Math.random(),"#checkImg")
+    }
+    function change1(){
+        checkImg("/virexp/getPIC?"+Math.random(),"#checkImg1")
+    }
+
+    function checkImg(url,id){
+        $.ajax({
+            type:"get",
+            url:url,
+            success:function(data) {
+                $(id).attr('src','data:image/png;base64,'+(data.imgBase64))
+            }
+        })
+    }
+    change()
+
+</script>
+</head>
+<body >
+ <div class="head">
+     </div>
+<div class="login">
+        <div class="headlogo"></div>
+		
+<form
+ id="loginForm" name="loginForm" onsubmit="return validateForm_loginForm();" action="/virexp/login" method="post"><input type="hidden" name="submitTimes" value="-1" id="loginForm_submitTimes"/><input type="hidden" name="next" value="http://wxylab.nankai.edu.cn/virexp/lab/!labsForStudent" id="loginForm_next"/><input type="hidden" name="nextLoginUrl" value="" id="loginForm_nextLoginUrl"/><input type="hidden" name="replaceLogin" value="" id="loginForm_replaceLogin"/><input type="hidden" name="struts.token.name" value="token" />
+<input type="hidden" name="token" value="9S0VOVB38Q0EFC8CLUEUNK2KQYJMSNRX" />            <div class="dl">
+                <div class="inputCon"><span>账&nbsp;号：</span><input type="text" name="account" size="29" maxlength="20" value="" id="loginForm_account"/>
+
+
+
+</div>
+                <div class="inputCon"><span>密&nbsp;码：</span><input type="password" name="password" size="29" id="loginForm_password"/>
+
+
+
+</div>
+                <div class="inputCon" style="display: flex;align-items: center">
+                    <span style="margin-top: 0">验证码：</span>
+                    <input type="text" id="checkcode" name="checkcode" class="text captcha" maxlength="4" autocomplete="off">
+
+                    <img id="checkImg" width="90" height="30" class="captchaImage" src="" onclick="change()" title="点击更换验证码">
+                </div>
+                <div class="btn">
+                    <button class="zc" type="submit" value="" style="cursor:pointer;"  id="register" onclick="javascript:location.href='/virexp/hysy'"/>专家入口</button>   
+                    <button class="btn-1" type="submit" value="" style="cursor:pointer;" />登录</button>
+                </div>
+                <span></span>
+            </div>
+<input type="hidden" name="type" value="" id="typeId"/></form>
+
+
+
+        <div id="zjx">
+            <div id="dizi">版权所有：南开大学文学国家级实验教学示范中心</div>
+            <div id="dizi2">Copyright © 2007-2016 NKU-Rainier All Rights Reserved.</div>
+        </div>
+</div>
+</body>
+</html>

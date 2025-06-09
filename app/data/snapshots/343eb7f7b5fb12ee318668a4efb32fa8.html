@@ -1,0 +1,242 @@
+
+
+
+
+
+  
+
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Content-Security-Policy" content="object-src 'self'">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="/nk_portal/favicon.ico" type="image/x-icon" />
+ <!-- about_hall -->
+<script type="text/javascript" src="/nk_portal/resources/js/jquery.min.js?version="></script>
+ 
+<script type="text/javascript" src="/nk_portal/resources/nku/js/tab.js?version="></script>
+<link href="/nk_portal/resources/nku/css/door.css?version=" rel="stylesheet" type="text/css">
+ <!-- guide -->
+
+
+
+<link href="/nk_portal/resources/nku/Font-Awesome-3.2.1/css/font-awesome.min.css?version=" rel="stylesheet" type="text/css">
+ <!-- index -->
+
+ <!-- service -->
+
+<script type="text/javascript" src="/nk_portal/resources/nku/js/jquery.featureList-1.0.0.js?version="></script>
+<script type="text/javascript" src="/nk_portal/resources/pagination/jquery.pagination.js?version="></script>
+<link href="/nk_portal/resources/pagination/pagination.css?version=" rel="stylesheet" type="text/css" />
+
+
+
+<title>在线南开网上办事大厅</title>
+<script type="text/javascript"> 
+	function setTab(name,m,n){ 
+		for( var i = 1;i <= n;i++){ 
+			
+			var menu = document.getElementById(name+i);
+			
+			var showDiv = document.getElementById("cont_"+name+"_"+i); 
+			menu.className = i==m ?"on":""; 
+			showDiv.style.display = i==m?"block":"none"; 
+		} 
+	} 
+	function jump_open(str){
+		window.open(str); 
+	}
+</script>
+<script type="text/javascript">
+function getGuideUrl(){
+	$.ajax({
+		type:"post",
+		url:"/nk_portal/getUrl",
+		async: false,
+		success:function (data) {
+			$("#guide_url").attr("href",data.nextToken);
+		}
+	});
+}
+
+$(function(){
+	/*var manage_url = "";
+	$("#manage_urlg").attr("href",manage_url);*/
+});
+
+</script>
+</head>
+<body>
+	  <div id="wrap">
+    	
+
+
+
+
+  
+
+
+
+<script type="text/javascript" src="/nk_portal/resources/nku/js/jquery.featureList-1.0.0.js?version="></script>
+
+<script type="text/javascript" src="/nk_portal/resources/nku/js/jquery.placeholder.js?version="></script>
+  <script>  
+     $(function(){  
+        /*  $('input[placeholder]').placeholder();   */
+    	 $("#keyword").placeholder();
+        
+        
+     });  
+</script>  
+ 
+
+<link href="/nk_portal/resources/nku/css/door.css?version=" rel="stylesheet" type="text/css">
+<link href="/nk_portal/resources/nku/css/news.css?version=" rel="stylesheet" type="text/css">
+
+<!--header-->
+		<div style="width:100%; background:#fff;">
+    	<div id="header">
+        	<a href="http://online.nankai.edu.cn/" target="_target">
+       			<img src="/nk_portal/resources/nku/images/logo.jpg" alt="" class="logo">
+            	<h1 class="header_title">在线南开网上办事大厅</h1>
+            </a>
+            <form action="service" class="search">
+            	<input type="text" name="keyword" id="keyword" value="" placeholder="请输入您想找的服务" class="text" >
+            	<input type="submit" class="btn" value="      ">
+            </form>
+            <p class="user"><a href="http://online.nankai.edu.cn/taskcenter/" target="_blank">用户登录</a></p>
+            <p class="school"><a href="http://www.nankai.edu.cn/" target="_blank">学校主页</a></p>
+        </div>
+        </div>
+        <!--//header-->
+
+      
+        <div id="service_content1">
+        <div class="item_menu">
+        		<div style="width:1180px; margin:0 auto;">
+            	<ul style="width:60%; float:left;">
+                	<li ><a href="/nk_portal/index">首页</a></li>
+                    <li class="click"><a href="/nk_portal/service?object=0&type=0&organize=0&keyword=">服务中心</a></li>
+                    <li><a href="http://online.nankai.edu.cn/taskcenter/" target="_blank">个人中心</a></li>                 
+                </ul>
+                <ul style=" font-size: 12px;/*position: relative;right: 0;*/float: right; text-align:right;/*position: absolute;right: 0;*/width: 230px;">
+                	
+                	<li><a href="/nk_portal/about_hall">关于大厅</a></li>
+                   <!--  <li><a href="http://online.nankai.edu.cn/file/853070bb-8a92-4b2f-8333-17f49148314c" target="_blank">新手指南</a></li> -->
+                </ul>
+                </div>
+            </div>
+            <div class="guide_title">
+            	<div class="guide_title_center">
+            		<p></p>
+            		
+                    
+                </div>
+            </div>
+          
+            <table class="guide_table" cellpadding="0" cellspacing="0" border="1">
+            	<tr>
+                	<td width="12%" class="td_bg">事项名称</td>
+                    <td width="38%"></td>
+                    <td width="12%" class="td_bg">事项编号</td>
+                    <td width="38%"></td>
+                </tr>
+                <tr>
+                	<td width="12%" class="td_bg">服务类别</td>
+                    <td width="38%"></td>
+                    <td width="12%" class="td_bg">事项类型</td>
+                    <td width="38%"></td>
+                </tr>
+                <tr>
+                	<td width="12%" class="td_bg">主办部门</td>
+                    <td width="38%"></td>
+                    <td width="12%" class="td_bg">协办部门</td>
+                    <td width="38%"></td>
+                </tr>
+                <tr>
+                	<td width="12%" class="td_bg">服务对象</td>
+                    <td width="38%"></td>
+                    <td width="12%" class="td_bg">办理时限</td>
+                    <td width="38%"></td>
+                </tr>
+                <tr>
+                	<td width="12%" class="td_bg">办理方式</td>
+                    <td width="38%"></td>
+                    <td width="12%" class="td_bg">收费标准</td>
+                    <td width="38%"></td>
+                </tr>
+                <tr>
+                	<td width="12%" class="td_bg">办理条件</td>
+                    <td width="38%" colspan="3"></td>
+                    
+                </tr>
+                <tr>
+                	<td width="12%" class="td_bg">服务简介</td>
+                    <td width="38%" colspan="3"></td>
+                </tr>
+                <tr>
+                	<td width="12%" class="td_bg">注意事项</td>
+                    <td width="38%" colspan="3"></td>
+                </tr>
+            </table>
+            <div class="guide_menu">
+                <div class="tab">
+                    <ul>
+                        <li id="one1" class="on" onclick='setTab("one",1,4)'>
+                        	<i class="icon-sitemap icon-large"> </i>办事流程
+                        </li>
+                        <li id="one2" onclick='setTab("one",2,4)'>
+                        	<i class=" icon-folder-open-alt icon-large"> </i>所需材料 
+                        </li>
+                        <li id="one3" onclick='setTab("one",3,4)'>
+                        	<i class=" icon-file-alt icon-large"> </i>文件规定
+                        </li>
+                        <li id="one4" onclick='setTab("one",4,4)'>
+                        	<i class=" icon-link icon-large"> </i>关联事项 
+                        </li>
+                 	</ul>
+               	 </div>
+               	 
+                <div class="tabList"> 
+					<div id="cont_one_1" class="one block">
+                    	 <ul class="flow">
+                          <!-- <textarea name="matter_flow" id="matter_flow" data-toggle="kindeditor" style="width:1000px;height:200px;"  data-items="fontname, fontsize, |, forecolor, hilitecolor, bold, italic, underline, removeformat, |, justifyleft, justifycenter, justifyright, insertorderedlist, insertunorderedlist, |, emoticons, image, link,insertfile"></textarea> --> <li></li>
+                        </ul> 
+                       
+                    </div> 
+                    <div id="cont_one_2" class="one">
+                   		
+                    </div>
+                    <div id="cont_one_3" class="one">
+                   		
+                    </div>
+                    <div id="cont_one_4" class="one">
+                   		
+                    </div>
+				</div>
+        	</div>
+     </div>   	
+     <div>   
+       
+ <!--footer-->
+        <div id="footer">
+        	<div class="footer_center">            	
+                <p>
+                	Copyright ©  2017-2018南开大学 <br />
+                    地址：天津市卫津路94号&nbsp;&nbsp;&nbsp;&nbsp;
+                    [300071]&nbsp;&nbsp;&nbsp;&nbsp;
+                    津教备0061号&nbsp;&nbsp;&nbsp;&nbsp;
+                    津ICP备12003308号-1<br />
+                    推荐使用IE8及以上、火狐、谷歌等主流浏览器
+                </p>
+            </div>
+        </div>
+        <!--//footer-->
+     </div>
+     </div>
+</body>
+</html>
+            

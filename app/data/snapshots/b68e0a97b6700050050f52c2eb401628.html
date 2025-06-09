@@ -1,0 +1,600 @@
+
+<!DOCTYPE HTML>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>南开大学招投标管理办公室-首页</title>
+<meta http-equiv="keywords" content=" "/>
+<meta http-equiv="description" content=" "/>
+<head>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link href="/r/cms/www/default/img/logo-h.ico" rel="shortcut icon" />
+<link rel="stylesheet" type="text/css" href="/r/cms/www/default/css/global.css?v=20250411">
+        
+<script type="text/javascript" src="/r/cms/www/default/js/jQuery.1.9.1.js?v=20250411"></script>
+        
+<script type="text/javascript" src="/r/cms/www/default/js/jquery.SuperSlide.js?v=20250411"></script>
+        
+<script type="text/javascript" src="/r/cms/www/default/js/index-style.js?v=20250411"></script>
+        
+<script type="text/javascript" src="/r/cms/www/default/js/front.js?v=20250411"></script>
+        
+    <script type="text/javascript">
+        $(function() {
+            Cms.siteFlow("");
+            iniNotice();
+            //$("#xmlb").val("0");
+            clCxlx("cgfs","全部");
+        });
+        function iniNotice(){     
+            $("dd[rdate]").each(function(){
+                var ggdate= $(this).attr("rdate");
+                var cid = $(this).attr("cid");
+                if(cid!='4' && cid!='8' && cid!='3'){
+                    return;
+                }
+                if(ggdate.length<10){
+                ggdate = "20"+ggdate;
+                }
+
+                var arrayDate = ggdate.split("-");
+                var ggDate =new Date(arrayDate[0],arrayDate[1]-1,arrayDate[2]);
+                var today= new Date();
+                var num = (today.getTime()-ggDate.getTime())/86400000;
+                if(num<=7){
+                    $(this).append("<img src='/r/cms/www/default/img/new.gif'>");
+                }
+            });  
+        }
+        function clCxlx(cxlx,lx) {
+			$("a[dm='"+cxlx+"']").removeClass("seled");
+			$("a[dm='"+cxlx+"'][dt='"+lx+"']").addClass("seled");
+            $("#"+cxlx).val(lx);
+
+            if("全部"==lx){
+                $("#"+cxlx).val("");
+            }
+            loadGg();
+		}
+        function loadGg(){
+            $.ajax({
+                cache : true,
+                type : "post",
+                url : "/cgqt/357/icGg.chtml",
+                data : $("#dataForm1").serialize(),
+                async : true,
+                timeout:5000,
+                dataType: "html",
+                error: function(request) {
+                    alert("网络异常");
+                },
+                success : function(data) {
+                    $("#datab").html(data);
+                } 
+            });
+        }
+    </script>
+</head>
+<body id="datac" class="white">
+
+<script type="text/javascript">
+    $(document).ready(function(){
+                     $("dd#161").addClass("on");
+            $("dd#357").addClass("on");
+    });
+</script>
+<div class="header">
+    <div class="wrap">
+		<div class="logo"></div>
+    </div>
+</div>
+<div class="nav">
+    <div class="wrap">
+        <ul id="nav" class="nav clearfix">
+			<li class="nLi on" id="0">
+				<h3>
+					<a href="/index.chtml">首页</a>
+				</h3>
+			</li>
+			<li class="nLi" id="169">
+				<h3>
+						<a href="/kszz/index.chtml">部门概况</a>
+				</h3>
+				<ul class="sub">
+						<li><a href="/bmjj/index.chtml">部门简介</a></li>
+						<li><a href="/kszz/index.chtml">科室职责</a></li>
+				</ul>
+			</li>
+			<li class="nLi" id="336">
+				<h3>
+						<a href="/ggtz/index.chtml">工作动态</a>
+				</h3>
+				<ul class="sub">
+				</ul>
+			</li>
+            <li class="nLi" id="161">
+				<h3>
+						<a href="/cghw/index.chtml">采购公告</a>
+				</h3>
+				<ul class="sub">
+						<li><a href="/cghw/index.chtml">货物类</a></li>
+						<li><a href="/cggc/index.chtml">工程类</a></li>
+						<li><a href="/cgfw/index.chtml">服务类</a></li>
+						<li><a href="/cgqt/index.chtml">其他类</a></li>
+				</ul>
+			</li>
+			<li class="nLi" id="341">
+				<h3>
+						<a href="/jghw/index.chtml">结果公告</a>
+				</h3>
+				<ul class="sub">
+						<li><a href="/jghw/index.chtml">货物类</a></li>
+						<li><a href="/jggc/index.chtml">工程类</a></li>
+						<li><a href="/jgfw/index.chtml">服务类</a></li>
+						<li><a href="/jgqt/index.chtml">其他类</a></li>
+				</ul>
+			</li>
+            <li class="nLi" id="13">
+				<h3>
+						<a href="/guojflfg/index.chtml">法规制度</a>
+				</h3>
+				<ul class="sub">
+						<li><a href="/guojflfg/index.chtml">国家</a></li>
+						<li><a href="/difzcfg/index.chtml">本市</a></li>
+						<li><a href="/xuexgzzd/index.chtml">学校</a></li>
+				</ul>
+			</li>
+            <li class="nLi" id="348">
+				<h3>
+						<a href="/bszn/index.chtml">办事指南</a>
+				</h3>
+				<ul class="sub">
+				</ul>
+			</li>
+            <li class="nLi" id="24">
+				<h3>
+						<a href="/dtype/index.chtml">常用下载</a>
+				</h3>
+				<ul class="sub">
+				</ul>
+			</li>
+            <li class="nLi" id="200">
+				<h3>
+						<a href="/aboutus.chtml">联系我们</a>
+				</h3>
+				<ul class="sub">
+				</ul>
+			</li>
+            <li>
+                <div class="tp">
+                    <div class="isearch"><form class="search" action="/cms/search/search.htm" target="_blank" id="searchForm" method="post">
+    <div class="input">
+        <input name="q" value="请输入关键词" type="text" onfocus="if(this.value=='请输入关键词')this.value=''" maxlength="50" autocomplete="off" />
+    </div>
+    <div class="submit">
+        <input type="submit" value="  " />
+    </div>
+</form>
+</div>
+                </div>
+            </li>
+		</ul>
+    </div>
+</div>
+<script id="jsID" type="text/javascript">
+	jQuery("#nav").slide({ 
+		type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
+		titCell:".nLi", //鼠标触发对象
+		targetCell:".sub", //titCell里面包含的要显示/消失的对象
+		effect:"slideDown", //targetCell下拉效果
+		delayTime:300 , //效果时间
+		triggerTime:0, //鼠标延迟触发时间（默认150）
+		returnDefault:false //鼠标移走后返回默认状态，例如默认频道是“预告片”，鼠标移走后会返回“预告片”（默认false）
+	});
+</script>
+<form id="dataForm1" name="dataForm1" method="post" target="_self">
+    <input type="hidden" id="xmlb" name="xmlb" value="" />
+    <input type="hidden" id="cgfs" name="cgfs" value="" />
+    <div class="wrap">
+        <div class="lleft white" style="min-height: 926px;">
+            <dl>
+                
+                    <dt>采购公告</dt>
+                    
+                        
+                            
+                                <dd>
+                            
+                            <a href="/cghw/index.chtml">货物类</a>
+                            </dd>
+                            
+                                
+                                    
+                                
+                            
+                        
+                            
+                                <dd>
+                            
+                            <a href="/cggc/index.chtml">工程类</a>
+                            </dd>
+                            
+                                
+                                    
+                                
+                            
+                        
+                            
+                                <dd>
+                            
+                            <a href="/cgfw/index.chtml">服务类</a>
+                            </dd>
+                            
+                                
+                                    
+                                
+                            
+                        
+                            
+                                <dd class="on">
+                            
+                            <a href="/cgqt/index.chtml">其他类</a>
+                            </dd>
+                            
+                                
+                                    
+                                
+                            
+                        
+                    
+                
+            </dl>
+        </div>
+        <div class="lright" style="min-height: 926px;">
+            <dl class="llist">
+                <dt><div>采购公告</div></dt>
+
+
+                <div class="row">
+                    <div class="form-element-group">
+                        <label class="form-element-label control-label" title="采购方式">采购方式</label>
+                        <div class="form-element">
+                            
+                                <ul class="se_list clearfix">
+                                    <li>
+                                        <a class="seled" title="全部" href="javascript:void(0);" dm="cgfs" dt="全部" onclick="clCxlx('cgfs','全部');">全部</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a class="" title="公开招租" href="javascript:void(0);" dm="cgfs" dt="公开招租" onclick="clCxlx('cgfs','公开招租');">公开招租</a>
+                                    </li>
+                                
+                                    <li>
+                                        <a class="" title="公开遴选" href="javascript:void(0);" dm="cgfs" dt="公开遴选" onclick="clCxlx('cgfs','公开遴选');">公开遴选</a>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="form-element-group ">
+                        <label class="form-element-label control-label" title="采购类型">采购类型</label>
+                        <div class="form-element">
+                            <ul class="se_list clearfix">
+                                <li>
+                                    <a class="seled" title="全部" href="javascript:void(0);" dm="xmlb" dt="0" onclick="clCxlx('xmlb','0');">全部</a>
+                                </li>
+                                
+                                    <li>
+                                        <a class="" title="工程" href="javascript:void(0);" dm="xmlb" dt="1" onclick="clCxlx('xmlb','1');">工程</a>
+                                    </li>
+                                
+                                    <li>
+                                        <a class="" title="货物" href="javascript:void(0);" dm="xmlb" dt="2" onclick="clCxlx('xmlb','2');">货物</a>
+                                    </li>
+                                
+                                    <li>
+                                        <a class="" title="服务" href="javascript:void(0);" dm="xmlb" dt="3" onclick="clCxlx('xmlb','3');">服务</a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="row">
+                    <div class="form-element-group ">
+                        <label class="form-element-label control-label" title="查询搜索">查询搜索</label>
+                        <div class="form-element">
+                            <ul class="se_list clearfix">
+                                <input type="text" name="cxnr" id="cxnr" class="form-control"  style="height: 28px;line-height: 28px;"/>
+                                <input type="button" id="btSearch" name="btSearch" class="btn btn-search" onclick="loadGg()" value="查询">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="datab">
+                    
+        <dd cid="161" rdate="2025-04-25">
+            <span class="date">
+                2025-04-25
+            </span>
+            <a title="南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）遴选公告" href="/cgqt/3090.chtml" target="_blank">
+南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）遴选公告            </a>
+        </dd>
+        <dd cid="161" rdate="2025-02-25">
+            <span class="date">
+                2025-02-25
+            </span>
+            <a title="南开大学采购招标代理机构遴选（补选）项目（NK2025F002L）遴选公告" href="/cgqt/2984.chtml" target="_blank">
+南开大学采购招标代理机构遴选（补选）项目（NK2025F002L）遴选公告            </a>
+        </dd>
+        <dd cid="161" rdate="2025-02-08">
+            <span class="date">
+                2025-02-08
+            </span>
+            <a title="南开大学采购招标代理机构遴选项目（NK2025F001L）遴选公告" href="/cgqt/2974.chtml" target="_blank">
+南开大学采购招标代理机构遴选项目（NK2025F001L）遴选公告            </a>
+        </dd>
+        <dd cid="161" rdate="2025-01-09">
+            <span class="date">
+                2025-01-09
+            </span>
+            <a title="南开大学八里台校区2025电动自行车充电柜项目（NK2025Z002）招租公告" href="/cgqt/2950.chtml" target="_blank">
+南开大学八里台校区2025电动自行车充电柜项目（NK2025Z002）招租公告            </a>
+        </dd>
+        <dd cid="161" rdate="2025-01-06">
+            <span class="date">
+                2025-01-06
+            </span>
+            <a title="南开大学国有资产管理办公室2025年公开招租项目（紫金山路校区）（NK2025Z001）招租公告" href="/cgqt/2942.chtml" target="_blank">
+南开大学国有资产管理办公室2025年公开招租项目（紫金山路校区）（NK2025Z001）招租公告            </a>
+        </dd>
+        <dd cid="161" rdate="2024-12-28">
+            <span class="date">
+                2024-12-28
+            </span>
+            <a title="南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）遴选公告" href="/cgqt/2932.chtml" target="_blank">
+南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）遴选公告            </a>
+        </dd>
+        <dd cid="161" rdate="2024-12-18">
+            <span class="date">
+                2024-12-18
+            </span>
+            <a title="南开大学八里台校区2024年生活服务配套项目（北村四期）（NK2024Z015）招租公告" href="/cgqt/2890.chtml" target="_blank">
+南开大学八里台校区2024年生活服务配套项目（北村四期）（NK2024Z015）招租公告            </a>
+        </dd>
+        <dd cid="161" rdate="2024-12-09">
+            <span class="date">
+                2024-12-09
+            </span>
+            <a title="南开大学财务处差旅服务平台差旅服务商遴选项目（NK2024F002L）遴选公告" href="/cgqt/2854.chtml" target="_blank">
+南开大学财务处差旅服务平台差旅服务商遴选项目（NK2024F002L）遴选公告            </a>
+        </dd>
+        <dd cid="161" rdate="2024-12-03">
+            <span class="date">
+                2024-12-03
+            </span>
+            <a title="南开大学八里台校区2024年生活服务配套项目（北村二期）（NK2024Z010）公开招租公告" href="/cgqt/2816.chtml" target="_blank">
+南开大学八里台校区2024年生活服务配套项目（北村二期）（NK2024Z010）公开招租公告            </a>
+        </dd>
+        <dd cid="161" rdate="2024-12-03">
+            <span class="date">
+                2024-12-03
+            </span>
+            <a title="南开大学2024年校园智能外卖柜服务项目（NK2024Z014）公开招租公告" href="/cgqt/2815.chtml" target="_blank">
+南开大学2024年校园智能外卖柜服务项目（NK2024Z014）公开招租公告            </a>
+        </dd>
+        <dd cid="161" rdate="2024-12-03">
+            <span class="date">
+                2024-12-03
+            </span>
+            <a title="南开大学津南校区2024年生活服务配套项目（一期）（NK2024Z008）招租公告" href="/cgqt/2812.chtml" target="_blank">
+南开大学津南校区2024年生活服务配套项目（一期）（NK2024Z008）招租公告            </a>
+        </dd>
+        <dd cid="161" rdate="2024-12-03">
+            <span class="date">
+                2024-12-03
+            </span>
+            <a title="南开大学八里台校区2024年生活服务配套项目（银行）（NK2024Z006）公开招租公告" href="/cgqt/2811.chtml" target="_blank">
+南开大学八里台校区2024年生活服务配套项目（银行）（NK2024Z006）公开招租公告            </a>
+        </dd>
+        <dd cid="161" rdate="2024-12-03">
+            <span class="date">
+                2024-12-03
+            </span>
+            <a title="南开大学八里台校区2024年生活服务配套项目（西南村一期）（NK2024Z012）公开招租公告" href="/cgqt/2810.chtml" target="_blank">
+南开大学八里台校区2024年生活服务配套项目（西南村一期）（NK2024Z012）公开招租公告            </a>
+        </dd>
+        <dd cid="161" rdate="2024-12-02">
+            <span class="date">
+                2024-12-02
+            </span>
+            <a title="南开大学津南校区2024年生活服务配套项目（超市）（NK2024Z007）招租公告" href="/cgqt/2806.chtml" target="_blank">
+南开大学津南校区2024年生活服务配套项目（超市）（NK2024Z007）招租公告            </a>
+        </dd>
+        <dd cid="161" rdate="2024-12-02">
+            <span class="date">
+                2024-12-02
+            </span>
+            <a title="南开大学八里台校区2024年生活服务配套项目（西南村二期）(NK2024Z013)招租公告" href="/cgqt/2805.chtml" target="_blank">
+南开大学八里台校区2024年生活服务配套项目（西南村二期）(NK2024Z013)招租公告            </a>
+        </dd>
+    <div class="lpage">
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#a"+parseInt('1')).removeAttr('onclick')
+        $("#a"+parseInt('1')).addClass("active");
+    });
+    function refreshPage(splitflag) {
+        submitSplitPage("goto",splitflag);
+    }
+    function onKeyDownGOTO() {
+        if (window.event.keyCode == 13) {
+            submitSplitPage("goto");
+            return false;
+        }
+    }
+    //根据点击的按钮进行页面跳转
+    function submitSplitPage(topage,splitflag) {
+        _generateMs();
+        splitflag = splitflag||1;
+        var bdform = $("#goto").parents("form:first");
+        if(topage=='goto'){
+            if($("#curPage").val()==''){
+                $("#curPage").val($("#hcurPage").val());
+            }
+        } else {
+             $("#curPage").val(topage);
+        }
+        if(splitflag!=1){
+            $("#curPage").val(1);
+        }
+        bdform.attr("action","/cgqt/index.chtml");
+        var cpage = $("#curPage").val();
+        if(isNaN(cpage)){
+            return false;
+        }
+        $("#splitFlag").val(splitflag);
+            if ((parseInt(cpage) > parseInt('2') || parseInt(cpage) < 0)) {
+                $("#curPage").val("1");
+            }
+            var _ajax = $.ajax;
+            if(typeof $.zcxAjax == "function") {
+                _ajax = $.zcxAjax;
+            }
+            _ajax({
+                 cache : true,
+                 type : "post",
+                 url : "/cgqt/357/icGg.chtml",
+                 data : bdform.serialize(),
+                 async : true,
+                 timeout:50000,
+                 dataType: "html",
+                 error: function(request) {
+                     alert("网络异常");
+                 },
+                 success : function(data) {
+                     $("#datab").html(data);
+                 } 
+             });
+    }
+    
+    function submitSplitStaticPage() {
+        var cpage = $("#curPage").val();
+        if(isNaN(cpage)){
+            return false;
+        }
+        if ((parseInt(cpage) > parseInt('2') || parseInt(cpage) < 0)) {
+            $("#curPage").val("1");
+        }
+        cpage = $("#curPage").val();
+        location.href="index_"+cpage+".html";
+    }
+    function _guid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0,
+                v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+    function _generateMs(){
+        var ms = parseInt(Math.floor(Date.now() / 1000)).toString(36);
+        $("#ms").val(ms);
+        var ms1 = _guid();
+        ms1 = ms1.replace(new RegExp("-", "gm"),"");
+        $("#ms1").val(ms1);
+        var ms2 = _crossJoin(ms, ms1);
+        $("#ms2").val(ms2);
+    }
+    function _crossJoin(str1, str2) {
+        var len1 = str1.length;
+        var len2 = str2.length;
+        var maxLength = Math.max(len1, len2);
+        var result = '';
+        for (var i = 0; i < maxLength; i++) {
+            if (i < len1) {
+                result += str1.charAt(i);
+            }
+            if (i < len2) {
+                result += str2.charAt(i);
+            }
+        }
+        return result;
+    }
+
+</script>
+<input type="hidden" id="rowTotal" value="28" />
+<input type="hidden" id="hcurPage" name="hcurPage" value="1" />
+<input type="hidden" id="_queryspt" name="_queryspt" value="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" />
+<input type="hidden" id="_paramspt" name="_paramspt" value="SQXESFX2clsO5RswRbUhaF2JdVX0FuCIvn62sPC9UJ2lfXoAhTKdkh4U3Cgf0EFDN6XXJjUy7gnaOLd0H01iv4ph/2Z2U54UVOOUTFMwO2LehFTh4pMSIiyqjT03aqfF/390RQShDXSCpUGSn3l4ehODJ4wiLFSxHZujqCHFOWkH6UGdfFlkG5X4ayehxQx06PP1tYwHV+qcFXb1k6Cu3F+k49HjtYFCnnL0ATvEDUBfKGosJzHnfaqyoJt9YoHz9s6/zTh4xXC/8TLpD+SROWEZOQtuKTHAx7kURz11XsI=" />
+<input type="hidden" id="_orderspt" name="_orderspt" value="" />
+<input type="hidden" id="splitFlag" name="splitFlag" value="-1" />
+<input type="hidden" id="ms" name="ms" />
+<input type="hidden" id="ms1" name="ms1" />
+<input type="hidden" id="ms2" name="ms2" />
+<table class="table table-page ">
+    <tr class="noborder cpage">
+        <td>
+            &nbsp;
+        </td>
+        <td colspan="-1" class="tright">
+            共28条,此页1-15条   共2页，此页 1/2
+            <input id="firstpage" title="首页" class="btn btn-page btn-first-disabled" />
+
+            <input id="perpage" title="上一页" class="btn btn-page btn-pre-disabled" />
+
+            <input id="nextpage" title="下一页" onclick="submitSplitPage('2')" class="btn btn-page btn-next" />
+           
+
+            <input id="lastpage" title="末页" onclick="submitSplitPage('2')" class="btn btn-page btn-last" />
+           
+           
+            转到
+            <input type="text" id="curPage" name="curPage" class="form-control curPage" style="width: 25pt" value="1" onkeydown="return onKeyDownGOTO()" /> 
+            页 
+            <input id="goto" splitflag="1" onClick="submitSplitPage('goto')" class="btn btn-page btn-goto" />
+            &nbsp;&nbsp;
+        </td>
+    </tr>
+</table>
+    </div>
+
+                </div>
+                
+            </dl>
+        </div>
+    </div>
+</form>
+ <!--footer开始-->
+<div class="footer" style="width:100%;">
+	<div class="wrap" >
+		<div class="code">
+			
+		</div>
+		<div class="copyright">
+			<div>
+				<span>版权所有：南开大学招投标管理办公室 </span>
+				<span>地址：天津市南开区卫津路94号</span>
+				<span>邮编：300071</span>
+			</div>
+			<div>
+				<span>津教备0061号&nbsp;&nbsp;</span>
+				<span><a href="https://beian.miit.gov.cn/" target="_blank">津ICP备12003308号-1</a>&nbsp;&nbsp;</span>
+				<span><a class="gawb" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12010402000967">津公网安备12010402000967号</a></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>用户登录</title>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
+  <link type="text/css" rel="stylesheet" href="icheck/square/green.css">
+  <link href="css/login-style.css" rel='stylesheet' type='text/css' />
+  <link type="text/css" rel="stylesheet" href="icheck/square/green.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <script type="text/javascript" src="js/lib/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/easyservice-util/EasyServiceClientFullZ.js"></script>
+  <script type="text/javascript" src="js/um.js"></script>
+  <script type="text/javascript" src="js/plugin/Validform_v5.3.2_min.js"></script>
+  <script type="text/javascript" src="js/plugin/winfloat.js"></script>
+  <script type="text/javascript" src="icheck/icheck.min.js"></script>
+  <script type="text/javascript" src="js/lib/template.min.js"></script>
+  <script type="text/javascript" src="js/util.js?v=20250226"></script>
+  <script type="text/javascript" src="js/jsencrypt.min.js"></script>
+  <script type="text/javascript" src="icheck/icheck.min.js"></script>
+  <script type="text/javascript" src="/easyservice/com.cnebula.common.security.auth.ILoginService?json"></script>
+  <script type="text/javascript" src="/easyservice/com.cnebula.scas.captcha.ISCASCaptchaService?json"></script>
+  <script type="text/javascript" src="/easyservice/com.cnebula.scas.master.data.UserService?json"></script>
+  <script type="text/javascript" src="/easyservice/com.cnebula.scas.master.data.SystemConfigService?json"></script>
+  <style>
+  .CasAuth:hover{
+	background:#0A4974;
+	color:#fff;
+}
+ .CasAuth{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 	text-align: center;
+ 	margin-top:10px;
+ 	width: 320px;
+	height:46px;
+	background: #72BFF3;
+	font-family: 'å¾®è½¯é›…é»‘', 'Hiragino Sans GB', 'Microsoft YaHei', 'Open Sans', sans-serif, 'é»‘ä½“';
+	color: #FFFFFF;
+	letter-spacing:20px;
+	font-size: 20px;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	font-weight:500;
+	transition: 0.5s;
+	-webkit-appearance:none;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-o-transition: 0.5s;
+	-ms-transition: 0.5s;
+ }
+  </style>
+  <script type="application/x-javascript">
+    addEventListener("load", function() {
+      setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+      window.scrollTo(0, 1);
+    }
+
+  </script>
+  <script type="text/javascript">
+    scas_um.checkUserLogin();
+
+    function getUrlSearch() {
+      var pairObjs = {};
+      if (window.location.search.length > 0) {
+        var pairs = window.location.search.substring(1).split("&"),
+          pair, i;
+        for (i in pairs) {
+          if (pairs[i] === "") continue;
+          pair = pairs[i].split("=");
+          pairObjs[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+        }
+      }
+      return pairObjs;
+    }
+
+    $(function() {
+      var loginService = EasyServiceClient.getRemoteProxy("/easyservice/com.cnebula.common.security.auth.ILoginService"),
+      	userService = EasyServiceClient.getRemoteProxy("/easyservice/com.cnebula.scas.master.data.UserService"),
+      	systemConfigService = EasyServiceClient.getRemoteProxy("/easyservice/com.cnebula.scas.master.data.SystemConfigService"),
+        captchService = EasyServiceClient.getRemoteProxy("/easyservice/com.cnebula.scas.captcha.ISCASCaptchaService");
+      
+      var publicKeyStr = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg0h/jqz1R+UaeaqZ/LyTRbmi0oRUpHKE5iNxcDYRWEjax7etI5QFms8eoT8GMxQYV7B/eVEvrAejgXxFgp5fl763LTvrYqDi9viCeYUGT9QdMz0B8QWHvzPH2gz92H4GD54E+ukfvFK+Pr4diPmb1shCd45D2ndIgwEAJQRgtu6p+aTkdi1r2bEhoH5F18nPtRTNQUVvexRKFY5Uo/lJ1784OZtCqyFtM06ffWqOtnIxq2RYU8lfnAWyNS7vEdECQL0LiuWBfQ0nQzUKOssSem748OwZXIwzWEC26r/i0/IH8Vc9GwEiLIyPfPj7TBXlKiRdWnbFo+l80NjgO/peFQIDAQAB";
+      var encrypt = new JSEncrypt();
+      encrypt.setPublicKey(publicKeyStr);
+      
+      //获取默认语种
+      var languageType = util.getCookie("languageType");
+      //设置页面ifCheck组件值
+      if("en" == languageType){
+    	  $("input[name='languageType'][value='en']").attr("checked",true); 
+      }else{
+    	  $("input[name='languageType'][value=cn]").attr("checked",true); 
+      }
+
+      // iCheck插件
+      $('input:radio').iCheck({
+  		   checkboxClass: 'icheckbox_square-green',
+  		   radioClass: 'iradio_square-green',
+  		   increaseArea: '20%'
+  	  });
+      
+   	  // 语言切换
+	 $(".languageType").on("ifChecked", function(e) {
+			var t = $(e.target),
+			selfRadioValue = t.val();
+			setLanguageType(selfRadioValue);
+	 });
+   	  
+   	  function setLanguageType(languageType){
+   		 var texts = {
+                 'en': {
+                     'BTN_LOGIN_LABEL': 'Login',
+                 },
+                 'cn': {
+                     'BTN_LOGIN_LABEL': '登录',
+                 }
+             };
+             for (const [key, text] of Object.entries(texts[languageType])) {
+                 $("."+key).val(text);
+             }
+   		  if("en" == languageType){
+   	   		  //设置Cookie
+   	   		  util.setCookie("languageType","en",15);
+   		  }else{
+   			 //设置Cookie
+   			 util.setCookie("languageType","cn",15);
+   		  }
+   	  }
+      
+      $(".loginType").hide();
+      
+      $('.unified_authentication').attr('href', loginService.getUser().depext_8 + window.location.href);
+      //南昌师范大学-
+      $(".loginLabel").html();
+      
+      var calisCode = loginService.getUser().depext_6;
+      //南开大学备案号
+      $(".nankaiRecord").hide();
+      if(calisCode == 212010){
+    	  $(".calisRecord").hide();
+    	   $(".nankaiRecord").show();
+      }
+      
+      //首都医科大学添加馆员登录超链接
+      $("#adminLogin").hide();
+      if(calisCode == 112900){
+    	  $("#adminLogin").show();
+      }
+      
+     //人民大学认证集成
+   	 if (calisCode == 211020) {
+   		window.location.href = "https://v.ruc.edu.cn/oauth2/authorize?client_id=63bd16b090f4d1071a0d341a.apps&response_type=code&scope=userinfo&redirect_uri=http://202.112.118.182/loginCas";
+     }
+      
+      //浙江大学认证集成
+      if (calisCode == 233020) {
+    	  $("#zdTip").show();
+    	  $('.unified_authentication').attr('href', "/main.do");
+    	  //首次委托使用注册替换
+          $('.preOrder').html('用户注册<span style="color:#FF3300;font-style:italic">New</span>');
+          $('.preOrder').attr('href', "./userRegister.html");
+          $('.serviceTip').show();
+          $('.zdUserManual').show();
+          $(".loginExplain").html("<label class='warTip'>推荐使用谷歌、火狐、搜狗浏览器(如使用指定浏览器依然无法正常委托，请先清除浏览器缓存，并关闭浏览器，然后打开再尝试一次)</label>");
+      }
+      if(calisCode == 350400){
+    	  //首次委托使用注册替换
+          $('.preOrder').html('用户注册<span style="color:#FF3300;font-style:italic">New</span>');
+          $('.preOrder').attr('href', "./userRegister.html");
+      }
+     
+      //CLSP认证
+      var clspLogin = systemConfigService.getConfig("学校自定义参数", "clspLogin");
+	  if(clspLogin){
+		  var urlAddress = systemConfigService.getConfig("WEB服务配置组", "webBaseAddr");
+		  $('.unified_authentication').attr('href', "http://lib.cnlsp.cn/reader/login.html?tenant="+clspLogin+"&goto="+urlAddress+"/loginCas");
+	  }
+      
+	  //南昌大学-校内登录-跳转到门户用户自主登录
+	   if (calisCode == 236010){
+		   $('.unified_authentication').attr('href', "https://lib.ncu.edu.cn"); 
+	   }
+	  
+      //深圳大学、山东师范大学、武汉大学
+      if (calisCode == 510500 ||calisCode == 237220 || calisCode == 242010 
+    		  ||  calisCode == 471200 ||  calisCode == 212010 || calisCode == 350400) {
+        	$('.unified_authentication').attr('href', "/loginCas?ticket="); 
+        	if(loginService.getUser().depext_6 == 242010){
+        		$('.unified_authentication').html("校内统一认证");
+        		$("#library_authentication").show();
+        	} 
+      }
+      
+      //深圳大学-用户端隐藏首次委托
+      if(calisCode == 510500){
+    	  $('.unified_authentication').attr('href', "/cscy/loginCas?ticket="); 
+    	  $(".preOrder").hide();
+      }
+      
+      //深圳大学城
+  	  if (calisCode == 522300) {
+  		$('.unified_authentication').attr('href', "/loginCas");
+  		//显示DIV
+  		$("#szdxcFirst").show();
+  		//隐藏DIV
+  		$("#formTable").hide();
+  		//切换DIV
+  		$("#descDiv").hide();
+  	  }
+  	  
+  	  //深圳技术大学oauth
+   	 if (calisCode == 524200) {
+   		$('.unified_authentication').attr('href', "https://auth.sztu.edu.cn/idp/oauth2/authorize?redirect_uri=http://10.11.220.7:60000/loginCas&client_id=tsgxt&response_type=code");
+   	 }
+      
+  	  //香港中文大学oauth认证
+  	 if (calisCode == 854400) {
+  		window.location.href = "https://sts.cuhk.edu.cn/adfs/oauth2/authorize?client_id=42729b7a-8a5b-475d-a9dd-6cb7a28d53bb&redirect_uri=https://citationreport.cuhk.edu.cn/token.html&response_type=code";
+   	  }
+  	  
+  	  //清华大学统一认证
+  	  if(calisCode == 211030){
+  		$('.unified_authentication').attr('href', "https://id.tsinghua.edu.cn/do/off/ui/auth/login/form/259a213ca57286ce1b011b550edafa8c/0?/login.do");
+  	  }
+  	  
+  	  //南方科技大学
+     if(calisCode == 521800){
+    	$('.unified_authentication').attr('href', "https://cas.sustech.edu.cn/cas/login?service=https%3A%2F%2Fchaxin.lib.sustech.edu.cn%2FloginCas");
+   		//显示DIV
+   		$("#nfkjdxFirst").show();
+   		//隐藏DIV
+   		$("#formTable").hide();
+   		//切换DIV
+   		$("#descDiv").hide();
+     }
+  	  
+  	  var loginType = "scas";
+  	  //北京交通大学集成统一认证
+  	  if (calisCode == 110400) {
+  		$("#unified_authentication").hide();
+  		//单选框样式
+  	    $('input').iCheck({
+  		   checkboxClass: 'icheckbox_square-green',
+  		   radioClass: 'iradio_square-green',
+  		   increaseArea: '20%'
+  		 });
+  		// 自引方式的绑定
+		$(".cRadio").on("ifChecked", function(e) {
+			var t = $(e.target);
+			loginType = t.val();
+		});
+  		$(".loginType").show();
+  	  }
+  	  
+  	  //杭州电子科技大学-用户端只是用统一认证登陆
+  	  if (calisCode == 350400) {
+  		//显示DIV
+   		$("#hzdzkjdxFirst").show();
+   		//隐藏DIV
+   		$("#formTable").hide();
+   		//切换DIV
+   		$("#descDiv").hide();
+  	  } 
+  		  
+      var urlSearch = getUrlSearch();
+      if (typeof urlSearch.authresult != "undefined") {
+        if (!urlSearch.artifact) {
+          if (urlSearch.authresult == "false" && urlSearch.authtype == "01") {
+            $.Showmsg("用户已停用,请重新输入");
+            return;
+          } else if (urlSearch.authresult == "false" && urlSearch.authtype == "05") {
+            $.Showmsg("用户未注册,请先注册");
+            return;
+          }
+        } else {
+          //TODO 调用服务同步统一认证用户信息
+          try {
+            loginService.loginByCredential(urlSearch.artifact);
+          } catch (e) {
+            $.Showmsg("登录失败!" + e.message);
+            return;
+          }
+          window.location.href = "index.html";
+          return;
+        }
+      } else {
+
+        $.Tipmsg.r = "";
+        $(".login-form").Validform({
+          tiptype: 3,
+          showAllError: false,
+          beforeCheck: function(curform) {
+            //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
+            //这里明确return false的话将不会继续执行验证操作;
+          },
+          beforeSubmit: function(curform) {
+            //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+            //这里明确return false的话表单将不会提交;  
+            //alert(data);
+            var name = $.trim($("#name").val());
+            var u = null;
+            try {
+              name = 'scas_client$' + name;
+              pass = $.trim($("#pass").val());
+              if(loginService.getUser().depext_6 == 110400 && 'cas' == loginType){
+            	  $.ajax({
+            	        type: "get",
+            	        async: false,
+            	        url : "/InterfaceLogin",  
+            	        data: {"userName" : name,"passWord" : pass},
+            	        success: function(data) {
+            	          
+            	        },
+            	        error:function(data){
+            	        	if("success" == data.responseText){
+            	        		window.location.href = "index.html";
+            	        	}else{
+            	        		$.Showmsg("登录失败!");
+               	             	return false;	
+            	        	}
+            	        },
+            	       dataType: "json"
+            	 });
+              }else{
+            		var captcha = $.trim($("#captcha").val());
+            		name = encrypt.encrypt(name);
+            		pass = encrypt.encrypt(pass);
+            		var clientIp = "未正确获取";
+            		try{
+            	  		clientIp = returnCitySN.cip;
+            	  		}catch(ex){}
+            	    u = userService.userLogin(name, pass, captcha,clientIp);
+              }
+            } catch (e) {
+              $('.scascaptcha').attr('src', "/scascaptcha?t=" + new Date().getTime());
+              if(e.message.indexOf("弱口令") >= 0){
+            	  var cfm = confirm("密码强度低：请修改密码后重新登录");
+	  				if (cfm) {
+	  					window.location.href = "updatePass.html";
+	  				}	
+            	  return;
+              }else{
+            	  $.Showmsg("登录失败!" + e.message);
+              }
+              return false;
+            }
+            if (u != null) {
+              var fromPage = util.getParameter("from");
+              if (fromPage == null) {
+                window.location.href = "index.html";
+              } else {
+                window.location.href = decodeURIComponent(fromPage);
+              }
+            }
+            return false;
+          },
+          callback: function(data) {
+            return false;
+          },
+          datatype: {
+            "username": function(gets, obj, curform, regxp) {
+              //数字、字母、下划线、中文
+              var dateReg = /^[\w\u4e00-\u9fa5]{2,15}$/;
+              if (!dateReg.test(gets)) {
+                return false;
+              }
+            },
+            "password": function(gets, obj, curform, regxp) {
+              /* var dateReg = /^[a-zA-Z0-9_]{3,20}$/;
+              if (!dateReg.test(gets)) {
+                return false;
+              } */
+            }
+          }
+        });
+      }
+
+      $('.change_captcha').bind("click", function() {
+        $('.scascaptcha').attr('src', "/scascaptcha?t=" + new Date().getTime());
+      });
+
+      //深圳大学城-无读者证用户登录
+      $('.noCertificate').bind("click", function() {
+          //隐藏当前div
+          $("#szdxcFirst").hide();
+          
+          $("#hzdzkjdxFirst").hide();
+          //显示另一个div
+          $("#formTable").show();
+    	  //切换DIV
+          $("#descDivSecond").show();
+        });
+      
+      var dataroot = "/conf/" + loginService.getUser().depext_6 + "/scas.json";
+      $.ajax({
+        type: "get",
+        async: false,
+        url: dataroot,
+        data: {},
+        success: function(data) {
+          $('h1').html(data.login_title_name);
+          if(data.preorder_status == 0){
+        	  $(".preOrder").hide();
+          }
+        },
+        dataType: "json"
+      });
+      
+      setLanguageType(languageType);
+    });
+  </script>
+</head>
+
+<body>
+  <div class="main">
+    <div class="login-form">
+      <h1>大学图书馆代查代检系统</h1>
+      <div  class="zdUserManual"  style="text-align: left;margin-top: -60px;font-size: 14px;font-weight: 600;font-family: '微软雅黑','Hiragino Sans GB', 'Microsoft YaHei', 'Open Sans', sans-serif, '黑体'; margin-bottom: 40px;margin-left: 20px;display: none">
+    	<a target="_blank" href="zdNoticeDesc.html" style="color: #ed7d31;text-decoration:underline;font-size: 18px;">注意事项（必读）</a>
+      </div>
+      <div  class="zdUserManual"  style="text-align: right;margin-top: -60px;font-size: 14px;font-weight: 600;font-family: '微软雅黑','Hiragino Sans GB', 'Microsoft YaHei', 'Open Sans', sans-serif, '黑体'; margin-bottom: 40px;margin-right: 20px;display: none">
+    	<a target="_blank" href="http://libweb.zju.edu.cn/55976/list.htm" style="color: #ed7d31;text-decoration:underline;font-size: 18px;">用户指南</a>
+      </div>
+      <div class="head">
+        <img src="img/login-user.png" alt="" />
+      </div>
+      <form method="post" id="formTable">
+        <div style="margin-bottom: 7px;">
+        	<img src="img/btn_r3_c1.jpg" alt="" style="float: left;"/>
+          	<input type="text" class="text" id="name" placeholder="请填写邮箱/用户名"  datatype="e|username" nullmsg="邮箱/用户名不能为空！" errormsg="只能是(2-15位的数字、字母、下划线、中文)或者邮箱地址。" onfocus="if (this.value == '请填写邮箱/用户名') {this.value = '';}" onblur="if (this.value == '') {this.value = '';}">
+        </div>
+        <div style="margin-bottom: 7px;">
+        	<img src="img/btn_r5_c1.jpg" alt=""  style="float: left;"/>
+          	<input type="password" placeholder="请填写密码" datatype="password" nullmsg="密码不能为空！" errormsg="密码由3-20位英文字母、数字、下划线或特殊字符组成" id="pass" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+        </div>
+        <div style="margin-bottom:15px;height: 62px;">
+        	<img src="img/btn_r7_c1.jpg" alt=""  style="float: left;"/>
+          	<input type="text" placeholder="请填写验证码" id="captcha" datatype="*4-4" nullmsg="验证码不能为空！" errormsg="请填写正确的验证码"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" style="width: 110px;float: left;" />
+          	<img class="scascaptcha" alt="" src="/scascaptcha" style="width: 100px; height: 38px; position: relative; margin-left: 10px; margin-right: 50px;">
+        </div>
+        <div style="margin-top: -66px;margin-left: 285px;margin-bottom: 45px;">
+        	<a class="change_captcha"  style="font-size: 12px;color: #72BFF3;	margin-left: 10px;" href="javascript:void(0);">换一张</a>
+        </div>
+        <div style="height: 42px;text-align: center;" class="loginType">
+        	<span>
+					<input type="radio" name="loginType" class="cRadio" value="scas" checked="checked"/>
+					<span class="selText">系统认证</span>
+			</span>
+			<span style="margin-left: 30px">
+					<input type="radio" name="loginType" class="cRadio" value="cas"/>
+					<span class="selText">统一认证</span>
+			</span>
+        </div>
+        <div class="submit">
+          <input type="submit" value="登录" class="BTN_LOGIN_LABEL">
+        </div>
+        <div class="submit">
+          <div class="CasAuth"><a href=javascript:void(0); class="unified_authentication"  id="unified_authentication" style="color: white;">统一认证登录</a></div> 
+         </div>
+        <!--  <div style="text-align: center;margin-top: 10px;">
+         		<input type="radio" name="languageType"  class="languageType"   value="cn" /><span class="selfAppend"> 中文</span>
+				<input type="radio" name="languageType"  class="languageType"   value="en" /><span class="selfAppend"> English</span>
+         </div> -->
+      </form>
+      
+      <div id="zdTip"  style="display: none;margin-top: -165px;height: 140px;margin-bottom: 65px;background: #f1f1f1;width: 300px;margin-left: 460px;    letter-spacing: 1px;">
+      	<br>
+      	<span>
+      		咨询电话：0571-87952423<br/><br/>
+      		工作时间：周一 ～ 周五，8:30～12:00、13:30～ 17:30 （节假日请参照图书馆通知）<br/><br/>
+			地址：浙江省杭州市西湖区余杭塘路866号浙江大学紫金港校区图书馆主馆222室（求是大讲堂北面，主馆东门进入右转上二楼）
+      	</span>
+      </div>
+      
+      <div style="margin-top: -35px;margin-bottom: 15px;background: #f1f1f1;height: 87px;" id="descDiv">
+      			<div style="width:100%;height:0;border-bottom:#CCCCCC 1px solid;margin: 20px 0px 20px 0px"></div>
+		        <p style="text-align: center;">
+		          <a href="editPass.html">找回密码</a>
+		          <a class="preOrder"  href="./preRequest2.html">校外首次委托<span style="color:#FF3300;font-style:italic">New</span></a>
+		          <a href="http://system.lib.whu.edu.cn/oauth/auth/index?response_type=code&granttype=authorization_code&client_id=cscy&redirect_uri=http://cscy2.lib.whu.edu.cn/oauth2callbak"
+		           style="display: none" id="library_authentication">图书馆统一认证</a>
+		          <a href="./scas"  id="adminLogin">馆员登录</a>
+		        </p>
+		        <p class="loginExplain" style="text-align: center;margin-top: 15px ;font-family: '宋体', 'Open Sans', sans-serif;color: #999999;font-size: 12px">
+		          <span>说明：用户首次委托后可用委托时设置的邮箱和密码直接登录查看委托进度.</span>
+		        </p>	
+      </div>
+      <div style="margin-top: -35px;margin-bottom: 15px;background: #f1f1f1;height: 87px;display: none" id="descDivSecond">
+      			<div style="width:100%;height:0;border-bottom:#CCCCCC 1px solid;margin: 20px 0px 20px 0px"></div>
+		        <p style="text-align: center;">
+		          <a href="editPass.html"  style="font-size: 14px;">找回密码?</a>
+		          <a class="preOrder"  href="./preRequest2.html" style="font-size: 14px;">申请账号<span style="color:#FF3300;font-style:italic">New</span></a>
+		        </p>
+		        <p class="loginExplain" style="text-align: center;margin-top: 15px ;font-family: '宋体', 'Open Sans', sans-serif;color: #999999;font-size: 12px">
+		          <span>说明：请等待管理员审核通过的邮件(因QQ邮箱有拦截限制，不建议使用QQ邮箱).</span>
+		        </p>	
+      </div>
+      
+      <div id="szdxcFirst" style="height: 400px;display: none;">
+      		<div style="margin-top: 20px;  margin-left: 120px;">
+	        		<div class="firstCategory" style="float: left;"><a href=javascript:void(0); class="unified_authentication"  style="color: white;">有本馆读者证</a></div>
+	        </div>
+	        <div class="desc"  style="margin-top: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大学城内读者（含中科院先进院读者）可以直接通过大学城校园卡号或读者证号登录“查收查引系统”提交论文查收查引业务委托。校外读者需持有深圳图书馆之城读者证号（包括深圳市图书馆和各区图书馆），通过“有本馆读者证”入口直接登陆，登陆后将跳转至“深圳大学城统一安全身份认证平台”，在该平台使用读者证号和密码登陆。</div>
+      </div>
+      
+      <div id="hzdzkjdxFirst" style="height: 400px;display: none;">
+      		<div style="margin-top: 20px;  margin-left: 120px;">
+	        		<div class="firstCategory" style="float: left;"><a href=javascript:void(0); class="unified_authentication"  style="color: white;">校内读者登录</a></div>
+	        </div>
+	        <div style="margin-top: 20px;  margin-left: 120px;float: left;">
+	        	<div class="firstCategory noCertificate" style="float: left;">校外读者登录</div>
+	        </div>
+      </div>
+      
+      <div id="xgzwdxFirst" style="height: 400px;display: none;">
+      		<div style="margin-top: 20px;  margin-left: 120px;">
+	        		<div class="firstCategory" style="float: left;"><a href=javascript:void(0); class="unified_authentication"  style="color: white;">登录入口</a></div>
+	        </div>
+	        <div class="desc"  style="margin-top: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该服务仅对本校学者开放，请使用校园网（或连接VPN），点击“登录入口”按钮，输入香港中文大学（深圳）校园卡帐号和密码登录。</div>
+      </div>
+      
+       <div id="nfkjdxFirst" style="height: 400px;display: none;">
+      		<div style="margin-top: 20px;  margin-left: 120px;">
+	        		<div class="firstCategory" style="float: left;"><a href=javascript:void(0); class="unified_authentication"  style="color: white;">CAS统一认证登录</a></div>
+	        </div>
+	        <div class="desc" style="margin-top: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该服务仅对本校师生开放，请点击“CAS统一认证”按钮，输入校园卡号和密码登录。</div>
+      </div>
+      
+      <div class="copy-right">
+        	<p class="calisRecord"> 2017&copy; 北京开元数图科技有限公司版权所有 version：2.0.0</p>
+        	<p class="nankaiRecord">
+        		津教备0061号&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="https://beian.miit.gov.cn/" target="_blank">津ICP备12003308号-1</a><br>
+				<a class="gawb" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12010402000967">津公网安备12010402000967号</a>
+        	</p>
+      </div>
+    </div>
+  </div>
+  <div style="display:none"></div>
+  <div class="serviceTip" frag="tipDiv" style="display:none">
+	<div id="winfloat_div_w30" style="position: absolute; width: 350px; height: 150px; padding: 8px; z-index: 1002; cursor: pointer; left: 1082px; top: 191px;background: white;border: 2px solid black;padding: 8px;">
+		<div> 
+			<span style="font-size: 16px;color: black;font-family: 微软雅黑, 'Hiragino Sans GB', 'Microsoft YaHei', 'Open Sans', sans-serif, 黑体;">
+亲爱的用户，查新站服务点已搬迁至浙大紫金港校区西区主馆（求是大讲堂北面）222室，请相互转告。</span>	
+		</div> 
+		<div style="margin-top: 10px;font-size: 16px;color: black;font-family: 微软雅黑, 'Hiragino Sans GB', 'Microsoft YaHei', 'Open Sans', sans-serif, 黑体;"> 
+			<span>
+					代表性论文影响力分析、研究领域竞争力/贡献度分析、高影响力学者证明等评价服务介绍详见： 
+			</span>	
+			<a href="http://cscy.zju.edu.cn/zdServiceDesc.html" target="_blank" style="">
+					http://cscy.zju.edu.cn/zdServiceDesc.html 
+			</a>
+		</div> 
+		
+		<div align="right">
+			<div style="FONT-SIZE: 9pt;width:40px; CURSOR: pointer" align="right" onclick="$(&#39;#winfloat_div_w30&#39;).hide()">×关闭</div>
+		</div>
+	</div>
+	<script type="text/javascript">$(document).ready(function(){ $('#winfloat_div_w30').imgFloat({speed:39,xPos:131,yPos:308});});</script>
+</div>
+</body>
+<script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+</html>

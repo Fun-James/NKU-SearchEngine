@@ -1,0 +1,1132 @@
+<!DOCTYPE HTML>
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9; IE=8; IE=7; IE=EDGE" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title> 南开大学招投标管理办公室 - 首页</title>
+    <head>
+		<link href="/r/cms/www/default/img/favicon.ico" rel="shortcut icon" />
+<link rel="stylesheet" type="text/css" href="/r/cms/www/default/css/global.css?v=20250411">
+        <link rel="stylesheet" type="text/css" href="/r/cms/www/default/front.css?v=20250411">
+        <script type="text/javascript" src="/r/cms/www/default/js/jQuery.1.9.1.js?v=20250411"></script>
+        <script type="text/javascript" src="/r/cms/www/default/js/jquery.flexslider-min.js?v=20250411"></script>
+        <script type="text/javascript" src="/r/cms/www/default/js/jquery.SuperSlide.js?v=20250411"></script>
+        <script type="text/javascript" src="/r/cms/www/default/js/index-style.js?v=20250411"></script>
+        <script type="text/javascript" src="/r/cms/www/default/js/jqueryUI/jquery-ui.js?v=20250411"></script>
+        <script type="text/javascript" src="/r/cms/www/default/js/front.js?v=20250411"></script>
+        <script type="text/javascript" src="/r/cms/www/default/js/floatadv.js?v=20250411"></script>
+        		
+        <script type="text/javascript">
+            $(function() {
+				Cms.siteFlow("");
+                iniNotice();
+				knowImgSize("#banner");
+                $("#closepiaofu").click(function () {
+                    $("#notice").hide();
+                });
+                $("a[dm='cggg']").click();
+                $("a[dm='jggg']").click();
+            });
+			function iniNotice(){
+                $("dd[rdate]").each(function(){
+                   var ggdate= $(this).attr("rdate");
+                   if(ggdate.length<10){
+                       ggdate = "20"+ggdate;
+                   }
+                   var arrayDate = ggdate.split("-");
+                   var ggDate =new Date(arrayDate[0],arrayDate[1]-1,arrayDate[2]);
+                   var today= new Date();
+                   var num = (today.getTime()-ggDate.getTime())/86400000;
+                   if(num<=3){
+                       $(this).append("<img src='/r/cms/www/default/img/new.gif'>");
+                   }
+                });  
+            }
+			function knowImgSize(id) {
+				var idWidth = $(id).width(),  // 容器的宽度和高度
+					idHeight = $(id).height();
+				$(id + ' img').each(function(index,img){
+					var img_w = $(this).width(),
+						img_h = $(this).height();
+					// 如果图片自身宽度大于容器的宽度的话 那么高度等比例缩放
+					if(img_w > idWidth) {
+						var height = img_h * idWidth / img_w;
+						$(this).css({"width":idWidth, "height":height});
+					}
+				});
+			 }
+       </script>
+    </head>
+    <body>
+<script type="text/javascript">
+    $(document).ready(function(){
+                    $("dd#1").addClass("on");
+    });
+</script>
+<div class="header">
+    <div class="wrap">
+		<div class="logo"></div>
+    </div>
+</div>
+<div class="nav">
+    <div class="wrap">
+        <ul id="nav" class="nav clearfix">
+			<li class="nLi on" id="0">
+				<h3>
+					<a href="/index.chtml">首页</a>
+				</h3>
+			</li>
+			<li class="nLi" id="169">
+				<h3>
+						<a href="/kszz/index.chtml">部门概况</a>
+				</h3>
+				<ul class="sub">
+						<li><a href="/bmjj/index.chtml">部门简介</a></li>
+						<li><a href="/kszz/index.chtml">科室职责</a></li>
+				</ul>
+			</li>
+			<li class="nLi" id="336">
+				<h3>
+						<a href="/ggtz/index.chtml">工作动态</a>
+				</h3>
+				<ul class="sub">
+				</ul>
+			</li>
+            <li class="nLi" id="161">
+				<h3>
+						<a href="/cghw/index.chtml">采购公告</a>
+				</h3>
+				<ul class="sub">
+						<li><a href="/cghw/index.chtml">货物类</a></li>
+						<li><a href="/cggc/index.chtml">工程类</a></li>
+						<li><a href="/cgfw/index.chtml">服务类</a></li>
+						<li><a href="/cgqt/index.chtml">其他类</a></li>
+				</ul>
+			</li>
+			<li class="nLi" id="341">
+				<h3>
+						<a href="/jghw/index.chtml">结果公告</a>
+				</h3>
+				<ul class="sub">
+						<li><a href="/jghw/index.chtml">货物类</a></li>
+						<li><a href="/jggc/index.chtml">工程类</a></li>
+						<li><a href="/jgfw/index.chtml">服务类</a></li>
+						<li><a href="/jgqt/index.chtml">其他类</a></li>
+				</ul>
+			</li>
+            <li class="nLi" id="13">
+				<h3>
+						<a href="/guojflfg/index.chtml">法规制度</a>
+				</h3>
+				<ul class="sub">
+						<li><a href="/guojflfg/index.chtml">国家</a></li>
+						<li><a href="/difzcfg/index.chtml">本市</a></li>
+						<li><a href="/xuexgzzd/index.chtml">学校</a></li>
+				</ul>
+			</li>
+            <li class="nLi" id="348">
+				<h3>
+						<a href="/bszn/index.chtml">办事指南</a>
+				</h3>
+				<ul class="sub">
+				</ul>
+			</li>
+            <li class="nLi" id="24">
+				<h3>
+						<a href="/dtype/index.chtml">常用下载</a>
+				</h3>
+				<ul class="sub">
+				</ul>
+			</li>
+            <li class="nLi" id="200">
+				<h3>
+						<a href="/aboutus.chtml">联系我们</a>
+				</h3>
+				<ul class="sub">
+				</ul>
+			</li>
+            <li>
+                <div class="tp">
+                    <div class="isearch"><form class="search" action="/cms/search/search.htm" target="_blank" id="searchForm" method="post">
+    <div class="input">
+        <input name="q" value="请输入关键词" type="text" onfocus="if(this.value=='请输入关键词')this.value=''" maxlength="50" autocomplete="off" />
+    </div>
+    <div class="submit">
+        <input type="submit" value="  " />
+    </div>
+</form>
+</div>
+                </div>
+            </li>
+		</ul>
+    </div>
+</div>
+<script id="jsID" type="text/javascript">
+	jQuery("#nav").slide({ 
+		type:"menu",// 效果类型，针对菜单/导航而引入的参数（默认slide）
+		titCell:".nLi", //鼠标触发对象
+		targetCell:".sub", //titCell里面包含的要显示/消失的对象
+		effect:"slideDown", //targetCell下拉效果
+		delayTime:300 , //效果时间
+		triggerTime:0, //鼠标延迟触发时间（默认150）
+		returnDefault:false //鼠标移走后返回默认状态，例如默认频道是“预告片”，鼠标移走后会返回“预告片”（默认false）
+	});
+</script>    <div class="wrap">
+        <!--左侧开始-->
+        <div class="ileft">
+            <!--新闻通知开始-->
+            <div class="news white">
+                <dl class="ilist1">
+                        <dt>
+                            <a href="javascript:void(0);" class="title">工作动态</a>
+                            <a class="more" href="/ggtz/index.chtml">MORE ></a>
+                        </dt>
+                        <dd rdate="2025-05-30">
+                            <span class="date">2025-05-30</span>
+                            <a title="招标办组织召开采购招标业务培训会" href="/ggtz/3153.chtml">招标办组织召开采购招标业务培训会</a>
+                        </dd>
+                        <dd rdate="2025-05-19">
+                            <span class="date">2025-05-19</span>
+                            <a title="招标办组织召开采购招标代理机构业务培训会" href="/ggtz/3121.chtml">招标办组织召开采购招标代理机构业务培训会</a>
+                        </dd>
+                        <dd rdate="2025-04-25">
+                            <span class="date">2025-04-25</span>
+                            <a title="中国人民大学采购与招标管理中心来访调研" href="/ggtz/3089.chtml">中国人民大学采购与招标管理中心来访调研</a>
+                        </dd>
+                        <dd rdate="2025-03-27">
+                            <span class="date">2025-03-27</span>
+                            <a title="南开区住建委监督站来校调研" href="/ggtz/3048.chtml">南开区住建委监督站来校调研</a>
+                        </dd>
+                        <dd rdate="2025-03-19">
+                            <span class="date">2025-03-19</span>
+                            <a title="招标办与图书馆开展业务交流活动" href="/ggtz/3026.chtml">招标办与图书馆开展业务交流活动</a>
+                        </dd>
+                        <dd rdate="2025-03-05">
+                            <span class="date">2025-03-05</span>
+                            <a title="关于征集南开大学采购招标评审专家的通知" href="/ggtz/2996.chtml">关于征集南开大学采购招标评审专家的通知</a>
+                        </dd>
+                        <dd rdate="2024-12-31">
+                            <span class="date">2024-12-31</span>
+                            <a title="招标办与外国语学院开展业务交流活动" href="/ggtz/2937.chtml">招标办与外国语学院开展业务交流活动</a>
+                        </dd>
+                </dl> 
+            </div>
+            <!--新闻通知结束-->
+
+
+            <!--采购公告开始-->
+            <div class="cgxx white">
+                <dl class="ilist1" id="indexp0d" style="overflow: hidden;">
+                    <dt>
+                        <a class="more" href="/cghw/index.chtml" target="_blank">MORE ></a>
+                        <span class="title">采购公告</span>
+                        <div class="subtitle">
+                            <a id="indexp0" class="on" onclick="indextab(this)" dm="cggg">全部</a>
+                            <a id="indexp1" onclick="indextab(this)">货物类</a>
+                            <a id="indexp2" onclick="indextab(this)">工程类</a>
+                            <a id="indexp3" onclick="indextab(this)">服务类</a>
+							<a id="indexp4" onclick="indextab(this)">其他类</a>
+                        </div>
+                    </dt>
+                            <dd rdate="2025-05-30">
+                                <span class="date">
+                                    2025-05-30
+                                </span>
+                                <a target="_blank" title="南开大学津南校区新物质创造大楼项目勘察(NK2025F010)招标公告" href="/cgfw/3155.chtml">
+                                    <span rsfzd="-1">南开大学津南校区新物质创造大楼项目勘察(NK2025F010)招标公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-30">
+                                <span class="date">
+                                    2025-05-30
+                                </span>
+                                <a target="_blank" title="南开大学津南校区化学大楼项目勘察(NK2025F011)招标公告" href="/cgfw/3154.chtml">
+                                    <span rsfzd="-1">南开大学津南校区化学大楼项目勘察(NK2025F011)招标公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-30">
+                                <span class="date">
+                                    2025-05-30
+                                </span>
+                                <a target="_blank" title="南开大学图书馆2025年Springer E-journal采购项目单一来源采购公告" href="/cgfw/3151.chtml">
+                                    <span rsfzd="-1">南开大学图书馆2025年Springer E-journal采购项目单一来源采购公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-30">
+                                <span class="date">
+                                    2025-05-30
+                                </span>
+                                <a target="_blank" title="南开大学八里台校区生物楼内部维修工程（NK2025G008）更正公告" href="/cggc/3149.chtml">
+                                    <span rsfzd="-1">南开大学八里台校区生物楼内部维修工程（NK2025G008）更正公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-29">
+                                <span class="date">
+                                    2025-05-29
+                                </span>
+                                <a target="_blank" title="南开大学八里台校区学生西区公寓室外自来水管改造工程(NK2025G012)竞争性磋商公告" href="/cggc/3147.chtml">
+                                    <span rsfzd="-1">南开大学八里台校区学生西区公寓室外自来水管改造工程(NK2025G012)竞争性磋商公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-28">
+                                <span class="date">
+                                    2025-05-28
+                                </span>
+                                <a target="_blank" title="南开大学医学院荧光细胞计数仪采购项目（NK2025H022N）采购公告" href="/cghw/3143.chtml">
+                                    <span rsfzd="-1">南开大学医学院荧光细胞计数仪采购项目（NK2025H022N）采购公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-26">
+                                <span class="date">
+                                    2025-05-26
+                                </span>
+                                <a target="_blank" title="南开大学2025-2027年教职工体检采购项目（NK2025F012）公开招标公告" href="/cgfw/3142.chtml">
+                                    <span rsfzd="-1">南开大学2025-2027年教职工体检采购项目（NK2025F012）公开招标公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-26">
+                                <span class="date">
+                                    2025-05-26
+                                </span>
+                                <a target="_blank" title="南开大学八里台校区认知科技大楼项目勘察服务(第二次)(NK2025F006)招标公告" href="/cgfw/3141.chtml">
+                                    <span rsfzd="-1">南开大学八里台校区认知科技大楼项目勘察服务(第二次)(NK2025F006)招标公告</span>
+                                </a>
+                            </dd>
+                </dl>
+                        <dl class="ilist1" ss="11" id="indexp1d">
+                        <dt>
+                            <a class="more" href="/cghw/index.chtml" target="_blank">MORE ></a>
+                            <span class="title">采购公告</span>
+                            <div class="subtitle">
+                                <a id="indexp0" class= "on" onClick="indextab(this)">全部</a>
+                                    <a id="indexp1" onClick="indextab(this)">货物类</a>
+                                    <a id="indexp2" onClick="indextab(this)">工程类</a>
+                                    <a id="indexp3" onClick="indextab(this)">服务类</a>
+                                    <a id="indexp4" onClick="indextab(this)">其他类</a>
+                            </div>
+                        </dt>
+                                <dd rdate="2025-05-28">
+                                    <span class="date">
+                                        2025-05-28
+                                    </span>
+                                    <a target="_blank" title="南开大学医学院荧光细胞计数仪采购项目（NK2025H022N）采购公告" href="/cghw/3143.chtml">
+                                        <span rsfzd="-1">南开大学医学院荧光细胞计数仪采购项目（NK2025H022N）采购公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-26">
+                                    <span class="date">
+                                        2025-05-26
+                                    </span>
+                                    <a target="_blank" title="南开大学智能光子研究院C波段可编程光波处理器采购项目（NK2025H034W）单一来源采购公示" href="/cghw/3139.chtml">
+                                        <span rsfzd="-1">南开大学智能光子研究院C波段可编程光波处理器采购项目（NK2025H034W）单一来源采购公示</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-26">
+                                    <span class="date">
+                                        2025-05-26
+                                    </span>
+                                    <a target="_blank" title="南开大学智能光子研究院可编程光滤波器采购项目（NK2025H033W）单一来源采购公示" href="/cghw/3138.chtml">
+                                        <span rsfzd="-1">南开大学智能光子研究院可编程光滤波器采购项目（NK2025H033W）单一来源采购公示</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-26">
+                                    <span class="date">
+                                        2025-05-26
+                                    </span>
+                                    <a target="_blank" title="南开大学化学学院凝胶渗透色谱仪采购项目（NK2025H028W）采购公告" href="/cghw/3137.chtml">
+                                        <span rsfzd="-1">南开大学化学学院凝胶渗透色谱仪采购项目（NK2025H028W）采购公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-26">
+                                    <span class="date">
+                                        2025-05-26
+                                    </span>
+                                    <a target="_blank" title="南开大学智能光子研究院L波段可编程光波处理器采购项目（NK2025H032W）单一来源采购公示" href="/cghw/3136.chtml">
+                                        <span rsfzd="-1">南开大学智能光子研究院L波段可编程光波处理器采购项目（NK2025H032W）单一来源采购公示</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-23">
+                                    <span class="date">
+                                        2025-05-23
+                                    </span>
+                                    <a target="_blank" title="南开大学图书馆中文图书采购项目（NK2025H024N）公开招标公告" href="/cghw/3134.chtml">
+                                        <span rsfzd="-1">南开大学图书馆中文图书采购项目（NK2025H024N）公开招标公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-22">
+                                    <span class="date">
+                                        2025-05-22
+                                    </span>
+                                    <a target="_blank" title="南开大学体育部（体育场馆管理中心）水源热泵机组及附属设备采购项目（NK2025H025N）公开招标公告" href="/cghw/3132.chtml">
+                                        <span rsfzd="-1">南开大学体育部（体育场馆管理中心）水源热泵机组及附属设备采购项目（NK2025H025N）...</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-20">
+                                    <span class="date">
+                                        2025-05-20
+                                    </span>
+                                    <a target="_blank" title="南开大学图书馆2025-2026年外文及港澳台原版图书采购项目（NK2025H021N）采购公告" href="/cghw/3127.chtml">
+                                        <span rsfzd="-1">南开大学图书馆2025-2026年外文及港澳台原版图书采购项目（NK2025H021N）采购公告</span>
+                                    </a>
+                                </dd>
+                    </dl>
+                        <dl class="ilist1" ss="11" id="indexp2d">
+                        <dt>
+                            <a class="more" href="/cggc/index.chtml" target="_blank">MORE ></a>
+                            <span class="title">采购公告</span>
+                            <div class="subtitle">
+                                <a id="indexp0" class= "on" onClick="indextab(this)">全部</a>
+                                    <a id="indexp1" onClick="indextab(this)">货物类</a>
+                                    <a id="indexp2" onClick="indextab(this)">工程类</a>
+                                    <a id="indexp3" onClick="indextab(this)">服务类</a>
+                                    <a id="indexp4" onClick="indextab(this)">其他类</a>
+                            </div>
+                        </dt>
+                                <dd rdate="2025-05-30">
+                                    <span class="date">
+                                        2025-05-30
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区生物楼内部维修工程（NK2025G008）更正公告" href="/cggc/3149.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区生物楼内部维修工程（NK2025G008）更正公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-29">
+                                    <span class="date">
+                                        2025-05-29
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区学生西区公寓室外自来水管改造工程(NK2025G012)竞争性磋商公告" href="/cggc/3147.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区学生西区公寓室外自来水管改造工程(NK2025G012)竞争性磋商公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-21">
+                                    <span class="date">
+                                        2025-05-21
+                                    </span>
+                                    <a target="_blank" title="南开大学津南校区部分宿舍淋浴间维修工程（NK2025G011）采购公告" href="/cggc/3131.chtml">
+                                        <span rsfzd="-1">南开大学津南校区部分宿舍淋浴间维修工程（NK2025G011）采购公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-21">
+                                    <span class="date">
+                                        2025-05-21
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区生物楼内部维修工程（NK2025G008）竞争性磋商公告" href="/cggc/3130.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区生物楼内部维修工程（NK2025G008）竞争性磋商公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-21">
+                                    <span class="date">
+                                        2025-05-21
+                                    </span>
+                                    <a target="_blank" title="南开大学泰达校区卓越工程师学院修缮工程（NK2025G016）采购公告" href="/cggc/3128.chtml">
+                                        <span rsfzd="-1">南开大学泰达校区卓越工程师学院修缮工程（NK2025G016）采购公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-04-30">
+                                    <span class="date">
+                                        2025-04-30
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区供电设施维修工程（第二次）（NK2025G006）采购公告" href="/cggc/3098.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区供电设施维修工程（第二次）（NK2025G006）采购公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-04-30">
+                                    <span class="date">
+                                        2025-04-30
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区第二主教学楼外檐粉刷修缮工程(NK2025G007)磋商公告" href="/cggc/3097.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区第二主教学楼外檐粉刷修缮工程(NK2025G007)磋商公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-04-17">
+                                    <span class="date">
+                                        2025-04-17
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区供电设施维修工程（NK2025G006）采购公告" href="/cggc/3076.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区供电设施维修工程（NK2025G006）采购公告</span>
+                                    </a>
+                                </dd>
+                    </dl>
+                        <dl class="ilist1" ss="11" id="indexp3d">
+                        <dt>
+                            <a class="more" href="/cgfw/index.chtml" target="_blank">MORE ></a>
+                            <span class="title">采购公告</span>
+                            <div class="subtitle">
+                                <a id="indexp0" class= "on" onClick="indextab(this)">全部</a>
+                                    <a id="indexp1" onClick="indextab(this)">货物类</a>
+                                    <a id="indexp2" onClick="indextab(this)">工程类</a>
+                                    <a id="indexp3" onClick="indextab(this)">服务类</a>
+                                    <a id="indexp4" onClick="indextab(this)">其他类</a>
+                            </div>
+                        </dt>
+                                <dd rdate="2025-05-30">
+                                    <span class="date">
+                                        2025-05-30
+                                    </span>
+                                    <a target="_blank" title="南开大学津南校区新物质创造大楼项目勘察(NK2025F010)招标公告" href="/cgfw/3155.chtml">
+                                        <span rsfzd="-1">南开大学津南校区新物质创造大楼项目勘察(NK2025F010)招标公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-30">
+                                    <span class="date">
+                                        2025-05-30
+                                    </span>
+                                    <a target="_blank" title="南开大学津南校区化学大楼项目勘察(NK2025F011)招标公告" href="/cgfw/3154.chtml">
+                                        <span rsfzd="-1">南开大学津南校区化学大楼项目勘察(NK2025F011)招标公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-30">
+                                    <span class="date">
+                                        2025-05-30
+                                    </span>
+                                    <a target="_blank" title="南开大学图书馆2025年Springer E-journal采购项目单一来源采购公告" href="/cgfw/3151.chtml">
+                                        <span rsfzd="-1">南开大学图书馆2025年Springer E-journal采购项目单一来源采购公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-26">
+                                    <span class="date">
+                                        2025-05-26
+                                    </span>
+                                    <a target="_blank" title="南开大学2025-2027年教职工体检采购项目（NK2025F012）公开招标公告" href="/cgfw/3142.chtml">
+                                        <span rsfzd="-1">南开大学2025-2027年教职工体检采购项目（NK2025F012）公开招标公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-26">
+                                    <span class="date">
+                                        2025-05-26
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区认知科技大楼项目勘察服务(第二次)(NK2025F006)招标公告" href="/cgfw/3141.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区认知科技大楼项目勘察服务(第二次)(NK2025F006)招标公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-23">
+                                    <span class="date">
+                                        2025-05-23
+                                    </span>
+                                    <a target="_blank" title="南开大学继续教育学院打印服务采购项目（第二次）（NK2025F008）采购公告" href="/cgfw/3135.chtml">
+                                        <span rsfzd="-1">南开大学继续教育学院打印服务采购项目（第二次）（NK2025F008）采购公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-21">
+                                    <span class="date">
+                                        2025-05-21
+                                    </span>
+                                    <a target="_blank" title="南开大学内部控制风险评估及有关单位业务内部控制体系建设项目（NK2025F021）采购公告" href="/cgfw/3129.chtml">
+                                        <span rsfzd="-1">南开大学内部控制风险评估及有关单位业务内部控制体系建设项目（NK2025F021）采购公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-20">
+                                    <span class="date">
+                                        2025-05-20
+                                    </span>
+                                    <a target="_blank" title="南开大学金融学院穆迪《Orbis Intellectual Property－全球知识产权数据库》与《ORBIS－全球企业数据库》采购项目(NK2025F028)单一来源采购公告" href="/cgfw/3125.chtml">
+                                        <span rsfzd="-1">南开大学金融学院穆迪《Orbis Intellectual Property－全球知识产权数据库》与《ORBIS...</span>
+                                    </a>
+                                </dd>
+                    </dl>
+                        <dl class="ilist1" ss="11" id="indexp4d">
+                        <dt>
+                            <a class="more" href="/cgqt/index.chtml" target="_blank">MORE ></a>
+                            <span class="title">采购公告</span>
+                            <div class="subtitle">
+                                <a id="indexp0" class= "on" onClick="indextab(this)">全部</a>
+                                    <a id="indexp1" onClick="indextab(this)">货物类</a>
+                                    <a id="indexp2" onClick="indextab(this)">工程类</a>
+                                    <a id="indexp3" onClick="indextab(this)">服务类</a>
+                                    <a id="indexp4" onClick="indextab(this)">其他类</a>
+                            </div>
+                        </dt>
+                                <dd rdate="2025-04-25">
+                                    <span class="date">
+                                        2025-04-25
+                                    </span>
+                                    <a target="_blank" title="南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）遴选公告" href="/cgqt/3090.chtml">
+                                        <span rsfzd="-1">南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）遴选公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-02-25">
+                                    <span class="date">
+                                        2025-02-25
+                                    </span>
+                                    <a target="_blank" title="南开大学采购招标代理机构遴选（补选）项目（NK2025F002L）遴选公告" href="/cgqt/2984.chtml">
+                                        <span rsfzd="-1">南开大学采购招标代理机构遴选（补选）项目（NK2025F002L）遴选公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-02-08">
+                                    <span class="date">
+                                        2025-02-08
+                                    </span>
+                                    <a target="_blank" title="南开大学采购招标代理机构遴选项目（NK2025F001L）遴选公告" href="/cgqt/2974.chtml">
+                                        <span rsfzd="-1">南开大学采购招标代理机构遴选项目（NK2025F001L）遴选公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-01-09">
+                                    <span class="date">
+                                        2025-01-09
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区2025电动自行车充电柜项目（NK2025Z002）招租公告" href="/cgqt/2950.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区2025电动自行车充电柜项目（NK2025Z002）招租公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-01-06">
+                                    <span class="date">
+                                        2025-01-06
+                                    </span>
+                                    <a target="_blank" title="南开大学国有资产管理办公室2025年公开招租项目（紫金山路校区）（NK2025Z001）招租公告" href="/cgqt/2942.chtml">
+                                        <span rsfzd="-1">南开大学国有资产管理办公室2025年公开招租项目（紫金山路校区）（NK2025Z001）招租公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2024-12-28">
+                                    <span class="date">
+                                        2024-12-28
+                                    </span>
+                                    <a target="_blank" title="南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）遴选公告" href="/cgqt/2932.chtml">
+                                        <span rsfzd="-1">南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）遴选公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2024-12-18">
+                                    <span class="date">
+                                        2024-12-18
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区2024年生活服务配套项目（北村四期）（NK2024Z015）招租公告" href="/cgqt/2890.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区2024年生活服务配套项目（北村四期）（NK2024Z015）招租公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2024-12-09">
+                                    <span class="date">
+                                        2024-12-09
+                                    </span>
+                                    <a target="_blank" title="南开大学财务处差旅服务平台差旅服务商遴选项目（NK2024F002L）遴选公告" href="/cgqt/2854.chtml">
+                                        <span rsfzd="-1">南开大学财务处差旅服务平台差旅服务商遴选项目（NK2024F002L）遴选公告</span>
+                                    </a>
+                                </dd>
+                    </dl>
+            </div>
+            <!--采购公告结束-->
+			
+            <!--结果公告开始-->
+            <div class="cgxx white" style="height: 400px;">
+                <dl class="ilist1" id="indexk0d" style="overflow: hidden;">
+                    <dt>
+                        <a class="more" href="/jghw/index.chtml" target="_blank">MORE ></a>
+                        <span class="title">结果公告</span>
+                        <div class="subtitle">
+                            <a id="indexk0" class="on" onclick="indextab(this)" dm="jggg">全部</a>
+                            <a id="indexk1" onclick="indextab(this)">货物类</a>
+                            <a id="indexk2" onclick="indextab(this)">工程类</a>
+                            <a id="indexk3" onclick="indextab(this)">服务类</a>
+							<a id="indexk4" onclick="indextab(this)">其他类</a>
+                        </div>
+                    </dt>
+                            <dd rdate="2025-05-29">
+                                <span class="date">
+                                    2025-05-29
+                                </span>
+                                <a target="_blank" title="南开大学泰达校区卓越工程师学院修缮工程（NK2025G016）结果公告" href="/jggc/3148.chtml">
+                                    <span rsfzd="-1">南开大学泰达校区卓越工程师学院修缮工程（NK2025G016）结果公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-29">
+                                <span class="date">
+                                    2025-05-29
+                                </span>
+                                <a target="_blank" title="南开大学图书馆2025-2026年外文及港澳台原版图书采购项目（NK2025H021N）结果公告" href="/jghw/3146.chtml">
+                                    <span rsfzd="-1">南开大学图书馆2025-2026年外文及港澳台原版图书采购项目（NK2025H021N）结果公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-28">
+                                <span class="date">
+                                    2025-05-28
+                                </span>
+                                <a target="_blank" title="南开大学金融学院穆迪《Orbis Intellectual Property－全球知识产权数据库》与《ORBIS－全球企业数据库》采购项目（NK2025F028）结果公告" href="/jgfw/3144.chtml">
+                                    <span rsfzd="-1">南开大学金融学院穆迪《Orbis Intellectual Property－全球知识产权数据库》与《ORBIS...</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-21">
+                                <span class="date">
+                                    2025-05-21
+                                </span>
+                                <a target="_blank" title="南开大学八里台校区认知科技大楼项目（NK2025F006）勘察服务废标公示" href="/jgfw/3140.chtml">
+                                    <span rsfzd="-1">南开大学八里台校区认知科技大楼项目（NK2025F006）勘察服务废标公示</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-19">
+                                <span class="date">
+                                    2025-05-19
+                                </span>
+                                <a target="_blank" title="南开大学八里台校区第二主教学楼外檐粉刷修缮工程（NK2025G007 ）成交公告" href="/jggc/3123.chtml">
+                                    <span rsfzd="-1">南开大学八里台校区第二主教学楼外檐粉刷修缮工程（NK2025G007 ）成交公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-16">
+                                <span class="date">
+                                    2025-05-16
+                                </span>
+                                <a target="_blank" title="南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）废标公告" href="/jgfw/3120.chtml">
+                                    <span rsfzd="-1">南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）废标公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-16">
+                                <span class="date">
+                                    2025-05-16
+                                </span>
+                                <a target="_blank" title="南开大学八里台校区供电设施维修工程（第二次）（NK2025G006）成交结果公告" href="/jggc/3119.chtml">
+                                    <span rsfzd="-1">南开大学八里台校区供电设施维修工程（第二次）（NK2025G006）成交结果公告</span>
+                                </a>
+                            </dd>
+                            <dd rdate="2025-05-16">
+                                <span class="date">
+                                    2025-05-16
+                                </span>
+                                <a target="_blank" title="南开大学继续教育学院打印服务采购项目(NK2025F008)终止公告" href="/jgfw/3117.chtml">
+                                    <span rsfzd="-1">南开大学继续教育学院打印服务采购项目(NK2025F008)终止公告</span>
+                                </a>
+                            </dd>
+                </dl>
+                        <dl class="ilist1" ss="11" id="indexk1d">
+                        <dt>
+                            <a class="more" href="/jghw/index.chtml" target="_blank">MORE ></a>
+                            <span class="title">结果公告</span>
+                            <div class="subtitle">
+                                <a id="indexk0" class= "on" onClick="indextab(this)">全部</a>
+                                    <a id="indexk1" onClick="indextab(this)">货物类</a>
+                                    <a id="indexk2" onClick="indextab(this)">工程类</a>
+                                    <a id="indexk3" onClick="indextab(this)">服务类</a>
+                                    <a id="indexk4" onClick="indextab(this)">其他类</a>
+                            </div>
+                        </dt>
+                                <dd rdate="2025-05-29">
+                                    <span class="date">
+                                        2025-05-29
+                                    </span>
+                                    <a target="_blank" title="南开大学图书馆2025-2026年外文及港澳台原版图书采购项目（NK2025H021N）结果公告" href="/jghw/3146.chtml">
+                                        <span rsfzd="-1">南开大学图书馆2025-2026年外文及港澳台原版图书采购项目（NK2025H021N）结果公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-15">
+                                    <span class="date">
+                                        2025-05-15
+                                    </span>
+                                    <a target="_blank" title="南开大学电子信息与光学工程学院高精度薄膜涂布设备采购项目流标公告" href="/jghw/3116.chtml">
+                                        <span rsfzd="-1">南开大学电子信息与光学工程学院高精度薄膜涂布设备采购项目流标公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-13">
+                                    <span class="date">
+                                        2025-05-13
+                                    </span>
+                                    <a target="_blank" title="南开大学工会2025年五一、端午教职工福利（清洁用品）采购项目（NK2025H016N）更正公告" href="/jghw/3113.chtml">
+                                        <span rsfzd="-1">南开大学工会2025年五一、端午教职工福利（清洁用品）采购项目（NK2025H016N）更正公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-09">
+                                    <span class="date">
+                                        2025-05-09
+                                    </span>
+                                    <a target="_blank" title="南开大学化学学院核磁质谱液氦采购项目（NK2025H019N）结果公告" href="/jghw/3110.chtml">
+                                        <span rsfzd="-1">南开大学化学学院核磁质谱液氦采购项目（NK2025H019N）结果公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-09">
+                                    <span class="date">
+                                        2025-05-09
+                                    </span>
+                                    <a target="_blank" title="南开大学“爱国三问”主题雕塑项目（NK2024H038N）中标公告" href="/jghw/3109.chtml">
+                                        <span rsfzd="-1">南开大学“爱国三问”主题雕塑项目（NK2024H038N）中标公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-09">
+                                    <span class="date">
+                                        2025-05-09
+                                    </span>
+                                    <a target="_blank" title="南开大学食堂帮扶非转基因大豆油采购项目（NK2025H015N）结果公告" href="/jghw/3108.chtml">
+                                        <span rsfzd="-1">南开大学食堂帮扶非转基因大豆油采购项目（NK2025H015N）结果公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-08">
+                                    <span class="date">
+                                        2025-05-08
+                                    </span>
+                                    <a target="_blank" title="南开大学物理科学学院自感知探针原子力显微镜采购项目（NK2025H014N）中标公告" href="/jghw/3105.chtml">
+                                        <span rsfzd="-1">南开大学物理科学学院自感知探针原子力显微镜采购项目（NK2025H014N）中标公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-07">
+                                    <span class="date">
+                                        2025-05-07
+                                    </span>
+                                    <a target="_blank" title="南开大学人工智能学院协作机械臂采购项目（NK2025H017W）结果公告" href="/jghw/3102.chtml">
+                                        <span rsfzd="-1">南开大学人工智能学院协作机械臂采购项目（NK2025H017W）结果公告</span>
+                                    </a>
+                                </dd>
+                    </dl>
+                        <dl class="ilist1" ss="11" id="indexk2d">
+                        <dt>
+                            <a class="more" href="/jggc/index.chtml" target="_blank">MORE ></a>
+                            <span class="title">结果公告</span>
+                            <div class="subtitle">
+                                <a id="indexk0" class= "on" onClick="indextab(this)">全部</a>
+                                    <a id="indexk1" onClick="indextab(this)">货物类</a>
+                                    <a id="indexk2" onClick="indextab(this)">工程类</a>
+                                    <a id="indexk3" onClick="indextab(this)">服务类</a>
+                                    <a id="indexk4" onClick="indextab(this)">其他类</a>
+                            </div>
+                        </dt>
+                                <dd rdate="2025-05-29">
+                                    <span class="date">
+                                        2025-05-29
+                                    </span>
+                                    <a target="_blank" title="南开大学泰达校区卓越工程师学院修缮工程（NK2025G016）结果公告" href="/jggc/3148.chtml">
+                                        <span rsfzd="-1">南开大学泰达校区卓越工程师学院修缮工程（NK2025G016）结果公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-19">
+                                    <span class="date">
+                                        2025-05-19
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区第二主教学楼外檐粉刷修缮工程（NK2025G007 ）成交公告" href="/jggc/3123.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区第二主教学楼外檐粉刷修缮工程（NK2025G007 ）成交公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-16">
+                                    <span class="date">
+                                        2025-05-16
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区供电设施维修工程（第二次）（NK2025G006）成交结果公告" href="/jggc/3119.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区供电设施维修工程（第二次）（NK2025G006）成交结果公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-04-29">
+                                    <span class="date">
+                                        2025-04-29
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区供电设施维修工程（NK2025G006）终止公告" href="/jggc/3094.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区供电设施维修工程（NK2025G006）终止公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-04-28">
+                                    <span class="date">
+                                        2025-04-28
+                                    </span>
+                                    <a target="_blank" title="南开大学屋面防水维修工程（NK2025G004）成交公告" href="/jggc/3093.chtml">
+                                        <span rsfzd="-1">南开大学屋面防水维修工程（NK2025G004）成交公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-04-21">
+                                    <span class="date">
+                                        2025-04-21
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区及津南校区屋面防水及电梯井堵漏维修工程成交公告" href="/jggc/3077.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区及津南校区屋面防水及电梯井堵漏维修工程成交公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-04-08">
+                                    <span class="date">
+                                        2025-04-08
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区学生第四食堂及附属用房红线外给排水配套工程(NK2025G003)结果公告" href="/jggc/3062.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区学生第四食堂及附属用房红线外给排水配套工程(NK2025G003)结果公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-04-03">
+                                    <span class="date">
+                                        2025-04-03
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区学生第四食堂及附属用房燃气工程(NK2025G002)成交公告" href="/jggc/3060.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区学生第四食堂及附属用房燃气工程(NK2025G002)成交公告</span>
+                                    </a>
+                                </dd>
+                    </dl>
+                        <dl class="ilist1" ss="11" id="indexk3d">
+                        <dt>
+                            <a class="more" href="/jgfw/index.chtml" target="_blank">MORE ></a>
+                            <span class="title">结果公告</span>
+                            <div class="subtitle">
+                                <a id="indexk0" class= "on" onClick="indextab(this)">全部</a>
+                                    <a id="indexk1" onClick="indextab(this)">货物类</a>
+                                    <a id="indexk2" onClick="indextab(this)">工程类</a>
+                                    <a id="indexk3" onClick="indextab(this)">服务类</a>
+                                    <a id="indexk4" onClick="indextab(this)">其他类</a>
+                            </div>
+                        </dt>
+                                <dd rdate="2025-05-28">
+                                    <span class="date">
+                                        2025-05-28
+                                    </span>
+                                    <a target="_blank" title="南开大学金融学院穆迪《Orbis Intellectual Property－全球知识产权数据库》与《ORBIS－全球企业数据库》采购项目（NK2025F028）结果公告" href="/jgfw/3144.chtml">
+                                        <span rsfzd="-1">南开大学金融学院穆迪《Orbis Intellectual Property－全球知识产权数据库》与《ORBIS...</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-21">
+                                    <span class="date">
+                                        2025-05-21
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区认知科技大楼项目（NK2025F006）勘察服务废标公示" href="/jgfw/3140.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区认知科技大楼项目（NK2025F006）勘察服务废标公示</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-16">
+                                    <span class="date">
+                                        2025-05-16
+                                    </span>
+                                    <a target="_blank" title="南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）废标公告" href="/jgfw/3120.chtml">
+                                        <span rsfzd="-1">南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）废标公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-16">
+                                    <span class="date">
+                                        2025-05-16
+                                    </span>
+                                    <a target="_blank" title="南开大学继续教育学院打印服务采购项目(NK2025F008)终止公告" href="/jgfw/3117.chtml">
+                                        <span rsfzd="-1">南开大学继续教育学院打印服务采购项目(NK2025F008)终止公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-10">
+                                    <span class="date">
+                                        2025-05-10
+                                    </span>
+                                    <a target="_blank" title="南开大学教务部本科招生宣传页及报考指南采购项目（NK2025F018）结果公告" href="/jgfw/3111.chtml">
+                                        <span rsfzd="-1">南开大学教务部本科招生宣传页及报考指南采购项目（NK2025F018）结果公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-08">
+                                    <span class="date">
+                                        2025-05-08
+                                    </span>
+                                    <a target="_blank" title="南开大学继续教育学院打印服务采购项目(NK2025F008)更正公告" href="/jgfw/3107.chtml">
+                                        <span rsfzd="-1">南开大学继续教育学院打印服务采购项目(NK2025F008)更正公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-05-08">
+                                    <span class="date">
+                                        2025-05-08
+                                    </span>
+                                    <a target="_blank" title="南开大学继续教育学院打印服务采购项目(NK2025F008)结果公告" href="/jgfw/3106.chtml">
+                                        <span rsfzd="-1">南开大学继续教育学院打印服务采购项目(NK2025F008)结果公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-04-22">
+                                    <span class="date">
+                                        2025-04-22
+                                    </span>
+                                    <a target="_blank" title="南开大学附属小学物业服务项目（NK2025F007）结果公告" href="/jgfw/3078.chtml">
+                                        <span rsfzd="-1">南开大学附属小学物业服务项目（NK2025F007）结果公告</span>
+                                    </a>
+                                </dd>
+                    </dl>
+                        <dl class="ilist1" ss="11" id="indexk4d">
+                        <dt>
+                            <a class="more" href="/jgqt/index.chtml" target="_blank">MORE ></a>
+                            <span class="title">结果公告</span>
+                            <div class="subtitle">
+                                <a id="indexk0" class= "on" onClick="indextab(this)">全部</a>
+                                    <a id="indexk1" onClick="indextab(this)">货物类</a>
+                                    <a id="indexk2" onClick="indextab(this)">工程类</a>
+                                    <a id="indexk3" onClick="indextab(this)">服务类</a>
+                                    <a id="indexk4" onClick="indextab(this)">其他类</a>
+                            </div>
+                        </dt>
+                                <dd rdate="2025-03-13">
+                                    <span class="date">
+                                        2025-03-13
+                                    </span>
+                                    <a target="_blank" title="南开大学采购招标代理机构遴选（补选）项目中标(成交公告)" href="/jgqt/3017.chtml">
+                                        <span rsfzd="-1">南开大学采购招标代理机构遴选（补选）项目中标(成交公告)</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-02-20">
+                                    <span class="date">
+                                        2025-02-20
+                                    </span>
+                                    <a target="_blank" title="南开大学采购招标代理机构遴选项目结果公告" href="/jgqt/2978.chtml">
+                                        <span rsfzd="-1">南开大学采购招标代理机构遴选项目结果公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-01-20">
+                                    <span class="date">
+                                        2025-01-20
+                                    </span>
+                                    <a target="_blank" title="南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）成交公告" href="/jgqt/2970.chtml">
+                                        <span rsfzd="-1">南开大学食堂食品原材料采购供应商遴选项目（NK2024F003L）成交公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-01-20">
+                                    <span class="date">
+                                        2025-01-20
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区2025电动自行车充电柜项目(NK2025Z002)成交公告" href="/jgqt/2969.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区2025电动自行车充电柜项目(NK2025Z002)成交公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2025-01-16">
+                                    <span class="date">
+                                        2025-01-16
+                                    </span>
+                                    <a target="_blank" title="南开大学国有资产管理办公室2025年公开招租项目（紫金山路校区）（NK2025Z001）成交公告" href="/jgqt/2967.chtml">
+                                        <span rsfzd="-1">南开大学国有资产管理办公室2025年公开招租项目（紫金山路校区）（NK2025Z001）成交公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2024-12-27">
+                                    <span class="date">
+                                        2024-12-27
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区2024年生活服务配套项目（北村四期）（NK2024Z015）结果公告" href="/jgqt/2931.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区2024年生活服务配套项目（北村四期）（NK2024Z015）结果公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2024-12-27">
+                                    <span class="date">
+                                        2024-12-27
+                                    </span>
+                                    <a target="_blank" title="南开大学八里台校区2024年生活服务配套项目（北村四期）（NK2024Z015）结果公告" href="/jgqt/2929.chtml">
+                                        <span rsfzd="-1">南开大学八里台校区2024年生活服务配套项目（北村四期）（NK2024Z015）结果公告</span>
+                                    </a>
+                                </dd>
+                                <dd rdate="2024-12-19">
+                                    <span class="date">
+                                        2024-12-19
+                                    </span>
+                                    <a target="_blank" title="南开大学财务处差旅服务平台差旅服务商遴选项目（NK2024F002L ）结果公告" href="/jgqt/2894.chtml">
+                                        <span rsfzd="-1">南开大学财务处差旅服务平台差旅服务商遴选项目（NK2024F002L ）结果公告</span>
+                                    </a>
+                                </dd>
+                    </dl>
+            </div>
+            <!--结果公告结束-->
+            
+        </div>
+        <!--左侧结束-->
+        
+        <!--右侧开始-->
+        <div class="iright">
+            <div class="dlbk">
+				<!--入口开始-->
+				<div class="link-tip"></div>
+                <div class="link">
+					<a class="link1" target="_blank" href="https://nkzbb.nankai.edu.cn/sso/index.htm"></a>
+					<a class="link2" target="_blank" href="https://nkzbb.nankai.edu.cn/index.htm"></a>
+					<a class="link3" target="_blank" href="https://nkzbb.nankai.edu.cn/xt/xzzjzcrk/zjzc.htm"></a>
+					<a class="link4" target="_blank" href="https://nkzbb.nankai.edu.cn/gyszc.htm"></a>
+                </div>
+				<div class="clear"></div>
+                <!--入口结束-->
+            </div>
+            <!--意向公开开始-->
+            <div class="lxwm white" style="height: 392px;">
+                <dl class="ilist1">
+                        <dt>
+                            <a href="javascript:void(0);" class="title icon4">意向公开</a>
+                             
+                            <a class="more" href="/yxgk/index.chtml">MORE ></a>
+                        </dt>
+                         <dd><a title="南开大学医学院实验家具采购及安装项目 政府采购意向" href="/yxgk/3152.chtml">南开大学医学院实验家具采购及安...</a></dd>
+                         <dd><a title="南开大学2025年政府采购意向公开（第45批）" href="/yxgk/3150.chtml">南开大学2025年政府采购意向公开...</a></dd>
+                         <dd><a title="南开大学2025年政府采购意向公开（第44批）" href="/yxgk/3145.chtml">南开大学2025年政府采购意向公开...</a></dd>
+                         <dd><a title="南开大学化学学院化学合成高通量工作站采购项目 政府采购意向" href="/yxgk/3133.chtml">南开大学化学学院化学合成高通量...</a></dd>
+                         <dd><a title="南开大学2025年政府采购意向公开（第42批）" href="/yxgk/3124.chtml">南开大学2025年政府采购意向公开...</a></dd>
+                         <dd><a title="南开大学环境科学与工程学院液相色谱三重四极杆质谱仪采购项目 政府采购意向" href="/yxgk/3101.chtml">南开大学环境科学与工程学院液相...</a></dd>
+                         <dd><a title="南开大学2025年政府采购意向公开（第40批）" href="/yxgk/3095.chtml">南开大学2025年政府采购意向公开...</a></dd>
+                         <dd><a title="南开大学2025年政府采购意向公开（第39批）" href="/yxgk/3067.chtml">南开大学2025年政府采购意向公开...</a></dd>
+                 </dl>  
+            </div>
+            <!--意向公开结束-->
+            <!--资料下载开始-->
+            <div class="lxwm white">
+                <dl class="ilist1">
+                        <dt>
+                            <a href="javascript:void(0);" class="title icon5">常用下载</a>
+                            <a class="more" href="/dtype/index.chtml">MORE ></a>
+                        </dt>
+							<dd>
+								<a title="关于为工程采购招标项目提供相关服务的各类单位情况汇总" href="/dtype/2833.chtml">关于为工程采购招标项目提供相关...</a>
+							</dd>
+							<dd>
+								<a title="南开大学单一来源采购项目（校内）申请表" href="/dtype/2683.chtml">南开大学单一来源采购项目（校内...</a>
+							</dd>
+							<dd>
+								<a title="资金性质认定表" href="/dtype/2502.chtml">资金性质认定表</a>
+							</dd>
+                 </dl>  
+            </div>
+            <!--资料下载束-->
+            <!--曝光台开始-->
+            <div class="lxwm white">
+                <dl class="ilist1">
+                        <dt>
+                            <a href="javascript:void(0);" class="title icon6">曝光台</a>
+                            <a class="more" href="/pgt/index.chtml">MORE ></a>
+                        </dt>
+                 </dl>  
+            </div>
+            <!--曝光台结束-->
+       </div>
+        <!--右侧结束-->
+        <!--友情链接开始-->
+		<div class="warp">
+        <div class="zsyqlj friend white">
+            <div class="yqlj"></div>
+            <div class="select">
+                <select onchange="indexfriend(this)">
+                <option style="text-align:center;">------校内网站------</option>
+                    <option value="https://cwc.nankai.edu.cn/">南开大学财务处</option>
+                    <option value="https://sjc.nankai.edu.cn/">南开大学审计处</option>
+                    <option value="http://zhgl.nankai.edu.cn/sfw_cms/e?page=cms.index">南开大学实验室设备处</option>
+                    <option value="https://wxb.nankai.edu.cn/">南开大学大数据管理中心</option>
+                    <option value="https://hq.nankai.edu.cn/">南开大学基建保障处</option>
+                    <option value="https://hq.nankai.edu.cn/">南开大学后勤服务处</option>
+                    <option value="https://guard.nankai.edu.cn/">南开大学保卫处</option>
+                    <option value="https://lib.nankai.edu.cn/">南开大学图书馆</option>
+                    <option value="https://std.nankai.edu.cn/">南开大学科学技术研究部</option>
+                    <option value="https://ssrm.nankai.edu.cn/">南开大学人文社会科学研究部</option>
+                    <option value="https://gh.nankai.edu.cn/">南开大学工会</option>
+                </select>
+            </div>
+            <div class="select">
+                <select onchange="indexfriend(this)">
+                <option style="text-align:center;">------政府网站------</option>
+                    <option value="http://www.ccgp.gov.cn/">中国政府采购网</option>
+                    <option value="https://www.zycg.gov.cn/freecms/site/zygjjgzfcgzx/index.html">中央政府采购网</option>
+                    <option value="https://www.zfcg.edu.cn/">教育部政府采购网</option>
+                    <option value="http://ggzy.zwfwb.tj.gov.cn/">天津市公共资源交易平台</option>
+                </select>
+            </div>
+            <div class="select">
+                <select onchange="indexfriend(this)">
+                <option style="text-align:center;">------校外网站------</option>
+                    <option value="https://www.fudan.edu.cn/">复旦大学</option>
+                    <option value="https://www.nju.edu.cn/">南京大学</option>
+                    <option value="https://www.ruc.edu.cn/">中国人民大学</option>
+                    <option value="https://www.sdu.edu.cn/">山东大学</option>
+                    <option value="http://www.tju.edu.cn/">天津大学</option>
+                </select>
+            </div>
+        </div>
+		</div>
+        <!--友情链接结束-->
+    </div>
+ <!--footer开始-->
+<div class="footer" style="width:100%;">
+	<div class="wrap" >
+		<div class="code">
+			
+		</div>
+		<div class="copyright">
+			<div>
+				<span>版权所有：南开大学招投标管理办公室 </span>
+				<span>地址：天津市南开区卫津路94号</span>
+				<span>邮编：300071</span>
+			</div>
+			<div>
+				<span>津教备0061号&nbsp;&nbsp;</span>
+				<span><a href="https://beian.miit.gov.cn/" target="_blank">津ICP备12003308号-1</a>&nbsp;&nbsp;</span>
+				<span><a class="gawb" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12010402000967">津公网安备12010402000967号</a></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<iframe id="_inner" name="_inner" class="hidden"></iframe>
+	
+    </body>
+</html>

@@ -7,12 +7,20 @@ import jieba
 import jieba.analyse
 
 def get_es_client():
-    """获取 Elasticsearch 客户端实例"""
+    """获取 Elasticsearch 客户端实例，配置超时参数"""
     if not current_app or not hasattr(current_app, 'elasticsearch'):
         try:
             from config import Config
             es_host = Config.ELASTICSEARCH_HOST
-            return Elasticsearch(es_host)
+            # 创建带超时配置的ES客户端
+            return Elasticsearch(
+                es_host,
+                timeout=60,  # 60秒连接超时
+                max_retries=3,  # 最大重试次数
+                retry_on_timeout=True,  # 超时时重试
+                http_compress=True,  # 启用HTTP压缩
+                request_timeout=300  # 5分钟请求超时
+            )
         except ImportError:
             print("Error: Cannot import Config for Elasticsearch outside Flask app context.")
             return None
@@ -96,19 +104,19 @@ def index_document(es, index_name, doc_id, document_body):
     except Exception as e:
         print(f"Failed to index document {doc_id}: {e}")
 
-def bulk_index_documents(es, index_name, documents):
-    """批量索引文档"""
+def bulk_index_documents(es, index_name, documents, max_retries=3):
+    """批量索引文档，带重试机制"""
+    import time
+    
     actions = []
     for doc in documents:
         # 获取标题，并进行处理
-        title = doc.get('title', '')
-        
-        # 如果标题为空或太短，尝试从URL中提取一个有意义的标题
+        title = doc.get('title', '')        # 如果标题为空或太短，尝试从URL中提取一个有意义的标题
         if not title or len(title.strip()) < 3:
             url = doc.get('url', '')
             try:
+                import re  # 确保在此作用域中可以使用 re 模块
                 from urllib.parse import unquote, urlparse
-                import re
                 
                 # 解析URL
                 parsed_url = urlparse(url)
@@ -130,7 +138,8 @@ def bulk_index_documents(es, index_name, documents):
                 # 如果仍然没有合适的标题，使用域名作为标题
                 if not title or len(title.strip()) < 3:
                     title = f"来自 {parsed_url.netloc} 的网页"
-            except:
+            except Exception as e:
+                print(f"从URL提取标题时出错: {e}")
                 if url:
                     # 如果所有提取失败，至少提供URL域名作为标题
                     title = url.split('/')[2] if len(url.split('/')) > 2 else url
@@ -140,8 +149,7 @@ def bulk_index_documents(es, index_name, documents):
         file_info = doc.get('file_info', {})
         file_type = file_info.get('file_type', '未知文档')
         mime_type = file_info.get('mime_type', 'text/html')
-        
-        # 检查标题中是否已经包含文件类型标记，如果已经包含则不再添加
+          # 检查标题中是否已经包含文件类型标记，如果已经包含则不再添加
         if is_attachment and file_type and '[' not in title:
             # 南开大学特殊处理 - 检查是否是特定文件
             if '附件1-2025年度天津市教育工作重点调研课题指南' in title:
@@ -153,17 +161,21 @@ def bulk_index_documents(es, index_name, documents):
             elif '附件3-2025年度天津市教育工作重点调研课题申报汇总表' in title:
                 title = '附件3-2025年度天津市教育工作重点调研课题申报汇总表'
                 file_type = 'Excel表格'
-                
-        # 如果标题中已包含文件类型标记，从中提取正确的文件类型
+          # 如果标题中已包含文件类型标记，从中提取正确的文件类型
         if '[' in title and ']' in title:
-            type_match = re.search(r'\[(.*?)\]', title)
-            if type_match:
-                extracted_type = type_match.group(1)
-                if extracted_type in ['PDF文档', 'Word文档', 'Excel表格', 'PowerPoint演示文稿']:
-                    # 使用标题中的文件类型
-                    file_type = extracted_type
-                    # 可选：移除标题中的文件类型标记，避免重复显示
-                    # title = re.sub(r'\s*\[.*?\]', '', title)
+            try:
+                import re  # 确保在此作用域中可以使用 re 模块
+                type_match = re.search(r'\[(.*?)\]', title)
+                if type_match:
+                    extracted_type = type_match.group(1)
+                    if extracted_type in ['PDF文档', 'Word文档', 'Excel表格', 'PowerPoint演示文稿']:
+                        # 使用标题中的文件类型
+                        file_type = extracted_type
+                        # 可选：移除标题中的文件类型标记，避免重复显示
+                        # title = re.sub(r'\s*\[.*?\]', '', title)
+            except Exception as re_error:
+                print(f"处理标题中的文件类型标记时出错: {re_error}")
+                # 继续执行，不影响整个索引过程
           # 生成 Completion Suggester 所需的建议输入
         title_suggestions = generate_suggest_input(title, None)
         content_suggestions = generate_suggest_input(None, doc.get('content', ''))
@@ -193,20 +205,73 @@ def bulk_index_documents(es, index_name, documents):
                     "input": content_suggestions,
                     "weight": 5   # 内容权重较低
                 }
-            }
-        }
+            }        }
         actions.append(action)
 
     if not actions:
         print("No documents to index.")
-        return
+        return    # 根据文档数量动态调整批处理参数
+    doc_count = len(actions)
+    if doc_count <= 10:
+        chunk_size = doc_count
+        max_chunk_bytes = 3 * 1024 * 1024  # 3MB
+    elif doc_count <= 30:
+        chunk_size = 15
+        max_chunk_bytes = 5 * 1024 * 1024  # 5MB
+    else:
+        chunk_size = 25
+        max_chunk_bytes = 8 * 1024 * 1024  # 8MB
 
-    try:
-        success, failed = helpers.bulk(es, actions, stats_only=True)
-        print(f"Bulk indexing completed: {success} succeeded, {len(failed) if failed else 0} failed.")
-    except Exception as e:
-        print(f"Bulk indexing failed: {e}")
-        raise
+    print(f"📊 准备索引 {doc_count} 个文档，使用批处理大小: {chunk_size}")
+
+    # 重试机制
+    for attempt in range(max_retries):
+        try:
+            # 检查ES服务器状态
+            if not es.ping():
+                raise Exception("ES服务器不可用")
+                  # 设置优化的超时时间和参数
+            success, failed = helpers.bulk(
+                es, 
+                actions, 
+                stats_only=True,
+                timeout='10m',  # 10分钟超时
+                request_timeout=600,  # 10分钟请求超时
+                chunk_size=chunk_size,  # 动态调整的块大小
+                max_chunk_bytes=max_chunk_bytes,  # 动态调整的最大块字节数
+                refresh=False  # 不立即刷新，提高性能
+            )
+            
+            # 成功后手动刷新索引
+            es.indices.refresh(index=index_name)
+            
+            print(f"✅ 批量索引完成: {success} 成功, {len(failed) if failed else 0} 失败")
+            
+            # 清理内存
+            del actions
+            import gc
+            gc.collect()
+            
+            return  # 成功后退出
+            
+        except Exception as e:
+            print(f"❌ 批量索引尝试 {attempt + 1}/{max_retries} 失败: {e}")
+            if attempt < max_retries - 1:
+                wait_time = (attempt + 1) * 15  # 递增等待时间：15s, 30s, 45s
+                print(f"⏳ 等待 {wait_time} 秒后重试...")
+                time.sleep(wait_time)
+                
+                # 减小批处理大小进行重试
+                chunk_size = max(5, chunk_size // 2)
+                max_chunk_bytes = max_chunk_bytes // 2
+                print(f"🔻 调整批处理参数 - 块大小: {chunk_size}, 最大字节数: {max_chunk_bytes // 1024 // 1024}MB")
+            else:
+                print("💥 所有重试尝试都失败了")
+                # 清理内存
+                del actions
+                import gc
+                gc.collect()
+                raise
 
 def test_analyzer(es, text):
     """测试IK分词器的分词效果"""
@@ -267,43 +332,3 @@ def generate_suggest_input(title, content):
             unique_suggestions.append(s_clean)
     
     return unique_suggestions[:10]  # 限制每个文档最多10个建议
-
-# 示例：如何使用这个模块
-if __name__ == '__main__':
-    try:
-        # 连接到Elasticsearch
-        es = Elasticsearch('http://localhost:9200')
-        
-        # 检查连接
-        if es.ping():
-            print("Connected to Elasticsearch")
-            
-            # 创建索引
-            index_name = "nku_web"
-            if create_index_if_not_exists(es, index_name):
-                # 测试分词器
-                test_text = "南开大学计算机学院"
-                tokens = test_analyzer(es, test_text)
-                print(f"\nAnalyzer test for '{test_text}':")
-                print("Tokens:", tokens)
-                
-                # 测试数据
-                test_doc = {
-                    "url": "https://cc.nankai.edu.cn",
-                    "title": "南开大学计算机学院",
-                    "content": "南开大学计算机学院创建于1978年...",
-                    "anchor_texts": [
-                        {"text": "学院简介", "href": "/about"}
-                    ]
-                }
-                
-                # 索引测试文档
-                index_document(es, index_name, test_doc["url"], test_doc)
-                print("\nTest document indexed.")
-                
-        else:
-            print("Could not connect to Elasticsearch!")
-            
-    except Exception as e:
-        print(f"Error: {e}")
-

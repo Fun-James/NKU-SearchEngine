@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta http-equiv="Pragma" content="no-cache">
+        <title>采购招标管理信息平台</title>
+        <link rel="stylesheet" type="text/css" href="/style/style41.css?v=20250411">
+        <link rel="stylesheet" type="text/css" href="/plugs/layui/css/layui.css?v=20250411" media="all">
+        <link rel="stylesheet" type="text/css" href="/style/verify.css?v=20250411">
+        <script type="text/javascript" src="/script/jquery.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery-migrate-1.4.1.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery-migrate-3.3.0.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.base64.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.dragsort.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/layui/layui.js?v=20250411" charset="utf-8"></script>
+        <script type="text/javascript" src="/script/json2.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/layui_exts/loading/loading.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/CilentSideData.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/CheckText.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/qTip2/jquery.qtip.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/qTip2/ZcPophint.js?v=20250411"></script>
+        <link rel="stylesheet" type="text/css" href="/plugs/qTip2/jquery.qtip.css?v=20250411"></link>
+        <script type="text/javascript" src="/script/KeyControl.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/Verify.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/rsa/jsencrypt.min.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/ca/caroute.js?v=20250411"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            history.pushState(null, null, document.URL);
+            window.addEventListener('popstate', function () {
+                history.pushState(null, null, document.URL);
+            });
+            
+                init_Calogin("");
+            
+            if (window.top != self) {
+                window.top.location = self.location;
+                return;
+            }
+            $("#bLogin").click(function(){
+                if(!checkData(dataForm))return;
+                
+                        var encrypt = new JSEncrypt();
+                        var publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlzvfDCYv8ro0I7XRSdRtNq1/2krpYFBgP3EsUMC9Bqxch29hoQAKBnNa4paMaKgwIDQ8r8Egh8wu7A27Gy9zchPb9lgX1eX3X+eLroxi16oOQs4EImd7TicwiCpnr7SOZ8bAAyYHN+so4tRwPz2kFWrXCabVAjknJ59Y6bJr91wIDAQAB";
+                        if(publicKey==""){
+                            alert("加密密码，公钥不能为空！");
+                            return;
+                        }
+                        encrypt.setPublicKey(publicKey);
+                        var password = encrypt.encrypt($("#password").val());
+                        $("#jmPassword").val(password);
+                    
+                        var varAction = "/home/login.htm" ;
+                        $("#dataForm").attr("action",varAction).attr("target","_self").submit() ;
+                    
+            });
+            $("#bCancel").click(function(){
+                $("#loginId").val("").focus();
+                $("#password").val("");
+                $("#verifyCode").val("");
+            });
+            $("#password").val(""); 
+            if($("#loginId").val()==""){
+                $("#loginId").focus();
+            }else if($("#password").val()==""){
+                $("#password").focus();
+            }else{
+                $("#verifyCode").focus() ;
+            }
+            
+            $(document).keyup(function(event){
+                if(event.keyCode ==13){
+                    var user = $("#loginId").val();
+                    var password = $("#password").val();
+                    var verifyCode = $("#verifyCode").val() ;
+                    if(user==''){
+                       $("#loginId").focus();
+                       return;
+                    } else if(user!=''&&password==''&&verifyCode!=''){
+                       $("#password").focus();
+                       return;
+                    }else if(user!=''&&password!=''&&verifyCode==''){
+                        $("#verifyCode").focus();
+                        return;
+                    }
+                    $("#bLogin").trigger("click");
+                }
+            });
+            
+            var operDlh = $.cookie('operDlh');
+            if(""==""){
+              $("#loginId").val(operDlh);
+            }
+            
+            
+                $("#mmdl").addClass("on");
+            
+            $("#cadl").click(function(){
+                $("#ptdlfs").hide();
+                $("#cadlfs").show();
+                $(this).addClass("on");
+                $("#mmdl").removeClass("on");
+                verifyCadlhj();
+            })
+            $("#mmdl").click(function(){
+                $("#cadlfs").hide();
+                $("#ptdlfs").show();
+                $(this).addClass("on");
+                $("#cadl").removeClass("on");
+            })
+            $("#pwd_kz_div").click(function(){
+                var type=$("#password").attr("type");
+                if(type=="password"){
+                    $("#password").attr("type","text");
+                    $("#pwd_xs").hide();
+                    $("#pwd_yc").show();
+                }else{
+                    $("#password").attr("type","password");
+                    $("#pwd_xs").show();
+                    $("#pwd_yc").hide();
+                }
+            });
+        });
+        function checkData(form) {
+            var dlh = $("#loginId").val();
+            if(escape(dlh).substring(0,2) == "%u"){
+                alert("账户名不支持中文/全角字符");
+                return false;
+            }
+            if (!checkFormItem(form.loginId, "C", 50, 0, 1, "用户账号")) return false;
+            
+                if (!checkFormItem(form.verifyCode, "C", 4, 0, 0, "验证码")) return false;
+            
+            return true;
+        }
+        //图片滑动验证
+        function slideImageVerifyLogin(){
+            top.layer.open({
+                type: 1,
+                area: ['450px', '350px'],
+                title: "请完成安全验证",
+                content:'<div id="verifyContainer"></div>',
+                success:function(){
+                    $("#verifyContainer").slideVerify({
+                        ctx : '',
+                        ready : function() {},
+                        success : function() {
+                            var index = top.layer.getFrameIndex(window.name);
+                            // 关闭
+                            top.layer.close(index);
+                            var varAction =  "/home/login.htm";
+                            $("#dataForm").attr("action",varAction).attr("target","_self").submit() ;
+                        },
+                        error : function() {}
+                    });
+                }
+            });
+        }
+        function register(){
+            var varAction = "/register.htm" ;
+            $("#dataForm").attr("action",varAction).attr("target","_self").submit() ;
+        }
+        
+        function refreshVerify(){
+            var varAction = "/home/refreshVerify.htm" ;
+            $.ajax({
+                type: "post",
+                url: varAction,
+                cache: true,
+                data: $('#dataForm').serialize(),
+                async : true,
+                timeout:5000,
+                dataType:"json",
+                error: function(request) {
+                    alert("网络异常");
+                },
+                success: function(data){
+                    if(data.status==1){
+                        $("#imgVerify").attr("src","data:image/jpg;base64,"+data.base64) ;
+                    }else{
+                        alert(data.msg) ;
+                    }
+                }
+          });
+            
+        }
+        function xzZjzc(zjzcsfdlh){
+            if(zjzcsfdlh==1){//专家注册是否使用登录号--是
+                var varAction="/xt/xzzjzcrk/zjzc.htm";
+                window.open(varAction,"_blank");
+            }else{//专家注册是否使用登录号--否
+                var varAction="/zjzc.htm";
+                window.open(varAction,"_blank");
+            }
+        }
+        </script>
+        <style type="text/css">
+            #div_ts{
+                text-align: left;
+
+                position: absolute;
+            }
+            input::-ms-reveal{display:none;}
+        </style>
+    </head>
+    <body class="login-bg-01">
+        <form id="dataForm" method="post">
+            <input type="hidden" id="jmPassword" name="jmPassword"/>
+            <div class="login-bg-02">
+                <span class="login-xtmc" style="font-size: 18px;">
+                    采购招标管理信息平台</span>
+                <div class="login-dlxx">
+                    <div class="usernamel" style="margin-left:5px;">
+                                <div id="mmdl" class="dlfs hand">密码登录</div>
+                                <div id="cadl" class="dlfs hand">CA用户登录</div>
+                            </div>
+                        <div id="ptdlfs">
+                        <div class="username" style="margin-top:15px;">用户名：
+                            <input type="text" name="loginId" id="loginId" style="width:150px" class="form-control" value='' />
+                        </div>
+                        <div class="password">密　码：
+                            <input type="password" id="password" style="width:150px" class="form-control" autoComplete="off" />
+                            <div id="pwd_kz_div" style="position: relative;left: 170px;top: -35px;width:0px;">
+                            <span id="pwd_xs" style="display:auto;"><a  class="link sharef" href="javascript:void(0)"></a></span>
+                            <span id="pwd_yc" style="display:none;"><a  class="link share" href="javascript:void(0)">&nbsp;</a></span>
+                            </div>
+                        </div>
+                        <div class="yzm" style="margin:0px;">验证码：
+                                <input type="text" name="verifyCode" id="verifyCode" style="width:46px" class="form-control" autoComplete="off"/>
+                                <img id="imgVerify" style="width:100px;height:25px;vertical-align:middle;" onclick="refreshVerify()" alt="验证码" class="hand" src="data:image/jpg;base64,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" />
+                            </div>
+                        <div class="zc">
+                            <input id="jzmm" type="checkbox" />
+                            <label for="jzmm" class="hand" style="vertical-align:middle;height:35px;line-height:35px;">记住密码</label>
+                            &nbsp;&nbsp;
+                            <span style="height:35px;padding-right:15px;line-height:35px;vertical-align: middle;">忘记密码？</span>
+                        </div>
+                        <div class="lbtn">
+                            <input type="button" id="bLogin" name="bLogin" class="btn" value="登录" />
+                            <input type="reset" id="bReset" name="bReset" class="btn" value="重置" />
+                        </div>
+                        <div class ="hyzc">
+                                <a href="/gyszc.htm" target="_blank">
+                                        <div class="gys" title="供应商注册">
+                                            <span class="gys-text">供应商注册</span>
+                                        </div>
+                                    </a>
+                                </div>
+                        <div style="position:absolute;right:0;bottom:35px;width:80px;text-align:center;">
+                                    <a href="/xt/dxmmzh/passwordFind.htm" target="_blank">忘记密码？</a>
+                                </div>
+                            </div>
+                    <div id="cadlfs" style="display:none;">
+                        <div id="isca" class="cadlts" style="display:none;"></div>
+                        <div id="noca" class="cadlts" style="display:none;margin-top:15px;">
+                            <div style="text-align:center;"><img src="/images/warning.png" style="transform:scale(0.9)"/></div>
+                            <div style="font-size:13px;padding:20px 20px;margin-left:3px;line-height:20px;">系统未检测到您的CA，请先检查CA驱动程序是否运行，插入CA并确保连接正常。</div>
+                        </div>
+                        <div id="nodriver" class="cadlts" style="display:none;">
+                            <div style="font-size:13px;padding:30px 20px;margin-left:3px;line-height:24px;">系统未检测到CA驱动，请先下载安装投标客户端程序，并在环境检测窗口安装所需的软件。</div>
+                            <a  onclick="downloadTbkhd('')" title="投标客户端程序&nbsp;&nbsp;&nbsp;" class="link caqdxz odownloadt" href="javascript:void(0)">投标客户端程序&nbsp;&nbsp;&nbsp;</a><br>
+                        </div>
+                        <div id="nosupport" class="cadlts" style="display:none;margin-top:15px;">
+                            <div style="text-align:center;"><img src="/images/warning.png" style="transform:scale(0.9)"/></div>
+                            <div style="font-size:13px;padding:20px 20px;margin-left:3px;line-height:24px;">CA控件不支持当前浏览器，请更换至IE内核浏览器后重试。</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="div_ts">
+	                <div style="margin-left:40px;height:75px;margin-top:-10px;">
+	                        <img src="/images/41/login/login_logo_nkdx.png">
+                        </div>
+	                <div style="margin-top:190px;">
+                        <span style="margin-left:40px;">
+                            </span>
+                    </div>
+                </div>
+             </div>
+             <iframe id="_inner" name="_inner" class="innerFrameHidden"></iframe>
+        </form>
+    </body>
+</html>

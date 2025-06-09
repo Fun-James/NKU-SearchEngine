@@ -1,0 +1,58 @@
+<!doctype html><html lang="zh"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/><meta name="renderer" content="webkit"/><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><script>window.globalInfo = {
+                VERSION: 'portal-fe-3.0.9.8465',
+                VERSION_CHECK: false,
+                APP_NAME: '飞连',
+                APP_NAME_EN: 'FeiLian',
+                REGION: 'cn',
+                CDN_PREFIX: '',
+                DEPLOY_TYPE: '0'
+            };</script><link rel="icon" href="/portal-static/favicon.ico"><script defer="defer" src="/portal-static/extract_css_dd2db6af.js"></script><script defer="defer" src="/portal-static/manifest_6da54b960d6a728eb82c.js"></script><script defer="defer" src="/portal-static/index_f66d74e022da591101ac.js"></script><link href="/portal-static/index_77b7152b.css" rel="stylesheet"></head><body><div id="root"></div><script>function isMobile() {
+                return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            }
+            function checkBrowser() {
+                var Sys = {};
+                var ua = navigator.userAgent.toLowerCase();
+                var s;
+                (s = ua.match(/edge\/([\d.]+)/))
+                    ? (Sys.edge = parseInt(s[1]))
+                    : (s = ua.match(/rv:([\d.]+)\) like gecko/))
+                      ? (Sys.ie = parseInt(s[1]))
+                      : (s = ua.match(/msie ([\d.]+)/))
+                        ? (Sys.ie = parseInt(s[1]))
+                        : (s = ua.match(/firefox\/([\d.]+)/))
+                          ? (Sys.firefox = parseInt(s[1]))
+                          : (s = ua.match(/chrome\/([\d.]+)/))
+                            ? (Sys.chrome = parseInt(s[1]))
+                            : (s = ua.match(/opera.([\d.]+)/))
+                              ? (Sys.opera = parseInt(s[1]))
+                              : (s = ua.match(/version\/([\d.]+).*safari/))
+                                ? (Sys.safari = parseInt(s[1]))
+                                : 0;
+                return Sys;
+            }
+            function showBrowserTips(text) {
+                window.onload = function (e) {
+                    var mainEle = document.getElementById('root');
+                    var div = document.createElement('div');
+                    div.innerText = text;
+                    div.style =
+                        'width: 100%; height: 30px; line-height: 30px; text-align: center; background-color: #fff7e8; color: #1d2129;';
+                    document.body.insertBefore(div, mainEle);
+                };
+            }
+            function init() {
+                var lang = localStorage.getItem('i18nextLocale');
+                var sys = checkBrowser();
+                var browserTipsText =
+                    lang === 'en-US'
+                        ? 'The browser you are using may not be able to access this application normally. It is recommended to use the Chrome 49 +/Safari 11 +/Firefox 44 + browser to open this application for the best experience.'
+                        : '您使用的浏览器可能不能正常访问本应用，推荐使用 Chrome 49+ / Safari 11 + / Firefox 44+ 浏览器打开本应用，获得最佳体验';
+                var phoneTipsText =
+                    lang === 'en-US'
+                        ? 'This application does not support opening on the mobile, please use the pc browser to open it'
+                        : '本应用暂不支持移动端打开，请使用 pc 浏览器打开';
+                if (sys.ie) {
+                    showBrowserTips(browserTipsText);
+                }
+            }
+            init();</script><div class="browser-extension-handler-lkD3yxpq6pwc"></div></body></html>

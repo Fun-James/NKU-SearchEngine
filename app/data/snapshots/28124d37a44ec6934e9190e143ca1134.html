@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>预算管理</title>
+
+<link type="text/css" href="/_css/_system/system.css" rel="stylesheet"/>
+<link type="text/css" href="/_upload/site/1/style/6/6.css" rel="stylesheet"/>
+<link type="text/css" href="/_upload/site/00/3e/62/style/48/48.css" rel="stylesheet"/>
+       <LINK href="/_css/tpl2/system.css" type="text/css" rel="stylesheet"> 
+<link type="text/css" href="/_js/_portletPlugs/sudyNavi/css/sudyNav.css" rel="stylesheet" />
+<link type="text/css" href="/_js/_portletPlugs/datepicker/css/datepicker.css" rel="stylesheet" />
+<link type="text/css" href="/_js/_portletPlugs/simpleNews/css/simplenews.css" rel="stylesheet" />
+       <LINK href="/_css/tpl2/default/default.css" type="text/css" rel="stylesheet"> 
+
+<script language="javascript" src="/_js/sudy-jquery-autoload.js" jquery-src="/_js/jquery-1.x.min.js" sudy-wp-context="" sudy-wp-siteId="62"></script>
+<script language="javascript" src="/_js/jquery-migrate.min.js"></script>
+<script language="javascript" src="/_js/jquery.sudy.wp.visitcount.js"></script>
+<script type="text/javascript" src="/_js/_portletPlugs/sudyNavi/jquery.sudyNav.js"></script>
+<script type="text/javascript" src="/_js/_portletPlugs/datepicker/js/jquery.datepicker.js"></script>
+<script type="text/javascript" src="/_js/_portletPlugs/datepicker/js/datepicker_lang_HK.js"></script>
+<link rel="stylesheet" href="/_upload/tpl/00/6c/108/template108/css/style.css" type="text/css" media="all" />
+</head>
+
+<body>
+<div class="wrapper" id="header">
+  <div class="inner clearfix">
+    <div class="head">
+      <div class="head_search" frag="面板12">
+        <div frag="窗口12">
+          <form method="POST" action="/_web/search/doSearch.do?_p=YXM9NjImdD0xMDgmZD0zNTYmcD0xJm09TiY_" target="_blank" onsubmit="if ($('#keyword').val() === '请输入关键字') { $('#keyword').val(''); }">
+    <div class="wp_search">
+        <table>
+            <tbody><tr>
+                <td height="25px">
+                    <input id="keyword" name="keyword" style="width: 150px" class="keyword" type="text" value="请输入关键字" onfocus="if (this.value === '请输入关键字') { this.value = ''; }" onblur="if (this.value === '') { this.value = '请输入关键字'; }">
+                </td>
+                <td>
+                    <input name="btnsearch" class="search" type="submit" value="">
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+</form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper" id="nav">
+  <div class="inner">
+  <div class="head_nav1" frag="面板21">
+    <div class="nav" frag="窗口21">
+      <div id="wp_nav_w21"> 
+
+ 
+<ul class="wp_nav" data-nav-config="{drop_v: 'down', drop_w: 'right', dir: 'y', opacity_main: '1', opacity_sub: '0.8', dWidth: '0'}">
+      
+     <li class="nav-item i1 "> 
+         <a href="/main.htm" title="首页" target="_self"><span class="item-name">首页</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i2 "> 
+         <a href="/3303/list.htm" title="新闻通知" target="_self"><span class="item-name">新闻通知</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i3 "> 
+         <a href="/3304/list.htm" title="政策法规" target="_self"><span class="item-name">政策法规</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i4 "> 
+         <a href="/3305/list.htm" title=" 服务指南" target="_self"><span class="item-name"> 服务指南</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i5 "> 
+         <a href="/3306/list.htm" title="常用下载" target="_self"><span class="item-name">常用下载</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i6 "> 
+         <a href="/3307/list.htm" title="信息公开" target="_self"><span class="item-name">信息公开</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i7 "> 
+         <a href="http://cwc.nankai.edu.cn/2022/0315/c28647a436842/page.htm" title="处长信箱" target="_self"><span class="item-name">处长信箱</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+</ul> 
+ 
+ 
+ </div>
+    </div>
+  </div>
+  <div class="head_rq">
+ 	<span style="width:165px;float:right; color:#573f00; font-size:12px;display: block;height: 40px;
+line-height: 40px;" id="timetable"></span>
+<script language="javascript">
+  function get_time()
+  {
+    var date=new Date();
+    var year="",month="",day="",week="",hour="",minute="",second="";
+    year=date.getFullYear();
+    month=add_zero(date.getMonth()+1);
+    day=add_zero(date.getDate());
+    week=date.getDay();
+    switch (date.getDay()) {
+    case 0:val="周日";break
+    case 1:val="周一";break
+    case 2:val="周二";break
+    case 3:val="周三";break
+    case 4:val="周四";break
+    case 5:val="周五";break
+    case 6:val="周六";break
+      }
+    hour=add_zero(date.getHours());
+    minute=add_zero(date.getMinutes());
+    second=add_zero(date.getSeconds());
+    document.getElementById("timetable").innerHTML=" "+year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second+" "+val;
+  }
+
+  function add_zero(temp)
+  {
+    if(temp<10) return "0"+temp;
+    else return temp;
+  }
+setInterval("get_time()",1000);
+</script>
+  </div>
+
+</div>
+</div>
+<div class="wrapper " id="container">
+  <div class="inner listpage-inner">
+    <div class="list_banner" frag="面板31">
+      <div frag="窗口31"><div class="articlecontent " >
+    
+        
+            
+                <p><img src="/_upload/article/75/22/c3f170d54e96b49fc98e61ecf093/6e10317d-a4e0-49f9-b959-e60ba61fbf3c.gif" /></p>
+            
+        
+    
+</div></div><div frag="窗口83"></div>             
+    </div>
+    <div class="col_mod">
+    <div class="col-menu">
+      <div class="col-menu-head banner-200-blue" frag="面板71">
+        <h3 class="col-name" frag="窗口71" portletmode="simpleColumnAnchor">
+          <span class="col-name-text conl_name_box">
+            <span class='Column_Anchor'>政策法规</span>
+          </span>
+        </h3>
+      </div>
+        
+      <div class="col-menu-con" frag="面板72">
+        <div class="col-list" frag="窗口72" portletmode="simpleColumnList">
+          <div id="wp_listcolumn_w72"> 
+
+ 
+<ul class="wp_listcolumn"> 
+      
+     <li class="wp_column column-1 selected"> 
+         <a href="/ysgl/list.htm" title="预算管理" class="selected" target="_self"><span class="column-name">预算管理</span></a> 
+          
+     </li> 
+      
+     <li class="wp_column column-2 "> 
+         <a href="/cwbx/list.htm" title="财务报销" class="" target="_self"><span class="column-name">财务报销</span></a> 
+          
+     </li> 
+      
+     <li class="wp_column column-3 "> 
+         <a href="/kyjf/list.htm" title="科研经费" class="" target="_self"><span class="column-name">科研经费</span></a> 
+          
+     </li> 
+      
+     <li class="wp_column column-4 "> 
+         <a href="/sfpj/list.htm" title="税费票据" class="" target="_self"><span class="column-name">税费票据</span></a> 
+          
+     </li> 
+      
+     <li class="wp_column column-5 "> 
+         <a href="/gxwfp/list.htm" title="工薪&分配" class="" target="_self"><span class="column-name">工薪&分配</span></a> 
+          
+     </li> 
+      
+     <li class="wp_column column-6 "> 
+         <a href="/xfsj/list.htm" title="学费收缴" class="" target="_self"><span class="column-name">学费收缴</span></a> 
+          
+     </li> 
+      
+     <li class="wp_column column-7 "> 
+         <a href="/bbwda/list.htm" title="报表&档案" class="" target="_self"><span class="column-name">报表&档案</span></a> 
+          
+     </li> 
+      
+     <li class="wp_column column-8 "> 
+         <a href="/cwxt/list.htm" title="财务系统" class="" target="_self"><span class="column-name">财务系统</span></a> 
+          
+     </li> 
+      
+     <li class="wp_column column-9 "> 
+         <a href="/qtzh/list.htm" title="其他综合" class="" target="_self"><span class="column-name">其他综合</span></a> 
+          
+     </li> 
+      
+</ul> 
+ 
+ 
+ </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-news">
+      <div class="col-news-head" frag="面板81">
+        <ul class="col-metas clearfix" frag="窗口81" portletmode="simpleColumnAttri">
+          
+            <li class="col-title">
+              <h2>预算管理</h2></li>
+            <li class="col-path"><span class="path-name">当前位置：</span><a href="/main.htm" target="_self">首页</a><span class='possplit'>&nbsp;&nbsp;</span><a href="/3304/list.htm" target="_self">政策法规</a><span class='possplit'>&nbsp;&nbsp;</span><a href="/ysgl/list.htm" target="_self">预算管理</a></li>
+          
+        </ul>
+      </div>
+      <div class="col-news-con" frag="面板82">
+      	<div class="col-news-list" frag="窗口82" portletmode="simpleList">
+          <div id="wp_news_w82"> 
+ 
+<ul class="wp_article_list"> 
+      
+     <li class="list_item i1"> 
+         <div class="fields pr_fields"> 
+             <span class='Article_Index'>1</span> 
+             <span class='Article_Title'><a href='http://webplus3.nankai.edu.cn/_upload/article/files/6f/82/9e6f4d7e4e86a8c4ec747bee49a4/ae96c557-8256-4dbe-8f51-386e95c77826.pdf' target='_blank' title='南开大学预算管理办法'>南开大学预算管理办法</a></span> 
+         </div> 
+         <div class="fields ex_fields"> 
+              
+             <span class='Article_PublishDate'>2020-02-25</span> 
+              
+         </div> 
+     </li> 
+      
+     <li class="list_item i2"> 
+         <div class="fields pr_fields"> 
+             <span class='Article_Index'>2</span> 
+             <span class='Article_Title'><a href='/2024/0516/c19362a542754/page.htm' target='_blank' title='南开大学基本科研业务费专项资金管理办法'>南开大学基本科研业务费专项资金管理办法</a></span> 
+         </div> 
+         <div class="fields ex_fields"> 
+              
+             <span class='Article_PublishDate'>2024-05-16</span> 
+              
+         </div> 
+     </li> 
+      
+     <li class="list_item i3"> 
+         <div class="fields pr_fields"> 
+             <span class='Article_Index'>3</span> 
+             <span class='Article_Title'><a href='http://webplus3.nankai.edu.cn/_upload/article/files/d9/00/ace7f13e47a98edeef2a8c32da74/0a29d2e5-8137-44d9-a0b8-9bb6a0ac6633.pdf' target='_blank' title='南开大学建设世界一流大学（学科）和特色发展引导专项资金管理办法'>南开大学建设世界一流大学（学科）和特色发展引导专项资金管理办...</a></span> 
+         </div> 
+         <div class="fields ex_fields"> 
+              
+             <span class='Article_PublishDate'>2020-02-25</span> 
+              
+         </div> 
+     </li> 
+      
+     <li class="list_item i4"> 
+         <div class="fields pr_fields"> 
+             <span class='Article_Index'>4</span> 
+             <span class='Article_Title'><a href='http://webplus3.nankai.edu.cn/_upload/article/files/e2/68/2ddde3754f93ab7f2dbf85632f6b/c0d6792c-bc87-4e20-905e-ec83b1a613b6.pdf' target='_blank' title='南开大学天津市共建高校项目和专项资金管理实施细则'>南开大学天津市共建高校项目和专项资金管理实施细则</a></span> 
+         </div> 
+         <div class="fields ex_fields"> 
+              
+             <span class='Article_PublishDate'>2020-02-25</span> 
+              
+         </div> 
+     </li> 
+      
+     <li class="list_item i5"> 
+         <div class="fields pr_fields"> 
+             <span class='Article_Index'>5</span> 
+             <span class='Article_Title'><a href='http://webplus3.nankai.edu.cn/_upload/article/files/1e/a3/2524d8804ab0800636627d9390c1/b4d9b8e2-5996-4b45-ab91-5c912eabf566.pdf' target='_blank' title='南开大学教育教学改革专项资金管理办法'>南开大学教育教学改革专项资金管理办法</a></span> 
+         </div> 
+         <div class="fields ex_fields"> 
+              
+             <span class='Article_PublishDate'>2020-02-25</span> 
+              
+         </div> 
+     </li> 
+      
+     <li class="list_item i6"> 
+         <div class="fields pr_fields"> 
+             <span class='Article_Index'>6</span> 
+             <span class='Article_Title'><a href='http://webplus3.nankai.edu.cn/_upload/article/files/3b/1e/847502f94ef1be191bbd9bf62258/ed19d748-5e5b-4db0-b9bd-1a26ce8f16c8.pdf' target='_blank' title='南开大学改善基本办学条件专项资金管理办法'>南开大学改善基本办学条件专项资金管理办法</a></span> 
+         </div> 
+         <div class="fields ex_fields"> 
+              
+             <span class='Article_PublishDate'>2020-02-25</span> 
+              
+         </div> 
+     </li> 
+      
+</ul> 
+</div> 
+
+ <div id="wp_paging_w82"> 
+<ul class="wp_paging clearfix"> 
+     <li class="pages_count"> 
+         <span class="per_page">每页&nbsp;<em class="per_count">14</em>&nbsp;记录&nbsp;</span> 
+         <span class="all_count">总共&nbsp;<em class="all_count">6</em>&nbsp;记录&nbsp;</span> 
+     </li> 
+     <li class="page_nav"> 
+         <a class="first" href="javascript:void(0);" target="_self"><span>第一页</span></a> 
+         <a class="prev" href="javascript:void(0);" target="_self"><span>&lt;&lt;上一页</span></a> 
+         <a class="next" href="javascript:void(0);" target="_self"><span>下一页&gt;&gt;</span></a> 
+         <a class="last" href="javascript:void(0);" target="_self"><span>尾页</span></a> 
+     </li> 
+     <li class="page_jump"> 
+         <span class="pages">页码&nbsp;<em class="curr_page">1</em>/<em class="all_pages">1</em></span> 
+         <span><input class="pageNum" type="text" /><input type="hidden" class="currPageURL" value=""></span></span> 
+         <span><a class="pagingJump" href="javascript:void(0);" target="_self">跳转到&nbsp;</a></span> 
+     </li> 
+</ul> 
+</div> 
+<script type="text/javascript"> 
+     $().ready(function() { 
+         $("#wp_paging_w82 .pagingJump").click(function() { 
+             var pageNum = $("#wp_paging_w82 .pageNum").val(); 
+             if (pageNum === "") { alert('请输入页码！'); return; } 
+             if (isNaN(pageNum) || pageNum <= 0 || pageNum > 1) { alert('请输入正确页码！'); return; } 
+             var reg = new RegExp("/list", "g"); 
+             var url = "/3304/list.htm"; 
+             window.location.href = url.replace(reg, "/list" + pageNum); 
+         }); 
+     }); 
+</script> 
+
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper" id="footer">
+  <div class="inner foot_inner">
+    <div class="foot ">
+      <div id="copyright" frag="面板61">
+        <p class="copyright" frag="窗口61">天津市卫津路94号 [300071]  津教备0061号 津ICP备12003308号-1　邮编：300071　您是本网站的第<span class="WP_VisitCount" url="/_visitcountdisplay?siteId=62&type=2&columnId=19362">1660</span>位访客
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+ <img src="/_visitcount?siteId=62&type=2&columnId=3304" style="display:none" width="0" height="0"/>

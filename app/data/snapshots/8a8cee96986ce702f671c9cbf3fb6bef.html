@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>原图查看</title>
+        <script type="text/javascript" src="../../_js/_portletPlugs/pictureZoom/pictureZoom.js"></script>
+        <script type="text/javascript" src="../../_js/jquery.min.js"></script>
+        <style>
+            .divCon{
+                width:100%;
+                text-align: center;
+            }
+        </style>
+        <script>
+            var localHref = window.location.href;
+            $(function() {
+                showImageInfo();
+            });
+            function html_encode(str){
+                var s = "";
+                if (str.length == 0)
+                    return "";
+                s = str.replace(/&/g, "&amp;");
+                s = s.replace(/</g, "&lt;");
+                s = s.replace(/>/g, "&gt;");
+                s = s.replace(/ /g, "&nbsp;");
+                s = s.replace(/\'/g, "&#39;");
+                s = s.replace(/\"/g, "&quot;");
+                s = s.replace(/\n/g, "<br/>");
+                return s;
+            }
+            function showImageInfo() {
+                $("#imgShow").attr("src", getQueryStringRegExp("img")).load(function() {
+                    var imgWidth = this.width;
+                    var screen_width = parseInt(screen.width);
+                    if (imgWidth <= screen_width) {
+                        setPInfo(10, "imgShow");
+                    } else {
+                        setPInfo(parseInt((screen_width * 10) / imgWidth), "imgShow");
+                    }
+                });
+            }
+
+            function getQueryStringRegExp(name) {
+                var src  = "";
+                var reg = new RegExp("(^|\\?|&)" + name + "=([^&]*)(\\s|&|$)", "i");
+                if (reg.test(localHref))
+                    src = unescape(RegExp.$2.replace(/\+/g, " "));
+                reg = new RegExp("^[a-zA-z\d\\/.]*$", "i");
+               if (!reg.test(src)){
+                   return "";
+               }
+                return html_encode(src);
+            }
+        </script>
+    </head>
+    <body>
+        <div class="divCon" id="divCon">
+            <img id='imgShow'  title="滚动鼠标可缩放图片" name='imgShow' src='' border='0' onmousewheel='return Picture();'/>
+        </div>
+    </body>
+</html>

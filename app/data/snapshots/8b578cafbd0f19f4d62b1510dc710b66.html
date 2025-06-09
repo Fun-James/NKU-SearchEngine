@@ -1,0 +1,747 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>校友名录</title>
+
+<link type="text/css" href="/_css/_system/system.css" rel="stylesheet"/>
+<link type="text/css" href="/_upload/site/1/style/6/6.css" rel="stylesheet"/>
+<link type="text/css" href="/_upload/site/00/dd/221/style/208/208.css" rel="stylesheet"/>
+<link type="text/css" href="/_js/_portletPlugs/sudyNavi/css/sudyNav.css" rel="stylesheet" />
+<link type="text/css" href="/_js/_portletPlugs/datepicker/css/datepicker.css" rel="stylesheet" />
+<link type="text/css" href="/_js/_portletPlugs/simpleNews/css/simplenews.css" rel="stylesheet" />
+
+<script language="javascript" src="/_js/jquery.min.js" sudy-wp-context="" sudy-wp-siteId="221"></script>
+<script language="javascript" src="/_js/jquery.sudy.wp.visitcount.js"></script>
+<script type="text/javascript" src="/_js/_portletPlugs/sudyNavi/jquery.sudyNav.js"></script>
+<script type="text/javascript" src="/_js/_portletPlugs/datepicker/js/jquery.datepicker.js"></script>
+<script type="text/javascript" src="/_js/_portletPlugs/datepicker/js/datepicker_lang_HK.js"></script>
+<link rel="stylesheet" href="/_upload/tpl/01/c6/454/template454/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="/_upload/tpl/01/c6/454/template454/css/style.css" type="text/css" media="all" />
+<script src="/_upload/tpl/01/c6/454/template454/extends/extends.js"></script>
+</head>
+
+<body>
+<div class="wrapper" id="header">
+  <div class="inner">
+       <div class="head" >
+			<div class="head-left">
+            <div class="sitelogo">
+                <div frag="面板200">
+                    <div frag="窗口200" portletmode="simpleSiteLogo">
+                       <a href="/main.htm" title="返回马克思主义学院首页"><img border='0' src='/_upload/site/00/dd/221/logo.png' /></a> 
+                    </div>
+                </div>
+            </div>
+            <div class="site">
+                <div frag="面板203">
+                    <div frag="窗口203" portletmode="simpleSiteName">
+                        <span class="sitetitle" style="
+       margin-top: -3px;
+    display: block;
+    font-size: 30px;
+    margin-left: 15px;
+"><a href="/main.htm" title="返回马克思主义学院首页"><img src="/_upload/tpl/01/c6/454/template454/images/logo2.png"></a></span>
+                    </div>
+                </div>
+            </div>
+				</div>
+            <div class="head-right">
+					
+            <div frag="面板1">
+<div class="aa" frag="窗口11" portletmode="simpleSudyNavi">
+					
+						
+						<ul class="clearfix">
+							
+							<li class="links i1"><a href="/13974/list.htm" target="_self">联系我们</a> </li>
+							
+						</ul>
+						
+					
+				</div>
+                <div class="ss" frag="窗口1" portletmode="search">
+                    
+    <div class="wp_search">
+        <table>
+            <tr>
+                <td height="25px">
+                    <input id="keyword" name="keyword" style="width: 150px" class="keyword" type="text" value="请输入关键字" onfocus="if (this.value === '请输入关键字') { this.value = ''; }"
+                           onblur="if (this.value === '') { this.value = '请输入关键字'; }" onkeydown="return onKeyEvent(event);"/>
+                </td>
+                <td>
+					<input type="hidden" id="securl" value="/_web/_search/api/search/new.rst?locale=zh_CN&request_locale=zh_CN&_p=YXM9MjIxJnQ9NDU0JmQ9MTY3MyZwPTImZj0xMjYxNyZtPVNOJnxibm5Db2x1bW5WaXJ0dWFsTmFtZT0xMjYxNyY_"/>
+                    <input name="btnsearch" class="search" type="submit" value="" onclick="checkValues();"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+<script>
+    function onKeyEvent(event){
+        if (event.keyCode != '13') {
+            return;
+        }
+        checkValues();
+    }
+    function checkValues(){
+		var url = $("#securl").val();
+        var keyword = $("input[name='keyword']").val();
+		if (keyword === '请输入关键字') {
+			keyword = ''; 
+		}
+		if (keyword !== '') {
+			keyword = encodeURI(encodeURI(keyword));
+			url = url + "&keyword=" + keyword;
+		}
+        window.open(url);
+    }
+</script>
+                </div>
+            </div>
+		 </div>
+        </div>
+    <div class="navbar" frag="面板2">
+      <div class="navbox" frag="窗口2" portletmode="simpleSudyNavi">
+        <div id="wp_nav_w2"> 
+
+ 
+<ul class="wp_nav" data-nav-config="{drop_v: 'down', drop_w: 'right', dir: 'y', opacity_main: '-1', opacity_sub: '-1', dWidth: '0'}">
+      
+     <li class="nav-item i1 "> 
+         <a href="http://cz.nankai.edu.cn/main.htm" title="首页" target="_self"><span class="item-name">首页</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i2 "> 
+         <a href="/13497/list.htm" title="学院概况" target="_self"><span class="item-name">学院概况</span></a><i class="mark"></i> 
+          
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i2-1 "> 
+                 <a href="/13944/list.htm" title="学院简介" target="_self"><span class="item-name">学院简介</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i2-2 "> 
+                 <a href="/13945/list.htm" title="现任领导" target="_self"><span class="item-name">现任领导</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i2-3 "> 
+                 <a href="/13946/list.htm" title="党群组织" target="_self"><span class="item-name">党群组织</span></a><i class="mark"></i> 
+                  
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i2-3-1 "> 
+                 <a href="/13975/list.htm" title="学院党委（委员）" target="_self"><span class="item-name">学院党委（委员）</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i2-3-2 "> 
+                 <a href="/13976/list.htm" title="学院团委" target="_self"><span class="item-name">学院团委</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i2-3-3 "> 
+                 <a href="/13977/list.htm" title="工会教代会" target="_self"><span class="item-name">工会教代会</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+             </li> 
+              
+             <li class="nav-item i2-4 "> 
+                 <a href="/13947/list.htm" title="组织结构" target="_self"><span class="item-name">组织结构</span></a><i class="mark"></i> 
+                  
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i2-4-1 "> 
+                 <a href="/13978/list.htm" title="教研部门" target="_self"><span class="item-name">教研部门</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i2-4-2 "> 
+                 <a href="/13979/list.htm" title="学术机构" target="_self"><span class="item-name">学术机构</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i2-4-3 "> 
+                 <a href="/13980/list.htm" title="研究中心" target="_self"><span class="item-name">研究中心</span></a><i class="mark"></i> 
+                  
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i2-4-3-1 "> 
+                 <a href="/14014/list.htm" title="马克思主义研究中心" target="_self"><span class="item-name">马克思主义研究中心</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i2-4-3-2 "> 
+                 <a href="/14015/list.htm" title="延安五老研究中心" target="_self"><span class="item-name">延安五老研究中心</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i2-4-3-3 "> 
+                 <a href="/14016/list.htm" title="和富研究中心" target="_self"><span class="item-name">和富研究中心</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+             </li> 
+              
+             <li class="nav-item i2-4-4 "> 
+                 <a href="http://cz.nankai.edu.cn/2019/0531/c13981a166491/page.htm" title="行政部门" target="_self"><span class="item-name">行政部门</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i2-4-5 "> 
+                 <a href="/13982/list.htm" title="资料中心" target="_self"><span class="item-name">资料中心</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+             </li> 
+              
+         </ul> 
+          
+     </li> 
+      
+     <li class="nav-item i3 "> 
+         <a href="/13498/list.htm" title="党团建设" target="_self"><span class="item-name">党团建设</span></a><i class="mark"></i> 
+          
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i3-1 "> 
+                 <a href="/13949/list.htm" title="党建工作" target="_self"><span class="item-name">党建工作</span></a><i class="mark"></i> 
+                  
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i3-1-1 "> 
+                 <a href="/13983/list.htm" title="党的建设" target="_self"><span class="item-name">党的建设</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i3-1-2 "> 
+                 <a href="/13984/list.htm" title="专题教育" target="_self"><span class="item-name">专题教育</span></a><i class="mark"></i> 
+                  
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i3-1-2-1 "> 
+                 <a href="/14004/list.htm" title="群众路线教育" target="_self"><span class="item-name">群众路线教育</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i3-1-2-2 "> 
+                 <a href="/14005/list.htm" title="三严三实" target="_self"><span class="item-name">三严三实</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i3-1-2-3 "> 
+                 <a href="/14006/list.htm" title="两学一做" target="_self"><span class="item-name">两学一做</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+             </li> 
+              
+             <li class="nav-item i3-1-3 "> 
+                 <a href="/13985/list.htm" title="支部建设" target="_self"><span class="item-name">支部建设</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i3-1-4 "> 
+                 <a href="/13986/list.htm" title="党校活动" target="_self"><span class="item-name">党校活动</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i3-1-5 "> 
+                 <a href="/13987/list.htm" title="党员风采" target="_self"><span class="item-name">党员风采</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+             </li> 
+              
+             <li class="nav-item i3-2 "> 
+                 <a href="/13950/list.htm" title="团建工作" target="_self"><span class="item-name">团建工作</span></a><i class="mark"></i> 
+                  
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i3-2-1 "> 
+                 <a href="/13988/list.htm" title="团学工作" target="_self"><span class="item-name">团学工作</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i3-2-2 "> 
+                 <a href="/13989/list.htm" title="学生社团" target="_self"><span class="item-name">学生社团</span></a><i class="mark"></i> 
+                  
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i3-2-2-1 "> 
+                 <a href="/17281/list.htm" title="红色记忆宣讲团" target="_self"><span class="item-name">红色记忆宣讲团</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i3-2-2-2 "> 
+                 <a href="/17282/list.htm" title="新觉悟社" target="_self"><span class="item-name">新觉悟社</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i3-2-2-3 "> 
+                 <a href="/17285/list.htm" title="周恩来池田大作研究会" target="_self"><span class="item-name">周恩来池田大作研究会</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i3-2-2-4 "> 
+                 <a href="/17283/list.htm" title="瑚琏琴社" target="_self"><span class="item-name">瑚琏琴社</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i3-2-2-5 "> 
+                 <a href="/17284/list.htm" title="越剧团" target="_self"><span class="item-name">越剧团</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i3-2-2-6 "> 
+                 <a href="/17286/list.htm" title="南开大学演讲团" target="_self"><span class="item-name">南开大学演讲团</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+             </li> 
+              
+         </ul> 
+          
+             </li> 
+              
+             <li class="nav-item i3-3 "> 
+                 <a href="/ghfc/list.htm" title="工会风采" target="_self"><span class="item-name">工会风采</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+     </li> 
+      
+     <li class="nav-item i4 "> 
+         <a href="/13499/list.htm" title="思政课程" target="_self"><span class="item-name">思政课程</span></a><i class="mark"></i> 
+          
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i4-1 "> 
+                 <a href="/rmwgkkwnkmyw/list.htm" title="人民网公开课（南开马院）" target="_self"><span class="item-name">人民网公开课（南开马院）</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i4-2 "> 
+                 <a href="/ssst/list.htm" title="师生四同" target="_self"><span class="item-name">师生四同</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i4-3 "> 
+                 <a href="/jgjy/list.htm" title="教改研得" target="_self"><span class="item-name">教改研得</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i4-4 "> 
+                 <a href="/tjsgxwyxypwszxxkpppyxm/list.htm" title="一校一品" target="_self"><span class="item-name">一校一品</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i4-5 "> 
+                 <a href="/tjsszkwjcykwhjzp/list.htm" title="精彩一课" target="_self"><span class="item-name">精彩一课</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i4-6 "> 
+                 <a href="/mywtkbtxjxbyqwzxjx/list.htm" title="“停课不停学 教学不延期”" target="_self"><span class="item-name">“停课不停学 教学不延期”</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+     </li> 
+      
+     <li class="nav-item i5 "> 
+         <a href="/13500/list.htm" title="师资力量" target="_self"><span class="item-name">师资力量</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i6 "> 
+         <a href="/13501/list.htm" title="教学科研" target="_self"><span class="item-name">教学科研</span></a><i class="mark"></i> 
+          
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i6-1 "> 
+                 <a href="/13958/list.htm" title="本科生教育" target="_self"><span class="item-name">本科生教育</span></a><i class="mark"></i> 
+                  
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i6-1-1 "> 
+                 <a href="/13990/list.htm" title="教务信息" target="_self"><span class="item-name">教务信息</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-1-2 "> 
+                 <a href="/13991/list.htm" title="课程管理" target="_self"><span class="item-name">课程管理</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-1-3 "> 
+                 <a href="/13992/list.htm" title="学科专业" target="_self"><span class="item-name">学科专业</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-1-4 "> 
+                 <a href="/13993/list.htm" title="毕业管理" target="_self"><span class="item-name">毕业管理</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-1-5 "> 
+                 <a href="/13994/list.htm" title="考试管理" target="_self"><span class="item-name">考试管理</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-1-6 "> 
+                 <a href="/13995/list.htm" title="表格下载" target="_self"><span class="item-name">表格下载</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-1-7 "> 
+                 <a href="/13996/list.htm" title="规章制度" target="_self"><span class="item-name">规章制度</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+             </li> 
+              
+             <li class="nav-item i6-2 "> 
+                 <a href="/13959/list.htm" title="研究生教育" target="_self"><span class="item-name">研究生教育</span></a><i class="mark"></i> 
+                  
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i6-2-1 "> 
+                 <a href="/13997/list.htm" title="教务信息" target="_self"><span class="item-name">教务信息</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-2-2 "> 
+                 <a href="/13998/list.htm" title="课程管理" target="_self"><span class="item-name">课程管理</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-2-3 "> 
+                 <a href="/13999/list.htm" title="专业学位" target="_self"><span class="item-name">专业学位</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-2-4 "> 
+                 <a href="/14000/list.htm" title="招生信息" target="_self"><span class="item-name">招生信息</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-2-5 "> 
+                 <a href="/14001/list.htm" title="毕业管理" target="_self"><span class="item-name">毕业管理</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-2-6 "> 
+                 <a href="/14002/list.htm" title="文件下载" target="_self"><span class="item-name">文件下载</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-2-7 "> 
+                 <a href="/14003/list.htm" title="常用链接" target="_self"><span class="item-name">常用链接</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+             </li> 
+              
+             <li class="nav-item i6-3 "> 
+                 <a href="/13960/list.htm" title="学科建设" target="_self"><span class="item-name">学科建设</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-4 "> 
+                 <a href="/13961/list.htm" title="科研动态" target="_self"><span class="item-name">科研动态</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-5 "> 
+                 <a href="/13962/list.htm" title="教学信息" target="_self"><span class="item-name">教学信息</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i6-6 "> 
+                 <a href="/qkdt/list.htm" title="期刊动态" target="_self"><span class="item-name">期刊动态</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+     </li> 
+      
+     <li class="nav-item i7 "> 
+         <a href="/13502/list.htm" title="学生培养" target="_self"><span class="item-name">学生培养</span></a><i class="mark"></i> 
+          
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i7-1 "> 
+                 <a href="/13963/list.htm" title="学工动态" target="_self"><span class="item-name">学工动态</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i7-2 "> 
+                 <a href="/13964/list.htm" title="辅学平台" target="_self"><span class="item-name">辅学平台</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i7-3 "> 
+                 <a href="/13965/list.htm" title="就业指导" target="_self"><span class="item-name">就业指导</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i7-4 "> 
+                 <a href="/13966/list.htm" title="校际交流" target="_self"><span class="item-name">校际交流</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i7-5 "> 
+                 <a href="/13967/list.htm" title="育人成果" target="_self"><span class="item-name">育人成果</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+     </li> 
+      
+     <li class="nav-item i8 "> 
+         <a href="/13503/list.htm" title="国际交流" target="_self"><span class="item-name">国际交流</span></a><i class="mark"></i> 
+          
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i8-1 "> 
+                 <a href="/13968/list.htm" title="交流动态" target="_self"><span class="item-name">交流动态</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i8-2 "> 
+                 <a href="/13969/list.htm" title="教师海外研修" target="_self"><span class="item-name">教师海外研修</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i8-3 "> 
+                 <a href="/13970/list.htm" title="学生海外研修" target="_self"><span class="item-name">学生海外研修</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+     </li> 
+      
+     <li class="nav-item i9 "> 
+         <a href="/13504/list.htm" title="校友之家" target="_self"><span class="item-name">校友之家</span></a><i class="mark"></i> 
+          
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i9-1 "> 
+                 <a href="/13971/list.htm" title="校友活动" target="_self"><span class="item-name">校友活动</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i9-2 "> 
+                 <a href="/13972/list.htm" title="校友名录" target="_self"><span class="item-name">校友名录</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i9-3 "> 
+                 <a href="/13973/list.htm" title="校友会" target="_self"><span class="item-name">校友会</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i9-4 "> 
+                 <a href="/13974/list.htm" title="联系我们" target="_self"><span class="item-name">联系我们</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+     </li> 
+      
+     <li class="nav-item i10 "> 
+         <a href="/cpyc/list.htm" title="诚聘英才" target="_self"><span class="item-name">诚聘英才</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i11 "> 
+         <a href="/kcpx/list.htm" title="课程培训" target="_self"><span class="item-name">课程培训</span></a><i class="mark"></i> 
+          
+         <ul class="sub-nav"> 
+              
+             <li class="nav-item i11-1 "> 
+                 <a href="/35815/list.htm" title="课程介绍" target="_self"><span class="item-name">课程介绍</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i11-2 "> 
+                 <a href="/35816/list.htm" title="往期案例" target="_self"><span class="item-name">往期案例</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+             <li class="nav-item i11-3 "> 
+                 <a href="/ztkc/list.htm" title="专题课程" target="_self"><span class="item-name">专题课程</span></a><i class="mark"></i> 
+                  
+             </li> 
+              
+         </ul> 
+          
+     </li> 
+      
+     <li class="nav-item i12 "> 
+         <a href=" http://cz.nankai.edu.cn/czen" title="English" target="_self"><span class="item-name">English</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+</ul> 
+ 
+ 
+ </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper" id="jumbotran">
+  <div class="inner">
+    <div class="jumbotran" frag="面板7">
+      <div class="jumbotran-box" frag="窗口7" portletmode="simpleColumnPicture">
+        <span class='Column_Picture'><img border='0' src='/_upload/column/31/49/12617/picture.png'  /></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper" id="container">
+	<div class="inner">
+  	<div class="col_menu">
+    	<div class="col_menu_head" frag="面板3">
+      	<h3 class="col_name" frag="窗口3" portletmode="simpleColumnAnchor">
+        	<span class="col_name_text">
+          	<span class='Column_Anchor'>校友之家</span>
+          </span>
+        </h3>
+      </div>
+      <div class="col_menu_con" frag="面板4">
+      	<div class="col_list" frag="窗口4" portletmode="simpleColumnList">
+        	<div id="wp_listcolumn_w4"> 
+
+ 
+<ul class="wp_listcolumn"> 
+      
+     <li class="wp_column column-1 "> 
+         <a href="/13971/list.htm" title="校友活动" class="" target="_self"><span class="column-name">校友活动</span></a> 
+          
+     </li> 
+      
+     <li class="wp_column column-2 selected"> 
+         <a href="/13972/list.htm" title="校友名录" class="selected" target="_self"><span class="column-name">校友名录</span></a> 
+          
+     </li> 
+      
+     <li class="wp_column column-3 "> 
+         <a href="/13973/list.htm" title="校友会" class="" target="_self"><span class="column-name">校友会</span></a> 
+          
+     </li> 
+      
+     <li class="wp_column column-4 "> 
+         <a href="/13974/list.htm" title="联系我们" class="" target="_self"><span class="column-name">联系我们</span></a> 
+          
+     </li> 
+      
+</ul> 
+ 
+ 
+ </div>
+        </div>
+      </div>
+    </div>
+    <div class="col_news">
+    	<div class="col_news_head" frag="面板5">
+      	<ul class="col_metas clearfix" frag="窗口5" portletmode="simpleColumnAttri">
+         
+        	<li class="col_title"><h2>校友名录</h2></li>
+          <li class="col_path"><span class="path_name">当前位置：</span><a href="/main.htm" target="_self">首页</a><span class='possplit'>&nbsp;&nbsp;</span><a href="/13504/list.htm" target="_self">校友之家</a><span class='possplit'>&nbsp;&nbsp;</span><a href="/13972/list.htm" target="_self">校友名录</a></li>
+         
+        </ul>
+      </div>
+      <div class="col_news_con" frag="面板6">
+      	<div class="col_news_list" frag="窗口6" portletmode="simpleList">
+           
+<div class="wp_single wp_column_article" id="wp_column_article"> 
+     <div class="wp_entry"> 
+         <div class="wp_articlecontent"> 
+             <div id="wp_content_w6_0" class="paging_content" style="display:"> 
+<table width="829" align="left" class="MsoTableGrid" style="margin:auto 9px;padding:0px;border:currentcolor;border-image:none;width:749px;color:#666666;text-transform:none;text-indent:0px;letter-spacing:normal;font-size:14px;font-style:normal;font-weight:400;word-spacing:0px;border-collapse:collapse;orphans:2;widows:2;font-variant-ligatures:normal;font-variant-caps:normal;-webkit-text-stroke-width:0px;text-decoration-style:initial;text-decoration-color:initial;" border="1" cellspacing="0" cellpadding="0"><tbody style="margin:0px;padding:0px;color:#666666;"><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:1px solid #a6a6a6;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="font-family:宋体;"><span style="margin:0px;padding:0px;color:#666666;">2012</span><span style="margin:0px;padding:0px;color:#666666;">级</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">韩祥宇、连金、孙乾、王品越、熊傲、张一松、陈琴、韩绮颜、贾若文、康钰、廉慧玉、卢衍禺、孟昕、田子涵、王杉、曾丹、翟珣、张卉明、张玉杰、赵姝媛、郑文婧</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">马军民、武亭亭、侯婷婷、王松强、吴银飞、张卫、张巍、郭方园、李娜、于阳阳、张婷、赵红清、赵新欣、崔璇、马琳瑛、张政、高莉娟、郭慧敏、魏嘉、崔雪、韩佳美、乐青、梁梦霞、吴淑丽、孙艺丹、郅艳梅、冯元、鲁楠、杨能、戎浩、吴承强、牛恒欢、杨远良、张玉川、诸葛瑞强、乔光东</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">博士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">陈长风、杨丽雯、杜翠梅、杨文娟、王超、李茗茗、邱春林、刘文佳、王庆超、邢怀亮、冯乐、郭威、崔欣玉、王建洲、殷一博、张妍、王燕珺、李碧石、李宁、王玉丽、王兆云、闫翠娟、胡军、安雅琴、刘向锋、陈兆红、刘芳、刘煜昊</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2011</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">常云桥、郎庆荣、宋彦泽、张铎、张誉仁、谷永鑫、刘琦、毛霞红、裴妍、谢君、薛颖、潘蕾、任亿伟、尤梦婷、张杨、秋硕、赵芊、周国艳、钟景红、周蓉、朱晓研、左为梅</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">崔福明、鲁晓晓、段永强、贾利颍、李少华、马宏涛、王文岭、杨丽雯、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">超、王倩倩、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">媛、韩俊平、李茗茗、刘佳佳、扶志刚、刘亚会、王育锋、付爱君、金</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">玉、牛晓晰、崔欣玉、杜志惠、李怡阳、吕</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">群、马</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">燕、魏</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">娜、郭</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">威、李海宾、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">然、韦小通、纪</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">淳、梁文龙、殷一博、李芙蓉、梁峥峥、徐</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">彭、郑</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">双、郑志林、赵耀文</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">博士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">胡银银、胡志辉、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">帆、方</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">伟、张文飞、任</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">琳、王思鸿、曾</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">静、张红柳、温建雪、朱熙宁、李爱华、倪明胜、田春艳、吴佩芬、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">艳、杜胜利、牛文利、谢光勇、段</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">玉、王国明、张治国、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">伟、刘爱玲、刘振强、唐伟锋、王俊桥、解庆宾、齐凯君</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2010</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">李敬、马涛、苏天翼、戴丽君、霍扬、李贝贝、宋桂花、唐智诚、田琪 王莉、徐晓丹、张怀予、张璐、赵艳华、赵冶、赵永丽、朱婷婷、赵蓉、王小弟</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">石雨熹、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">旭、辛凤华、丁彦文、石</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">健、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">欢、王利娟、张巧稚、杜卫健、杨学平、李钰潇、刘</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">倩、邱兴华、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">楠、史凤阁、杨文娟、王云民、侯丽静、马明冲、于安龙、蔡姣婷、魏志敏、闫</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">磊、刘旭虹、陆</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">阳、马振叶、庞红敏、王晓凤、谢丽娟、许</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">萌、杨</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">静、田</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">英、贾</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">凯、田云飞、崔东文、孟祥安、南慧茹、王辛刚</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">博士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">李宗建、牛文浩、王文强、豆庆升、曲、凯、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">琳、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">茜、张爱华、张丽莉、马淑娟、赵学昌、高媛媛、刘</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">晋、刘</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">慧、滕翠华、夏静雷、杜宝玲、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">兰、杜广杰、宋</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">婷、邢丽芳、王桂菊、杨国强、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">维、王雪超、李思聪</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2009</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">曹猛、付亚奇、孟令生、孟中秋、张腾霄、崔雪、杜雅楠、韩彩风、梁梦霞、刘楚妍、刘小宁、刘彦、齐芳佩、孙桂荣、谈妍、王婷婷、吴雪、徐千华、张婷、张悦、郅艳梅</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">王彩晔、胡银银、张苗苗、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">颖、胡志辉、王广峰、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">欣、杨晓成、杨</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">欣、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">剑、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">培、高秀峰、刘春亮、赵明明、乔</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">娜、邢华彬、于</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">娟、王燕红、吴</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">爽、战元芳、刘汉玉、罗</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">岐、汝</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">平、段</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">玉、何</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">珊、栾芳芳、宁</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">静、于玲玲、吕雪艳、夏</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">静、裴志娜、席英僡、曹</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">蒙、解庆宾、樊少华、江</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">毅、王浩宇、郑</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">伟、赵润青</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">博士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">冯德军、郑兴刚、李文华、伍绍勤、丁</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">咚、任春峰、路晓锋、齐艳苓、高建华、朱</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">健、邵新顺、赛</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">北、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">凤、刘占奎、王素斋、杨秀萍、李世辉、李玉萍、才</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">华、蓝</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">海、王迎新、郝幸艳、韩剑锋、梁丽辉、仲地锋、万</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">奎</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2008</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">李贺贺、雷进华、刘琦、刘晗、张锦宠、张现彬、张廷厚、史涛、金梦、鲁楠、李婧、钟子尧、唐彩霞、魏晶、张一凡、冯元、郭玮、王天则、满媛</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">贾素明、宋海涛、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">茜、安腾飞、李向京、王建君、赵路华、李炳通、刘忠锋、唐伟锋、王慧娟、谢燕红、李东锋、高媛媛、牛宏艳、殷凤敏、黄丽丽、刘</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">晋、殷</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">倩、彭</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">爽、王雪超、闫</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">夏、岳才华、刘</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">云、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">爽、刘雅婧、杨旭忠、陈蓓蓓、单伟亮、樊立侠、高素红、李宗建、吕宜倩、黄</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">琰、马</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">超、金博渊、欧</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">晋、张天本、赵鲁臻、朱</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">旭</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">博士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">磬、葛亚坤、花文潇、陈燕平、康小怀、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">明、刘玉靖、谢忠平肖光文、秦明月、魏雄军、高丽萍、赵</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">鸣、陈标平、韦幼苏、刘爱军、杨文圣、张红妹、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">萍、冯晓阳、路</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">波、吴荣生、安祥仁、孙晓华、徐</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">锋</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2007</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">杨彬、郭威、何龙、王小弟、王志萌、叶瑞龙、刘洋、李昊、洪雪茹、刘礼、李想、李怡阳、崔欣玉、朱瑞、赵蓉、邹静、邱文静、刘玮、吴黛</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">白</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">璐、杜富娜、李书瑞、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">国、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">洋、高</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">阳、牛文浩、吴晨晨、叶</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">帆、候沁宇、候有升、李文忠、刘占奎、刘中华、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">飞、于</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">敏、卓祖方、李大棚、王成玲、赵化冲、朱玉晓、朱</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">健、李世辉、苏丽丽、白晓剑、高建华、刘</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">慧、任小艳、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">琳、魏</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">华、陈静萍、袁</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">婧、赵翠云、康丽滢、成</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">林、孙海东、韩</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">锐、邓</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">成、聂文婷、赵</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">岚、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">晗</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">博士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">张志辉、张殿军、郑林华、李延华、张秀阁、初春华、王承就、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">可、张国锋、赵</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">敏、代俊兰、郭</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">强、陈红娟、靳书君、韩艳涛、余一凡、章</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">杨</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2006</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">苏天翼、李敬、马涛、于良涛、李贝贝、宋桂花、霍扬、戴丽君、唐智诚、王莉、田琪、张怀予、张璐、徐晓丹、赵艳华、赵冶、赵永丽、朱婷婷</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">娟、冯淑瑾、毛慧敏、葛亚坤、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">倩、潘殿全、孙</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">爽、秦明月、肖光文、吴荣生、赵玉军、谭</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">苋、王飞飞、杨美丽、宫立杰、金雪飞、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">伟、王艳红、安祥仁、李洪喜、马亚男、蒋海燕、焦银鸽、李润明、苗书利、宁洁亚、孙晓华、袁龙岗</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">博士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">邵宪梅、韩</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">柱、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">歆、李海涛、赵化刚、姚巧华、郑宏颖、侯</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">明、张秀清、赵</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">彤</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2005</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">白杨、包传娇、丁若木、高泳、耿艳、郭天天、鞠海坤、李瑞雪、路红芳、罗宝洪、吕昆晏、吕雪艳、牛得松、尚明、王莹、伍娟、赵海强、赵丽、周琼、周瑶</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">李敏丽、韩</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">竹、郝晓晨、王好萍、胡一萍、于</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">辉、韩</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">旭、李小静、郑慧英、张晓岩、何大海、孔维健、罗忠荣、张春莹、章</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">杨、赵</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">元、单珏慧、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">军、余一凡、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">靖、敖</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">静、陈红娟、陈</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">昕、景正茂、王国明</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">博士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">冉文伟、鄢本凤、李彦昭、王俊华、刘会新、邰哈斯</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2004</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">曹莹、陈腾宇、都岩、高杨、何珊、何雅丽、李高扬、刘筱筱、刘洋、马超、孙嵩林、徐宏潇、徐宇峰、叶宗君、于茂富 袁继亮、张丽文、张素芹、赵丁丁、邹主东</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">车运景、席华娟、薛丽琴、王慧芳、肖</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">湘、侯</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">明、李洪满、杨付红、陈兆红、金学东、赵化刚、路高峰、许</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">倩、杜广杰、管</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">宁、韩</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">丽、王伟娟、范冬香、路晓锋、平芹芹、李红梅、高</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">波、臧文淼、王芸惠、陈会芹</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">博士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">王春风、李合亮、徐</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">中、苏宝俊、周三胜、朱丽萍、王贺胜、张葆春</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2003</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">李爽、黄晓丹、袁婧、尚倩倩、王雅卓、刘小溪、林爱珍、熊润芳 姜娟、余媛媛、朱历屏、刘伟、贾雪里、胡晶晶、郑超、王君君、朱丁恺、朱晶波、朱宏波、刘西学、张万松</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">高立军、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">丹、邢晓静、周</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">兵、杜弘韬、秦</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">颖、刘文欣、朱寿庆、初春华、王洪彬、刘</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">浩、冯江红、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">扬、冯文艳、赵元春、范春艳、徐亚娜、胡</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">勇、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">楠、于晓庆、袁</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">芳、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">刚、朱君梅、郑爱红、袁</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">宙、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">菲、郭小学、靳玉华、万丽华、孙晓华、吴佩芬、宋玉清、袁</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">云、王丽娴</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2002</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">王伟、金雪飞、王岩、杨彦春、张鹏霄、陈荟、黄晶菁、郭婉莹、苏文莉、朴丽花、田园、谭苋、相羽、汪洁、周帅</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">王金玲、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">歆、颜杰峰、王宣瑛、刘玉靖、孙运涛、孙</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">伟、戈黎华、刘</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">珣、钟玉文、王兆云、弓丽娜、黄</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">涛</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2001</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">杨涛、余一凡、孔宪翔、马桂斌、朴贤、张弛、吉飚、单珏慧、高雁何晶、蒋晓敏、李陈微、李瑶、逯文杰、梅晶磊、孙晏如、武蕾、尤艳婕、张春莹、章杨、郑玲玲</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">胡尹燕、张春霞、顾洪英、张宏岩、王玉新、马喜春、孔</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">玲、赵</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">伟、崔满顺、黄丽红、张文飞、姜</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">东、史九卿、史丽香、孙</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">颖、周多刚、邢邴华、李文华</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">2000</span><span style="margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">本科生</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">李亚军、路高峰、马钰金、王铭惠、王延东、姚文军、赵楠、朱中卫、刚岩、李春霞、梁静、刘洋 马文娟、马亚男、徐悦、杨欣华、秦臻</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">郭</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">洁、李静静、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">敏、何伶俐、钟</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">恒、崔学军、赵学锋、董</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">欣、白向宁、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">喆、曹亚芳、岳从欣、朱荣华、何喜莲、吴春霞、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">梅、曹金华、奚先来</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1999</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">车壮丽、刘玉新、乔永忠、李信群、晋丽珍、张国锋、刘锋博、康安平、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">颖、朱全景、吴玉风、王晨艳、王玉云、马立民</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1998</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">禹伟良、林艳辉、俞艳丽、李云鹏、刘</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">仓、李立军、卢、君、任永菊、李鹏奇、甘小军、吴</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">娜、苏荟莹、谢</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">强、杜玉莲、王庆彬</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1997</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">何建江、秦海英、杨</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">苗、曹爱华、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">勇、裴</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">辛、温</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">浩、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">慧、傅</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">新、陈良咨、郜志英、蒋旭东、茹</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">宁、刚、威、王肖燕、李云山</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1996</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">陈桂兰、霍</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">铁、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">强、孟</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">闽、郭建强、房连泉、许云霄、陈</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">弘、杨晓玲、方后军、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">峰</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1995</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">戴</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">源、汪向阳、卜翔国、张志辉、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">杰、阮班会、赵贵军、卫淑琴、邵激光、赵美玲</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1994</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">张登波、高延勇、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">峰、李俊云、谢鸿昆、伍学军</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1993</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">陈真年、陈</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">雷、李昆刚、王跃峰、高科泰、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">洁、李福堂、白玉国、高建斌</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1992</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">匡树辉、曹</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">普、刘忠权、高</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">翔、盛和泰、谭水华、温京萍</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1991</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">孙可加、周兴军、姜协军、马</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">飞、王燕晓、连</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">洁、郭道新、吴练达</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1990</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">肖</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">前、孙</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">航、南饶华、徐</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">平、陈</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">辉、李</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">可、严亨祥、郑耀东、王尚礼</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1989</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">胡春辉、张满生、吕</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">齐、程文杰、张金斗、李洪东、高</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">庆、朱双荣、王永志、方小利、郭亚全、丁茂战、黄维忠、吕国庆、刘、欣、贾玉树、李友安</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1988</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">王寒松、解</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">安、徐建民、李旭辉、计永超、杜金泉、肖胜利、冯小品、寇清杰、张亚辉、韦幼苏、季健霞、张</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp;<span>&nbsp;</span></span></span><span style="font-family:宋体;">亚</span></span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1987</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">杨令侠、杨青海、武红军、杨 毅、王秀琴、杨毅周、宋作勇、薛 军、陈钟林、白长虹、杨桂华</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1986</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">赵铁锁、严士凡、李跃进</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1985</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">陈杰、刘炳香、张山新</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="829" valign="top" style="background:#bfbfbf;margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;" colspan="2"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">1984</span><span style="background:#bfbfbf;margin:0px;padding:0px;color:#666666;">级</span></p></td></tr><tr style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><td width="83" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;text-align:center;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;">硕士</span></p></td><td width="747" valign="top" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;background-color:transparent;"><p class="MsoNormal" style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;"><span style="margin:0px;padding:0px;color:#666666;"><span style="font-family:宋体;">卜万平、张培成、张秀珍、王</span><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;"><span style="margin:0px;padding:0px;color:#666666;font-family:微软雅黑;">&nbsp; 红</span></span><span style="font-family:宋体;">、张荣臣</span></span></p></td></tr></tbody></table><p style="margin:0px;padding:0px;border:currentcolor;border-image:none;color:#666666;text-transform:none;text-indent:0px;letter-spacing:normal;font-size:14px;font-style:normal;font-weight:400;word-spacing:0px;orphans:2;widows:2;font-variant-ligatures:normal;font-variant-caps:normal;-webkit-text-stroke-width:0px;text-decoration-style:initial;text-decoration-color:initial;">&nbsp;</p><p><br /></p>
+</div> 
+ 
+         </div> 
+     </div> 
+</div> 
+
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+
+<div class="wrapper" id="footer">
+    <div class="inner">
+        <div class="foot-left" frag="面板201">
+            <div frag="窗口201" portletmode="simpleSiteAttri">
+                
+                    <p><span class="copyright">南开大学 </span><span class="addr">天津海河教育园区同砚路38号 </span><span class="tel">电话：022-23502579 </span><span class="email">邮编：300350</span></p>
+					
+				
+			
+                </div>
+            </div>
+		<div class="foot-right" frag="面板10">
+				<div class="links-wrap-l" frag="窗口81">
+						<a class="links-arrow" frag="标题">全国重点马院链接</a>
+						<div class="link-items">
+							
+						</div>
+					</div>
+			<div class="links-wrap-c" frag="窗口82">
+						<a class="links-arrow" frag="标题">重点网站链接</a>
+						<div class="link-items">
+							
+						</div>
+					</div>
+			<div class="links-wrap-r" frag="窗口83">
+						<a class="links-arrow" frag="标题">常用下载</a>
+						<div class="link-items">
+							
+						</div>
+					</div>
+			
+			
+		</div>
+		
+        </div>
+    </div>
+</body>
+</html>
+
+ <img src="/_visitcount?siteId=221&type=2&columnId=13972" style="display:none" width="0" height="0"/>

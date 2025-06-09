@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.min.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <![endif]-->
+    <title>搜索</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/news.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-datetimepicker.min.css" />
+</head>
+<body>
+<!-- 导航 -->
+<div class="space" style="height: 72px;"></div>
+<nav class="nankai-navbar nankai-navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header" style="line-height: 73px;">        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+            <a class="navbar-brand navbar-brand" href="/"><img src="/static/img/home/logo.jpg" alt=""></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                                    <li><a href="/" >首页</a></li>
+                    <li><a href="/leader" target="_blank">学校领导</a></li>
+                    <li><a href="/organization" target="_blank">机构人员</a></li>
+                    <li><a href="http://xxgk.nankai.edu.cn/" target="_blank">信息公开</a></li>
+                    <li><a href="http://xzxx.nankai.edu.cn/" target="_blank">校长信箱</a></li>
+                    <li><a href="http://nkoa.nankai.edu.cn" target="_blank">OA系统</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- content -->
+<div class="container nankai-container">
+
+    <!-- newslist -->
+    <div class="nankai-news-list">
+        <!-- title -->
+        <div class="row nankai-title">
+            <div class="col-sm-6 col-md-6 nankai-doc-title">搜索</div>
+            <div class="col-sm-6 col-md-6 nankai-doc-position">
+                当前位置 - <a href="/">首页</a>&nbsp;/&nbsp;搜索
+            </div>
+        </div>
+        <!-- list -->
+        <div class="row" style="margin: 0;">
+            <form class="form-inline" role="form" method="post" action="/search/2" id="search-form">
+                <div class="form-group">
+                    <label for="title">标题</label>
+                    <input type="text" value="" class="form-control" id="title" name="title" placeholder="请输入标题关键字">
+                </div>
+                <div class="form-group">
+                    <label for="content">内容</label>
+                    <input type="text" value="" class="form-control" id="content" name="content" placeholder="请输入内容关键字">
+                </div>
+                <div class="form-group">
+                    <label for="startTime">开始时间</label>
+                    <input size="16" value="" type="text" class="form-control" readonly id="startTime" name="startTime">
+                </div>
+                <div class="form-group">
+                    <label for="endTime">结束时间</label>
+                    <input size="16" value="" type="text" class="form-control" readonly id="endTime" name="endTime">
+                </div>
+
+                <input type="hidden" name="num" id="num" value="1">
+                <button type="button" class="btn btn-default" id="search-btn">搜索</button>
+            </form>
+
+
+
+            <div class="col-xs-12 col-sm-12 nankai-cont-right search-list">
+                <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation">
+                            <a href="/article/14998" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p><b style="color:black">南发字〔2025〕80号关于印发《〈南开大学横向科研项目及经费管理办法〉中有关经费报销管理的补充规定》的通知</b></p>
+                                        <p>南发字〔2025〕80号关于印发《〈南开大学横向科研项目及经费管理办法〉中有关经费报销管理的补充规定》的通知各学院、各单位、各部门，附属医院：《〈南开大学横向科研项目及经费管理办法〉中有关经费报销管理的补充规定》业经2025年5月7日第十一次校长办公会议审议通过，现印发你们，请遵照执行。南开大学2...</p>
+                                    </div>
+                                    <div class="col-md-4 time">2025/05/30</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/article/14997" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p><b style="color:black">南发字〔2025〕79号关于修订《南开大学科研项目经费博士专项计划招生实施办法》的通知</b></p>
+                                        <p>南发字〔2025〕79号关于修订《南开大学科研项目经费博士专项计划招生实施办法》的通知各学院、各单位、各部门，附属医院：修订后的《南开大学科研项目经费博士专项计划招生实施办法》业经2025年5月7日第十一次校长办公会议审议通过，现印发你们，请遵照执行。南开大学2025年5月7日（此件主动公开）南开...</p>
+                                    </div>
+                                    <div class="col-md-4 time">2025/05/30</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/article/14996" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p><b style="color:black">南发字〔2025〕78号关于认定张铭悦等教师系列中级专业技术职务任职资格的通知</b></p>
+                                        <p>南发字〔2025〕78号关于认定张铭悦等教师系列中级专业技术职务任职资格的通知各学院、各单位、各部门，附属医院：经各学科教师系列专业技术职务评审分委员会审议通过，认定下列人员具有讲师任职资格：历史学院张铭悦外国语学院郑锡然周恩来政府管理学院娜菲沙•哈力克金融学院吕沛繁商学院苏比伊努尔•阿卜杜拉旅游...</p>
+                                    </div>
+                                    <div class="col-md-4 time">2025/05/29</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/article/14995" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p><b style="color:black">南发字〔2025〕77号关于认定部分教育管理研究系列人员任职资格的通知</b></p>
+                                        <p>南发字〔2025〕77号关于认定部分教育管理研究系列人员任职资格的通知各学院、各单位、各部门，附属医院：经校教育管理研究系列专业技术职务评审委员会审议通过，认定下列人员具有教育管理研究系列高级职务任职资格：研究员：邢丽芳郑龙副研究员：仇林平扬卢伟任子雄许萌耿松青经教育管理研究系列专业技术职务评审分...</p>
+                                    </div>
+                                    <div class="col-md-4 time">2025/05/29</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/article/14994" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p><b style="color:black">南发字〔2025〕76号关于认定部分其他系列专业技术人员任职资格的通知</b></p>
+                                        <p>南发字〔2025〕76号关于认定部分其他系列专业技术人员任职资格的通知各学院、各单位、各部门，附属医院：经校其他系列专业技术职务评审委员会审议通过，认定下列人员具有高级职务任职资格：一、工程技术系列正高级工程师：卢冶边强高级工程师：刘乐二、实验技术系列正高级实验师：王槿高级实验师：冯欢王海许丽乜鹏...</p>
+                                    </div>
+                                    <div class="col-md-4 time">2025/05/29</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/article/14993" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p><b style="color:black">南发字〔2025〕75号关于公布2024年教师系列专业技术职务聘任名单的通知</b></p>
+                                        <p>南发字〔2025〕75号关于公布2024年教师系列专业技术职务聘任名单的通知各学院、各单位、各部门，附属医院：经校教师系列专业技术职务评审委员会审议通过，聘任下列人员为教授：文学院李玉平历史学院朱洪斌刘晓琴哲学院范广欣外国语学院郭嘉法学院邹兵建周恩来政府管理学院刘兴华周望社会学院黄晓燕王琰马克思主...</p>
+                                    </div>
+                                    <div class="col-md-4 time">2025/05/29</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/article/14992" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p><b style="color:black">南发字〔2025〕74号关于终止南开大学海洋工程研究中心的通知</b></p>
+                                        <p>南发字〔2025〕74号关于终止南开大学海洋工程研究中心的通知各学院、各单位、各部门，附属医院：根据《南开大学非实体研究机构管理办法》（南发字〔2024〕137号）相关规定，经机构自主申请、挂靠单位同意、科研管理部门审核并报校领导批准，决定终止南开大学海洋工程研究中心。特此通知。南开大学2025年...</p>
+                                    </div>
+                                    <div class="col-md-4 time">2025/05/26</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/article/14991" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p><b style="color:black">南发字〔2025〕73号关于印发《南开大学印章管理办法》的通知</b></p>
+                                        <p>南发字〔2025〕73号关于印发《南开大学印章管理办法》的通知各学院、各单位、各部门，附属医院：《南开大学印章管理办法》业经2025年5月16日第十二次校长办公会议审议通过，现印发你们，请遵照执行。南开大学2025年5月16日（此件主动公开）南开大学印章管理办法第一章总则第一条为进一步规范学校印章...</p>
+                                    </div>
+                                    <div class="col-md-4 time">2025/05/26</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/article/14990" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p><b style="color:black">南发字〔2025〕72号关于印发《南开大学预算与绩效管理专项工作领导小组议事规则》的通知</b></p>
+                                        <p>南发字〔2025〕72号关于印发《南开大学预算与绩效管理专项工作领导小组议事规则》的通知各学院、各单位、各部门，附属医院：《南开大学预算与绩效管理专项工作领导小组议事规则》业经2025年4月23日第十次校长办公会议审议通过，现印发你们，请遵照执行。南开大学2025年4月23日（此件主动公开）南开大...</p>
+                                    </div>
+                                    <div class="col-md-4 time">2025/05/26</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="/article/14989" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p><b style="color:black">南发字〔2025〕71号关于印发《南开大学财经工作领导小组议事规则》的通知</b></p>
+                                        <p>南发字〔2025〕71号关于印发《南开大学财经工作领导小组议事规则》的通知各学院、各单位、各部门，附属医院：《南开大学财经工作领导小组议事规则》业经2025年4月23日第十次校长办公会议审议通过，现印发你们，请遵照执行。南开大学2025年4月23日（此件主动公开）南开大学财经工作领导小组议事规则第...</p>
+                                    </div>
+                                    <div class="col-md-4 time">2025/05/26</div>
+                                </div>
+                            </a>
+                        </li>
+                </ul>
+
+                <!-- 分页 -->
+                <nav aria-label="Page navigation" class="nankai-news-pagination">
+                    <ul class="pagination">
+                                <li class="active"><a href="javascript:page(1)">1</a></li>
+                                <li><a href="javascript:page(2)">2</a></li>
+                                <li><a href="javascript:page(3)">3</a></li>
+                                <li><a href="javascript:page(4)">4</a></li>
+                                <li><a href="javascript:page(5)">5</a></li>
+                                <li><a href="javascript:page(6)">6</a></li>
+                                <li><a href="javascript:page(7)">7</a></li>
+                                <li><a href="javascript:page(8)">8</a></li>
+                            <li class="next">
+                                <a href="javascript:page(2)" aria-label="Next">
+                                    <span aria-hidden="true">下一页</span>
+                                </a>
+                            </li>
+                            <li class="last">
+                                <a href="javascript:page(592)" aria-label="last">
+                                    <span aria-hidden="true">尾页</span>
+                                </a>
+                            </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- links -->
+<!-- link -->
+    <div class="nankai-footer">
+        <div class="row nankai-link col-xs-12 col-md-12">
+            <span class="link-title">友情链接</span>
+                            <span><a href="http://www.nankai.edu.cn" target="_blank">南开大学</a></span>
+                    <span class="line"></span>
+                <span><a href="https://sso.nankai.edu.cn/sso/login?service=https://i.nankai.edu.cn/user/simpleSSOLogin" target="_blank">信息门户</a></span>
+                    <span class="line"></span>
+                <span><a href="http://cwc.nankai.edu.cn/" target="_blank">财务处</a></span>
+                    <span class="line"></span>
+                <span><a href="http://rsc.nankai.edu.cn/" target="_blank">人事处</a></span>
+                    <span class="line"></span>
+                <span><a href="http://zzb.nankai.edu.cn/" target="_blank">组织部</a></span>
+                    <span class="line"></span>
+                <span><a href="http://international.nankai.edu.cn/" target="_blank">国际合作与交流处</a></span>
+                    <span class="line"></span>
+                <span><a href="http://hq.nankai.edu.cn/" target="_blank">后勤保障服务</a></span>
+        </div>
+        <div class="footer-logo">
+            <div class="footer-logo-img"><img src="/static/img/home/footer_logo.jpg" alt="" class="img-responsive"></div>
+        </div>
+            <div class="nankai-record">
+                <span class="col-xs-12 col-md-8 col-md-offset-2">八里台校区：天津市南开区卫津路94号南开大学八里台校区服务楼 300071</span>
+            </div>
+            <div class="nankai-record">
+                <span class="col-xs-12 col-md-8 col-md-offset-2">津南校区：天津海河教育园区同砚路38号南开大学津南校区综合业务东楼 300350</span>
+            </div>
+
+    </div>
+</div>
+</body>
+</html>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script><script src="/static/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/static/js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script>
+    $(window).on('load', function() {
+        function itemHeight() {
+            var item = $("#big-carousel .item");
+            var docHeight = $(item[0]).outerHeight();
+            $("#big-carousel").css("height", docHeight);
+        }
+        itemHeight();
+        $(window).resize(function (){
+            itemHeight();
+        });
+
+        $("#startTime").datetimepicker({
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+            autoclose: true,
+            todayBtn: true,
+            clearBtn: true,
+            minView: 2
+        });
+        $("#endTime").datetimepicker({
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+            autoclose: true,
+            todayBtn: true,
+            clearBtn: true,
+            minView: 2
+        });
+
+        $("#search-btn").click(function() {
+            $("#num").val(1)
+            $("#search-form").submit()
+        })
+    });
+
+    function page(num) {
+        $("#num").val(num);
+        $("#search-form").submit();
+    }
+</script>

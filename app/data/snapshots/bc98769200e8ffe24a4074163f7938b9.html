@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="/Public/css/company.css"/>
+<script type="text/javascript" src="/Public/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/Public/js/base.js"></script>
+<title>南开大学学生就业指导中心</title>
+</head>
+<style>
+font{color:#ff0000; font-size:16px; margin-right:5px; vertical-align:middle;}
+</style>
+<body style="background:#ffffff;">
+<div class="nk_register_header">
+  <div class="register_header">
+     <div class="register_header_logo"><a href="javascript:void(0)" style="background:url(/Uploads/2018-09-12/5b98f5aba4cb5.png) no-repeat left center; background-size:auto 60px;"></a></div>
+	 <div class="register_header_txt"></div>
+  </div>
+</div>
+<div class="blank_30"></div>
+<div class="register_con_bors"></div>
+<div class="register_con">
+   <div class="register_con_title" style=" background-color:#802358;">
+     <div class="register_con_title_bt">验证邮箱</div>
+	 <div class="register_con_title_zc"><span><a href="/login/login/type/2.html">已有账号？立即登录</a></span></div>
+   </div>
+   <div class="register_con_table">
+   <form method="post" action="/login/doforget.html" onsubmit="return needwrite();">
+        <table class="typetable1">
+	    <tbody class="js_addforum">
+            <tr>
+               <p style="font-weight:bold;">方式一：企业用户忘记登录密码，输入<span style="color:red;">企业名称</span>和<span style="color:red;">注册邮箱</span>自主找回登录密码。</p>
+            </tr>
+		    <tr>
+			   <td width="200"><font>*</font>企业名称</td>
+			   <td style="position:relative;"><input type="text" name="companyname" value=""  onkeyup="document.getElementById('tipscompany').style.display='none';" /><div class="tipc" id="tipscompany">企业名称不能为空！</div></td>
+			</tr>
+            <tr>
+			   <td><font>*</font>电子邮箱</td>
+			   <td style="position:relative;"><input type="text" name="contactemail" value="" onkeyup="document.getElementById('tipsemail').style.display='none';document.getElementById('tipsemail2').style.display='none';" /><div class="tipc" id="tipsemail" >电子邮箱不能为空！</div><div class="tipc" id="tipsemail2">电子邮箱格式不正确！</div></td>
+			</tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                <input type="submit" value="发送邮件" style=" background:#802358;cursor:pointer" />
+                <p style="padding-top:20px; display:none;">如有疑问或需要帮助，请联系客服邮箱：mima@jingzhuncloud.com</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                <p style="font-weight:bold; padding-top:30px;">方式二：如企业忘记所有注册信息，请按以下步骤申请客服手动重置密码：</p>
+                <p>（1）企业将营业执照打印（党政机关为统一社会信用代码证书；事业单位、科研院所、高等院校、医疗卫生及其他公办教育单位为事业单位法人证书），加盖<span style="color:red;">本单位公章</span>或<span style="color:red;">人事部门专用章</span>后扫描。</p>
+                <p>（2）请点击下载<a href="/login/download.html" style="text-decoration:underline;">《企业账号重置密码授权委托书》</a>，<span style="color:red;">填写签字盖章</span>后扫描。</p>
+                <p>（3）请将（1）和（2）中的扫描件发送到<span style="color:red;">mima@jingzhuncloud.com（同时抄送到career@nankai.edu.cn）</span>，邮件标题注明<span style="color:red;">“企业名称+申请修改/找回南开大学就业指导中心官网雇主账号密码”</span>。</p>
+                <p>（4）重置后的密码将在<span style="color:red;">2个工作日内</span>以邮件形式发送到企业申请邮箱。</p>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+   </form>
+   </div>
+</div>
+<div class="register_con_borx"></div>
+<div class="blank_30"></div>
+<div class="register_footer">版权所有 南开大学学生就业指导中心</div>
+<script type="text/javascript">
+function needwrite(){
+	var companyname=$("input[name=companyname]");
+	var contactemail=$("input[name=contactemail]");
+	if($.trim(companyname.val())==''){
+		document.getElementById("tipscompany").style.display="block";
+		companyname.focus();
+		return false;
+	}
+	if($.trim(contactemail.val())==''){
+		document.getElementById("tipsemail").style.display="block";
+		contactemail.focus();
+		return false;
+	}
+	if($.trim(contactemail.val())!==""){
+		if(!Isyx($.trim(contactemail.val()))){
+		document.getElementById("tipsemail2").style.display="block";
+		contactemail.focus();
+		return false;
+	    }
+	}
+	
+	return true;
+}
+</script>
+</body>
+</html>

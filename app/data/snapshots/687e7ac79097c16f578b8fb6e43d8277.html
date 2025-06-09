@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+<title>数据库检索</title>
+
+<link type="text/css" href="/_css/_system/system.css" rel="stylesheet"/>
+<link type="text/css" href="/_upload/site/1/style/6/6.css" rel="stylesheet"/>
+<link type="text/css" href="/_upload/site/00/da/218/style/174/174.css" rel="stylesheet"/>
+<link type="text/css" href="/_js/_portletPlugs/sudyNavi/css/sudyNav.css" rel="stylesheet" />
+<link type="text/css" href="/_js/_portletPlugs/simpleNews/css/simplenews.css" rel="stylesheet" />
+
+<script language="javascript" src="/_js/jquery.min.js" sudy-wp-context="" sudy-wp-siteId="218"></script>
+<script language="javascript" src="/_js/jquery.sudy.wp.visitcount.js"></script>
+<script type="text/javascript" src="/_js/_portletPlugs/sudyNavi/jquery.sudyNav.js"></script>
+<script type="text/javascript" src="/_upload/tpl/01/f0/496/template496/extends/extends.js"></script>
+<link rel="stylesheet" href="/_upload/tpl/01/f0/496/template496/style.css" type="text/css" />
+<link rel="stylesheet" href="/_upload/tpl/01/f0/496/template496/css/nav.css" type="text/css" />
+<link href="/_upload/tpl/01/f0/496/template496/search.css" rel="stylesheet" type="text/css">
+<link href="/_upload/tpl/01/f0/496/template496/favicon.ico" rel="shortcut icon" />
+<link rel="stylesheet" type="text/css" href="/_upload/tpl/01/f0/496/template496/css/search2/style.css" />
+<link rel="stylesheet" type="text/css" href="/_upload/tpl/01/f0/496/template496/css/search2/selector.css" />
+<!--[if lt IE 9]>
+	<script src="/_upload/tpl/01/f0/496/template496/extends/libs/html5.js"></script>
+<![endif]-->
+</head>
+<body class="list list-2">
+<!--Start||headTop-->
+<div class="wrapper headtop" id="headtop">
+  <div class="inner">
+    <div class="mod clearfix"> 
+      <!--头部信息-->
+      <div class="post post1 post-111" frag="窗口111" portletmode="simpleNews">
+        <!-- No Data -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--End||headTop--> 
+<!--Start||head-->
+<div class="wrapper header" id="header">
+	<div class="inner">
+		<div class="mod clearfix">
+			<div class="head-left" frag="面板1">
+				<!--logo开始-->
+				<div class="sitelogo" frag="窗口1" portletmode="simpleSiteAttri">
+					<a href="/main.htm" title="返回南开大学图书馆首页"><img border='0' src='/_upload/site/00/da/218/logo.png' /></a> 
+				</div>
+				<!--//logo结束-->
+			</div>
+			<div class="head-right">	
+				<div class="wrapper nav wp-navi" id="nav">
+					<div class="wp-panel">
+<div class="site-lang clearfix" frag="窗口99" > 
+					
+						
+						<ul class="clearfix">
+							
+							<li class="links i1"><a href="https://enlib.nankai.edu.cn/" target="_self">英文</a> </li>
+							
+							<li class="links i2"><a href="https://www.nankai.edu.cn/" target="_self">南开大学</a> </li>
+							
+						</ul>
+						
+					
+				</div>
+						<div class="wp-window" frag="窗口2" portletmode="simpleSudyNavi">
+							<!-- No Data -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--End||head-->
+
+<!--Start||content-->
+<div class="wrapper" id="l-container">
+  <div class="inner">
+    <div class="mod clearfix">
+      <div class="col_news_head">
+        <ul class="col_metas clearfix" frag="窗口5" portletmode="simpleColumnAttri">
+          
+            <li class="col_path"><a href="/main.htm" target="_self">首页</a><span class='possplit'>&nbsp;&nbsp;</span><a href="/sjkjs_15469/list.htm" target="_blank">数据库检索</a></li>
+          
+        </ul>
+      </div>
+      <div class="wid32">
+        <div class="list_right list_right_100">
+          <div class="search-name">数据库名称检索</div>
+          <div class="searchcon clearfix">
+            <div class="wp-search">
+              <div class="con">
+                <div class="boxcon">
+                  <div class="txtcon">
+                    <input id="keyword" name="keyword" value="" type="text" onkeypress="return keyCodes()"/>
+                  </div>
+                </div>
+                <div class="btns" id="btns" onclick="loadTec_ClassifyContents(true,20,1);"> 搜索 </div>
+              </div>
+            </div>
+          </div>
+          <div class="searchcon">
+            <div id="searchCondition" style="display: none">
+              <input type="hidden" id="wp_tw_careers" name="careers" value=""/>
+              <input type="hidden" id="wp_tw_departments" name="departments" value=""/>
+              <input type="hidden" id="wp_tw_letters" name="letters" value=""/>
+              <input type="hidden" id="wp_tw_dates" name="dates" value=""/>
+            </div>
+            <div class="wp-paralist">
+              <div class="selector s3">
+                <div class="tit"> 按首字字母或拼音： </div>
+                <div class="main">
+                  <ul class="letterSelector">
+                    <li id="tw_sc_letter_0" class="letters all selected checked"> 不限 </li>
+                  </ul>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <div class="selector letterSelectorDiv" style="display: none; background-color: #bfbfbf;">
+                <div class="tit"> 已选择： </div>
+                <div class="main">
+                  <ul class="selectedContent">
+                    <li class="selectedLetter"></li>
+                    <div class="clear"></div>
+                  </ul>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <div class="selector s1">
+                <div class="tit"> 按学科分类： </div>
+                <div class="main">
+                  <ul class="departmentSelector">
+                    <li id="tw_sc_letter_0" class="departments all selected checked"> 不限 </li>
+                  </ul>
+                </div>
+                <!--<div class="info_more">更多<em></em></div>-->
+                <div class="clear"></div>
+              </div>
+              <div class="selector departmentSelectorDiv" style="display: none; background-color: #bfbfbf;">
+                <div class="tit"> 已选择： </div>
+                <div class="main">
+                  <ul class="selectedContent">
+                    <li class="selectedDepartment"></li>
+                    <div class="clear"></div>
+                  </ul>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <div class="selector s2">
+                <div class="tit"> 按资源类型分类： </div>
+                <div class="main">
+                  <ul class="careersSelector">
+                    <li id="tw_sc_career_0" class="careers all selected checked"> 不限 </li>
+                  </ul>
+                </div>
+                <!--<div class="info_more">更多<em></em></div>-->
+                <div class="clear"></div>
+              </div>
+              <div class="selector careersSelectorDiv" style="display: none; background-color: #bfbfbf;">
+                <div class="tit"> 已选择： </div>
+                <div class="main">
+                  <ul class="selectedContent">
+                    <li class="selectedCareer"></li>
+                    <div class="clear"></div>
+                  </ul>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <div class="selector s2">
+                <div class="tit"> 按数据库类型： </div>
+                <div class="main">
+                  <ul class="datesSelector">
+                    <li id="tw_sc_date_0" class="dates all selected checked"> 不限 </li>
+                  </ul>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <div class="selector datesSelectorDiv" style="display: none; background-color: #bfbfbf;">
+                <div class="tit"> 已选择： </div>
+                <div class="main">
+                  <ul class="selectedContent">
+                    <li class="selectedDate"></li>
+                    <div class="clear"></div>
+                  </ul>
+                </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+          <div class="searchsort clearfix">
+            <div class="title">排序方式：</div>
+            <ul class="clearfix">
+              <li class="i0 select" onclick="loadTec_ClassifyContents(false,20,1);"> 不限 </li>
+              <li class="i1" onclick="loadTec_ClassifyContents(false,20,1);"> 按名称排序 </li>
+              <li class="i2" onclick="loadTec_ClassifyContents(true,20,1);"> 按访问量排序 </li>
+            </ul>
+          </div>
+          <div class="i3"> <a href="http://lib.nankai.edu.cn/2019/0709/c15470a185121/page.htm">* 电子资源使用版权声明</a> </div>
+          <div class="searchdata">
+            <ul class="clearfix">
+              <li class="n n1">
+                <table class="data_table cn">
+                  <tbody>
+                    <tr class="head" style="background:#711a5f;color:#fff;font-size: 18px;font-weight: bold;height:50px;line-height: 50px;">
+                      <th style="width:60px;text-align: center;border-right: 1px #e8e8e8 solid;">序号</th>
+                      <th style="padding-left: 84px;"> 中文数据库 </th>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+              <li class="n n2">
+                <table class="data_table en">
+                  <tbody>
+                    <tr class="head" style="background:#711a5f;color:#fff;font-size: 18px;font-weight: bold;height:50px;line-height: 50px;">
+                      <th style="width:60px;text-align: center;border-right: 1px #e8e8e8 solid;">序号</th>
+                      <th style="padding-left: 84px;"> 外文数据库 </th>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+          <div class="more"><img src="/_upload/tpl/01/f0/496/template496/images/more.jpg"></div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+<!--End||content--> 
+<!--Start||footer-->
+<div class="wrapper footer" id="footer">
+  <div class="inner">
+    <div class="mod clearfix">
+      <div class="foot-left">
+        <div class="post post1 post-81" frag="窗口81" portletmode="simpleSudyNavi">
+          <div id="wp_nav_w81"> 
+
+ 
+<ul class="wp_nav" data-nav-config="{vertical: {active: '1', col: '1' }, drop_v: 'down', drop_w: 'right', dir: 'y', opacity_main: '-1', opacity_sub: '-1', dWidth: '0'}">
+      
+     <li class="nav-item i1 "> 
+         <a href="http://xb.nankai.edu.cn/" title="办公网" target="_blank"><span class="item-name">办公网</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i2 "> 
+         <a href="/14518/list.htm" title="网站地图" target="_blank"><span class="item-name">网站地图</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i3 "> 
+         <a href="http://www.nankai.edu.cn/" title="南开大学" target="_blank"><span class="item-name">南开大学</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+</ul> 
+ 
+ 
+ </div>
+        </div>
+        <div class="post post1 post-82" frag="窗口82" portletmode="simpleSudyNavi">
+          <div id="wp_nav_w82"> 
+
+ 
+<ul class="wp_nav" data-nav-config="{vertical: {active: '1', col: '1' }, drop_v: 'down', drop_w: 'right', dir: 'y', opacity_main: '-1', opacity_sub: '-1', dWidth: '0'}">
+      
+     <li class="nav-item i1 "> 
+         <a href="http://www.calis.edu.cn/" title="CALIS" target="_blank"><span class="item-name">CALIS</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i2 "> 
+         <a href="http://211.81.31.59/" title="TALIS" target="_blank"><span class="item-name">TALIS</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i3 "> 
+         <a href="http://www.cashl.edu.cn/portal/index.jsp" title="CASHL" target="_blank"><span class="item-name">CASHL</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+</ul> 
+ 
+ 
+ </div>
+        </div>
+        <div class="post post1 post-83" frag="窗口83" portletmode="simpleSudyNavi">
+          <div id="wp_nav_w83"> 
+
+ 
+<ul class="wp_nav" data-nav-config="{vertical: {active: '1', col: '1' }, drop_v: 'down', drop_w: 'right', dir: 'y', opacity_main: '-1', opacity_sub: '-1', dWidth: '0'}">
+      
+     <li class="nav-item i1 "> 
+         <a href="http://www.scal.edu.cn/" title="全国高校图工委" target="_blank"><span class="item-name">全国高校图工委</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i2 "> 
+         <a href="http://www.lib.nankai.edu.cn/tjtgw/" title="天津高校图工委" target="_blank"><span class="item-name">天津高校图工委</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i3 "> 
+         <a href="http://www.mathlib.nankai.edu.cn/" title="分馆（数学图书馆）" target="_blank"><span class="item-name">分馆（数学图书馆）</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+</ul> 
+ 
+ 
+ </div>
+        </div>
+        <div class="post post1 post-84" frag="窗口84" portletmode="simpleSudyNavi">
+          <div id="wp_nav_w84"> 
+
+ 
+<ul class="wp_nav" data-nav-config="{vertical: {active: '1', col: '1' }, drop_v: 'down', drop_w: 'right', dir: 'y', opacity_main: '-1', opacity_sub: '-1', dWidth: '0'}">
+      
+     <li class="nav-item i1 "> 
+         <a href="http://old.lib.nankai.edu.cn/" title="旧版" target="_blank"><span class="item-name">旧版</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+     <li class="nav-item i2 "> 
+         <a href="/14527/list.htm" title="相关链接" target="_blank"><span class="item-name">相关链接</span></a><i class="mark"></i> 
+          
+     </li> 
+      
+</ul> 
+ 
+ 
+ </div>
+        </div>
+      </div>
+      <div class="foot-right" frag="窗口85" portletmode="simpleNews">
+        <div class="share">
+          <div id="wp_news_w85"> 
+
+            <ul class="clearfix">
+              
+              <li class="i1">
+                <div class="news_imgs"><img src='/_upload/article/images/05/2b/21cd35624b7683545b1392341a5a/f2c22a10-f2bd-43d9-9e12-7113b0077dab_s.png' width='100' height='100' /></div>
+                <div class="news_title">微信公众号</div>
+              </li>
+              
+            </ul>
+          </div> 
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper footer2" id="footer2">
+  <div class="inner">
+    <div class="mod clearfix">
+      <div class="foot-left" frag="窗口90" portletmode="simpleSiteAttri">
+				<p class="copyright"><span>Copyright ©2019 南开大学图书馆 All Rights Reserved</span></p><p class="copyright">津教备0061号&nbsp;&nbsp;
+				<a href="https://beian.miit.gov.cn/" target="_blank">津ICP备12003308号-1</a>&nbsp;&nbsp;
+				<a class="gawb" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12010402000967">津公网安备12010402000967号</a></p>
+			</div>
+      </div>
+      <div class="foot-right" frag="窗口91" portletmode="simpleNews">
+        <div class="shares">
+          <div id="wp_news_w91"> 
+
+            <ul class="clearfix">
+              
+              <li class="i1"> <a href="javascript:void(0);"></a>
+                <div class="con"><img src='/_upload/article/images/46/00/119c1c4942888954b7c5bcdef813/65624f94-a4c6-4c88-a13d-1cdbcb2e9037_s.png' width='100' height='100' /></div>
+              </li>
+              
+              <li class="i2"> <a href="javascript:void(0);"></a>
+                <div class="con"><img src='/_upload/article/images/af/b0/de84c43049c784dac855e981337f/0c2ddbf4-52b8-4342-a1c9-4b6a69ed15bd_s.png' width='100' height='100' /></div>
+              </li>
+              
+              <li class="i3"> <a href="javascript:void(0);"></a>
+                <div class="con"><img src='/_upload/article/images/51/e1/50ac52d14fa39f817a4d56eabb2b/eaf9e081-152c-40e2-9d7b-107893444cf8_s.png' width='100' height='100' /></div>
+              </li>
+              
+            </ul>
+          </div> 
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End||footer-->
+</body>
+
+<script type="text/javascript" src="/_upload/tpl/01/f0/496/template496/search/tecClassifiedSearch.js"></script>
+<script type="text/javascript" src="/_upload/tpl/01/f0/496/template496/search/deSearch.js"></script>
+<script type="text/javascript" src="/_upload/tpl/01/f0/496/template496/search/selector-career.js"></script>
+<script type="text/javascript" src="/_upload/tpl/01/f0/496/template496/search/selector-department.js"></script>
+<script type="text/javascript" src="/_upload/tpl/01/f0/496/template496/search/selector-letter.js"></script>
+<script type="text/javascript" src="/_upload/tpl/01/f0/496/template496/search/selector-dates.js"></script>
+
+
+</html>
+
+ <img src="/_visitcount?siteId=218&type=2&columnId=15469" style="display:none" width="0" height="0"/>

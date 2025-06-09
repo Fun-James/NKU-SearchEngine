@@ -25,11 +25,62 @@ except Exception as e:
 # Define a consistent User-Agent for the crawler
 CRAWLER_USER_AGENT = 'Mozilla/5.0 (compatible; NKUSearchBot/1.0; +http://www.nankai.edu.cn/search_info)'
 
-def is_valid_url(url):
-    """检查URL是否属于南开大学域名"""
+def is_valid_url(url, allowed_domains=None):
+    """检查URL是否允许爬取
+    
+    参数:
+    - url: 要检查的URL
+    - allowed_domains: 可以是以下格式之一：
+      1. 元组 (domains_to_exclude, current_college_domain) - 旧格式
+      2. 列表 [target_domain] - 新格式，仅允许指定域名
+      3. None - 允许所有南开域名
+    """
     try:
         parsed = urlparse(url)
-        return bool(re.search(r'(nankai\.edu\.cn)$', parsed.netloc))
+        # 首先检查是否属于南开大学域名
+        if not re.search(r'(nankai\.edu\.cn)$', parsed.netloc):
+            return False
+        
+        # 如果指定了域名规则
+        if allowed_domains is not None:
+            # 检查是否为新格式（列表）
+            if isinstance(allowed_domains, list):
+                # 新格式：只允许列表中的域名
+                if len(allowed_domains) == 1:
+                    target_domain = allowed_domains[0]
+                    if parsed.netloc != target_domain:
+                        print(f"跳过非目标域名: {url} (域名: {parsed.netloc}, 目标: {target_domain})")
+                        return False
+                else:
+                    # 如果列表为空或有多个域名，允许所有域名
+                    pass
+            else:
+                # 旧格式：元组 (domains_to_exclude, current_college_domain)
+                domains_to_exclude, current_college_domain = allowed_domains
+                
+                # 如果域名在排除列表中，则跳过
+                if parsed.netloc in domains_to_exclude:
+                    print(f"跳过限制域名: {url} (域名: {parsed.netloc})")
+                    return False
+        
+        # 尝试从Flask配置中获取黑名单，如果没有则使用默认值
+        try:
+            from flask import current_app
+            blacklist_domains = current_app.config.get('CRAWLER_BLACKLIST', [])
+        except:
+            # 如果无法获取Flask配置，使用硬编码的黑名单
+            blacklist_domains = [
+                'nkzbb.nankai.edu.cn',    # 招标办网站
+                'iam.nankai.edu.cn'       # 身份认证网站
+            ]
+        
+        # 检查是否在黑名单中
+        for blacklisted_domain in blacklist_domains:
+            if parsed.netloc == blacklisted_domain:
+                print(f"跳过黑名单网站: {url}")
+                return False
+        
+        return True
     except:
         return False
 
@@ -89,8 +140,14 @@ def get_file_info(url):
         }
     return None
 
-def fetch_page(url, max_retries=3):
-    """获取单个页面的内容，支持重试机制"""
+def fetch_page(url, max_retries=1, allowed_domains=None):  # 修改 max_retries 默认值为 1
+    """获取单个页面的内容，支持重试机制
+    
+    参数:
+    - url: 要获取的页面URL
+    - max_retries: 最大重试次数
+    - allowed_domains: 允许的域名列表
+    """
     headers = {
         'User-Agent': CRAWLER_USER_AGENT,
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -108,12 +165,13 @@ def fetch_page(url, max_retries=3):
         print(f"尝试使用HTTP协议: {http_url}")
     else:
         http_url = url
-      # 检查是否是文档类型
+    
+    # 检查是否是文档类型
     file_info = get_file_info(url)
     if file_info:
         try:
             # 对于文档类型，只获取头信息，不下载文件内容
-            response = session.head(http_url, headers=headers, timeout=30)
+            response = session.head(http_url, headers=headers, timeout=3) # 修改 timeout 为 3
             
             # 提取文件名并解码
             filename = url.split('/')[-1]
@@ -140,7 +198,7 @@ def fetch_page(url, max_retries=3):
         except requests.exceptions.RequestException:
             # 如果HTTP失败，尝试HTTPS
             try:
-                response = session.head(url, headers=headers, timeout=30)
+                response = session.head(url, headers=headers, timeout=3) # 修改 timeout 为 3
                 return {
                     'url': url,
                     'title': url.split('/')[-1],
@@ -158,56 +216,33 @@ def fetch_page(url, max_retries=3):
     for attempt in range(max_retries):
         try:
             # 先尝试HTTP
-            response = session.get(http_url, headers=headers, timeout=30)
+            response = session.get(http_url, headers=headers, timeout=3) # 修改 timeout 为 3
             response.raise_for_status()
             response.encoding = response.apparent_encoding
             
             # 检查是否有内容
             if not response.text:
                 raise requests.exceptions.RequestException("Empty response")
-                
             soup = BeautifulSoup(response.text, 'html.parser')
             
             # 提取页面信息
             title = extract_title(soup)
             content = extract_content(soup)
-            links, attachments, potential_attachment_pages = parse_links(response.text, url)
-              # --- 新增：保存网页快照 ---
+            links, attachments, potential_attachment_pages = parse_links(response.text, url, allowed_domains)
+            
+            # 明确释放BeautifulSoup对象和response内容以节省内存
+            del soup
+            response_text = response.text  # 保存需要的内容
+            del response  # 释放response对象            # 临时保存快照路径（不实际保存文件，减少磁盘I/O）
             snapshot_path = None
-            try:
-                snapshot_folder = current_app.config['SNAPSHOT_FOLDER']
-                if not os.path.exists(snapshot_folder):
-                    os.makedirs(snapshot_folder)
-                
-                # 使用URL的MD5哈希值作为文件名，避免特殊字符和长度问题
-                snapshot_filename = hashlib.md5(url.encode('utf-8')).hexdigest() + '.html'
-                snapshot_path = os.path.join(snapshot_folder, snapshot_filename)
-                
-                # 使用更安全的编码方式写入文件
-                try:
-                    with open(snapshot_path, 'w', encoding='utf-8', errors='ignore') as f:
-                        f.write(response.text)
-                except UnicodeEncodeError:
-                    # 如果UTF-8失败，尝试其他编码
-                    try:
-                        with open(snapshot_path, 'w', encoding='gbk', errors='ignore') as f:
-                            f.write(response.text)
-                    except:
-                        # 最后尝试二进制模式
-                        with open(snapshot_path, 'wb') as f:
-                            f.write(response.text.encode('utf-8', errors='ignore'))
-                
-                print(f"Saved snapshot for {url} to {snapshot_path}")
-            except Exception as e:
-                print(f"Error saving snapshot for {url}: {e}")
-                snapshot_path = None  # 如果保存失败，则路径为None
-            # --- 网页快照保存结束 ---
+            # 注释掉快照保存功能以减少内存和磁盘压力
+            # 如果需要快照功能，可以考虑只保存重要页面或定期清理
 
             return {
                 'url': url,  # 保留原始URL
                 'title': title,
                 'content': content,  # 这是提取后的纯文本内容
-                'html_content': response.text,  # 保留原始HTML文本
+                'html_content': response_text,  # 保留原始HTML文本
                 'links': links,
                 'attachments': attachments,  # 附件链接
                 'potential_attachment_pages': potential_attachment_pages,  # 潜在附件页面
@@ -221,8 +256,8 @@ def fetch_page(url, max_retries=3):
             if attempt == max_retries - 1 and http_url != url:
                 try:
                     print(f"尝试回退到HTTPS: {url}")
-                    response = session.get(url, headers=headers, timeout=30)
-                    response.raise_for_status()
+                    response = session.get(url, headers=headers, timeout=3) # 修改 timeout 为 3
+                    response.raise_for_status()                    
                     response.encoding = response.apparent_encoding
                     
                     if not response.text:
@@ -231,29 +266,22 @@ def fetch_page(url, max_retries=3):
                     soup = BeautifulSoup(response.text, 'html.parser')
                     title = extract_title(soup)
                     content = extract_content(soup)
-                    links, attachments, potential_attachment_pages = parse_links(response.text, url)
+                    links, attachments, potential_attachment_pages = parse_links(response.text, url, allowed_domains)
                     
-                    # --- 新增：保存网页快照 (HTTPS回退时) ---
+                    # 明确释放BeautifulSoup对象以节省内存
+                    response_text_https = response.text
+                    del soup
+                    del response
+                    
+                    # 临时保存快照路径（HTTPS回退时也不保存快照）
                     snapshot_path_https = None
-                    try:
-                        snapshot_folder = current_app.config['SNAPSHOT_FOLDER']
-                        if not os.path.exists(snapshot_folder):
-                            os.makedirs(snapshot_folder)
-                        snapshot_filename = hashlib.md5(url.encode('utf-8')).hexdigest() + '.html'
-                        snapshot_path_https = os.path.join(snapshot_folder, snapshot_filename)
-                        with open(snapshot_path_https, 'w', encoding='utf-8') as f:
-                            f.write(response.text)
-                        print(f"Saved snapshot for {url} (HTTPS fallback) to {snapshot_path_https}")
-                    except Exception as e_https:
-                        print(f"Error saving snapshot for {url} (HTTPS fallback): {e_https}")
-                        snapshot_path_https = None
-                    # --- 网页快照保存结束 ---
+                    # 注释掉HTTPS回退时的快照保存
 
                     return {
                         'url': url,
                         'title': title,
                         'content': content,
-                        'html_content': response.text,  # 保留原始HTML文本
+                        'html_content': response_text_https,  # 保留原始HTML文本
                         'links': links,
                         'attachments': attachments,  # 附件链接
                         'potential_attachment_pages': potential_attachment_pages,  # 潜在附件页面
@@ -329,10 +357,9 @@ def handle_nankai_attachment_page(url, session=None):
         'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
         'Connection': 'keep-alive'
     }
-    
     try:
         # 获取页面内容
-        response = session.get(url, headers=headers, timeout=30)
+        response = session.get(url, headers=headers, timeout=3) # 修改 timeout 为 3
         response.raise_for_status()
         response.encoding = response.apparent_encoding
         
@@ -393,8 +420,14 @@ def handle_nankai_attachment_page(url, session=None):
         print(f"Error processing Nankai attachment page {url}: {e}")
         return []
 
-def parse_links(html_content, base_url):
-    """从HTML中解析链接"""
+def parse_links(html_content, base_url, allowed_domains=None):
+    """从HTML中解析链接
+    
+    参数:
+    - html_content: HTML内容
+    - base_url: 基础URL
+    - allowed_domains: 允许的域名列表
+    """
     soup = BeautifulSoup(html_content, 'html.parser')
     links = set()
     attachments = set()  # 存储附件链接
@@ -428,8 +461,7 @@ def parse_links(html_content, base_url):
             
             # 处理三: 直接检查URL是否为文档类型
             file_info = get_file_info(normalized_url)
-            
-            # 处理四: 南开大学网站特殊处理 - 检查是否包含附件下载链接格式
+              # 处理四: 南开大学网站特殊处理 - 检查是否包含附件下载链接格式
             is_nankai_attachment = False
             is_nankai_attachment_page = False
             
@@ -453,14 +485,14 @@ def parse_links(html_content, base_url):
                 if re.search(pattern, normalized_url, re.IGNORECASE):
                     is_nankai_attachment_page = True
                     break
-                    
+            
             # 如果是附件，添加到附件集合
             if file_info and file_info['is_document'] or is_attachment_by_text or has_attachment_icon or is_nankai_attachment:
                 attachments.add(normalized_url)
             elif is_nankai_attachment_page or '附件' in link_text:
                 # 如果是可能包含附件的页面，加入到潜在附件页面集合
                 potential_attachment_pages.add(normalized_url)
-            elif is_valid_url(normalized_url):
+            elif is_valid_url(normalized_url, allowed_domains):
                 links.add(normalized_url)
         except Exception as e:
             print(f"Error processing URL {href}: {e}")
@@ -511,10 +543,9 @@ def fetch_attachment(url, session=None):
         'Accept': '*/*',
         'Connection': 'keep-alive'
     }
-    
     try:
         # 先用HEAD请求获取文件信息
-        head_response = session.head(url, headers=headers, timeout=30, allow_redirects=True)
+        head_response = session.head(url, headers=headers, timeout=3, allow_redirects=True) # 修改 timeout 为 3
         
         # 获取最终URL（处理重定向后）
         final_url = head_response.url
@@ -796,7 +827,8 @@ def extract_meaningful_filename(url, link_text=None, context=None):
     # 默认返回基础文件名，如果看起来不是有效的文件名则使用默认名称
     return basename if basename and '.' in basename else "附件.doc"
 
-def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_depth=5):
+def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_depth=5, 
+                 batch_callback=None, batch_size=100, allowed_domains=None):
     """增强的爬虫逻辑
     
     参数:
@@ -805,8 +837,11 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
     - delay: 爬取延迟时间(秒)
     - respect_robots: 是否遵守robots.txt
     - max_depth: 最大爬取深度
+    - batch_callback: 批处理回调函数，每达到batch_size时调用
+    - batch_size: 批处理大小，默认100个页面
+    - allowed_domains: 允许爬取的域名列表，如果为None则允许所有南开域名
     """
-    if not is_valid_url(start_url):
+    if not is_valid_url(start_url, allowed_domains):
         start_url = "https://www.nankai.edu.cn/"
     
     # 尝试使用HTTP协议访问
@@ -829,8 +864,7 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
         'Connection': 'keep-alive'
     }
     session.headers.update(headers)
-        
-    # Initialize RobotFileParser if needed
+          # Initialize RobotFileParser if needed
     rp = None
     if respect_robots:
         parsed_uri = urlparse(start_url)
@@ -839,7 +873,7 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
             print(f"Fetching robots.txt from: {robots_url}")
             
             # 使用会话请求robots.txt
-            response = session.get(robots_url, timeout=30)
+            response = session.get(robots_url, timeout=5)
             if response.status_code == 200:
                 rp = RobotFileParser()
                 rp.parse(response.text.splitlines())
@@ -851,11 +885,58 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
             print(f"Could not fetch or parse robots.txt from {robots_url}: {str(e)}")
             print("Warning: Proceeding without robots.txt rules. This is not recommended for polite crawling.")
             rp = None
-
+    
     visited_pages = set()
     visited_attachments = set()  # 已访问的附件
     visited_attachment_pages = set()  # 已访问的附件页面
-    crawled_data = []
+    crawled_data = []    
+    def check_and_process_batch():
+        """检查是否达到批处理大小，如果是则调用回调函数并清空数据"""
+        nonlocal crawled_data
+        if batch_callback and len(crawled_data) >= batch_size:
+            print(f"\n🔄 达到批处理大小 ({len(crawled_data)})，开始索引...")
+            try:
+                # 创建数据的副本用于索引，避免引用问题
+                batch_data = crawled_data.copy()
+                batch_callback(batch_data)
+                print(f"✅ 批处理完成，已索引 {len(batch_data)} 个页面")
+                
+                # 清空内存并强制垃圾回收
+                crawled_data.clear()
+                del batch_data
+                import gc
+                gc.collect()  # 强制垃圾回收
+                print("🗑️ 内存已清理")
+                
+                # 添加短暂延迟，让ES服务器有时间处理
+                time.sleep(3)
+                
+            except Exception as e:
+                print(f"❌ 批处理失败: {e}")
+                print("🔄 尝试减小批次大小重新处理...")
+                
+                # 如果批处理失败，尝试分成更小的块
+                try:
+                    chunk_size = max(5, len(crawled_data) // 4)  # 至少5个，最多分成4块
+                    if chunk_size > 0:
+                        for i in range(0, len(crawled_data), chunk_size):
+                            chunk = crawled_data[i:i + chunk_size]
+                            if chunk:
+                                print(f"📦 处理分块 {i//chunk_size + 1}，大小: {len(chunk)}")
+                                batch_callback(chunk.copy())
+                                del chunk  # 显式删除
+                                time.sleep(2)  # 分块之间添加延迟
+                                gc.collect()   # 每块处理后进行垃圾回收
+                        print("✅ 分块处理完成")
+                        crawled_data.clear()
+                        gc.collect()
+                    else:
+                        print("⚠️ 无法分块，跳过此批次")
+                        crawled_data.clear()
+                except Exception as retry_e:
+                    print(f"❌ 分块重试也失败: {retry_e}")
+                    print("⚠️ 跳过此批次，继续爬取")
+                    crawled_data.clear()
     
     while pages_to_visit and len(visited_pages) < max_pages:
         # 获取下一个URL及其深度
@@ -868,15 +949,14 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
         # 检查是否超过最大深度
         if current_depth > max_depth:
             continue
-            
-        # 检查robots.txt权限
+              # 检查robots.txt权限
         if rp and not rp.can_fetch(CRAWLER_USER_AGENT, current_url):
             print(f"Skipping (disallowed by robots.txt): {current_url}")
             visited_pages.add(current_url)  # 添加到已访问列表以避免重复检查
             continue
             
         print(f"Crawling ({len(visited_pages)+1}/{max_pages}): {current_url}")
-        page_data = fetch_page(current_url)
+        page_data = fetch_page(current_url, allowed_domains=allowed_domains)
         visited_pages.add(current_url)
         
         if page_data:
@@ -892,8 +972,8 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                     'crawled_at': time.strftime('%Y-%m-%d %H:%M:%S'),
                     'snapshot_path': page_data.get('snapshot_path')  # 文档类型快照路径为None
                 })
-            else:
-                # page_data['content'] 是已经处理过的文本内容
+                check_and_process_batch()  # 检查是否需要批处理
+            else:                # page_data['content'] 是已经处理过的文本内容
                 content_text = page_data['content']
                 
                 crawled_data.append({
@@ -903,6 +983,7 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                     'crawled_at': time.strftime('%Y-%m-%d %H:%M:%S'),
                     'snapshot_path': page_data.get('snapshot_path')  # 新增快照路径
                 })
+                check_and_process_batch()  # 检查是否需要批处理
             
             # 处理普通链接和附件链接
             if not page_data['is_document']:
@@ -963,8 +1044,7 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                                 if not re.search(r'\[.+?\]', base_title):
                                     attachment_data['title'] = f"{base_title}"  # 不添加文件类型标记
                                 else:
-                                    attachment_data['title'] = base_title  # 已包含标记，直接使用
-                                attachment_data['filename'] = meaningful_filename
+                                    attachment_data['title'] = base_title  # 已包含标记，直接使用                                attachment_data['filename'] = meaningful_filename
                             
                             crawled_data.append({
                                 'url': attachment,
@@ -979,6 +1059,7 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                                 'snapshot_path': None,
                                 'is_attachment': True  # 标记为附件
                             })
+                            check_and_process_batch()  # 检查是否需要批处理
                             print(f"已抓取附件: {attachment_data['title']} - {attachment}")
                 
                 # 处理可能包含附件的页面
@@ -1036,7 +1117,6 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                                     # 如果没有有意义的文件名但有链接文本
                                     elif attachment_text and len(attachment_text) > 3:
                                         attachment_data['title'] = attachment_text
-                                    
                                     crawled_data.append({
                                         'url': attachment_url,
                                         'title': attachment_data['title'],
@@ -1053,15 +1133,28 @@ def basic_crawler(start_url, max_pages=2000, delay=1, respect_robots=True, max_d
                                         'link_text': attachment_text,  # 保存链接文本
                                         'original_title': attachment_data.get('original_title', '')  # 保存原始标题
                                     })
+                                    check_and_process_batch()  # 检查是否需要批处理
                                     print(f"从页面 {page_url} 抓取附件: {attachment_data['title']} - {attachment_url}")
             
             # 控制抓取速度
             time.sleep(delay)  # 可配置的爬取延迟
-            
-            # 每抓取100个页面，暂停较长时间，避免对服务器压力过大
+              # 每抓取100个页面，暂停较长时间，避免对服务器压力过大
             if len(visited_pages) % 100 == 0:
                 print(f"Crawled {len(visited_pages)} pages, taking a short break...")
                 time.sleep(delay * 5)
+    
+    # 处理剩余的数据
+    if batch_callback and len(crawled_data) > 0:
+        print(f"\n🔄 处理剩余数据 ({len(crawled_data)} 个页面)...")
+        try:
+            batch_callback(crawled_data)
+            print(f"✅ 最后批处理完成，已索引 {len(crawled_data)} 个页面")
+            crawled_data = []  # 清空内存
+            import gc
+            gc.collect()
+            print("🗑️ 最终内存清理完成")
+        except Exception as e:
+            print(f"❌ 最后批处理失败: {e}")
     
     return crawled_data
 
@@ -1069,9 +1162,20 @@ def spider_main(start_url="https://www.nankai.edu.cn/",
              max_pages=100, 
              delay=1, 
              respect_robots=True, 
-             max_depth=3):
-    """爬虫主函数，便于从外部调用"""
-    data = basic_crawler(start_url, max_pages, delay, respect_robots, max_depth)
+             max_depth=3,
+             batch_callback=None,
+             batch_size=100,
+             allowed_domains=None):
+    """爬虫主函数，便于从外部调用
+    
+    参数:
+    - batch_callback: 批处理回调函数，每达到batch_size时调用
+    - batch_size: 批处理大小，默认100个页面
+    - allowed_domains: 允许爬取的域名列表，如果为None则允许所有南开域名
+    """
+    data = basic_crawler(start_url, max_pages, delay, respect_robots, max_depth, 
+                        batch_callback=batch_callback, batch_size=batch_size, 
+                        allowed_domains=allowed_domains)
     return data
 
 if __name__ == '__main__':

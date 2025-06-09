@@ -1,0 +1,329 @@
+<!--
+主要功能："后台管理"->"页面管理"->"编缉页面"->"主页预览"
+开发时间：未知
+开发人员：未知
+主要参数：HomeID=主页id
+
+修改内容记录：
+添加"是否是哀悼日"选项（datetype） 2011-05-30 by 孟云云
+将所有用到本地文件下载的都将Fts服务去掉 20120313 by 孟云云
+-->
+<html>
+<head>
+<title>环境科学与工程学院资料中心</title>
+<meta http-equiv="x-ua-compatible" content="ie=11" />
+<meta http-equiv="Set-Cookie" content="name=value; secure;httponly">
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<link href="/css/home.css" rel="stylesheet" type="text/css">
+
+<SCRIPT language=javascript src="/js/jquery-1.10.2.min.js"></SCRIPT>
+<script language="javascript">
+String.prototype.trim = function()    
+{    
+	return this.replace(/(^\s*)|(\s*$)/g, "");    
+}    
+</script>
+</head>
+
+<body bgcolor="" leftmargin="2" topmargin="2"  background=""><div class="parent knowledge-box"><link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/jquery.lazyload.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<div class="parent">
+<div class="top" id="topBox">
+<div class="top_all">
+					<div class="logo"> <img src="/images/logo.png" alt="" height="70%"> </div>
+				</div>
+				<!-- Website Menu -->
+				<div class="nav_box">
+					<ul class="menu boxed clearfix">
+						<li><a href="/" target="_blank">首页</a></li>
+						<li> <a href="javascript:void(0);">馆藏查询</a>
+							<ul>
+								<li><a href="/page/framelimit.cbs?resname=chinesebook" target="_blank">本馆中文书</a></li>
+								<li><a href="/page/framelimit.cbs?resname=foreignbook" target="_blank">本馆外文书</a></li>
+								<li><a href="/page/framelimit.cbs?resname=chinesejournal" target="_blank">本馆中文刊</a></li>
+								<li><a href="/page/framelimit.cbs?resname=foreignjournal" target="_blank">本馆外文刊</a></li>							                 
+								<li><a href="/page/framelimit.cbs?resname=dissertation" target="_blank">本馆学位论文</a></li>
+								<li><a href="/page/framelimit.cbs?resname=tssc" target="_blank">本馆电子书</a></li>
+								<li><a href="https://opac.nankai.edu.cn/opac/search_more.php" target="_blank">南开书目检索</a></li>
+							</ul>
+						</li>
+						<li> <a href="javascript:void(0);">电子期刊</a>
+							<ul>
+								<li><a href="https://navi.cnki.net/knavi/ " target="_blank">中文刊</a></li>
+								<li><a href="/wwk.htm" target="_blank">外文刊</a></li>
+							</ul>
+						</li>
+						<li> <a href="javascript:void(0);">常用数据库</a>
+							<ul>
+								<li> <a href="https://www.cnki.net/" target="_blank">CNKI系列</a> </li>
+								<li> <a href="https://www.webofscience.com/wos/alldb/basic-search" target="_blank">SCI</a> </li>
+								<li> <a href="https://www.engineeringvillage.com" target="_blank">EI</a> </li>
+								<li> <a href="https://pubs.acs.org" target="_blank">ACS</a> </li>
+								<li> <a href="https://agupubs.onlinelibrary.wiley.com" target="_blank">AGU</a> </li>
+								<li> <a href=" https://www.sciencedirect.com" target="_blank">ScienceDirect</a> </li>
+								<li> <a href="http://www.sslibrary.com" target="_blank">超星</a> </li>
+							</ul>
+						</li>
+						<li> <a href="javascript:void(0);">科研服务</a>
+							<ul>
+								<li> <a href="/jsk.htm" target="_blank">检索课</a> </li>
+								<li> <a href="/zwhxk.htm" target="_blank">中文核心期刊</a> </li>
+								<li> <a href="/sci.htm" target="_blan">SCI来源期刊</a> </li>
+								<li> <a href="/fwb.htm" target="_blank">中科院JCR分区表</a> </li>
+								<li> <a href="/esi.htm" target="_blank">ESI</a> </li>
+								<li> <a href="/gjhj.htm" target="_blank">馆际互借与文献传递</a> </li>
+								<li> <a href="https://www.mee.gov.cn/hjzl/sthjzk/" target="_blank">环境质量公报</a> </li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!--/ Website Menu -->
+			</div>
+<table align=center width=100% cellspacing=0 cellpadding=0 ><tr><td width=16%  align=center></td><td width=16%  align=center></td><td width=16%  align=center></td><td width=16%  align=center></td><td width=16%  align=center></td><td width=16%  align=center></td></tr><tr></tr></table><table align=center  width=100% cellspacing=2 cellpadding=2 border=0><tr><td valign=top  align=left width=100%><style>
+input[type="text"],
+input[type="password"] {
+    font-size: 16px;
+    font-weight: 100;
+    margin-bottom: 15px;
+    width: 60%;
+    display: block;
+    border-radius: 6px;
+    padding: 5px 10px;
+    border: solid 1px #87005c;
+}
+input[type="submit"],
+input[type="button"] {
+    font-size: 14px;
+    color: #fff;
+    background: #7f0087;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 20px;
+    margin: 0px 5px 10px 8px;
+    border-radius: 6px;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background: #87005e;
+    -webkit-transform: translateY(8px);
+    -ms-transform: translateY(8px);
+    -o-transform: translateY(8px);
+    -ms-transform: translateY(8px);
+    transform: translateY(8px);
+    -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.58);
+    -moz-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.58);
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.58);
+    -webkit-transition: .5s all;
+    -moz-transition: .5s all;
+    -o-transition: .5s all;
+    -ms-transition: .5s all;
+    transition: .5s all;
+}
+</style>
+<div class="center" id="centerBox">
+				<!-- 轮换部分 -->
+				<div class="lbt_content cfix">
+					<div class="banner_box cfix">
+						<!-- 焦点图片 -->
+						<div class="focus_box fl">
+							<ul class="focus_list">
+								<li> <a href="#" title="允公允能 日新月异"> <img class="lazy_focus" data-original="/images/banner01.jpg" src="/images/blank.jpg" alt="允公允能 日新月异"> </a> </li>
+								<li> <a href="#" title="海棠飞雪落校钟"> <img class="lazy_focus" data-original="/images/banner02.jpg" src="/images/blank.jpg" alt="海棠飞雪落校钟"> </a> </li>
+								<li> <a href="#" title="夏荷"> <img class="lazy_focus" data-original="/images/banner03.jpg" src="/images/blank.jpg" alt="夏荷"> </a> </li>
+								<li> <a href="#" title="金秋思源堂"> <img class="lazy_focus" data-original="/images/banner04.jpg" src="/images/blank.jpg" alt="金秋思源堂"> </a> </li>
+								<li> <a href="#" title="我是爱南开的-冬雪"> <img class="lazy_focus" data-original="/images/banner05.jpg" rc="/images/blank.jpg" alt="我是爱南开的-冬雪"> </a> </li>
+							</ul>
+							<div class="focus_nav_box">
+								<p class="focus_nav">
+									<a class="oncur" href="#">允公允能 日新月异 1</a>
+									<a href="#">海棠飞雪落校钟 2</a>
+									<a href="#">夏荷 3</a>
+									<a href="#">金秋思源堂 4</a>
+									<a href="#">我是爱南开的-冬雪 5</a>
+								</p>
+							</div>
+						</div>
+						<!-- 焦点图片 end -->
+					</div>
+				</div>
+				<!-- 轮换部分 end -->
+				<!-- 读者登录 通知公告 友情链接部分 -->
+				<div class="main_top">
+					<div class="center_box">
+						<div class="user_enter">
+							<div class="user">
+								<div class="title"> <span class="en_title">Enter</span> <strong>读者登录</strong> </div>
+									<iframe src="/tool/userstate_hjkx.cbs" frameborder="0" scrolling="no" width="0" height="0" method="post"></iframe>
+		                           <form name="user_login" method="post" action="/page/plogin.cbs">						<div class="login_box" id="loginstate">
+                                <span class="name">用户名：</span><input type="text" name="username"
+                                    placeholder="guest">
+                                <span class="name">密码：</span><input type="password" name="password"
+                                    placeholder="······" autocomplete="off">
+								<span class="name">验证码：</span><input type="text" name="yzcode" size=4 maxlength="4" style='width:90px;float:left;'>&#160;&#160;<IFRAME src="/page/dispicture.cbs" frameBorder="0" width="80" height="60"></iframe>
+                                <span style="padding-left:45px"><input type="submit" value="登录" name='mysubmit'>
+                                <input type="button" value="注册" onClick="window.open('/page/UserReg.cbs','_self');" > </span>                           <p class="newuser">注：新用户请首先注册</p>
+                        </div>
+                            </form>
+
+							</div>
+						</div>
+						<div class="notices_box">
+							<div class="notices">
+								<div class="title">
+									<span class="en_title">Notices</span>
+									<strong>通知公告</strong>
+									<a href="/page/framelimit.cbs?resname=ggl" class="more" target="_blank">更多</a>
+								</div>
+								<ul class="notice_li">
+									<!--
+主要功能：首页中可显示指定资源的n条记录数据
+生成时间：2010-12-09
+开发人员：孟云云
+主要参数： ResName=资源id；DisCount=共显示条数；Dislen=截取字符数；discolsnum=列数；disFlds=显示字段1，显示字段2；SortFld=排序字段；jtpic=每条记录的左边显示图；width=列宽
+-->
+<li class='news'><a title='解锁学术成功之路——Wiley 平台检索技巧与期刊投稿' href='/module/pageCommon1/browinfo.cbs?ResName=ggl&order=28' target=_blank > <p class=li_cont> <span class=list_left>【讲座培训】</span>解锁学术成功之路——Wiley 平台检索技巧与期...</p> <span class=list_date>20250512</span></a></li><li class='news'><a title='本站全文资源暂停访问' href='/module/pageCommon1/browinfo.cbs?ResName=ggl&order=27' target=_blank > <p class=li_cont> <span class=list_left>【通知】</span>本站全文资源暂停访问</p> <span class=list_date>202409</span></a></li><li class='news'><a title='陶瓷复合膜在复杂水体处理的应用--Chong Jengyi 研究员' href='/module/pageCommon1/browinfo.cbs?ResName=ggl&order=26' target=_blank > <p class=li_cont> <span class=list_left>【讲座通知】</span>陶瓷复合膜在复杂水体处理的应用--Chong Je...</p> <span class=list_date>20230923</span></a></li><li class='news'><a title='食品-环境-水中薄膜复合膜技术的新见解与未来方向--Younas Mohammad 教授' href='/module/pageCommon1/browinfo.cbs?ResName=ggl&order=25' target=_blank > <p class=li_cont> <span class=list_left>【学术讲座】</span>食品-环境-水中薄膜复合膜技术的新见解与未...</p> <span class=list_date>20230914</span></a></li><li class='news'><a title='伦敦大学学院水与卫生研究一瞥：跨学科视角--Luiza Cintra Campos' href='/module/pageCommon1/browinfo.cbs?ResName=ggl&order=24' target=_blank > <p class=li_cont> <span class=list_left>【学术讲座】</span>伦敦大学学院水与卫生研究一瞥：跨学科视角...</p> <span class=list_date>20230912</span></a></li><li class='news'><a title='吸附材料对减少气候变化影响的应用--Professor Tezel' href='/module/pageCommon1/browinfo.cbs?ResName=ggl&order=23' target=_blank > <p class=li_cont> <span class=list_left>【学术讲座】</span>吸附材料对减少气候变化影响的应用--Profes...</p> <span class=list_date>20230829</span></a></li><li class='news'></li>								</ul>
+							</div>
+						</div>
+						<div class="links_box">
+							<div class="links">
+								<div class="title"> <span class="en_title">Links</span> <strong>友情链接</strong> </div>
+								<ul class="link_all">
+									<li> <a href="https://www.mee.gov.cn/" target="_blank" title="国家生态环保部">国家生态环保部</a></li>
+									<li> <a href=" http://sthj.tj.gov.cn" target="_blank" title="天津市环境生态局">天津市环境生态局</a></li>
+									<li> <a href="https://www.cenews.com.cn/" target="_blank" title="中国环境报">中国环境报</a></li>
+									<li> <a href="http://www.nlc.cn/" target="_blank" title="国家图书馆">国家图书馆</a></li>
+									<li> <a href="https://lib.nankai.edu.cn/" target="_blank" title="南开大学图书馆">南开大学图书馆</a></li>
+									<li> <a href="http://opac.calis.edu.cn" target="_blank" title="CALIS联合目录检索">CALIS联合目录检索</a></li>
+									<li> <a href="https://env.nankai.edu.cn/" target="_blank" title="南开大学环境科学与工程学院">南开大学环境科学与工程学院</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 读者登录 通知公告 友情链接部分 end -->
+
+				<!-- 读者指南 论文查询 论文提交部分 -->
+				<div class="main_bottom">
+					<div class="bottom_left">
+						<ul class="dzzn">
+							<li>
+								<a href="/dzxz.htm" target="_blank" title="读者须知"> <img src="/images/du01.png" alt="读者须知"> </a>
+							</li>
+							<li>
+								<a href="/jygz.htm" target="_blank" title="借阅规则"><img src="/images/du02.png" alt="借阅规则"></a>
+							</li>
+							<li>
+								<a href="/kfsj.htm" target="_blank"title="开放时间"><img src="/images/du03.png" alt="开放时间"></a>
+							</li>
+						</ul>
+						<div class="contact">
+							<div class="title">
+								<span class="en_title">Contact US</span> <strong>联系我们</strong>
+								<a class="shoucang" href="javascript:void(0)" onclick="addFavorite()">收藏我们</a>
+							</div>
+							<ul class="con_list">
+								<li>
+									<span class="con_list_left">TEL:</span><span class="list_right">022-23503527</span>
+								</li>
+								<li>
+									<span class="con_list_left">Email：</span><span class="list_right">hkzl@nankai.edu.cn</span>
+								</li>
+								<li>
+									<span class="con_list_left">QQ咨询群：</span><span class="list_right">488275364</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<ul class="bottom_center">
+						<li>
+							<a href="/page/framelimit.cbs?resname=dissertation" target="_blank" title="学位论文查询" >
+								<img src="/images/li01.jpg" alt="学位论文查询">
+							</a>
+						</li>
+						<li><a href="/page/framelimit.cbs?resname=hb" target="_blank" title="环境标准·基准" ><img src="/images/li02.jpg" alt="环境标准·基准"></a></li>
+						<li><a href="/page/framelimit.cbs?resname=fg" target="_blank" titl="环保法律法规" ><img src="/images/li03.jpg" alt="环保法律法规"></a></li>
+					</ul>
+					<div class="bottom_right">
+						<p class="lwtj">
+							<a href="/page/PostMessage.cbs?ResName=dissertation" target="_blank" title="学位论文提交"> <img src="/images/lwtj.jpg" alt="学位论文提交"></a>
+						</p>
+						<p class="dzjg"><a href="/page/PostMessage.cbs?ResName=sktj" target="_blank" title="读者荐购"><img src="/images/dzjg.jpg" alt="读者荐购"></a></p>
+						<ul class="erwm">
+							<li><img src="/images/erwm1.jpg" alt=""><span>加入图书志愿服务小分队</span></li>
+							<li><img src="/images/erwm2.jpg" alt=""><span>校馆公众号</span></li>
+						</ul>
+					</div>
+				</div>
+				<!-- 读者指南 论文查询 论文提交部分 end -->
+			</div></td></tr></table><link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/jquery.lazyload.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<div class="footer" id="footerBox">
+				<!-- footer -->
+				<div class="footerBox">
+					<div class="fott_box">
+						<div class="item">
+							<div class="numU">
+								<span class="indc">访客统计: </span>
+								<span class="numCX" data-startVal="0" data-endVal="363567" data-speed="4" data-decimals="0" id="mumC1">0</span>
+							</div>
+						</div>
+						<p>地址：天津市津南区 海河教育园区 同砚路38号 环境科学与工程学院楼B座 （300350）</p>
+						<p>版权所有：南开大学 环境科学与工程学院 </p>
+					</div>
+				</div>
+				<!-- footer end -->
+				<!-- 计数器 -->
+				<script src="/js/count.js"></script>
+<script src="/js/jquery-1.10.2.min.js"></script>
+				<script type="text/javascript">
+					$(function() {
+						var countCXArr = [];
+						var countCX = function() {
+							$('.item').each(function(i, dom) {
+								if (countCXArr[i] && countCXArr[i] === true) {
+									return;
+								}
+								var sT;
+								var ncTop;
+								sT = $(window).scrollTop();
+								ncTop = $(dom).offset().top;
+								var id, decimals, startVal, endVal, duration;
+								if (sT > ncTop - $(window).height() && sT < ncTop) {
+									$(dom).find('.numCX').each(function() {
+										id = $(this).attr('id');
+										decimals = $(this).attr('data-decimals'),
+											startVal = $(this).attr('data-startVal'),
+											endVal = $(this).attr('data-endVal'),
+											duration = $(this).attr('data-speed');
+										new CountUp(id, startVal, endVal, decimals, duration, {
+												useEasing: true, //效果
+												separator: '' //数字分隔符
+											})
+											.start(); // target：目标元素id, startVal：你想要开始的值, endVal：你想要到达的值, decimals：小数位数，默认值为0, duration：动画持续时间为秒，默认值为2, options：选项的可选对象
+										countCXArr[i] = true;
+									})
+								}
+							})
+						}
+						countCX();
+						$(window).on("scroll", function() {
+							countCX();
+						})
+					});
+				</script>
+				<!-- 计数器 end -->
+			</div>
+</div>
+</body></html>

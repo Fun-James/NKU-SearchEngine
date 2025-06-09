@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="webkit" name="renderer" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="/Public/css/company.css"/>
+<script type="text/javascript" src="/Public/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/Public/js/base.js?1743546502"></script>
+<script type="text/javascript" src="/Public/js/info_citys.js"></script>
+<title>南开大学学生就业指导中心</title>
+</head>
+<style>
+font{color:#ff0000; font-size:16px; margin-right:5px; vertical-align:middle;}
+#searchresult {width: 357px;position: absolute;left: 0px;top: 32px; z-index: 1; overflow: hidden;}
+.tables{ max-height:150px;overflow-x: hidden; background:#ffffff; border:1px solid #e3e3e3;}
+.tables ul li{ height:25px; line-height:25px;}
+.line{font-size:12px; color:#222; background:#ffffff; width:350px; padding-left:5px;}
+.hover{background:#316ac5; color:#fff;}
+/*密码强度提示*/
+.pwdtips{display:block;padding:0 5px;overflow:hidden;vertical-align: middle;}
+.pwdtips li{float:left;}
+.pwdline {background: #d6d3d3;width: 62px;height: 4px;margin-top: 5px;margin-left: 5px;}
+.pwdtext {display:inline-block;width: 62px;margin-left: 5px;text-align: center;color: #b0adad;font-size: 12px;}
+</style>
+<body style="background:#ffffff;">
+<div class="nk_register_header">
+  <div class="register_header">
+     <div class="register_header_logo"><a href="javascript:void(0)" style="background:url(/Uploads/2018-09-12/5b98f5aba4cb5.png) no-repeat left center; background-size:auto 60px;"></a></div>
+	 <div class="register_header_txt"><!--<span><a href="javascript:void(0)">登录</a></span> - <span><a href="javascript:void(0)">注册</a></span>--></div>
+  </div>
+</div>
+<div class="blank_30"></div>
+<div class="register_con_bors"></div>
+<div class="register_con">
+   <div class="register_con_title">
+     <div class="register_con_title_bt">注册账号</div>
+	 <div class="register_con_title_zc"><span><a href="/login/login.html">已有账号？立即登录</a></span></div>
+   </div>
+   <div class="register_con_table">
+   <form method="post" action="/login/doregister.html" onsubmit="return needwrite();"  enctype="multipart/form-data">
+		<input type="text" id="companyname" style="height:0px; border:0px; width:0px; padding:0px; display:block;" />
+		<input type="password" id="password" style="height:0px; border:0px; width:0px; padding:0px;" />
+		<input type="text" id="contactemail" style="height:0px; border:0px; width:0px; padding:0px; display:block;" />
+      <table class="typetable1">
+	    <tbody class="js_addforum">
+		    <tr>
+			   <td width="200"><font>*</font>企业名称</td>
+			   <td style="position:relative;"><input type="text" name="companyname" id="companyname" value=""  onkeyup="document.getElementById('tipscompany').style.display='none';" /><div class="tipc" id="tipscompany">企业名称不能为空！</div></td>
+			</tr>
+			<tr>
+				<td width="200" style="vertical-align:top; padding-top:20px;"><font>*</font>密码</td>
+				<td style="position:relative;"><input type="password" name="password" id="password" value="" onkeyup="document.getElementById('tipspassword').style.display='none';document.getElementById('tipspassword2').style.display='none';" /><div class="tipc" id="tipspassword">密码不能为空！</div><div class="tipc" id="tipspassword2">密码应该遵循强密码原则！</div>
+				 <ul class="pwdtips">
+					 <input type="hidden" name="level" value="0">
+					 <li>
+						 <p class="pwdline" id="pwdLevel_1"></p>
+						 <span class="pwdtext"> 弱</span>
+					 </li>
+					 <li>
+						 <p class="pwdline" id="pwdLevel_2"></p>
+						 <span class="pwdtext"> 中</span>
+					 </li>
+					 <li>
+						 <p class="pwdline" id="pwdLevel_3"></p>
+						 <span class="pwdtext"> 强</span>
+					 </li>
+				 </ul>
+				</td>
+			 </tr>
+			 <tr>
+				 <td colspan="2" style="color:red">注：密码应该遵循强密码原则，建议采用字母+数字+特殊字符的组合，字母区分大小写。</td>
+			 </tr>
+			<tr>
+			   <td><font>*</font>统一社会信用代码</td>
+			   <td style="position:relative;"><input type="text" name="ornum" value=""  onkeyup="document.getElementById('tipsornum').style.display='none';document.getElementById('tipsornum2').style.display='none';" /><div class="tipc" id="tipsornum">统一社会信用代码不能为空！</div><div class="tipc" id="tipsornum2">统一社会信用代码长度必须为18位！</div></td>
+			</tr>
+			<tr>
+			   <td><font>*</font>单位性质</td>
+			   <td style="position:relative;"><select name="unitnature" onchange="document.getElementById('tipsunitnature').style.display='none';">
+			           <option value="0" >请选择</option>
+			           <option value="1">党政机关</option><option value="2">事业单位</option><option value="3">科研院所</option><option value="4">高等院校</option><option value="5">医疗卫生</option><option value="6">其他教学单位</option><option value="7">县及以下机关</option><option value="8">国有企业</option><option value="9">三资企业</option><option value="10">民营企业</option><option value="11">部队</option><option value="12">其他</option><option value="13">城镇社区</option>			       </select><div class="tipc" id="tipsunitnature">单位性质不能为空！</div></td>
+			</tr>
+			<tr>
+			   <td><font>*</font>单位行业</td>
+			   <td style="position:relative;"><select name="unitindustry" onchange="document.getElementById('tipsunitindustry').style.display='none';">
+			           <option value="0" >请选择</option>
+			           <option value="1">制造业</option><option value="2">农林牧渔业</option><option value="3">采矿业</option><option value="4">电力业</option><option value="5">建筑业</option><option value="6">批发和零售业</option><option value="7">国际组织</option><option value="8">交通运输业</option><option value="9">住宿餐饮业</option><option value="10">信息传输软件和信息技术服务业</option><option value="11">金融业</option><option value="12">房地产业</option><option value="13">租赁和商务</option><option value="14">科学研究和技术服务业</option><option value="15">教育</option><option value="16">卫生和社会工作</option><option value="17">文化体育娱乐业</option><option value="18">公共管理、社会保障</option><option value="19">军队</option><option value="20">水利、环境和公共设施管理业</option><option value="21">居民服务、修理和其他服务业</option>			       </select><div class="tipc" id="tipsunitindustry">单位行业不能为空！</div></td>
+			</tr>
+			<tr>
+			   <td><font>*</font>企业规模</td>
+			   <td style="position:relative;"><select name="companygm" onchange="document.getElementById('tipscompanygm').style.display='none';">
+			           <option value="0" >请选择</option>
+			           <option value="1" >50人以下</option><option value="2" >50-200人</option><option value="3" >200-500人</option><option value="4" >500人以上</option>			       </select><div class="tipc" id="tipscompanygm">企业规模不能为空！</div></td>
+			</tr>
+			<tr>
+			   <td><font>*</font>注册资本</td>
+			   <td style="position:relative;"><input type="text" name="recapital" value="" onkeyup="document.getElementById('tipsrecapital').style.display='none';" /><div class="tipc" id="tipsrecapital">注册资本不能为空！</div></td>
+			</tr>
+			<tr style="height:62px;" valign="top">
+			   <td style="line-height: 25px; padding-top: 20px;"><font>*</font>营业执照/事业单位法人证书/统一社会信用代码证书</td>
+			   <td style="position:relative; padding-top:20px;"><input type="file" name="pic" value="" onclick="document.getElementById('tipspic').style.display='none';"  /><div class="tipc" id="tipspic">营业执照或法人证书不能为空！</div>
+               <p style="font-size:14px; color:#f60; line-height:20px; padding-top:10px;">请上传原件或已加盖公章的复印件；<br />只能上传图片，图片大小不能超过1M；</p>
+               </td>
+			</tr>
+			<tr class="ctr">
+			   <td colspan="2" class="ctitle">联系方式</td>
+			</tr>
+                        <tr>
+               <td valign="top" style="line-height:32px;"><font>*</font>单位注册地</td>
+               <td style="position:relative; padding-bottom:10px;">
+                    <select name="dwszd1" id="dwszd1" style="width:78px; margin:5px 0px 2px;" onchange="hd_province('dwszd',this.options[this.selectedIndex].value);">
+                        <option value="">省</option>
+                        <option value="11" >北京</option><option value="12" >天津</option><option value="13" >河北</option><option value="14" >山西</option><option value="15" >内蒙古</option><option value="21" >辽宁</option><option value="22" >吉林</option><option value="23" >黑龙江</option><option value="31" >上海</option><option value="32" >江苏</option><option value="33" >浙江</option><option value="34" >安徽</option><option value="35" >福建</option><option value="36" >江西</option><option value="37" >山东</option><option value="41" >河南</option><option value="42" >湖北</option><option value="43" >湖南</option><option value="44" >广东</option><option value="45" >广西</option><option value="46" >海南</option><option value="50" >重庆</option><option value="51" >四川</option><option value="52" >贵州</option><option value="53" >云南</option><option value="54" >西藏</option><option value="61" >陕西</option><option value="62" >甘肃</option><option value="63" >青海</option><option value="64" >宁夏</option><option value="65" >新疆</option><option value="71" >台湾</option><option value="81" >香港</option><option value="82" >澳门</option><option value="99" >国外</option>                    </select>
+                    <select name="dwszd2" id="dwszd2" style="width:100px; margin:5px 0px 2px;" onchange="hd_city('dwszd',this.options[this.selectedIndex].value);">
+                        <option value="">市/地区</option>
+                    </select>
+                    <select name="dwszd3" id="dwszd3" style="width:114px; margin:5px 0px 2px;">
+                        <option value="">区/县</option>
+                    </select>
+                    <div class="tips" id="tipsdwszd" style="line-height:32px;">单位注册地不能为空！</div>
+                    <br />
+                    <p style="color:#666666; font-size:12px;">（具体到区/县一级，<span style="color:#f60">如不能选择市/地区，请使用360浏览器的极速模式、谷歌浏览器、火狐浏览器等非IE浏览器注册</span>）</p>
+                </td>
+            </tr>
+			<tr>
+			   <td valign="top" style="line-height:32px;"><font>*</font>通讯地址</td>
+			   <td style="position:relative;"><input type="text" name="address" value="" onkeyup="document.getElementById('tipsaddress').style.display='none';" style="margin:0px;" /><div class="tipc" id="tipsaddress" style="line-height:32px;">通讯地址不能为空！</div><br />
+			    <span style="color:#666666; font-size:12px;">（填写完整省市区地址，精确至门牌号）</span></td>
+			</tr>
+			<tr>
+			   <td><font>*</font>邮政编码</td>
+			   <td style="position:relative;"><input type="text" name="zipcode" value="" onkeyup="document.getElementById('tipszipcode').style.display='none';document.getElementById('tipszipcode2').style.display='none';" /><div class="tipc" id="tipszipcode" >邮政编码不能为空！</div><div class="tipc" id="tipszipcode2" >邮政编码不正确！</div></td>
+			</tr>
+			<tr>
+			   <td><font>*</font>联系人</td>
+			   <td style="position:relative;"><input type="text" name="contactname" value="" onkeyup="document.getElementById('tipsname').style.display='none';" /><div class="tipc" id="tipsname" >联系人不能为空！</div></td>
+			</tr>
+			<tr>
+			   <td><font>*</font>电子邮箱</td>
+			   <td style="position:relative;"><input type="text" name="contactemail" id="contactemail" value="" onkeyup="document.getElementById('tipsemail').style.display='none';document.getElementById('tipsemail2').style.display='none';" /><div class="tipc" id="tipsemail" >电子邮箱不能为空！</div><div class="tipc" id="tipsemail2">电子邮箱格式不正确！</div></td>
+			</tr>
+			<tr>
+			   <td><font>*</font>联系方式</td>
+			   <td style="position:relative;"><input type="text" name="contacttel" value="" onkeyup="document.getElementById('tipstel').style.display='none';document.getElementById('tipstel2').style.display='none';" /><div class="tipc" id="tipstel" >联系方式不能为空！</div><div class="tipc" id="tipstel2">联系方式不正确！</div></td>
+			</tr>
+		            </tbody>
+		<tr>
+		    <td>&nbsp;</td>
+			<td><label class="agreement"><input type="checkbox" name="is_ty" value="1" checked="checked" /> 同意<span><a href="/login/registerxy.html" target="_blank">《南开大学就业指导中心注册协议》</a></span></label></td>
+		</tr>
+		<tr>
+		    <td>&nbsp;</td>
+			<td><input type="submit" style="cursor:pointer" value="注册" /></td>
+		</tr>
+	  </table>
+   </form>
+   </div>
+</div>
+<div class="register_con_borx"></div>
+<div class="blank_30"></div>
+<div class="register_footer">版权所有 南开大学学生就业指导中心</div>
+</body>
+</html>
+<script type="text/javascript">
+$(function(){
+    $('input[name=password]').keyup(function(){
+        var pwd=$(this).val();
+        pwStrength(pwd);
+    })
+})
+
+function needwrite(){
+	var companyname=$("input[name=companyname]");
+	var password=$("input[name=password]");
+	var ornum=$("input[name=ornum]");
+	var unitnature=$("select[name=unitnature]");
+	var unitindustry=$("select[name=unitindustry]");
+	var companygm=$("select[name=companygm]");
+	var recapital=$("input[name=recapital]");
+	/*var province=$("select[name=province]");
+	var city=$("select[name=city]");*/
+	var pic=$("input[name=pic]");
+	//var dwszd=$("input[name=dwszd]");
+	var address=$("input[name=address]");
+	var zipcode=$("input[name=zipcode]");
+	var contactname=$("input[name=contactname]");
+	var contactemail=$("input[name=contactemail]");
+	var contacttel=$("input[name=contacttel]");
+	if($.trim(companyname.val())==''){
+		document.getElementById("tipscompany").style.display="block";
+		companyname.focus();
+		return false;
+	}
+	if($.trim(password.val())==''){
+		document.getElementById("tipspassword").style.display="block";
+		password.focus()
+		return false;
+	}
+	var level=$('input[name=level]').val();
+	if(level<3){
+		document.getElementById("tipspassword2").style.display="block";
+		password.focus()
+		return false;
+	}
+	if($.trim(ornum.val())==''){
+		document.getElementById("tipsornum").style.display="block";
+		ornum.focus();
+		return false;
+	}
+	if($.trim(ornum.val()).length!=18){
+		document.getElementById("tipsornum2").style.display="block";
+		ornum.focus();
+		return false;
+	}
+	if(unitnature.val()==0){
+		document.getElementById("tipsunitnature").style.display="block";
+		unitnature.focus();
+		return false;
+	}
+	if(unitindustry.val()==0){
+		document.getElementById("tipsunitindustry").style.display="block";
+		unitindustry.focus();
+		return false;
+	}
+	if(companygm.val()==0){
+		document.getElementById("tipscompanygm").style.display="block";
+		companygm.focus();
+		return false;
+	}
+	if($.trim(recapital.val())==''){
+		document.getElementById("tipsrecapital").style.display="block";
+		recapital.focus()
+		return false;
+	}
+	/*if(province.val()==0){
+		document.getElementById("tipsprovince").style.display="block";
+		province.focus();
+		return false;
+	}
+	if(city.val()==0){
+		document.getElementById("tipsprovince").style.display="block";
+		city.focus();
+		return false;
+	}*/
+	if($.trim(pic.val())==''){
+		document.getElementById("tipspic").style.display="block";
+		pic.focus()
+		return false;
+	}
+		var dwszd3=$("select[name='dwszd3']");
+	if($.trim(dwszd3.val())==''){
+		document.getElementById("tipsdwszd").style.display="block";
+		$("select[name='dwszd1']").val('');
+		$("select[name='dwszd2']").val('');
+		dwszd3.focus();
+		return false;	
+	}else{
+		document.getElementById("tipsdwszd").style.display="none";
+	}
+	if($.trim(address.val())==''){
+		document.getElementById("tipsaddress").style.display="block";
+		address.focus();
+		return false;
+	}
+	if($.trim(zipcode.val())==''){
+		document.getElementById("tipszipcode").style.display="block";
+		zipcode.focus();
+		return false;
+	}
+	if($.trim(zipcode.val())!==""){
+		if(!/^\d{6}$/.test($.trim(zipcode.val()))){
+		document.getElementById("tipszipcode2").style.display="block";
+		zipcode.focus();
+		return false;
+		}
+	}
+	if($.trim(contactname.val())==''){
+		document.getElementById("tipsname").style.display="block";
+		contactname.focus();
+		return false;
+	}
+	if($.trim(contactemail.val())==''){
+		document.getElementById("tipsemail").style.display="block";
+		contactemail.focus();
+		return false;
+	}
+	if($.trim(contactemail.val())!==""){
+		if(!Isyx($.trim(contactemail.val()))){ 
+		document.getElementById("tipsemail2").style.display="block"; 
+		contactemail.focus();
+		return false;
+	    }
+	}
+	if($.trim(contacttel.val())==''){
+		document.getElementById("tipstel").style.display="block";
+		contacttel.focus();
+		return false;
+	}
+	if($.trim(contacttel.val())!==""){
+		if(!/^0\d{2,3}-?\d{7,8}$/.test($.trim(contacttel.val())) && !Phone($.trim(contacttel.val()))){
+		document.getElementById("tipstel2").style.display="block";
+		contacttel.focus(); 
+		return false; 
+		} 
+	}
+	
+	var is_ty=$("input[name=is_ty]:checked");
+	if(is_ty.val()!=1){
+		alert("请选择同意注册协议！");
+		$("input[name=is_ty]").focus();
+		return false;
+	}
+	
+	return true;
+}
+</script>

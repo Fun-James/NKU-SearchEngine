@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="keywords" content="南开大学文学院，文学国家级实验教学示范中心，开放式实验教学与实验室管理系统，开放式虚拟仿真实验教学中心，虚拟仿真实验教学，文学示范中心，wxylab">
+    <meta name="description" content="南开大学文学院，文学国家级实验教学示范中心，开放式实验教学与实验室管理系统，开放式虚拟仿真实验教学中心，虚拟仿真实验教学，文学示范中心，wxylab">
+	<title>南开大学文学国家级实验教学示范中心</title>
+    <link rel="stylesheet" href="/virexp/s/site_themes/default/css/style.css"/>
+    <link rel="stylesheet" href="/virexp/s/site_themes/default/css/shadowbox.css"/>
+    <script type="text/javascript" src="/virexp/s/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/virexp/s/site_themes/default/js/jquery.SuperSlide.2.1.js"></script>
+    <script type="text/javascript" src="/virexp/s/site_themes/default/js/js_toolBackTop.js"></script>
+    <script type="text/javascript" src="/virexp/s/site_themes/default/js/main.js"></script>
+    <script type="text/javascript" src="/virexp/s/site_themes/default/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/virexp/s/ckplayer/ckplayer.js" charset="utf-8"></script>
+    <style type="text/css">
+        .btn-page{font-size: 12px;margin:20px auto;height:20px;}
+        .btn-page li{float:left;width:20px;*+width:19px;height:20px;border-right:1px solid #D2D2D2;line-height: 20px;text-align: center;border:1px solid #D2D2D2;border-right:none;}
+        .btn-page li a{display:block;}
+    </style>
+    
+    <script type="text/javascript" src="/virexp/s/site_themes/default/focus/focusflash.js"></script>
+	<script type="text/javascript" src="/virexp/s/site_themes/default/jwplayer/jwplayer5.7.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/virexp/s/ckplayer/ckplayer.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/virexp/s/site_themes/default/js/shadowbox.js"></script>
+	<script type="text/javascript" src="/virexp/s/site_themes/default/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="/virexp/s/themes/default/css/classroom.css" />
+<link rel="stylesheet" type="text/css" href="/virexp/s/themes/default/css/jquery-ui-1.10.3.custom.min.css" />
+<script type="text/javascript" src="/virexp/s/layer/v2.1/layer/layer.js"></script>
+ <style>
+    .content p{line-height: 14px}
+    .content{position:relative; z-index:10;}
+    .lessons {height:34px;line-height:34px;font-size:12px !important;}
+    .seatNum {
+	font-size:13px;
+	line-height:45px;
+    color: #d2d2d2;
+	
+}
+#schedule td.reservation{
+    background:#ffffff;
+}
+td div.title{
+	width:92px;
+}
+#schedule td.no-reservation,.overtime{
+	background:#cacbcc;
+}
+ </style>
+    <!--HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries-->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<script>
+    // $(function(){
+    // $(".Category-nav ul div").hide();
+    // $(".lm a").click(function(){
+    //     $(this).parent().next().toggle();
+    // });
+    // })
+</script>
+    <script type="text/javascript">
+        function getObject(objectId) {
+            if(document.getElementById && document.getElementById(objectId)) {
+                return document.getElementById(objectId);
+            }
+            else if (document.all && document.all(objectId)) {
+                return document.all(objectId);
+            }
+            else if (document.layers && document.layers[objectId]) {
+                return document.layers[objectId];
+            }
+            else {
+                return false;
+            }
+        }
+
+        function showHide(e,objname){
+        var obj = getObject(objname);
+        if(obj.style.display == "none"){
+            obj.style.display = "block";
+        }else{
+            obj.style.display = "none";
+        }
+    }
+</script>
+<div class="header">
+	<div class="bn">
+		<a class="left_href" href="/virexp/"></a>
+		<a class="right_href"></a>
+	</div>
+</div>
+<div class="top-nav">
+        <div class="navs wid1000" >
+            <ul class="nav">
+                    <li class="m">
+                        <h3><a href="https://wxylabxf.nankai.edu.cn/virexp/">首页</a></h3>
+                    </li>
+                                                    <li class="m">
+                                                        <h3>
+                                                            <a href="/virexp/sysyd/">
+                                                                实验室预定
+                                                            </a>
+                                                        </h3>
+                                                     </li>
+                                                    <li class="m">
+                                                        <h3>
+                                                            <a href="/virexp/xsgwyd/">
+                                                                工位预定
+                                                            </a>
+                                                        </h3>
+                                                     </li>
+                                                    <li class="m">
+                                                        <h3>
+                                                            <a href="/virexp/sbzj/">
+                                                                设备租借
+                                                            </a>
+                                                        </h3>
+                                                     </li>
+                        <li class="m"><h3><a href="/virexp/prepare_login" target="_blank" hidefocus="false">实验入口</a></h3></li>
+                </ul>
+
+
+        </div>
+</div>
+<style>
+.aCur{
+	background: #a30682;color: #fff !important;
+}
+</style>
+<script type="text/javascript">
+        $(function(){
+            $(".btn-page").css("width",$(".btn-page li").size()*($(".btn-page li").width()+1)+1)
+            $(".btn-page li").last().css("border-right","1px solid #D2D2D2");
+				var href = window.location.pathname;
+				var cook = $.cookie("clickUrl");
+				
+				if(href=='/virexp/'){
+					$('.nav li').eq(0).addClass("aCur");
+				}else{
+					$(".nav a").each(function(){
+						 if($.cookie("clickUrl") != null ){
+							  if($.cookie("clickUrl") == $(this).attr("href")){
+								$(".nav a").removeClass("aCur");
+								if($(this).parents('.m').length>0){
+									$(this).addClass("aCur")
+									$(this).parents('.m').addClass("aCur")	
+								}else{
+								}
+							}
+						 }
+					});
+				}
+					
+				
+					
+				
+
+            	$(".nav a").click(function(){
+            	    var clickUrl = $(this).attr("href");
+            	    $.cookie("clickUrl",clickUrl)
+            	});
+
+        })
+    </script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        jQuery(".nav").slide({
+            type:"menu", //效果类型
+            titCell:".m", // 鼠标触发对象
+            targetCell:".sub", // 效果对象，必须被titCell包含
+            delayTime:300, // 效果时间
+            triggerTime:0, //鼠标延迟触发时间
+            returnjsj:false//on返回初始位置
+        });
+        $(".navBar > ul > li").each(function(){
+            if($(this).find('h3').siblings('ul.sub').length != 0){
+                $(this).addClass('arrow-right');
+            }
+        });
+
+    });
+</script>
+
+	
+<div id='main'>
+<div id='mainContent'>
+<script type="text/javascript">
+    var week=1;
+    $(function () {
+        $("#naviBar").width("100%");
+        $("#schedule tr,#fix-header tr").each(function(){
+            var i=$(this).find("td").length==9?1:0;
+            $($(this).children()[(week==0?7:week)+i]).addClass("current");
+        });
+        $("#schedule td").hover(function(){
+            $(this).parents("tr").addClass("current");
+
+        },function(){
+            $(this).parents("tr").removeClass("current");
+
+        });
+
+        var header=$("#fix-header");
+        var table=$("#schedule");
+        var navFixed = $('.virtual .nav');
+
+        //处理在表格的th随着滚动条下拉消失的问题
+        $(window).scroll(function(){
+            if($(this).scrollTop()>253)
+            {
+            	console.log($(this).scrollTop())
+                $("#fix-header").show();
+                 header.width(table.outerWidth());
+                 $('#fix-header .week div').width($('#schedule .week').width()+1);
+                 navFixed.css({width:table.outerWidth(),position:'fixed',top:'0px'})
+            }
+            else
+            {
+                $("#fix-header").hide();
+                navFixed.css({width:'100%',position:'relative',top:'auto'})
+            }
+        })
+
+        //根据由freemarker生成的时间数组向表格添加节数时间
+        var lessons = 0;
+        /*
+        $('.dateArea').each(function(){
+        	var data = lectureTimeArray[lessons][0]+'~'+lectureTimeArray[lessons][1];
+        	$(this).html(data)
+        	lessons>10?lessons=0:lessons++
+        })
+	*/
+    });
+
+   function convertDateFromString(dateString) {
+    if (dateString) {
+        var arr1 = dateString.split(" ");
+        var sdate = arr1[0].split('-');
+        var date = new Date(sdate[0], sdate[1]-1, sdate[2]);
+        return date;
+    }
+}
+</script>
+
+<script type="text/javascript">
+
+    var scheduleUrl="/virexp/lab/reservation/!reservation";
+    var viewUrl = "/virexp/lab/reservation/!view";
+    $(function(){
+        $.browser=[];
+        $.browser.mozilla = /firefox/.test(navigator.userAgent.toLowerCase());
+        $.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
+        $.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
+        $.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
+        scheduleUrl=scheduleUrl;
+        viewUrl=viewUrl;
+    });
+    function reservation(date,roomid,period)
+    {
+        window.location.href=scheduleUrl+"?labId="+roomid+"&date="+date+"&period="+period+"&entrance=yuyue";
+    }
+
+
+</script>
+<script type="text/javascript">
+    $(function(){
+        $("#schedule td.reservation").each(function(){
+            //当前日期
+            var date =convertDateFromString('2025-05-31 07:31:38');
+            var y = date.getFullYear();
+            var m = date.getMonth()+1;
+            var d = date.getDate();
+            //td中的日期
+            var oldDate = $(this).attr("date").split("-");
+            var yy = parseInt(oldDate[0]);
+            var mm = parseInt(oldDate[1]);
+            var dd = parseInt(oldDate[2]);
+            if(yy < y || (yy==y&&mm<m) || (yy == y && mm==m && dd<=d)){
+               $(this).removeClass('reservation').addClass('overtime');
+            }
+        })
+
+    })
+</script>
+<script type="text/javascript">
+    //读取json数据，解析并显示到网页上
+    function getSchedule(){
+        $.getJSON('!getLabReservations?weekInDate=2025-05-26--2025-06-01&weekIndex=12',function(json){
+            //遍历json，获取时间段
+
+			//处理返回数据的数组
+            getSchedule_OnComplete(json);
+
+            $("#schedule td.schedule-detail").on('click', function(){
+				
+				if(!$(this).hasClass('no-reservation')){
+						//当前日期
+					var date =convertDateFromString('2025-05-31 07:31:38');
+					var y = date.getFullYear();
+					var m = date.getMonth()+1;
+					var d = date.getDate();
+					//td中的日期
+					var oldDate = $(this).attr("date").split("-");
+					var yy = parseInt(oldDate[0]);
+					var mm = parseInt(oldDate[1]);
+					var dd = parseInt(oldDate[2]);
+
+					//不包含.content
+					if($(this).find('.content').length==0){
+						if(yy>y){
+							var userName = $(this).find("p").eq(1).text()
+							var activityName = $(this).find("p").eq(2).text()
+							var td = $(this);
+							reservation(td.attr("date"),td.attr("roomid"),td.attr("period"),userName,activityName);
+						}else{
+							if(mm > m){
+								var userName = $(this).find("p").eq(1).text()
+								var activityName = $(this).find("p").eq(2).text()
+								var td = $(this);
+								reservation(td.attr("date"),td.attr("roomid"),td.attr("period"),userName,activityName);
+							}else if(mm == m){
+								if(d < dd){
+									var userName = $(this).find("p").eq(1).text()
+									var activityName = $(this).find("p").eq(2).text()
+									var td=$(this);
+									reservation(td.attr("date"),td.attr("roomid"),td.attr("period"),userName,activityName);
+								}else{
+									layer.alert('该时间段已过期，请选择第二天及以后的时间段！', {
+										
+									});
+								}
+							}else{
+								layer.alert('该时间段已过期，请选择第二天及以后的时间段！', {
+									
+								});
+							}
+						}
+					}
+				}else{
+					layer.alert('该时间段暂未开放！');
+				}
+			
+            	
+            });
+            $("#schedule td.reservation").hover(function(){
+
+                var item=$(this);
+                var content=item.find("div.content");
+                if(content.length==0){
+                    var mask=$("<div>");
+                    mask.addClass("hover");
+                    var seat=item.find("p.seatNum");
+                    mask.height(item.height());
+                    if (content.length==0)
+                    {
+                        seat.hide();
+                        item.append(mask)
+                    } else {
+                        mask.css("position","absolute").css("left","0").css("top","0").css("z-index",9);
+                        $(content[0]).append(mask);
+                    }
+                }
+
+            },
+            function(){
+            	$(this).find("div.hover").remove();
+            	$(this).find("p.seatNum").show();
+            });
+        });
+    }
+
+    /**
+     * 处理返回数据数组方法，拆分数组将数据生成dom元素添加到表格中
+     */
+    function getSchedule_OnComplete(data){
+
+       	//循环数组取出每一个json对象，并生成信息添加到表格中。控制表格合并和位置
+        for (var i = 0; i < data.length; i++) {
+        	var labId = data[i].labId;
+        	var startLesson = parseInt(data[i].startLesson);
+        	var endLesson = parseInt(data[i].endLesson);
+        	var bookDate = data[i].bookDate;
+        	var rowspan = endLesson-startLesson+1;
+        	$('#schedule td.schedule-detail').each(function() {
+        		var roomId = $(this).attr('roomid');
+        		var dateStr = $(this).attr('date');
+        		var period = $(this).attr('period');
+
+        		/**
+			     * 根据表格的实验室ID、日期、节数判断位置
+			     */
+        		if(labId==roomId && dateStr==bookDate && period==startLesson) {
+        			$(this).attr('rowspan',rowspan);
+        			if((13-period) == rowspan) {
+        				$(this).addClass('split')
+        			}
+        			var item=$("<div>");
+		            item.data("reservation",data[i]);
+		            item.css('height','45px')
+		            console.log(item.outerHeight())
+		            item.css("padding-top",(45*(rowspan-1)/2)+'px')
+		            item.css("padding-bottom",(45*(rowspan-1)/2)+rowspan-1+'px')
+		            item.addClass("content");
+		            item.addClass("type"+data[i].type);
+		            item.append("<p title="+data[i].activityName+">"+data[i].activityName+"</p>");
+		            item.append("<p>"+lectureTimeArray[startLesson-1][0]+'~'+lectureTimeArray[endLesson-1][1]+"</p>");
+		            item.append("<p>"+data[i].userName+"</p>");
+
+		             //判断是否是待审核的，添加修改和删除按钮
+		            var audit = data[i].type;
+		            var permission = data[i].permission;
+		            if(audit == 0 && permission == "true"){
+		                var id=data[i].id;
+		                var aHref = './reservation/!deleteReser?id='+id+'&labId='+labId;
+		                var sHref = './reservation/'+id+'!edit';
+		                item.append("<div class='op'><a href="+ sHref +" class='op-upd'></a><a href="+aHref+" class='op-del'></a></div>");
+		            }
+        			$(this).append(item);
+
+        			/**
+				     * 删除经过合并后多余的表格
+				     */
+        			for(var k=startLesson;k<endLesson;k++){
+		        		var idIndex = labId+'-'+bookDate+'-'+(k+1);
+		        		$(document.getElementById(idIndex)).remove();
+		        	}
+
+        		}
+        	})
+
+        }
+
+         /**
+         * 循环每个表格，如果没有被预约的话生成json数组
+         * @labId         实验室ID
+         * @startLesson   当前格对应的节数
+         * @startDate     当前格对应的日期
+         * @seatNum       当前格对应的实验室的总工位数
+         * @xmlStrArr     存放数据数组
+         */
+
+        var xmlStrArr=[];
+        $('#schedule td.schedule-detail').each(function() {
+        	var roomId = $(this).attr('roomid');
+    		var dateStr = $(this).attr('date');
+    		var period = $(this).attr('period');
+    		var seatNum = $(this).attr('seatNum')
+
+    		if($(this).find('.content').length == 0){
+    			xmlStrArr.push({labId:roomId,startLesson:period,startDate:dateStr,seatNum:seatNum})
+    		}
+        })
+        xmlStrArr.reverse();
+		var times= xmlStrArr.length;
+
+		Recursion_Ajax(times,xmlStrArr);
+
+
+		/**
+		 * 用递归的方式请求多个ajax，判断当前实验室被预约情况
+		 * 避免出现请求数据冲突问题
+		 */
+		function Recursion_Ajax(times,xmlStrArr){
+		    if(times <= 0){
+		        return;
+		    }
+		    (function($){
+		        temp = times-1;
+		        $.ajax({
+		            type: "GET",
+		            url:"/virexp/lab/reservation/!getReserNumForSeat",
+		            data:xmlStrArr[temp],
+		            cache:false,
+		            dataType:"json",
+		            success: function(data) {
+		                var num = data.num
+		                console.log(num)
+		                var idIndex = xmlStrArr[temp].labId+'-'+xmlStrArr[temp].startDate+'-'+xmlStrArr[temp].startLesson;
+		                if(num>0){
+			                if(xmlStrArr[temp].seatNum<=num){
+			                	$(document.getElementById(idIndex)).html('<p class="seatNum" style="height:45px;">工位已被约满</p>').removeClass('reservation');
+			                }else{
+			                	$(document.getElementById(idIndex)).html('<p class="seatNum" style="height:45px;">剩/总:'+(xmlStrArr[temp].seatNum-num)+'/'+xmlStrArr[temp].seatNum+'工位</p>').removeClass('reservation');
+			                }
+    					}
+		                times --;
+		                Recursion_Ajax(times,xmlStrArr); //递归调用
+		            }
+		        });
+
+		    })(jQuery);
+
+		 }
+
+        //监听点击，解析改“td”内的数据，并跳转到相应的预约地址
+        $(".button").on("click",function(){
+
+            var id=$(this).next().attr("id").replace("room","").split('-');
+            var roomid=id[0];
+            var dateindex=parseInt(id[1]);
+            var period=id[2];
+            var date=$($("#schedule th")[dateindex+1]).find("a.week").attr("title").replace(/-/ig,'');
+
+            window.location.href=scheduleUrl+"?labId="+roomid+"&date="+date+"&period="+period;
+        });
+
+    }
+	var lectureTimeArray = new Array();
+			lectureTimeArray[0]=new Array();
+			var start = '8:00:00';
+			var end = '8:45:00';
+			lectureTimeArray[0][0]=getHM(start);
+			lectureTimeArray[0][1]=getHM(end);
+			lectureTimeArray[1]=new Array();
+			var start = '8:55:00';
+			var end = '9:40:00';
+			lectureTimeArray[1][0]=getHM(start);
+			lectureTimeArray[1][1]=getHM(end);
+			lectureTimeArray[2]=new Array();
+			var start = '10:00:00';
+			var end = '10:45:00';
+			lectureTimeArray[2][0]=getHM(start);
+			lectureTimeArray[2][1]=getHM(end);
+			lectureTimeArray[3]=new Array();
+			var start = '10:55:00';
+			var end = '11:40:00';
+			lectureTimeArray[3][0]=getHM(start);
+			lectureTimeArray[3][1]=getHM(end);
+			lectureTimeArray[4]=new Array();
+			var start = '12:00:00';
+			var end = '12:45:00';
+			lectureTimeArray[4][0]=getHM(start);
+			lectureTimeArray[4][1]=getHM(end);
+			lectureTimeArray[5]=new Array();
+			var start = '12:55:00';
+			var end = '13:40:00';
+			lectureTimeArray[5][0]=getHM(start);
+			lectureTimeArray[5][1]=getHM(end);
+			lectureTimeArray[6]=new Array();
+			var start = '14:00:00';
+			var end = '14:45:00';
+			lectureTimeArray[6][0]=getHM(start);
+			lectureTimeArray[6][1]=getHM(end);
+			lectureTimeArray[7]=new Array();
+			var start = '14:55:00';
+			var end = '15:40:00';
+			lectureTimeArray[7][0]=getHM(start);
+			lectureTimeArray[7][1]=getHM(end);
+			lectureTimeArray[8]=new Array();
+			var start = '16:00:00';
+			var end = '16:45:00';
+			lectureTimeArray[8][0]=getHM(start);
+			lectureTimeArray[8][1]=getHM(end);
+			lectureTimeArray[9]=new Array();
+			var start = '16:55:00';
+			var end = '17:40:00';
+			lectureTimeArray[9][0]=getHM(start);
+			lectureTimeArray[9][1]=getHM(end);
+			lectureTimeArray[10]=new Array();
+			var start = '18:30:00';
+			var end = '19:15:00';
+			lectureTimeArray[10][0]=getHM(start);
+			lectureTimeArray[10][1]=getHM(end);
+			lectureTimeArray[11]=new Array();
+			var start = '19:25:00';
+			var end = '20:10:00';
+			lectureTimeArray[11][0]=getHM(start);
+			lectureTimeArray[11][1]=getHM(end);
+function getHM(str){
+	var arr = str.split(':');
+	arr.splice(2, 1);
+	return arr.join(':');
+
+}
+function getTime(time,flag){
+    timeIndex = parseInt(time/60);
+    if(timeIndex==12){
+		timeIndex = 11;
+	}
+    	if(flag=="start"){
+    		return lectureTimeArray[timeIndex][0];
+    	}else{
+    		return lectureTimeArray[timeIndex][1];
+    	}
+
+}
+
+    $(function(){
+        getSchedule();
+        $(".detailRight").remove();
+
+        var aKey = [];
+        //第一周时去除上一周链接
+        //最后一周 时去除下一周链接
+        $('.page a').each(function(){
+            if($(this).text() == 12){
+                $(this).css('color','red');
+            }
+        })
+    });
+
+    //获取当前周的上一周对应的日期
+    function lastDateToWeek(){
+    var temp = 12;
+    var weekIndex = temp - 1;
+	location.href = "/virexp/sysyy/?weekInDate=2025-05-19--2025-05-25&weekIndex="+weekIndex;
+    }
+
+   function nextDateToWeek(){
+        var temp = 12;
+    var weekIndex = temp + 1;
+    location.href = "/virexp/sysyy/?weekInDate=2025-06-02--2025-06-08&weekIndex="+weekIndex;
+   }
+
+   function submitLabIds(){
+      $("#submitForm").submit();
+   }
+</script>
+<div class="warpCon">
+<div class="wrapper">
+<div class="classroom">
+        <div class="title">
+            <h2>&nbsp;</h2>
+            <h2>实验室预定系统</h2>
+            <h3>
+                凡使用本预定系统的老师和学生，必须在登陆后将邮箱信息填写完整，预约审批信息会通过邮箱发送给各位。
+                <div class="tips">
+	            	<span style="display:inline-block;width:15px;height:15px;border-radius:4px;background:#cacbcc;"></span>&nbsp;不可预约&nbsp;&nbsp;
+	                <span style="display:inline-block;width:15px;height:15px;border-radius:4px;background:#ffffff;"></span>&nbsp;可预约&nbsp;&nbsp;
+                    <span style="display:inline-block;width:15px;height:15px;border-radius:4px;background:#3fbbf7;"></span>&nbsp;预约待审核&nbsp;&nbsp;
+                    <span style="display:inline-block;width:15px;height:15px;border-radius:4px;background:#5c9e3a;"></span>&nbsp;预约已通过&nbsp;&nbsp;
+                    <span style="display:inline-block;width:15px;height:15px;border-radius:4px;background:#f37431;"></span>&nbsp;开课已占用&nbsp;&nbsp;
+                </div>
+            </h3>
+                
+        </div>
+
+        <div class="list">
+        	<div class="virtual">
+	            <div class="nav">
+	                <a id="prev" href="javascript:void(0)" onclick="lastDateToWeek()" title="上一周" class="prev" style="float:left;">&lt;&lt;上一周</a>
+	                <div class="page">
+	                                                  第 
+	                        <a href="/virexp/sysyy/?weekInDate=2025-03-10--2025-03-16&weekIndex=1" title="2025-03-10--2025-03-16">1</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-03-17--2025-03-23&weekIndex=2" title="2025-03-17--2025-03-23">2</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-03-24--2025-03-30&weekIndex=3" title="2025-03-24--2025-03-30">3</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-03-31--2025-04-06&weekIndex=4" title="2025-03-31--2025-04-06">4</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-04-07--2025-04-13&weekIndex=5" title="2025-04-07--2025-04-13">5</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-04-14--2025-04-20&weekIndex=6" title="2025-04-14--2025-04-20">6</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-04-21--2025-04-27&weekIndex=7" title="2025-04-21--2025-04-27">7</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-04-28--2025-05-04&weekIndex=8" title="2025-04-28--2025-05-04">8</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-05-05--2025-05-11&weekIndex=9" title="2025-05-05--2025-05-11">9</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-05-12--2025-05-18&weekIndex=10" title="2025-05-12--2025-05-18">10</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-05-19--2025-05-25&weekIndex=11" title="2025-05-19--2025-05-25">11</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-05-26--2025-06-01&weekIndex=12" title="2025-05-26--2025-06-01">12</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-06-02--2025-06-08&weekIndex=13" title="2025-06-02--2025-06-08">13</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-06-09--2025-06-15&weekIndex=14" title="2025-06-09--2025-06-15">14</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-06-16--2025-06-22&weekIndex=15" title="2025-06-16--2025-06-22">15</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-06-23--2025-06-29&weekIndex=16" title="2025-06-23--2025-06-29">16</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-06-30--2025-07-06&weekIndex=17" title="2025-06-30--2025-07-06">17</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-07-07--2025-07-13&weekIndex=18" title="2025-07-07--2025-07-13">18</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-07-14--2025-07-20&weekIndex=19" title="2025-07-14--2025-07-20">19</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-07-21--2025-07-27&weekIndex=20" title="2025-07-21--2025-07-27">20</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-07-28--2025-08-03&weekIndex=21" title="2025-07-28--2025-08-03">21</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-08-04--2025-08-10&weekIndex=22" title="2025-08-04--2025-08-10">22</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-08-11--2025-08-17&weekIndex=23" title="2025-08-11--2025-08-17">23</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-08-18--2025-08-24&weekIndex=24" title="2025-08-18--2025-08-24">24</a>&nbsp;
+	                        <a href="/virexp/sysyy/?weekInDate=2025-08-25--2025-08-31&weekIndex=25" title="2025-08-25--2025-08-31">25</a>&nbsp;
+	                                                 周                        
+	                </div>
+	                <a href="#" id="next" onclick="nextDateToWeek()" title="下一周" class="next" style="float:right;">下一周&gt;&gt;</a>
+	            </div>
+			</div>
+            <table id="fix-header" class="fix-header-in" style="display:none;top: 30px;">
+                <tbody>
+                    <tr>
+                        <th class="week" style="padding:0;text-align:center;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;"><div>周次</br>实验室</div></th>
+                           <th style="width:150px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;"  class="current">
+                                                                                                          星期一
+                               <br>
+                               2025-05-26
+                           </th>
+                           <th style="width:150px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;"  class="current">
+                                                                                                        星期二
+                               <br>
+                               2025-05-27
+                           </th>
+                           <th style="width:150px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;"  class="current">
+                                                                                                       星期三
+                               <br>
+                               2025-05-28
+                           </th>
+                           <th style="width:150px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;"  class="current">
+                                                                                                      星期四 
+                               <br>
+                               2025-05-29
+                           </th>
+                           <th style="width:150px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;"  class="current">
+                                                                                                      星期五
+                               <br>
+                               2025-05-30
+                           </th>
+                           <th style="width:150px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;"  class="current">
+                                                                                                     星期六
+                               <br>
+                               2025-05-31
+                           </th>
+                           <th style="width:150px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;"  class="current">
+                                                                                                      星期日
+                               <br>
+                               2025-06-01
+                           </th>
+                    </tr> 
+                </tbody>
+            </table>
+            <table id="schedule" style="cursor:default;width:100%;">
+                <tbody>
+                    <tr>
+                        <th colspan="3" class="week" style="padding:0;text-align:center;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;"><div>周次</br>实验室</div></th>
+                           <th style="width:135px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;" class="current">
+                                                                                                          星期一
+                               <br>
+                               2025-05-26
+                           </th>
+                           <th style="width:135px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;" class="current">
+                                                                                                        星期二
+                               <br>
+                               2025-05-27
+                           </th>
+                           <th style="width:135px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;" class="current">
+                                                                                                       星期三
+                               <br>
+                               2025-05-28
+                           </th>
+                           <th style="width:135px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;" class="current">
+                                                                                                      星期四 
+                               <br>
+                               2025-05-29
+                           </th>
+                           <th style="width:135px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;" class="current">
+                                                                                                      星期五
+                               <br>
+                               2025-05-30
+                           </th>
+                           <th style="width:135px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;" class="current">
+                                                                                                     星期六
+                               <br>
+                               2025-05-31
+                           </th>
+                           <th style="width:135px;background:#beb2ad;font-size: 14px;font-weight: normal;color: #fff;font-family: Microsoft YaHei;" class="current">
+                                                                                                      星期日
+                               <br>
+                               2025-06-01
+                           </th>
+                    </tr>
+                    <tr>
+                        <td rowspan="12" class="split" style="width:27px;line-height: 2em;">
+                            <b>数字艺术与传播实验室430</b>      
+                        </td>
+                        <td rowspan="4"  style="width:27px;line-height: 2em;">上午</td>
+                        <td>
+                            <div class="title lessons">第一节<p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-1" roomid='808080805e7a67a4015e7f7994940594' date="2025-05-26" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-1" roomid='808080805e7a67a4015e7f7994940594' date="2025-05-27" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-1" roomid='808080805e7a67a4015e7f7994940594' date="2025-05-28" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-1" roomid='808080805e7a67a4015e7f7994940594' date="2025-05-29" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-1" roomid='808080805e7a67a4015e7f7994940594' date="2025-05-30" period="1" class="schedule-detail reservation">
+                              </td>
+                                            <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-1" roomid='808080805e7a67a4015e7f7994940594' date="2025-05-31" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                                            <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-1" roomid='808080805e7a67a4015e7f7994940594' date="2025-06-01" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第二节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-2" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-26" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-2" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-27" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-2" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-28" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-2" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-29" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-2" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-30" period="2" class="schedule-detail reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-2" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-31" period="2" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-2" roomid="808080805e7a67a4015e7f7994940594" date="2025-06-01" period="2" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第三节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-3" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-26" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-3" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-27" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-3" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-28" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-3" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-29" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-3" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-30" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-3" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-31" period="3" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-3" roomid="808080805e7a67a4015e7f7994940594" date="2025-06-01" period="3" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第四节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-4" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-26" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-4" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-27" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-4" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-28" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-4" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-29" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-4" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-30" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-4" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-31" period="4" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-4" roomid="808080805e7a67a4015e7f7994940594" date="2025-06-01" period="4" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"  style="width:27px;line-height: 2em;">中午</td>   
+                        <td>
+                            <div class="title lessons">第五节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-5" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-26" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-5" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-27" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-5" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-28" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-5" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-29" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-5" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-30" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-5" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-31" period="5" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-5" roomid="808080805e7a67a4015e7f7994940594" date="2025-06-01" period="5" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td >
+                            <div class="title lessons">第六节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-6" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-26" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-6" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-27" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-6" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-28" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-6" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-29" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-6" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-30" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-6" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-31" period="6" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-6" roomid="808080805e7a67a4015e7f7994940594" date="2025-06-01" period="6" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4"  style="width:27px;line-height: 2em;">下午</td>   
+                        <td>
+                            <div class="title lessons">第七节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-7" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-26" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-7" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-27" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-7" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-28" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-7" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-29" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-7" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-30" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-7" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-31" period="7" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-7" roomid="808080805e7a67a4015e7f7994940594" date="2025-06-01" period="7" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第八节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-8" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-26" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-8" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-27" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-8" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-28" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-8" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-29" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-8" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-30" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-8" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-31" period="8" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-8" roomid="808080805e7a67a4015e7f7994940594" date="2025-06-01" period="8" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第九节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-9" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-26" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-9" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-27" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-9" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-28" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-9" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-29" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-9" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-30" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-9" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-31" period="9" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-9" roomid="808080805e7a67a4015e7f7994940594" date="2025-06-01" period="9" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title lessons">第十节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-10" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-26" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-10" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-27" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-10" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-28" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-10" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-29" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-10" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-30" period="10" class="schedule-detail reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-10" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-31" period="10" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-10" roomid="808080805e7a67a4015e7f7994940594" date="2025-06-01" period="10" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"  class="split"  style="width:27px;line-height: 2em;">晚上</td>
+                        <td>
+                            <div class="title lessons">第十一节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-11" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-26" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-11" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-27" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-11" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-28" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-11" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-29" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-11" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-30" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-11" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-31" period="11" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-11" roomid="808080805e7a67a4015e7f7994940594" date="2025-06-01" period="11" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr class="current">
+                        <td class="split">
+                            <div class="title lessons">第十二节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="1" id="808080805e7a67a4015e7f7994940594-2025-05-26-12" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-26" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="2" id="808080805e7a67a4015e7f7994940594-2025-05-27-12" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-27" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="3" id="808080805e7a67a4015e7f7994940594-2025-05-28-12" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-28" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="4" id="808080805e7a67a4015e7f7994940594-2025-05-29-12" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-29" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="5" id="808080805e7a67a4015e7f7994940594-2025-05-30-12" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-30" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="6" id="808080805e7a67a4015e7f7994940594-2025-05-31-12" roomid="808080805e7a67a4015e7f7994940594" date="2025-05-31" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="34" data-week="7" id="808080805e7a67a4015e7f7994940594-2025-06-01-12" roomid="808080805e7a67a4015e7f7994940594" date="2025-06-01" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="12" class="split" style="width:27px;line-height: 2em;">
+                            <b>计算机表现实验室433</b>      
+                        </td>
+                        <td rowspan="4"  style="width:27px;line-height: 2em;">上午</td>
+                        <td>
+                            <div class="title lessons">第一节<p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-1" roomid='808080805e7a67a4015e7f343d540406' date="2025-05-26" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-1" roomid='808080805e7a67a4015e7f343d540406' date="2025-05-27" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-1" roomid='808080805e7a67a4015e7f343d540406' date="2025-05-28" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-1" roomid='808080805e7a67a4015e7f343d540406' date="2025-05-29" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-1" roomid='808080805e7a67a4015e7f343d540406' date="2025-05-30" period="1" class="schedule-detail reservation">
+                              </td>
+                                            <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-1" roomid='808080805e7a67a4015e7f343d540406' date="2025-05-31" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                                            <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-1" roomid='808080805e7a67a4015e7f343d540406' date="2025-06-01" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第二节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-2" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-26" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-2" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-27" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-2" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-28" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-2" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-29" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-2" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-30" period="2" class="schedule-detail reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-2" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-31" period="2" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-2" roomid="808080805e7a67a4015e7f343d540406" date="2025-06-01" period="2" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第三节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-3" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-26" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-3" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-27" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-3" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-28" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-3" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-29" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-3" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-30" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-3" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-31" period="3" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-3" roomid="808080805e7a67a4015e7f343d540406" date="2025-06-01" period="3" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第四节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-4" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-26" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-4" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-27" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-4" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-28" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-4" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-29" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-4" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-30" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-4" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-31" period="4" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-4" roomid="808080805e7a67a4015e7f343d540406" date="2025-06-01" period="4" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"  style="width:27px;line-height: 2em;">中午</td>   
+                        <td>
+                            <div class="title lessons">第五节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-5" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-26" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-5" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-27" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-5" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-28" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-5" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-29" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-5" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-30" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-5" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-31" period="5" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-5" roomid="808080805e7a67a4015e7f343d540406" date="2025-06-01" period="5" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td >
+                            <div class="title lessons">第六节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-6" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-26" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-6" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-27" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-6" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-28" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-6" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-29" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-6" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-30" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-6" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-31" period="6" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-6" roomid="808080805e7a67a4015e7f343d540406" date="2025-06-01" period="6" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4"  style="width:27px;line-height: 2em;">下午</td>   
+                        <td>
+                            <div class="title lessons">第七节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-7" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-26" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-7" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-27" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-7" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-28" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-7" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-29" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-7" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-30" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-7" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-31" period="7" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-7" roomid="808080805e7a67a4015e7f343d540406" date="2025-06-01" period="7" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第八节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-8" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-26" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-8" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-27" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-8" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-28" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-8" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-29" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-8" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-30" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-8" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-31" period="8" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-8" roomid="808080805e7a67a4015e7f343d540406" date="2025-06-01" period="8" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第九节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-9" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-26" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-9" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-27" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-9" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-28" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-9" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-29" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-9" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-30" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-9" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-31" period="9" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-9" roomid="808080805e7a67a4015e7f343d540406" date="2025-06-01" period="9" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title lessons">第十节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-10" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-26" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-10" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-27" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-10" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-28" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-10" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-29" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-10" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-30" period="10" class="schedule-detail reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-10" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-31" period="10" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-10" roomid="808080805e7a67a4015e7f343d540406" date="2025-06-01" period="10" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"  class="split"  style="width:27px;line-height: 2em;">晚上</td>
+                        <td>
+                            <div class="title lessons">第十一节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-11" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-26" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-11" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-27" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-11" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-28" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-11" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-29" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-11" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-30" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-11" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-31" period="11" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-11" roomid="808080805e7a67a4015e7f343d540406" date="2025-06-01" period="11" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr class="current">
+                        <td class="split">
+                            <div class="title lessons">第十二节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="1" id="808080805e7a67a4015e7f343d540406-2025-05-26-12" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-26" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="2" id="808080805e7a67a4015e7f343d540406-2025-05-27-12" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-27" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="3" id="808080805e7a67a4015e7f343d540406-2025-05-28-12" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-28" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="4" id="808080805e7a67a4015e7f343d540406-2025-05-29-12" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-29" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="5" id="808080805e7a67a4015e7f343d540406-2025-05-30-12" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-30" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="6" id="808080805e7a67a4015e7f343d540406-2025-05-31-12" roomid="808080805e7a67a4015e7f343d540406" date="2025-05-31" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="64" data-week="7" id="808080805e7a67a4015e7f343d540406-2025-06-01-12" roomid="808080805e7a67a4015e7f343d540406" date="2025-06-01" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="12" class="split" style="width:27px;line-height: 2em;">
+                            <b>数字绘画实验室442</b>      
+                        </td>
+                        <td rowspan="4"  style="width:27px;line-height: 2em;">上午</td>
+                        <td>
+                            <div class="title lessons">第一节<p class="dateArea"></p></div>
+                        </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-1" roomid='4028817d67392eea0167639ccc876ada' date="2025-05-26" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-1" roomid='4028817d67392eea0167639ccc876ada' date="2025-05-27" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-1" roomid='4028817d67392eea0167639ccc876ada' date="2025-05-28" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-1" roomid='4028817d67392eea0167639ccc876ada' date="2025-05-29" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-1" roomid='4028817d67392eea0167639ccc876ada' date="2025-05-30" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-1" roomid='4028817d67392eea0167639ccc876ada' date="2025-05-31" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-1" roomid='4028817d67392eea0167639ccc876ada' date="2025-06-01" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第二节<br><p class="dateArea"></p></div>
+                        </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-2" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-26" period="2" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-2" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-27" period="2" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-2" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-28" period="2" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-2" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-29" period="2" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-2" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-30" period="2" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-2" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-31" period="2" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-2" roomid="4028817d67392eea0167639ccc876ada" date="2025-06-01" period="2" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第三节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-3" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-26" period="3" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-3" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-27" period="3" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-3" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-28" period="3" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-3" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-29" period="3" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-3" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-30" period="3" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-3" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-31" period="3" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-3" roomid="4028817d67392eea0167639ccc876ada" date="2025-06-01" period="3" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第四节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-4" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-26" period="4" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-4" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-27" period="4" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-4" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-28" period="4" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-4" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-29" period="4" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-4" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-30" period="4" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-4" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-31" period="4" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-4" roomid="4028817d67392eea0167639ccc876ada" date="2025-06-01" period="4" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"  style="width:27px;line-height: 2em;">中午</td>   
+                        <td>
+                            <div class="title lessons">第五节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-5" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-26" period="5" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-5" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-27" period="5" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-5" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-28" period="5" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-5" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-29" period="5" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-5" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-30" period="5" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-5" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-31" period="5" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-5" roomid="4028817d67392eea0167639ccc876ada" date="2025-06-01" period="5" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td >
+                            <div class="title lessons">第六节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-6" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-26" period="6" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-6" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-27" period="6" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-6" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-28" period="6" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-6" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-29" period="6" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-6" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-30" period="6" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-6" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-31" period="6" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-6" roomid="4028817d67392eea0167639ccc876ada" date="2025-06-01" period="6" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4"  style="width:27px;line-height: 2em;">下午</td>   
+                        <td>
+                            <div class="title lessons">第七节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-7" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-26" period="7" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-7" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-27" period="7" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-7" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-28" period="7" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-7" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-29" period="7" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-7" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-30" period="7" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-7" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-31" period="7" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-7" roomid="4028817d67392eea0167639ccc876ada" date="2025-06-01" period="7" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第八节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-8" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-26" period="8" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-8" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-27" period="8" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-8" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-28" period="8" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-8" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-29" period="8" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-8" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-30" period="8" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-8" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-31" period="8" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-8" roomid="4028817d67392eea0167639ccc876ada" date="2025-06-01" period="8" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第九节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-9" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-26" period="9" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-9" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-27" period="9" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-9" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-28" period="9" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-9" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-29" period="9" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-9" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-30" period="9" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-9" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-31" period="9" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-9" roomid="4028817d67392eea0167639ccc876ada" date="2025-06-01" period="9" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title lessons">第十节<br><p class="dateArea"></p></div>
+                        </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-10" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-26" period="10" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-10" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-27" period="10" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-10" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-28" period="10" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-10" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-29" period="10" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-10" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-30" period="10" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-10" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-31" period="10" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-10" roomid="4028817d67392eea0167639ccc876ada" date="2025-06-01" period="10" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"  class="split"  style="width:27px;line-height: 2em;">晚上</td>
+                        <td>
+                            <div class="title lessons">第十一节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-11" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-26" period="11" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-11" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-27" period="11" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-11" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-28" period="11" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-11" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-29" period="11" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-11" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-30" period="11" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-11" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-31" period="11" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-11" roomid="4028817d67392eea0167639ccc876ada" date="2025-06-01" period="11" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr class="current">
+                        <td class="split">
+                            <div class="title lessons">第十二节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="1" id="4028817d67392eea0167639ccc876ada-2025-05-26-12" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-26" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="2" id="4028817d67392eea0167639ccc876ada-2025-05-27-12" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-27" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="3" id="4028817d67392eea0167639ccc876ada-2025-05-28-12" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-28" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="4" id="4028817d67392eea0167639ccc876ada-2025-05-29-12" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-29" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="5" id="4028817d67392eea0167639ccc876ada-2025-05-30-12" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-30" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="6" id="4028817d67392eea0167639ccc876ada-2025-05-31-12" roomid="4028817d67392eea0167639ccc876ada" date="2025-05-31" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="32" data-week="7" id="4028817d67392eea0167639ccc876ada-2025-06-01-12" roomid="4028817d67392eea0167639ccc876ada" date="2025-06-01" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="12" class="split" style="width:27px;line-height: 2em;">
+                            <b>虚拟情境实验室432</b>      
+                        </td>
+                        <td rowspan="4"  style="width:27px;line-height: 2em;">上午</td>
+                        <td>
+                            <div class="title lessons">第一节<p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-1" roomid='8a89809861d076360161d0b759431193' date="2025-05-26" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-1" roomid='8a89809861d076360161d0b759431193' date="2025-05-27" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-1" roomid='8a89809861d076360161d0b759431193' date="2025-05-28" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-1" roomid='8a89809861d076360161d0b759431193' date="2025-05-29" period="1" class="schedule-detail reservation">
+                              </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-1" roomid='8a89809861d076360161d0b759431193' date="2025-05-30" period="1" class="schedule-detail reservation">
+                              </td>
+                                            <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-1" roomid='8a89809861d076360161d0b759431193' date="2025-05-31" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                                            <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-1" roomid='8a89809861d076360161d0b759431193' date="2025-06-01" period="1" class="schedule-detail no-reservation"> 
+                              </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第二节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-2" roomid="8a89809861d076360161d0b759431193" date="2025-05-26" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-2" roomid="8a89809861d076360161d0b759431193" date="2025-05-27" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-2" roomid="8a89809861d076360161d0b759431193" date="2025-05-28" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-2" roomid="8a89809861d076360161d0b759431193" date="2025-05-29" period="2" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-2" roomid="8a89809861d076360161d0b759431193" date="2025-05-30" period="2" class="schedule-detail reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-2" roomid="8a89809861d076360161d0b759431193" date="2025-05-31" period="2" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-2" roomid="8a89809861d076360161d0b759431193" date="2025-06-01" period="2" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第三节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-3" roomid="8a89809861d076360161d0b759431193" date="2025-05-26" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-3" roomid="8a89809861d076360161d0b759431193" date="2025-05-27" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-3" roomid="8a89809861d076360161d0b759431193" date="2025-05-28" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-3" roomid="8a89809861d076360161d0b759431193" date="2025-05-29" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-3" roomid="8a89809861d076360161d0b759431193" date="2025-05-30" period="3" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-3" roomid="8a89809861d076360161d0b759431193" date="2025-05-31" period="3" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-3" roomid="8a89809861d076360161d0b759431193" date="2025-06-01" period="3" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第四节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-4" roomid="8a89809861d076360161d0b759431193" date="2025-05-26" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-4" roomid="8a89809861d076360161d0b759431193" date="2025-05-27" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-4" roomid="8a89809861d076360161d0b759431193" date="2025-05-28" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-4" roomid="8a89809861d076360161d0b759431193" date="2025-05-29" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-4" roomid="8a89809861d076360161d0b759431193" date="2025-05-30" period="4" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-4" roomid="8a89809861d076360161d0b759431193" date="2025-05-31" period="4" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-4" roomid="8a89809861d076360161d0b759431193" date="2025-06-01" period="4" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"  style="width:27px;line-height: 2em;">中午</td>   
+                        <td>
+                            <div class="title lessons">第五节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-5" roomid="8a89809861d076360161d0b759431193" date="2025-05-26" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-5" roomid="8a89809861d076360161d0b759431193" date="2025-05-27" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-5" roomid="8a89809861d076360161d0b759431193" date="2025-05-28" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-5" roomid="8a89809861d076360161d0b759431193" date="2025-05-29" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-5" roomid="8a89809861d076360161d0b759431193" date="2025-05-30" period="5" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-5" roomid="8a89809861d076360161d0b759431193" date="2025-05-31" period="5" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-5" roomid="8a89809861d076360161d0b759431193" date="2025-06-01" period="5" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td >
+                            <div class="title lessons">第六节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-6" roomid="8a89809861d076360161d0b759431193" date="2025-05-26" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-6" roomid="8a89809861d076360161d0b759431193" date="2025-05-27" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-6" roomid="8a89809861d076360161d0b759431193" date="2025-05-28" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-6" roomid="8a89809861d076360161d0b759431193" date="2025-05-29" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-6" roomid="8a89809861d076360161d0b759431193" date="2025-05-30" period="6" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-6" roomid="8a89809861d076360161d0b759431193" date="2025-05-31" period="6" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-6" roomid="8a89809861d076360161d0b759431193" date="2025-06-01" period="6" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4"  style="width:27px;line-height: 2em;">下午</td>   
+                        <td>
+                            <div class="title lessons">第七节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-7" roomid="8a89809861d076360161d0b759431193" date="2025-05-26" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-7" roomid="8a89809861d076360161d0b759431193" date="2025-05-27" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-7" roomid="8a89809861d076360161d0b759431193" date="2025-05-28" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-7" roomid="8a89809861d076360161d0b759431193" date="2025-05-29" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-7" roomid="8a89809861d076360161d0b759431193" date="2025-05-30" period="7" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-7" roomid="8a89809861d076360161d0b759431193" date="2025-05-31" period="7" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-7" roomid="8a89809861d076360161d0b759431193" date="2025-06-01" period="7" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第八节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-8" roomid="8a89809861d076360161d0b759431193" date="2025-05-26" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-8" roomid="8a89809861d076360161d0b759431193" date="2025-05-27" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-8" roomid="8a89809861d076360161d0b759431193" date="2025-05-28" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-8" roomid="8a89809861d076360161d0b759431193" date="2025-05-29" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-8" roomid="8a89809861d076360161d0b759431193" date="2025-05-30" period="8" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-8" roomid="8a89809861d076360161d0b759431193" date="2025-05-31" period="8" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-8" roomid="8a89809861d076360161d0b759431193" date="2025-06-01" period="8" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>   
+                        <td>
+                            <div class="title lessons">第九节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-9" roomid="8a89809861d076360161d0b759431193" date="2025-05-26" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-9" roomid="8a89809861d076360161d0b759431193" date="2025-05-27" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-9" roomid="8a89809861d076360161d0b759431193" date="2025-05-28" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-9" roomid="8a89809861d076360161d0b759431193" date="2025-05-29" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-9" roomid="8a89809861d076360161d0b759431193" date="2025-05-30" period="9" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-9" roomid="8a89809861d076360161d0b759431193" date="2025-05-31" period="9" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-9" roomid="8a89809861d076360161d0b759431193" date="2025-06-01" period="9" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title lessons">第十节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-10" roomid="8a89809861d076360161d0b759431193" date="2025-05-26" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-10" roomid="8a89809861d076360161d0b759431193" date="2025-05-27" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-10" roomid="8a89809861d076360161d0b759431193" date="2025-05-28" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-10" roomid="8a89809861d076360161d0b759431193" date="2025-05-29" period="10" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-10" roomid="8a89809861d076360161d0b759431193" date="2025-05-30" period="10" class="schedule-detail reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-10" roomid="8a89809861d076360161d0b759431193" date="2025-05-31" period="10" class="schedule-detail no-reservation">
+                             </td>
+                                            <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-10" roomid="8a89809861d076360161d0b759431193" date="2025-06-01" period="10" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"  class="split"  style="width:27px;line-height: 2em;">晚上</td>
+                        <td>
+                            <div class="title lessons">第十一节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-11" roomid="8a89809861d076360161d0b759431193" date="2025-05-26" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-11" roomid="8a89809861d076360161d0b759431193" date="2025-05-27" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-11" roomid="8a89809861d076360161d0b759431193" date="2025-05-28" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-11" roomid="8a89809861d076360161d0b759431193" date="2025-05-29" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-11" roomid="8a89809861d076360161d0b759431193" date="2025-05-30" period="11" class="schedule-detail reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-11" roomid="8a89809861d076360161d0b759431193" date="2025-05-31" period="11" class="schedule-detail no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-11" roomid="8a89809861d076360161d0b759431193" date="2025-06-01" period="11" class="schedule-detail no-reservation">
+                             </td>
+                    </tr>
+                    <tr class="current">
+                        <td class="split">
+                            <div class="title lessons">第十二节<br><p class="dateArea"></p></div>
+                        </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="1" id="8a89809861d076360161d0b759431193-2025-05-26-12" roomid="8a89809861d076360161d0b759431193" date="2025-05-26" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="2" id="8a89809861d076360161d0b759431193-2025-05-27-12" roomid="8a89809861d076360161d0b759431193" date="2025-05-27" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="3" id="8a89809861d076360161d0b759431193-2025-05-28-12" roomid="8a89809861d076360161d0b759431193" date="2025-05-28" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="4" id="8a89809861d076360161d0b759431193-2025-05-29-12" roomid="8a89809861d076360161d0b759431193" date="2025-05-29" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="5" id="8a89809861d076360161d0b759431193-2025-05-30-12" roomid="8a89809861d076360161d0b759431193" date="2025-05-30" period="12" class="schedule-detail split current reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="6" id="8a89809861d076360161d0b759431193-2025-05-31-12" roomid="8a89809861d076360161d0b759431193" date="2025-05-31" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                                             <td valign="top" align="left" seatNum="25" data-week="7" id="8a89809861d076360161d0b759431193-2025-06-01-12" roomid="8a89809861d076360161d0b759431193" date="2025-06-01" period="12" class="schedule-detail split current no-reservation">
+                             </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+     </div>
+</div>
+<style type="text/css">
+    .footer1{width: 100%;}
+    .footer1 .speedLink{width: 950px;height:180px; margin: 0 auto;padding-top:30px;}
+    .footer1 .speedLink .linkList{width: 130px;height:30px;float:left;}
+    .footer1 .footer-nr{width: 650px; height:55px;margin: 0 auto;color:#fff;}
+    .footer1 .speedLink .linkList ul li h3 a{font-family: "Microsoft YaHei","Times New Roman",Georgia,serif;color:#666 !important;}
+    .footer1 .speedLink .linkList ul li a{font-family:'宋体';color:#8B8787 !important;}
+    .footer1 .speedLink .beCenter{margin:0 auto;width:690px;}
+</style>
+<footer class="footer1">
+    <div class="kong">
+        <div class="speedLink">
+        	<div class="beCenter clearfix">
+	            <div class="linkList" style="margin-left: 40px">
+	                <ul>
+	                    <li><h3><a href="javascript:void(0);" target="_blank"><b>实验室预定</b></a></h3></li>
+	                    <li><a href="javascript:void(0);" target="_blank">设备租借</a></li>
+	                    <li><a href="javascript:void(0);" target="_blank">人机环境同步平台</a></li>
+	                    <li><a href="/virexp/glyxzyk/" target="_blank">资源库</a></li>
+	                    <li><a href="/virexp/szkcy/" target="_blank">数字课程</a></li>
+	                </ul>
+	            </div>
+	         </div>
+        </div>
+    </div>
+    <div class="foot_top">
+        <div class="foot_box">
+            <div class="foot_nr">
+                <a class="hb-1" href="">承建单位：南开大学</a>
+                <span>地址：天津南开区卫津路94号范孙楼407室</span>
+            </div>
+            <div class="foot_nr">
+                <a class="hb-1" href="http://www.rainier.net.cn/">支持单位：北京润尼尔网络科技有限公司</a>
+                <a class="hb-2">网站访问量：181749次&emsp;&nbsp;推荐使用：IE9.0以上浏览器</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--toolBackTop-->
+<div style="display:none;" class="back-to" id="toolBackTop">
+    <a title="返回顶部" onclick="window.scrollTo(0,0);return false;" href="#top" class="back-top">
+        返回顶部
+    </a>
+</div>
+</body>
+<script type="text/javascript">jQuery(".sys").slide({delayTime:0 });</script>
+</html>

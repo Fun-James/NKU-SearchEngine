@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>南开大学</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="copyright" content="">
+    <meta name="author" content="">
+    <base href="http://mse.less.nankai.edu.cn/genee/">
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/nankai_mse.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.css" rel="stylesheet">
+    <script type="text/javascript" charset="utf-8" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="assets/js/echarts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="assets/js/Clamp.js"></script>
+    <script type="text/javascript" charset="utf-8" src="assets/js/jquery.cxscroll.js"></script>
+    <script data-main="assets/js/main.js" src="assets/js/require.js"></script>
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5.js"></script>
+    <script src="assets/js/respond.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="assets/img/unpc/unpc2.png">
+</head>
+<body class="layout-index">
+    <div id="wrap">
+        <div id="header"><div class="header_container">
+        <img src="http://mse.less.nankai.edu.cn/genee/!category/icon/6/南开大学材料测试站.png" height="60px" style="overflow: hidden;" />
+</div>
+<div class="section section_white">
+    <div class="section_container">
+                <ul id="navbar" style="margin: 0px">
+            <li class="active"><a href="http://mse.less.nankai.edu.cn/genee/">首页</a></li>
+                            <li class="">
+            		<a href="http://mse.less.nankai.edu.cn/genee/category/cke">平台介绍</a>
+            	</li>
+                            <li class="">
+            		<a href="http://mse.less.nankai.edu.cn/genee/category/equipment">仪器列表</a>
+            	</li>
+                            <li class="">
+            		<a href="http://mse.less.nankai.edu.cn/genee/category/cekg">规章制度</a>
+            	</li>
+                            <li class="">
+            		<a href="http://mse.less.nankai.edu.cn/genee/category/ckeg">使用指南</a>
+            	</li>
+                            <li class="">
+            		<a href="http://mse.less.nankai.edu.cn/genee/category/lkjh">测试服务</a>
+            	</li>
+                            <li class="">
+            		<a href="http://mse.less.nankai.edu.cn/genee/category/ckekg">下载中心</a>
+            	</li>
+                            <li class="active">
+            		<a href="http://mse.less.nankai.edu.cn/genee/category/"></a>
+            	</li>
+                    </ul>
+    </div>
+    <script type="text/javascript">
+        $().ready(function(){
+            var reloadMenu = function () {
+                var container = $('#navbar')
+                    , lis = $('#navbar > li')
+                console.log($(window).width(), container.width(),lis.length);
+		if ($(window).width() >= 768) {
+                    lis.css('width', container.width() / 8)
+                }
+                else {
+                    lis.css('width', 'auto')
+                }
+            }
+            $(window).resize(reloadMenu)
+            reloadMenu()
+        });
+    </script>
+</div>
+</div>
+        <div id="body"><div class="section">
+    <div class="section_container one">
+        <div id="wrapper" style="height: 320px">
+	<div class="slider-wrapper theme-default">
+    	<div id="slider_2" class="nivoSlider">
+						<img src="http://mse.less.nankai.edu.cn/genee/!category/icon/3/672582e5-51d9-48d2-94ec-d8624e903008.jpg" alt="" height="320px" data-thumb="http://mse.less.nankai.edu.cn/genee/!category/icon/3/672582e5-51d9-48d2-94ec-d8624e903008.jpg" />
+					</div>
+        	</div>
+</div>
+<style type="text/css">
+    .nivoSlider img{ object-fit:fill; }
+	.nivo-main-image { height:320px !important; }
+	.nivo-slice,.nivo-slice img { height:320px !important; }
+    .platforms {
+        width: 22%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        background: rgba(2,102,177,.9);
+        z-index: 9999;
+        padding: 16px 22px;
+    }
+</style>
+<script>
+    require(['main'], function() {
+        require(['jquery.nivo.slider','css!../css/nivo-slider'],function(){
+            $('#slider_2').nivoSlider({
+                //effect: 'sliceDown',
+                effect:'fold',
+                slices: 15,
+                boxCols: 50,
+                boxRows: 4,
+                animSpeed: 500,
+                pauseTime: 3000,
+                directionNav:false,                      // Next & Prev navigation
+    //            directionNavHide:false,
+                prevText: '<h1><</h1>',                 // Prev directionNav text
+                nextText: '<h1>></h1>',
+                controlNav: false,                      //显示1..2..3 若要显示缩略图需要同时打开选项
+                controlNavThumbs: false, // Use thumbnails for Control Nav
+                randomStart: false,               // Start on a random slide 随机播放
+                afterLoad: function() {
+                    $('#slider_2 img').css({
+                        'max-height' : '320px',
+                        'min-height' : '320px'
+                    })
+                }
+            });
+        });
+    });
+</script>
+    </div>
+</div>
+<div class="section">
+    <div class="section_container two flex-between two-module">
+        <div class="notice">
+                        <div class="title">
+                <strong class="b">通知公告</strong>
+                <a class="right" href="http://mse.less.nankai.edu.cn/genee/category/notice">更多 ></a>
+            </div>
+            <div class="hr_1"></div>
+            <ul class="calendar_list">
+                                <li>
+                    <div class="flex-between calendar_container">
+                        <div class="calendar_box">
+                            <div class="year">2024</div>
+                            <div class="date">10.22</div>
+                        </div>
+                        <div class="calendar_content">
+                            <div class="name"><a href="http://mse.less.nankai.edu.cn/genee/post/33">关于大仪平台切换新统一身份认证的通知</a></div>
+                            <div class="content_line">
+	按照学校网信办统一安排，校、院大仪平台需与学校新的认证系统进行对接，大仪平台计划于2024年10月23日（星期三）中午12点30分开始逐平台进行切换工作。预计持续时间为1小时，切换期间统一身份认证用户将无法登陆，校外用户（本地用户）登录不受影响。
+
+
+	&nbsp; 影响范围：校级大仪平台及所有院级大仪平台，校内统一身份认证用户。
+
+
+	如遇登录问题或任何异常情况，请及时联系我们的技术支持团队（联系方式：400-017-5664），感谢您对我们工作的理解和支持！
+
+
+	&nbsp;
+
+
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 实验室设备处
+
+
+	2024年10月22日</div>
+                        </div>
+                    </div>
+                </li>
+                                <li>
+                    <div class="flex-between calendar_container">
+                        <div class="calendar_box">
+                            <div class="year">2022</div>
+                            <div class="date">05.16</div>
+                        </div>
+                        <div class="calendar_content">
+                            <div class="name"><a href="http://mse.less.nankai.edu.cn/genee/post/32">&quot;聚焦离子束电子束双束电镜&quot;和&ldquo;高真空多靶磁控溅射镀膜系统&rdquo;-刷卡器信息录入须知</a></div>
+                            <div class="content_line">经培训获得"聚焦离子束电子束双束电镜"和“高真空多靶磁控溅射镀膜系统”仪器设备的使用权限后，拿着一卡通到狄璐老师处获得一卡通磁条号码，"聚焦离子束电子束双束电镜"属于校级平台仪器设备，用户自己发送“姓名、学子卡号、一卡通磁条号码、课题组信息以邮件名“聚焦离子束电子束双束电镜-刷卡器信息录入”至邮箱nkyqpt@nankai.edu.cn。“高真空多靶磁控溅射镀膜系统”属于院级平台仪器设备，需狄璐老师将磁条号码录入院平台。</div>
+                        </div>
+                    </div>
+                </li>
+                                <li>
+                    <div class="flex-between calendar_container">
+                        <div class="calendar_box">
+                            <div class="year">2021</div>
+                            <div class="date">04.21</div>
+                        </div>
+                        <div class="calendar_content">
+                            <div class="name"><a href="http://mse.less.nankai.edu.cn/genee/post/15">关于鼓励我院贵重仪器纳入材料科学与工程学院公共仪器管理平台的倡议</a></div>
+                            <div class="content_line">各位机主老师大家好：&nbsp; &nbsp; &nbsp; 材料科学与工程学院公共仪器管理平台自2020年建成并开始试运行，目前共享平台已有16台套贵重仪器设备加入，为全院师生提供测试服务。根据学校相关文件要求，符合开放共享条件40万元及以上的科研、教学设备必须纳入到校级平台进行开放共享，10万元至40万元的设备鼓励加入院级平台进行开放共享，在满足本单位科研、教学任务之余为大家提供测试服务。&nbsp; &nbsp; &nbsp; 为了鼓励更多的仪器设备加入共享平台，学校出台了相应的激励政策，包括：测试费收入大部分返还给提供服务的单位，可一定程度上减轻本单位关于设备运行维护的成本，提高使用效率；将一定比例的测试费以“劳务费”的形式奖励给测试机主老师；纳入平台的仪器设备根据所提供测试服务可优先申请使用学校配套的大型仪器设备维修费，鼓励其为学校的发展做出更多的贡献。&nbsp; 欢迎各位机主老师将您的仪器设备加入到我院的公共仪器管理平台，填写“共享平台仪器设备信息采集表”，送至材料楼110（西）室，我们会尽快将您的仪器设备录入到共享平台，为大家提供测试服务。&nbsp; &nbsp; &nbsp;&nbsp;联系人：狄璐联系电话：13207687862&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</div>
+                        </div>
+                    </div>
+                </li>
+                                <li>
+                    <div class="flex-between calendar_container">
+                        <div class="calendar_box">
+                            <div class="year">2019</div>
+                            <div class="date">06.20</div>
+                        </div>
+                        <div class="calendar_content">
+                            <div class="name"><a href="http://mse.less.nankai.edu.cn/genee/post/21">大仪共享管理系统中心管理员使用手册</a></div>
+                            <div class="content_line"></div>
+                        </div>
+                    </div>
+                </li>
+                            </ul>
+        </div>
+        <div class="quick-way">
+             <div class="search" style="position: relative;top: 10px;right: 0;width: 376px;">
+                <form action="http://mse.less.nankai.edu.cn/genee/category/equipment" method="get">
+                    <div class="input-group">
+                                                <input type="hidden" name="search_type" value="equipment"/>
+                        <input id="search-input" class="form-control search-input" type="text" placeholder="请输入关键词" name="keywords">
+                        <input type="hidden" name="token" value="077c77d42333f7086161a274db46c7d6">
+                        <span class="input-group-addon">
+                                <button class="btn search-btn" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                    </div>
+                </form>
+            </div>
+            <div class="hr_1"></div>
+            <div class="login-content">
+                <div class="hr_2"></div>
+                <div class="hr_2"></div>
+                                <form class="login-form" method="post" role="form" action="http://mse.less.nankai.edu.cn/lims/login">
+                    <div class="form-group">
+                        <label class="user-font" for="exampleInputEmail1">用户名</label>
+                        <input type="text" class="form-control" id="inputUser" name="token" placeholder="用户名">
+                    </div>
+                    <div class="hr_1"></div>
+                    <div class="form-group">
+                        <label class="user-password" for="exampleInputPassword1">密码</label>
+                        <input type="password" class="form-control" id="inputpwd" name="password" placeholder="密码">
+                    </div>
+                    <div class="hr_1"></div>
+                    <div class="form-group login-btn">
+                                                <a href="http://mse.less.nankai.edu.cn/lims/!labs/signup/user_lab_signup"
+                           class="btn-block btn-gxu" style="text-align: center;">注册账号</a>
+                        <div class="hr_1"></div>
+                        <button type="submit" name="submit" value="登录" class="btn btn-default btn-block btn-gxu"
+                         style="background-color: #7a1a62;color: #ffffff;">登录</button>
+                        <div class="hr_1"></div>
+                    </div>
+		</form>
+                <div class="hr_2"></div>
+            </div>
+	</div>
+    </div>
+</div>
+<div class="hr_2"></div><div class="hr_2"></div>
+<div class="section">
+    <div class="section_container two flex-between two-module">
+        <div class="equipment-summary">
+            <ul>
+                <li >
+                    <a href="javascript: die();" class="hover">仪器实时情况<span class="down_diams">▼</span></a>
+                </li>
+                <li>
+                    <a href="javascript: die();">课题测试情况<span class="down_diams">▼</span></a>
+                </li>
+                <li>
+                    <a href="javascript: die();">人员分布情况<span class="down_diams">▼</span></a>
+                </li>
+            </ul>
+            <div>
+	            <div class="instrument-y ct">
+                    <div style="position:absolute;margin-top:50px;margin-left:400px;font-size:20px;color:#666666">
+                        <div style="height:60px;line-height: 60px;">
+                            共<span class="total_count"style="padding:0 10px;font-size:30px;font-weight:bold;color:#30405a"><i class="fa fa-spinner fa-spin"></i></span>台仪器
+                        </div>
+                        <!-- <div style="height:60px;line-height: 60px;">其中<span style="padding:0 10px;font-size:30px;font-weight:bold;color:#30405a">{$sinfo.controlCount}</span>台正在实时监控</div> -->
+                        <div style="height:30px;line-height: 30px;padding:0px 40px;margin-top:20px;background:url('/assets/img/dlmu/c-working.jpg') no-repeat 0% 50%;">
+                            <span class="working_count" style="padding:0 10px;font-size:24px;font-weight:bold;color:#30405a"><i class="fa fa-spinner fa-spin"></i></span>台正在使用
+                        </div>
+                        <div class="hr"></div>
+                        <div style="height:30px;line-height: 30px;padding:0px 40px;margin-top:10px;background:url('/assets/img/dlmu/c-wait.jpg') no-repeat 0% 50%;">
+                            <span class="wait_count" style="padding:0 10px;font-size:24px;font-weight:bold;color:#30405a"><i class="fa fa-spinner fa-spin"></i></span>台待机中
+                        </div>
+                        <div class="hr"></div>
+                        <div style="height:30px;line-height: 30px;padding:0px 40px;margin-top:10px;background:url('/assets/img/dlmu/c-down.jpg') no-repeat 0% 50%;">
+                            <span class="down_count" style="padding:0 10px;font-size:24px;font-weight:bold;color:#30405a"><i class="fa fa-spinner fa-spin"></i></span>台出故障
+                        </div>
+                    </div>
+                </div>
+	            <div class="instrument-y ct" style="display:none">
+                    <div style="position:absolute;margin-top:120px;margin-left:55px;width: 138px;">
+                        <div style="padding-left:10px;height:51px;line-height:51px;font-size:20px;color:#666"><p style="float:left;height:51px;line-height:51px;">总课题数</p>
+                            <p class="lab_total" style="float:left;font-size:30px;color:#30405a;padding-left:5px;font-weight:bolder;height:51px;line-height:51px;"><i class="fa fa-spinner fa-spin"></i></p>
+                        </div>
+                        <div style="padding-left:30px;height:51px;line-height: 50px;font-size:20px;color:#666"><p style="float:left;height:51px;line-height:51px;">课题数</p>
+                            <p class="lab_test" style="float:left;font-size:30px;color:#30405a;padding-left:5px;font-weight:bolder;height:51px;line-height:51px;"><i class="fa fa-spinner fa-spin"></i></p>
+                        </div>
+                    </div>
+					<div id="tubiao2" style="float:left;width: 250px;height:250px;margin-top:40px; margin-left: 0px;">
+                    </div>
+					<div style="float:left;width: 55px;height: 30px;margin-top: 150px;margin-left: 35px;"><img style="height: 30px;" src="http://mse.less.nankai.edu.cn/genee/assets/img/dlmu/jiantou.png"></div>
+					<div style="float:left;width: 200px;height: 200px;margin-top: 65px;margin-left: 35px;"><img style="height:200px;" src="http://mse.less.nankai.edu.cn/genee/assets/img/dlmu/qiu.png"><span style="position:absolute; width:200px;margin-left:-200px;margin-top: 80px;color:#31415B;font-size:24px;text-align: center">测试数<span class="test_count" style="font-size:30px;font-weight:bolder"><i class="fa fa-spinner fa-spin"></i></span>次</span></div>
+				</div>
+				<div class="instrument-y ct" style="display:none">
+					<div style="position:absolute;margin-top:85px;margin-left:400px;z-index:99;">
+						<div class="user_outer" style="height:51px;line-height: 51px;font-size:30px;color:#30405a">8795</div>
+						<div class="user_inner" style="height:51px;line-height: 51px;font-size:30px;color:#30405a">9335</div>
+						<div class="user_incharge" style="height:51px;line-height: 51px;font-size:30px;color:#30405a">622</div>
+					</div>
+					<div id="myChart3" style="width:600px;height:325px"></div>
+				</div>
+            </div>
+        </div>
+        <div class="top-equipment">
+            <div class="title">
+                                <strong class="b">使用机时排行（2023年4月）</strong>
+                <a class="right" href="http://mse.less.nankai.edu.cn/genee/Dlut/Top/Equipment">更多 ></a>
+            </div>
+            <div class="hr_1"></div>
+            <ul class="list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section_container four">
+        <div class="equipment-index">
+            <div class="title">
+                <strong class="b">正在使用的仪器</strong>
+                <a class="right" href="http://mse.less.nankai.edu.cn/genee/category/equipment">更多 ></a>
+            </div>
+            <div class="hr_2"></div>
+            <div class="display-equipment cxscroll" id="equipment-box">
+                            </div> 
+        </div>
+    </div>
+</div>
+<!-- 环形图 -颜色-->
+<div style="position: fixed;top:-500px;">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+            <linearGradient id="grad-working" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#89f7fe;stop-opacity:1"/>
+                <stop offset="100%" style="stop-color:#66a6ff;stop-opacity:1"/>
+            </linearGradient>
+        </defs>
+        <ellipse cx="200" cy="70" rx="85" ry="55" fill="url(#grad1)"/>
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+            <linearGradient id="grad-wait" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#fee140;stop-opacity:1"/>
+                <stop offset="100%" style="stop-color:#fa709a;stop-opacity:1"/>
+            </linearGradient>
+        </defs>
+        <ellipse cx="200" cy="70" rx="85" ry="55" fill="url(#grad1)"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+            <linearGradient id="grad-down" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#f09819;stop-opacity:1"/>
+                <stop offset="100%" style="stop-color:#ff5858;stop-opacity:1"/>
+            </linearGradient>
+        </defs>
+        <ellipse cx="200" cy="70" rx="85" ry="55" fill="url(#grad1)"/>
+    </svg>
+</div>
+<script>
+function die() { }
+require(['main'], function($){
+    $().ready(function(){
+        let selector = '.equipment-summary';
+        $(selector + " ul li").on('click', function(){
+            $(this).find("a").addClass("hover")
+            $(this).siblings().find("a").removeClass()
+            //获取当前标签的索引值
+            var content_idnex = $(selector + ' ul li').index(this)
+            $(selector + ' .ct').eq(content_idnex).show().siblings().hide()
+        });
+
+        $.ajax({
+		    type: "POST",
+            url: "http://mse.less.nankai.edu.cn/genee/ajax/Dlut/equipment/GetTopEquipments",
+            data: { id: 20 ,type:'pm'},
+            success: function(html) {
+                $(".top-equipment .list").html(html)
+    		}
+        });
+
+        /* 仪器展示 */
+        $.ajax({
+            type: "POST",
+            url: 'ajax/index/equipment/GetDisplayEquipments',
+            data: {
+                id: '0'
+            },
+            success: function(html) {
+                var container = $('#equipment-box').append(html)
+                require(['jquery.cxscroll'], function(){
+                    container.cxScroll({
+                        time: 3000,
+                        speed: 500
+                    }, function() {
+                        container.find('.box').css('top', '0px')
+                    })
+                })
+            },
+            complete: function() {
+            }
+        });
+
+        $.ajax({
+		    type: "POST",
+            url: "http://mse.less.nankai.edu.cn/genee/ajax/index/equipment/GetSummaryInfo",
+            data: { res_type: 'json' },
+            success: function(info) {
+                info = JSON.parse(info)
+                $('.instrument-y .total_count').html(info.totalCount)
+                $('.instrument-y .working_count').html(info.usingCount)
+		$('.instrument-y .wait_count').html(parseInt(info.totalCount - info.usingCount - info.outServiceCount))
+                $('.instrument-y .down_count').html(info.outServiceCount)
+                require(['chat'], function(chat){
+                    $('.instrument-y')[0].appendChild(chat.pieCircle({
+                        width: 600,
+                        height: 325,
+                        total: info.totalCount,   //总数
+                        online: info.controlCount,  //在线
+                        working: info.usingCount,  //使用中
+                        wait: info.unUsingCount,    //待机
+                        down: info.outServiceCount      //故障
+                    }));
+                })
+    		}
+        });
+
+        //课题组测试情况****************************************************************
+        $.ajax({
+            type: "POST",
+            url: "http://mse.less.nankai.edu.cn/genee/ajax/index/equipment/labStatus",
+            data: { res_type: 'json' },
+            success: function(info) {
+                info = JSON.parse(info)
+                $('.instrument-y .lab_total').html(info.project)
+                $('.instrument-y .lab_test').html(info.lab)
+                $('.instrument-y .test_count').html(info.test)
+                require(['circle-progress'], function(){
+                    var num = (info.lab / info.project).toFixed(2)
+                    //num = num*100;
+                    $('#tubiao2').circleProgress({
+                        startAngle: -Math.PI / 2,
+                        value: 10,
+                        size: 250,
+                        thickness: 35,
+                        lineCap: 'round',
+                        fill: { gradient: ['#66a6ff', '#89f7fe'], gradientAngle: Math.PI/1.5 }
+                    });
+                });
+    		}
+        });
+
+        //人员分布情况**********************************************
+        $.ajax({
+            type: "POST",
+            url: "http://mse.less.nankai.edu.cn/genee/ajax/index/equipment/userStatus",
+            data: { res_type: 'json' },
+            success: function(info) {
+                info = JSON.parse(info)
+                $('.instrument-y .user_outer').html(info.outer)
+                $('.instrument-y .user_inner').html(info.inner)
+                $('.instrument-y .user_incharge').html(info.incharge)
+                var myChart = echarts.init(document.getElementById('myChart3'));
+                var option3 = {
+                    backgroundColor: '#FFFFFF',//背景色
+                    color:['#86F3BA','#79D2FE','#FCAF67'],
+                    selectedMode:false,
+                    legend: {
+                        orient: 'vertical',
+                        left: '446',
+                        y: 'center',
+                        textStyle: {
+                            fontSize: 20,
+                            color:"#666666",
+                            lineHeight:20,
+                            padding:10
+                        },
+                        height: 325,
+                        data: [{name:'校外用户',icon: 'pin'},{name:'校内用户',icon: 'pin'},{name:'管理员',icon: 'pin'}],
+                        formatter:['{a|name}','{b|这段文本采用样式b}'],
+                        rich: {
+                            a: {
+                                fontSize:18
+                            },
+                            b: {
+                                fontSize:24
+                            }
+                        }
+                    },
+                    series : [
+                        {
+                            name: '用户比例分析',
+                            type: 'pie',
+                            radius : '133px',
+                            center: ['185px', '160px'],
+                            clockwise:false,
+                            startAngle:100,
+                            minAngle:32,
+                            selectedMode: 'single',
+                            data:[
+                                {
+                                    value: info.outer,
+                                    name:'校外用户',
+                                    "itemStyle": {
+                                        "normal": {
+                                            "color": new echarts.graphic.LinearGradient(1, 0, 0, 1, [{
+                                                "offset": 0,
+                                                "color": '#fee140'
+                                            }, {
+                                                "offset": 1,
+                                                "color": '#fa709a'
+                                            }]),
+                                        }
+                                    }
+                                },
+                                {
+                                    value: info.inner,
+                                    name:'校内用户',
+                                    "itemStyle": {
+                                        "normal": {
+                                            "color": new echarts.graphic.LinearGradient(1, 0, 0, 1, [{
+                                                "offset": 0,
+                                                "color": '#89f7fe'
+                                            }, {
+                                                "offset": 1,
+                                                "color": '#66a6ff'
+                                            }]),
+                                        }
+                                    }
+                                },
+                                {
+                                    value: info.incharge,
+                                    name:'管理员',
+                                    "itemStyle": {
+                                        "normal": {
+                                            "color": new echarts.graphic.LinearGradient(1, 0, 0, 1, [{
+                                                "offset": 0,
+                                                "color": '#84fab0'
+                                            }, {
+                                                "offset": 1,
+                                                "color": '#8fd3f4'
+                                            }]),
+                                        }
+                                    }
+                                }
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    label:{
+                                        position:"inside",
+                                        textStyle: {
+                                            fontSize: 20,
+                                            color:"#ffffff"
+                                        },
+                                        show: true,
+                                        formatter: '{c}'
+                                    },
+                                    borderWidth: 2,
+                                    borderColor: '#ffffff',
+                                },
+                                labelLine :{show:true}
+                            }
+                        }
+                    ]
+                };
+                myChart.setOption(option3);
+            }
+        });
+    });
+})
+</script>
+</div>
+    </div>
+</body>
+<footer>
+    <div class="footer">
+        <div class="footer-container">
+        <div class="foot-link">
+        <ul class="links">
+            <li class="title">常用链接</li>
+                            <li><a href="https://www.nankai.edu.cn/" target="_blank" class="h_y">南开大学</a></li>
+                            <li><a href="https://mse.nankai.edu.cn/" target="_blank" class="h_y">南开大学材料科学与工程学院</a></li>
+                    </ul>
+    </div>
+    <div class="copyright">
+        <p>程序版本号 3.0.22 [通用版本]&#160;&#160;&#160;&#160;南开大学实验室与设备管理部版权所有&#160;&#160;&#160;&#160;系统开发商: <a target="_bank" href="http://www.geneegroup.com">天津市基理科技股份有限公司</a></p>
+    </div>
+</div>
+    </div>
+</footer>
+</html>

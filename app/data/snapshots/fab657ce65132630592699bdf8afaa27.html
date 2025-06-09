@@ -1,0 +1,336 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1">
+    <meta name="renderer" content="webkit">
+    <link rel="icon" href="./xds/favicon.ico" type="image/x-icon">
+    <link href="./xds/resources/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/bootstrap-3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./xds/resources/css/index.css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.core.css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.bootstrap.css">
+    <link href="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./xds/resources/css/loaders.css">
+    <script type="text/javascript" src="./xds/bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="./xds/resources/js/vendor/district-picker/district.picker.css">
+    <style type="text/css" media="screen">
+    .alertify-buttons {
+        padding: 14px 15px 15px;
+        background: #F5F5F5;
+        border-top: 1px solid #DDD;
+        border-radius: 0 0 6px 6px;
+        box-shadow: inset 0 1px 0 #FFF;
+    }
+    .alertify-message {
+        padding: 15px;
+        margin: 0;
+    }
+    .login-btn-item {
+        width: 100px;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+    </style>
+    <title>南开大学选调生系统</title>
+    <style>
+    .board .btn {
+        height: 44px;
+        line-height: 44px;
+        padding: 0 20px;
+        border-radius: 0;
+        display: block;
+    }
+    .board {
+        position: absolute;
+        top: -6px;
+        transform: skewX(-8deg);
+        box-shadow: 5px 3px 4px #ccc;
+        right: 19px;
+    }
+    .triangle {
+        position: absolute;
+        right: -3px;
+        top: 0;
+        width: 0;
+        height: 0;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+        border-bottom: 6px solid #f0ad4e;
+        transform: skewX(16deg);
+    }
+    .articleContext1 table{
+        border-spacing: 0;
+        border-collapse: 0;
+    }
+    .articleContext1 table td,.articleContext1 table th{
+         border:1px solid #ccc;
+    }
+    .articleContext1 img{
+        max-width: 100%;
+    }
+    .hui_my_answer{
+        border: 1px solid #812358;
+        width: 107px;
+        text-align: center;
+        cursor: pointer;
+        display: inline-block;
+        padding: 1px 10px;
+        color: #812358;
+        border-radius: 3px;
+        margin: 0 10px;
+    }
+    [v-cloak] {
+        display: none;
+    }
+    .pic-slider{
+        height: 200px;
+    }
+    .banner-bg img{
+        height: 200px;
+    }
+    .articleDate {
+        padding:10px 15px;
+    }
+    .fbtime{
+        text-indent: 0;
+    }
+    </style>
+</head>
+<body class="bodyloaded">
+<section class="header"></section>
+<div class="main-content" id="vueCon" v-cloak>
+    <div v-if="news === '已删除'" style="text-align: center;font-size: 28px;color:#999;margin-top:100px;">
+        文章已删除，请查看其他文章!
+    </div>
+    <div v-else class="banner-content badg articleContainer " style="margin-bottom:20px;min-height:600px;padding:0 80px;">
+        <div class="articleType">{{news.title}}</div>
+        <div class="articleDate" style="text-align: center;">
+            <div class="input-group2 fbtime">发布日期：{{news.addtime|time}}</div>
+            <div class="input-group2 ">发布人：{{news.author}}</div>
+            <div class="input-group2" v-if="activehref==4">阅读数：{{news.views}}</div>
+        </div>
+        <!-- :src="info.headimg_name | imgsrc" -->
+        <img :src="news.image_name|imgsrc"/>
+        <div class="articleContext1">
+            <div id="temp"></div>
+        </div>
+        <template v-if="news.attachment">
+            <div class="fujian">
+                <div style="margin-bottom:10px;" v-if="fjlength!=0">附件：</div>
+                <template v-for="(item,index) in news.attachment">
+                    <p style="text-align: left;background: #fff;">{{index+1}}.
+                        <span><a :href="item.linkpath|imgsrc">{{item.title}}</a></span>
+                    </p>
+                </template>
+            </div>
+        </template>
+        <div class="shangxia">
+            <div v-if="news.prev">上一篇：<span class="tophref">{{news.prev.title}}</span> </div>
+            <div v-if="news.next">下一篇：<span class="bothref">{{news.next.title}}</span></div>
+        </div>
+        <div style="text-align: center;">
+            <template v-if="wj_id !=''">
+                <template v-if="td==false">
+                    <a class="wenjuan" data-toggle="modal" style="width:100px;text-align:center;cursor: pointer;display:block;margin:0 auto 20px;padding:2px 10px;color:#fff;border-radius:3px;background-color:#9c6959">问卷填答
+                    </a>
+                </template>
+                <template v-else>
+                    <template v-if="zai">
+                        <a class="my_answer"  data-toggle="modal" style="width:100px;text-align:center;cursor: pointer;display:inline-block;margin:0 auto 20px;padding:2px 10px;color:#fff;border-radius:3pxbackground-color:#9c6959;">再次填答</a>
+                    </template>
+                    <template v-if="fen">
+                        <a class="hui_my_answer" href="javascript:void(0);">已填答</a>
+                        <!-- <a class="see_answer" href="javascript:;" style="border: 1px solid #812358;width: 107px;text-align: center;cursor: pointer;display: inline-block;padding: 1px 10px;color: #812358;border-radius: 3px;margin: 0 10px;">查看统计分析</a> -->
+                    </template>
+                    <template v-else>
+                        <a class="hui_my_answer" href="javascript:void(0);">已填答</a>
+                    </template>
+                </template>
+            </template>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" style="z-index: 1111;" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content loginIn2" style="padding:20px;margin-top:100%;z-index: 1;">
+        <div style="line-height: 45px;">
+            <div class="login_studenty login_js">
+                <a href="javascript:;"><span></span>教职工</a>
+            </div>
+            <div class="silde"></div>
+            <div class="login_studenty login_zxs">
+                <a href="javascript:;"><span></span>在校生</a>
+            </div>
+            <div class="silde"></div>
+            <div class="login_studentw login_xds">
+                <a   href="javascript:;"><span></span>选调生</a>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+<section class="footer"></section>
+<script src="./xds/resources/js/vendor/bootstrap-3.2.0/js/bootstrap.min.js "></script>
+<script src="./xds/bower_components/nivo-slider/jquery.nivo.slider.js "></script>
+<script src="./xds/resources/js/vendor/bootstrap-paginator.js "></script>
+<script src="./xds/resources/js/vendor/template.js "></script>
+<script src="./xds/resources/js/vendor/template-util.js "></script>
+<script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.js "></script>
+<script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.zh-CN.js "></script>
+<script src="./xds/bower_components/bootstrapValidator/dist/js/bootstrapValidator.js "></script>
+<script src="./xds/resources/js/vendor/alertify/js/alertify.js "></script>
+<script src="./xds/resources/js/vendor/ajaxfileupload.js "></script>
+<script src="./xds/resources/js/vendor/district-picker/jquery.district.picker.js "></script>
+<script src="./xds/resources/js/vendor/common.js "></script>
+<script src="./xds/resources/js/vendor/config.js"></script>
+<script src="./xds/resources/js/vendor/api.js"></script>
+<script src="./xds/resources/js/vendor/vue.min.js"></script>
+<script src="./xds/resources/js/vendor/wx_get_openid.js"></script>
+<script src="./xds/resources/js/admin/creat-drop-down-list.js "></script>
+<style>
+    .loginIn2>div {
+        height: 100px;
+        background: #fff;
+        z-index: 9999;
+        border: 1px solid #d2d2d2;
+        padding: 17px 20px;
+        box-sizing: border-box;
+    }
+    .loginIn2>div>div{
+        float: left;
+        text-align: center;
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(".header").load("../public/header.html");
+    $(".footer").load("../public/footer.html");
+    var id = $.getUrlParam('id');
+    var type = $.getUrlParam('type');
+    var activehref = $.getUrlParam('active');
+    var stu_id = sessionStorage.getItem('userid')||'';
+    var yulan =  $.getUrlParam('yulan');
+    var news1 = sessionStorage.getItem('news1');//选调政策
+    var news2 = sessionStorage.getItem('news2');//选调心声
+    var news3 = sessionStorage.getItem('news3');//选调进展
+
+    var vm = new Vue({
+        el: "#vueCon",
+        data: {
+            type:type,
+            news: [], //招录公告
+            wj_id:'',
+            td:false,
+            fen:false,
+            zai:false,
+            fjlength:'',
+            activehref:activehref
+        },
+        filters: {
+            time: function(value) {
+                if (value == 0) {
+                    return "";
+                }
+                var date = new Date(value * 1000);
+                Y = date.getFullYear() + '-';
+                M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                D = date.getDate() < 10 ?'0' +date.getDate()+ ' ' : date.getDate()+ ' ';
+                h = date.getHours()< 10 ?'0' +date.getHours()+ ':': date.getHours()+ ':';
+                m = date.getMinutes()< 10 ?'0' +date.getMinutes()+ ':': date.getMinutes()+ ':';
+                s = date.getSeconds()< 10 ?'0' +date.getSeconds(): date.getSeconds();
+                return Y + M + D;
+            }
+        },
+        updated: function () {
+            $(".wenjuan").click(function(){
+                if(!is_wxempty(stu_id)){ 
+                    if(!is_wxempty(vm.wj_id)){ 
+                        http('post','/wenjuan/checkanswer',{"id":vm.wj_id,"userid":stu_id,'extend':true}, function(e){
+                            if(e.code == "1"){
+                                    sessionStorage.setItem('back_url',window.location.href);
+                                    window.location.href="../wenjuan.html?id="+vm.wj_id;
+                            }else{
+                                vm.td=true
+                                if(e.data.seting.analysis==1){
+                                    vm.fen=true;
+                                }
+                                if(e.data.seting.moreanswer==1){
+                                    vm.zai=true;
+                                }
+                            }
+                        });
+                    }else{
+                        alertify.error("暂无问卷可填答！");
+                    }
+                }else{
+                    sessionStorage.setItem('back_url',window.location.href);
+                    sessionStorage.setItem('wj_id',vm.wj_id);
+                    $(".bs-example-modal-sm").modal('show')
+                    // $(".wenjuan").attr("data-target","#myModal");
+                    // $.idcode.setCode({
+                    //     e           : 'idcode',
+                    //     codeType    : { name : 'follow', len: 4},//len是修改验证码长度的
+                    //     codeTip     : '换个验证码?',
+                    //     inputID     : 'Txtidcode'//验证元素的ID
+                    // });
+                }
+            })
+        },
+    })
+
+    if(yulan == 1){
+        yulans = 1
+    }else{
+        yulans = 0
+    }
+    //选调生公告
+    http('POST', '/Article/detail', {"id":id,"yulan":yulans}, function (e) {
+        console.log(e.data);
+        document.title = e.data.title;
+        vm.news=e.data;
+        vm.wj_id = e.data.wj_id;
+        vm.fjlength = e.data.attachment;
+        // 获取问卷答题情况
+        if(!is_wxempty(stu_id)){ 
+            if(!is_wxempty(e.data.wj_id)){ 
+                http('post','/wenjuan/checkanswer',{"id":e.data.wj_id,"userid":stu_id,'extend':true}, function(e){
+                    if(e.code == "1"){
+
+                    }else{
+                        vm.td=true
+                        if(e.data.seting.analysis==1){
+                            vm.fen=true;
+                        }
+                        if(e.data.seting.moreanswer==1){
+                            vm.zai=true;
+                        }
+                    }
+                });
+            }
+        }
+        const div = document.getElementById('temp');
+        div.attachShadow({mode: 'open'});
+        div.shadowRoot.innerHTML = vm.news.content;
+        //上一篇下一篇
+        $(document).on("click",".tophref",function(){
+            window.location.href="newsDetail.html?active="+activehref+"&type=2&id="+e.data.prev.id
+        })
+        $(document).on("click",".bothref",function(){
+            window.location.href="newsDetail.html?active="+activehref+"&type=2&id="+e.data.next.id
+        })
+    })
+
+    $(document).on("click",".my_answer",function(){
+        sessionStorage.setItem('back_url',window.location.href);
+        window.location.href="../wenjuan.html?id="+vm.wj_id;
+    })
+    $(document).on("click",".see_answer",function(){
+        sessionStorage.setItem('back_url',window.location.href);
+        window.location.href="../wenjuan_result.html?id="+vm.wj_id;
+    })
+</script>
+
+
+</body></html>

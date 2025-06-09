@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1">
+    <meta name="renderer" content="webkit">
+    <link rel="icon" href="./xds/favicon.ico" type="image/x-icon">
+    <link href="./xds/resources/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/bootstrap-3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./xds/resources/css/index.css" />
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.core.css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.bootstrap.css">
+    <link href="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./xds/resources/css/loaders.css">
+    <script type="text/javascript" src="./xds/bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="./xds/resources/js/vendor/district-picker/district.picker.css">
+    <title>南开大学选调生系统</title>
+    <style type="text/css" media="screen">
+    .alertify-buttons {
+        padding: 14px 15px 15px;
+        background: #F5F5F5;
+        border-top: 1px solid #DDD;
+        border-radius: 0 0 6px 6px;
+        box-shadow: inset 0 1px 0 #FFF;
+    }
+
+    .alertify-message {
+        padding: 15px;
+        margin: 0;
+    }
+
+    .login-btn-item {
+        width: 100px;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+    </style>
+    <style type="text/css">
+    .slh {
+        height: 38px;
+        overflow: hidden;
+        color:#595959;
+        margin-bottom:8px;
+    }
+    .slh>div{
+        float: right;
+        margin-left: -5px;
+        width: 100%;
+        word-break: break-all;
+    }
+    .slh::before {
+        float: left;
+        width: 5px;
+        content: '';
+        height: 40px;
+    }
+    
+    .slh::after {
+        float: right;
+        content: "...";
+        height: 20px;
+        line-height: 20px;
+        /* 为三个省略号的宽度 */
+        width: 3em;
+        /* 使盒子不占位置 */
+        margin-left: -3em;
+        /* 移动省略号位置 */
+        position: relative;
+        left: 102%;
+        top: -20px;
+        padding-right: 47px;
+        background-color: #FFF;
+    }
+    .views{
+        color:#999;
+        text-align:right;
+        line-height: 30px;
+        font-size: 13px;
+    }
+    .views i{
+        color:#999;
+        font-style: normal;
+    }
+    
+    [v-cloak] {
+        display: none;
+    }
+    </style>
+</head>
+
+<body class="body">
+    <section class="header"></section>
+    <div class="main-content addis"  v-cloak>
+        <div class="banner-content badg" style="padding-top:0;padding-bottom:0;">
+            <div style="overflow: hidden">
+                <ul id="gridBody" style="width:915px;float: left;">
+                    <!-- <li class="article-item clearfix" v-for="item in newlist2">
+                        <div class="item-pic  pull-left">
+                            <div class="date-time text-c"><span>{{item.addtime|day}}</span>{{item.addtime|month}}
+                            </div>
+                        </div>
+                        <div class="item-intro">
+                            <template v-if="item.content_url == ''">
+                                <a :href="'newsDetail.html?active=6&type=2&id='+item.id" class="item-title">
+                                    <template v-if="item.top_time != '0'">
+                                        <i>顶</i>
+                                    </template>
+                                    {{item.title}}
+                                </a>
+                            </template>
+                            <template v-else>
+                                <a :href="item.content_url" :title="item.title" target="_blank" class="item-title">
+                                    <template v-if="item.top_time != '0'">
+                                        <i>顶</i>
+                                    </template>
+                                    {{item.title}}
+                                </a>
+                            </template>
+                            <div class="item-desc add-ellipsis2 slh">
+                                <div v-html="item.content"></div>
+                            </div>
+                        </div>
+                    </li> -->
+                    <li class="article-item clearfix" v-for="item in newlist2">
+                        <template v-if="item.content_url == ''">
+                            <a :href="'newsDetail.html?active=6&type=2&id='+item.id" class="item-title">
+                                <div class="item-phone  pull-left">
+                                    <img :src="item.image_name | imgfilter" alt="">
+                                </div>
+                                <div class="item-intro">
+                                    <div class="item-title">
+                                        <template v-if="item.top_time != '0'">
+                                            <i>顶</i>
+                                        </template>
+                                        {{item.title}}
+                                    </div>
+                                    <div class="slh">
+                                        <div v-html="item.content"></div>
+                                    </div>
+                                    <div class="times">
+                                        {{item.addtime | time}}
+                                    </div>
+                                </div>
+                            </a>
+                        </template>
+                        <template v-else>
+                            <a :href="item.content_url" :title="item.title" target="_blank" class="item-title">
+                                <div class="item-phone  pull-left">
+                                    <img :src="item.image_name | imgfilter" alt="">
+                                </div>
+                                <div class="item-intro">
+                                    <div class="item-title">
+                                        <template v-if="item.top_time != '0'">
+                                            <i>顶</i>
+                                        </template>
+                                        {{item.title}}
+                                    </div>
+                                    <div class="slh">
+                                        <div v-html="item.content"></div>
+                                    </div>
+                                    <div class="times">
+                                        {{item.addtime | time}}
+                                    </div>
+                                </div>
+                            </a>
+                        </template>
+                    </li>
+                </ul>
+                <ul class="imgbox">
+                    <div class="hotcont">
+                        <img src="xds/resources/images/hots.png" alt="">
+                        <span>相关链接</span>
+                    </div>
+                    <li v-for="index in newimg">
+                        <template v-if="index.content_url == ''">
+                            <a :href="'newsDetail.html?active=6&type=2&id='+index.id" class="index-title">
+                                <div class="slh imgtitle" style="height: 42px;">
+                                    <div v-html="index.title"></div>
+                                </div>
+                                <img :src="index.image_name+''" alt="">
+                            </a>
+                        </template>
+                        <template v-else>
+                            <a :href="index.content_url" :title="index.title" target="_blank" class="index-title">
+                                <div class="slh imgtitle" style="height: 42px;">
+                                    <div v-html="index.title"></div>
+                                </div>
+                                <img :src="index.image_name+''" alt="">
+                            </a>
+                        </template>
+                    </li>
+                </ul>
+            </div>
+            <div align="center" class="clearfix">
+                <div class="pages_wrapper" id="footpage"></div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <section class="footer"></section>
+
+    <script src="./xds/resources/js/vendor/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script src="./xds/bower_components/nivo-slider/jquery.nivo.slider.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-paginator.js"></script>
+    <script src="./xds/resources/js/vendor/template.js"></script>
+    <script src="./xds/resources/js/vendor/template-util.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="./xds/bower_components/bootstrapValidator/dist/js/bootstrapValidator.js"></script>
+    <script src="./xds/resources/js/vendor/alertify/js/alertify.js"></script>
+    <script src="./xds/resources/js/vendor/ajaxfileupload.js"></script>
+    <script src="./xds/resources/js/vendor/district-picker/jquery.district.picker.js"></script>
+    <script src="./xds/resources/js/vendor/common.js"></script>
+    <script src="./xds/resources/js/vendor/page2.js "></script>
+    <script src="./xds/resources/js/vendor/config.js"></script>
+    <script src="./xds/resources/js/vendor/api.js"></script>
+    <script src="./xds/resources/js/vendor/vue.min.js"></script>
+    <script src="./xds/resources/js/vendor/wx_get_openid.js"></script>
+</body>
+<script>
+    $(".header").load("../public/header.html");
+    $(".footer").load("../public/footer.html");
+    var news4 = sessionStorage.getItem('news4');//新闻资讯
+    var school_id = sessionStorage.getItem("school_id");
+    var size = 15;
+    var cpage = $.getUrlParam("page");
+    cpage = parseInt(cpage);
+    if(!cpage || cpage < 1){
+        cpage = 1;
+    }
+    var vm = new Vue({
+        el: ".addis",
+        data: {
+            newlist2: [], 
+            allpage:0,
+            pagesize:size,
+            newimg:[],
+        },
+        updated:function(){
+            var onPagechange = function (page) {
+                // console.log('当前点击页码', page);
+                // window.location.href = $.UrlUpdateParams(window.location.href, 'page', page);
+                window.location.href = "informate.html?active=6&page="+page;
+            }
+            var obj = {
+                wrapid: 'footpage', //页面显示分页器容器id
+                total: vm.total, //总条数
+                pagesize: vm.pagesize, //每页显示10条
+                currentPage: cpage, //当前页
+                onPagechange: onPagechange,
+                //btnCount:7 页数过多时，显示省略号的边界页码按钮数量，可省略，且值是大于5的奇数
+            }
+            if (vm.allpage > 0) {
+                console.log(obj);
+                pagination.init(obj);
+            }
+
+            $('#gridBody').css('min-height',$(window).height()-360);
+
+            $(".imgbox li").hover(function(){
+                console.log(1)
+                $(this).find(".imgtitle").addClass("imgtitle-width");
+                $(this).find("img").show();
+            },function(){
+                $(this).find(".imgtitle").removeClass("imgtitle-width");
+                $(this).find("img").hide();
+            })
+        },
+        filters: {
+            year:function(value) {
+                if (value == 0) {
+                    return "";
+                }
+                var date = new Date(value * 1000);
+                Y = date.getFullYear();
+                return Y;
+            },
+            month:function(value) {
+                if (value == 0) {
+                    return "";
+                }
+                var date = new Date(value * 1000);
+                M = date.getMonth();
+                var month = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+                return month[M]+"月";
+            },
+            day:function(value) {
+                if (value == 0) {
+                    return "";
+                }
+                var date = new Date(value * 1000);
+                D = date.getDate();
+                return D;
+            },
+            time:function(value){
+                if (value == 0) {
+                    return "";
+                }
+                var date = new Date(value * 1000);
+                Y = date.getFullYear() + '-';
+                M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                D = date.getDate() + ' ';
+                h = date.getHours() + ':';
+                m = date.getMinutes() + ':';
+                s = date.getSeconds();
+                return Y + M + D;
+            },
+            imgfilter:function(value){
+                if(value == null || value=="" || value == undefined || value == "0"){
+                    return "/xds/resources/images/newsinfo.png";
+                }else{
+                    return value;
+                }
+            }
+        },
+    })
+
+
+    //选调政策
+    http('POST', '/Article/getlist', {"school_id": school_id,"cate_id": news4,"page": cpage,"size": size,"show_type":1}, function (e) {
+        console.log(e);
+        vm.newlist2 = e.data.list;
+        vm.total = e.data.count;
+        vm.allpage = e.data.allpage;
+    });
+   //图片浏览量排序
+   http('POST', '/Article/getsortlist', {"school_id": school_id,"cate_id": news4,"show_type":1}, function (e) {
+       console.log(e,11)
+        vm.newimg=e.data.list;
+    });
+
+    
+
+
+
+
+
+
+</script>
+<!-- <script type="text/html" id="gridTpl">
+    {{if content.length>0}} {{each content as v }}
+    <li class="article-item clearfix">
+        {{if v.type=='选调政策' || v.type =='选调心声'}}
+        <a href="./xds/news/detail/{{v.id}}" style="color:#333;">
+                    <i class="fa fa-dot-circle-o" style="color:#812358"></i> {{if v.top==1}}<b style="color:#812358;">【置顶】</b>{{/if}} {{v.title}}
+                    <label style="float:right">{{v.createTime}}</label>
+                </a> {{else}}
+        <div class="item-pic  pull-left">
+            <div class="date-time text-c">{{#v.createTimeStr}}</div>
+        </div>
+        <div class="item-intro">
+            <a href="./xds/news/detail/{{v.id}}" class="item-title">
+                        {{if v.top==1}}<b style="color:#812358;">【置顶】</b>{{/if}} {{v.title}}
+                        </a>
+            <div class="item-desc add-ellipsis2 slh">{{#v.content}}</div>
+        </div>
+        {{/if}}
+    </li>
+    {{/each}} {{else}}
+    <li class="no-data">暂无查询结果</li>
+    {{/if}}
+</script>
+<script type="text/html" id="ly-gridTpl">
+    {{if content.length>0}} {{each content as v }}
+    <li class="article-item clearfix">
+        <div class="item-pic  pull-left">
+            <div class="date-time text-c">{{#v.createTimeStr}}</div>
+        </div>
+        <div class="item-intro">
+            <a href="./xds/news/detail/{{v.id}}" class="item-title">
+                {{v.createUserName}}:{{v.content}}
+            </a>
+            <div class="item-desc add-ellipsis2 slh">{{#v.content}}</div>
+        </div>
+    </li>
+    {{/each}} {{else}}
+    <li class="no-data">暂无查询结果</li>
+    {{/if}}
+</script>
+<script type="text/html" id="by-gridTpl">
+    {{if content.length>0}} {{each content as v }}
+    <li class="article-item clearfix">
+        <div class="item-pic  pull-left">
+            <img src="/xds{{v.img}}" style="width:175px" onerror="onerror=null;src='./xds/resources/images/default-picture.png'">
+        </div>
+    </li>
+    {{/each}} {{else}}
+    <li class="no-data">暂无查询结果</li>
+    {{/if}}
+</script>
+ -->
+</html>

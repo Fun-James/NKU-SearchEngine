@@ -1,0 +1,205 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>南开大学网站群平台</title>
+        <link href="_css/main.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="_js/themes/default/easyui.css" />
+        <link rel="stylesheet" type="text/css" href="_js/themes/icon.css" />
+        <script type="text/javascript" src="_js/jquery.min.js"></script>
+        <script type="text/javascript" src="_js/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="_js/easyui-lang-zh_CN.js"></script>
+        <script type="text/javascript" src="_js/common.js"></script>
+        <script type="text/javascript" src="_js/jquery.query.js"></script>
+	<script type="text/javascript" src="_js/security.js"></script>
+        <script type="text/javascript" src="extends/extends.js"></script>
+		<link rel="stylesheet" href="style.css" type="text/css" />
+        <link href="css/gmail.css" rel="stylesheet" type="text/css"> 
+
+        
+        <script language='javascript' type="text/javascript">
+            $().ready(function () {
+                $('#validateCode').attr('value', '');
+            });
+
+            function userLogin() {
+                var userName = $('#userName').val().replace(/\s/gi, "");
+                var password = $('#password').val().replace(/\s/gi, "");
+                var validateCode = $('#validateCode').val().replace(/\s/gi, "");
+                if (userName == "" || password == "") {
+                    $.messager.alert('提醒', alertPrefix + '请输入用户名和密码！', 'info', function () {
+                        if (userName == "") {
+                            $("#userName").focus();
+                        } else {
+                            $("#password").focus();
+                        }
+                    });
+                    return;
+                }
+                if (validateCode == "") {
+                    $.messager.alert('提醒', alertPrefix + '请输入验证码！', 'info', function () {
+                        $("#validateCode").focus();
+                    });
+                    return;
+                }
+		var exponent = '010001';//java代码产生的hexPublicExponent
+            var modulus = '00df7307e6b9b2153ee4f79badce7015955effe1642c00a62ad21eb5582fe5bc7d44524c9fd4c4b78612c5b98f937bf7570a78cdfaef890a577a7476f77af62e57241a17dafc008c14426a1f136d38c48a565dce181d8dd93a9769134ac5f71d416accbe80b290b4ad26412754bd71004793f5a4f83cc3f470dd7225add9bab91d';//java代码产生的hexModulus
+            var publicKey = RSAUtils.getKeyPair(exponent, '', modulus);
+            var newpassword = RSAUtils.encryptedString(publicKey, password);
+            $('#password').val(newpassword);
+                $('#loginForm').submit();
+            }
+
+            function onKeyUserName(event) {
+                if (event.keyCode != '13') {
+                    return;
+                }
+                if ($('#userName').val() == '') {
+                    $.messager.alert('提醒', alertPrefix + '请输入用户名！', 'info', function() {
+                        $("#userName").focus();
+                    });
+                    return false;
+                } else {
+                    $("#password").focus();
+                    return true;
+                }
+            }
+            function onKeyPassword(event) {
+                if (event.keyCode != '13') {
+                    return;
+                }
+                if ($('#password').val() == '') {
+                    $.messager.alert('提醒', alertPrefix + '请输入密码！', 'info', function () {
+                        $("#password").focus();
+                    });
+                    return false;
+                } else {
+                    $('#validateCode').focus();
+                    return true;
+                }
+            }
+            function onKeyValidateCode(event) {
+                if (event.keyCode != '13') {
+                    return;
+                }
+                if ($('#validateCode').val() == '') {
+                    $.messager.alert('提醒', alertPrefix + '请输入验证码！', 'info', function () {
+                        $("#validateCode").focus();
+                    });
+                    return false;
+                } else {
+                    userLogin();
+                    return true;
+                }
+            }
+        </script>
+    </head>
+
+<body class="b">
+<div class="main">
+    <div class="inner">
+ <div class="sudy-tab">
+        	<ul class="tab-menu">
+               <img  class="jt" src="images/jt.png">
+               <div class="act">
+            	<li></li>
+            	<li></li>
+               </div>
+               </ul>
+            <ul class="tab-list">
+            	<li>
+                	<div class="c1">
+                    	<div class="left">
+                        <a href="https://iam.nankai.edu.cn/api/cas/login?service=http%3A%2F%2Fwebplus3.nankai.edu.cn%2Findex.jsp%3F_p%3DYXM9MSZwPTEmbT1OJg__%26act%3D1" target="_blank">
+                    		<div class="p"> <img src="images/xx.png" style="border:0;"></div>
+                            <div class="f">信息门户账号登录</div></a>
+                        </div>
+                        <div class="right">
+                        <div class="login_1">
+                    	<div class="p"> <img src="images/qt.png" style="border:0;"></div>
+                            <div class="f">其他账号登录</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            	<li>
+                	<div class="c2">
+                    	<div class="left">
+                    		<div class="p"><a href="https://iam.nankai.edu.cn/api/cas/login?service=http%3A%2F%2Fwebplus3.nankai.edu.cn%2Findex.jsp%3F_p%3DYXM9MSZwPTEmbT1OJg__%26act%3D1" target="_blank" title="信息门户账号登录"> <img src="images/xx2.png" style="border:0;"></a></div>
+                            
+                        </div>
+                        <div class="right">
+                    	     <div class="logo"><img src="images/logo.png" style="border:0;"></div>
+                             <div class="center">
+                                 <form id="loginForm" name="loginForm" method="post" action="/login.jsp?_p=YXM9MSZwPTEmbT1OJg__">
+										
+                                <input  type="text" id="userName" class="input1"  name="userName"  value="" onKeyDown="return onKeyUserName(event);" spellcheck="false" placeholder="LOGIN">
+                                <input type="password" id="password" class="input1" name="password" placeholder="PASSWORD" value="" onKeyDown="return onKeypassword(event);" autocomplete="off">
+								
+                                <input name="validateCode" id="validateCode" type="text" value="" placeholder="Verification Code" onKeyDown="return onKeyValidateCode(event);"/>
+                                <p align="right" class="yz">验证码： <img src="/_control/validateimage?tt=Sat May 31 07:29:48 CST 2025" width="70" height="25" /></p>
+								<div name="signIn" class="rc-button rc-button-red" id="signIn" type="text" value="登录"  onclick="userLogin()";>登录</div>
+
+                                   
+										<input type="hidden" name="isSubmitted" value="1"/>
+
+                                  </form>
+                                 <div class="f">其他账号登录</div>
+                            </div>
+                        </div>
+                        </div>
+                    
+                </li>
+            	
+            </ul>
+        </div>
+       <script type="text/javascript">
+			$(function(){
+				$(".sudy-tab").sudyTab({
+					handle:".act >li",		// 控制器元素，默认为.tab-menu li
+					content:".tab-list >li",		// 内容体，可以有多个并以英文逗号隔开，如.tab-list li,.tab-more li,默认值为".tab-list li,.tab-more li"
+					trigger:"click",		// 触发事件，默认为"mouseenter"鼠标经过
+					start:1,					// 开始项，默认为第一个
+					autoPlay:{
+						active:false,			// 是否激活自动切换
+						interval:5000,		// 自动切换时间间隔
+						pauseHover:true		// 是否鼠标放上面时停止自动
+					}
+				});
+			});
+		</script>
+</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$(".login_1").on("click", function(){
+		$(".act").find("li").eq(1).trigger('click');
+	})
+	$(".jt").on("click", function(){
+		$(".act").find("li").eq(0).trigger('click');
+	})
+})
+</script>
+</body>
+
+
+
+</html>

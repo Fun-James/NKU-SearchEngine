@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>采购招标管理信息平台</title>
+        <script type="text/javascript" src="/script/jquery.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery-migrate-1.4.1.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery-migrate-3.3.0.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.base64.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/jquery.dragsort.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/layui/layui.js?v=20250411" charset="utf-8"></script>
+        <script type="text/javascript" src="/script/json2.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/layui_exts/loading/loading.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/Public.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/CheckText.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/qTip2/jquery.qtip.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/qTip2/ZcPophint.js?v=20250411"></script>
+        <link rel="stylesheet" type="text/css" href="/plugs/qTip2/jquery.qtip.css?v=20250411"></link>
+        <link rel="stylesheet" type="text/css" href="/style/style41.css?v=20250411">
+        <link rel="stylesheet" type="text/css" href="/plugs/layui/css/layui.css?v=20250411" media="all">
+        <script type="text/javascript" src="/script/KeyControl.js?v=20250411"></script>
+        <script type="text/javascript" src="/script/CryptoJs.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/rsa/jsencrypt.min.js?v=20250411"></script>
+        <link rel="stylesheet" type="text/css" href="/style/regist.css?v=20250411">
+        <script type="text/javascript" src="/plugs/formValidator/formValidator.js?v=20250411"></script>
+        <script type="text/javascript" src="/plugs/formValidator/formValidatorRegex.js?v=20250411"></script>
+        <style type="text/css">
+        .header.background{
+             background:#f7f7f7;
+             height:118px;
+        }
+        .header.nr{
+            margin-top: 30px;
+        }
+        .header.nr.bt{
+            margin-left:10px;
+            font-size: 20px;
+        }
+        .user.icon{
+            width:35px;
+            height:35px;
+            display:inline-block;
+            background: url("/images/regist/user.png") no-repeat center center;
+        }
+        .gl{
+            color:#fa4719;
+        }
+        .gl.lj{
+            cursor:pointer;
+        }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#zcxznr").css("height", $(window).height()-300+"px");
+                yzDxfscs();
+                //拒绝协议关闭窗口
+                $("#btClose").click(function(){
+                    window.close();
+                });
+                //同意协议，开始下一步操作。btAgree
+                $("#btAgree").click(function(){
+                    var time = "10";
+                    if(time <= 0){
+                        var ydxz = $("#ydbty").prop('checked');
+                        if(!ydxz){
+                            alert("请您阅读并同意此须知后再进行此操作！");
+                            return;
+                        }
+                    }
+                    $("#ydxy").css("display","none");
+                    $("#ydxyLi").removeClass("active");
+                    $("#szyhmLi").addClass("active");
+                    $("#szyhm").css("display","");
+                });
+            });
+            //定时器：30秒阅读时间
+            $(document).ready(function(){
+                var time = "10";
+                if(time>0){
+                    //禁用掉确认按钮并且 变为灰色
+                    $("#btAgree").prop("disabled",true);
+                    $("#btAgree").css("background-color","#cccccc");
+                    $("#btAgree").css("color","#FFFFFF");
+                    var val = $("#btAgree").val();
+                    var set = setInterval(function() {
+                        time--;
+                        $("#btAgree").val("同意("+time+"s)");
+                        if(time === 0) {
+                            $("#btAgree").val("同意");
+                            $("#btAgree").prop("disabled",false);
+                            $("#btAgree").css("background-color","");
+                            $("#btAgree").css("color","");
+                            clearInterval(set);
+                        }
+                    }, 1000);
+                }
+            });
+            function refreshVerify(){
+                var varAction = "/home/refreshVerify.htm" ;
+                $.ajax({
+                    type: "post",
+                    url: varAction,
+                    cache: true,
+                    data: $('#dataForm').serialize(),
+                    async : true,
+                    timeout:5000,
+                    dataType:"json",
+                    error: function(request) {
+                        alert("网络异常");
+                    },
+                    success: function(data){
+                        if(data.status==1){
+                            $("#imgVerify").attr("src","data:image/jpg;base64,"+data.base64) ;
+                        }else{
+                            alert(data.msg) ;
+                        }
+                    }
+                });
+            }
+            //初始化短息提醒
+            function initMsgTip(){
+                $(".msgTip").each(function(i,tip){
+                    $(tip).hide();
+                });
+            }
+            //点击获取短信验证码
+            function exeOfVali(){
+                $("#msgxh").val("");
+                var tokenHeaders = getTokenHeaders();
+                var varAction = "/jc/hyzc/sendMsg.htm" ;
+                $.ajax({
+                    type: "post",
+                    url: varAction,
+                    cache: true,
+                    headers: tokenHeaders,
+                    data: $('#dataForm').serialize(),
+                    async : true,
+                    timeout:5000,
+                    dataType:"json",
+                    error: function(request) {
+                        alert("网络异常");
+                        $("#bsendMobileCode").show();
+                        initMsgTip();
+                    },
+                    success: function(data){
+                        if(data.status==1){
+                            $("#msgxh").val(data.msgxh);
+                            $("#ipdxcs").val(data.ipdxcs);
+                            zcfsdxsj();
+                            refreshDxVerify();
+                        }else{
+                            alert(data.msg);
+                            $("#bsendMobileCode").show();
+                            initMsgTip();
+                        }
+                    }
+                });
+                $("#bsendMobileCode").hide();
+                $(".msgTip").each(function(i,tip){
+                    $(tip).show();
+                });
+            }
+            function zcfsdxsj(){
+                var sec=60;
+                showSec(sec)
+                var i = setInterval(function(){
+                    if(sec==1){
+                        sec=60;
+                        $("#bsendMobileCode").show();
+                        $(".msgTip").each(function(i,tip){
+                            $(tip).hide();
+                        });
+                        clearInterval(i);
+                    }
+                    sec--;
+                    showSec(sec);
+                },1000);
+            }
+            //显示下次获取短信验证码的时间
+            function showSec(sec){
+                $("#Sec").text(sec);
+            }
+            //立即登录
+            function toLogin(){
+                window.location.href="/home/login.htm";
+            }
+            //填写统一社会信用代码时将小写字母转大写
+            function upperCase(x){
+                var y=document.getElementById(x).value
+                document.getElementById(x).value=y.toUpperCase()
+            }
+            // 验证短信发送次数
+            function yzDxfscs(){
+                var varAction = "/jc/hyzc/yzDxfscs.htm" ;
+                $.ajax({
+                    type: "post",
+                    url: varAction,
+                    cache: true,
+                    data: $('#dataForm').serialize(),
+                    async : true,
+                    timeout:5000,
+                    dataType:"json",
+                    error: function(request) {
+                        alert("网络异常");
+                    },
+                    success: function(data){
+                        if(data.status==1){
+                            $("#ipdxcs").val(data.ipdxcs);
+                            // 三次以上添加发送短信的验证码
+                            if(data.ipdxcs >= 3){
+                                $("#fsdxyzmkz").show();
+                                refreshDxVerify();
+                            } else {
+                                $("#fsdxyzmkz").hide();
+                            }
+                        }
+                    }
+                });
+            }
+            function refreshDxVerify(){
+                var varAction = "/jc/hyzc/refreshVerify.htm" ;
+                $.ajax({
+                    type: "post",
+                    url: varAction,
+                    cache: true,
+                    data: $('#dataForm').serialize(),
+                    async : true,
+                    timeout:5000,
+                    dataType:"json",
+                    error: function(request) {
+                        alert("网络异常");
+                    },
+                    success: function(data){
+                        if(data.status==1){
+                            $("#imgDxVerify").attr("src","data:image/jpg;base64,"+data.base64) ;
+                        }else{
+                            alert(data.msg) ;
+                        }
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <form id="dataForm" name="dataForm" method="post" >
+            <input type="hidden" id="jmfs" name="jmfs" value="密文"/>
+            <input type="hidden" id="timeStamp" name="timeStamp" value="1748662956451"/>
+            <input type="hidden" id="msgxh" name="msgxh" value=""/>
+            <input type="hidden" id="dxlb" name="dxlb" value="gyszcyzm"/>
+            <input type="hidden" id="gyszccode" name="gyszccode" value="5392bf738aed4a11a707b95996f829cc"/>
+            <input type="hidden" id="ipdxcs" name="ipdxcs"/>
+            <div class="header background">
+                <div class="regist">
+                    <div class="header">
+                        <div class="header nr">
+                            <div style="float:left;"><span class="user icon"></span></div>
+                            <div style="float:left;"><span class="header nr bt">采购招标管理信息平台 |</span><span class="header nr bt gl">供应商/投标人注册</span></div>
+                            <div style="float:right;"><span>已有账号？</span><span class="gl lj" onclick="toLogin()">立即登录 ></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="regist">
+                <div class="steps steps-4" style="margin-bottom: 10px;">
+                    <ul>
+                                <li id="ydxyLi" class="active">
+                                    <i>1</i>
+                                    <span>注册须知</span>
+                                </li>
+                                <li id="szyhmLi">
+                                    <i>2</i>
+                                    <span>设置用户名</span>
+                                </li>
+                                <li>
+                                    <i>3</i>
+                                    <span>完善信息</span>
+                                </li>
+                                <li>
+                                    <i>4</i>
+                                    <span>提交审核</span>
+                                </li>
+                                <li>
+                                    <i class="iconfont"> &radic; </i>
+                                    <span>注册成功</span>
+                                </li>
+                            </ul>
+                        </div>
+                <div id="ydxy">
+                    <!-- <h1 class="btm-panel" >《注册须知》</h1> -->
+                    <div class="yhxy-border" id="zcxznr">
+                        <p style="text-align:center;line-height:31px;">
+	<strong>
+		<span style="font-size:19px;font-family: 仿宋_GB2312;color:black;">供应商注册须知</span>
+	</strong>
+</p>
+<p style="text-align:center;line-height:31px;">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">&nbsp;</span>
+</p>
+<p style="text-indent:37px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">南开大学欢迎广大供应商注册，并参与学校采购招标活动。在注册和提交资料前，请务必认真阅读以下内容，若继续填写和提交注册信息，即代表同意本须知所有内容，若不同意，请停止下一步注册。</span>
+</p>
+<p style="text-indent:37px;line-height:31px">
+	<strong>
+		<span style="font-size:19px;font-family: 仿宋_GB2312;color:black">一、注册资格</span>
+	</strong>
+</p>
+<p style="margin-left:28px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">符合</span>
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:#156356;">
+		<a href="https://nkzbb.nankai.edu.cn/guojflfg/1.chtml" target="https://nkzbb.nankai.edu.cn/_blank">
+			<span style="color:#156356;text-underline:none">《中华人民共和国政府采购法》</span>
+		</a>
+	</span>
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">第二十二条规定的主体。</span>
+</p>
+<p style="text-indent:28px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">第二十二条&nbsp;供应商参加政府采购活动应当具备下列条件：&nbsp; &nbsp;</span>
+</p>
+<p style="text-indent:28px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">（一）具有独立承担民事责任的能力；&nbsp; &nbsp;</span>
+</p>
+<p style="text-indent:28px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">（二）具有良好的商业信誉和健全的</span>
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:#156356;">
+		<a href="https://www.baidu.com/s?wd=%E8%B4%A2%E5%8A%A1%E4%BC%9A%E8%AE%A1%E5%88%B6%E5%BA%A6&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao" target="https://nkzbb.nankai.edu.cn/_blank">
+			<span style="color:black;text-underline:none">财务会计制度</span>
+		</a>
+	</span>
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">；&nbsp; &nbsp;</span>
+</p>
+<p style="text-indent:28px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">（三）具有履行合同所必需的设备和专业技术能力；&nbsp; &nbsp;</span>
+</p>
+<p style="text-indent:28px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">（四）有依法缴纳税收和</span>
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:#156356;">
+		<a href="https://www.baidu.com/s?wd=%E7%A4%BE%E4%BC%9A%E4%BF%9D%E9%9A%9C%E8%B5%84%E9%87%91&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao" target="https://nkzbb.nankai.edu.cn/_blank">
+			<span style="color:black;text-underline:none">社会保障资金</span>
+		</a>
+	</span>
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">的良好记录；&nbsp; &nbsp;</span>
+</p>
+<p style="text-indent:28px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">（五）参加政府采购活动前三年内，在经营活动中没有重大违法记录；&nbsp; &nbsp;</span>
+</p>
+<p style="text-indent:28px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">（六）法律、行政法规规定的其他条件。&nbsp; &nbsp;</span>
+</p>
+<p style="text-indent:37px;line-height:31px">
+	<strong>
+		<span style="font-size:19px;font-family: 仿宋_GB2312;color:black">二、相关要求</span>
+	</strong>
+</p>
+<p style="text-indent:37px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">1.</span>
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">提供真实准确的注册信息，并对信息的合法性、真实性、有效性负责。</span>
+</p>
+<p style="text-indent:37px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">2.</span>
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">信息发生变更的，须及时更新。</span>
+</p>
+<p style="text-indent:37px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">3.</span>
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">保管好账号密码，并对以该帐号进行的所有活动和事件负责。</span>
+</p>
+<p style="text-indent:37px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;letter-spacing:-0">4.</span>
+	<span style="font-size:19px;font-family:仿宋_GB2312;letter-spacing:-0">遵守国家和学校有关采购招标的法律法规和相关规定</span>
+	<span style="font-size: 19px;font-family:仿宋_GB2312;color:black;">。</span>
+</p>
+<p style="text-indent:28px;line-height:31px">
+	<strong>
+		<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">三、其它声明</span>
+	</strong>
+</p>
+<p style="text-indent:28px;line-height:31px">
+	<span style="font-size:19px;font-family:仿宋_GB2312;color:black;">学校有权将违反法律法规和相关规定的供应商纳入不良行为记录，并在相关网站进行公示。</span>
+</p>
+<p>
+	<br />
+</p></div>
+                    <div class="btm-panel" style="margin: 15px;">
+                        <input type="button" id="btAgree" name="btAgree" class="btn" value="同意(10s)" />
+                            <input type="button" id="btClose" name="btClose"  class="btn " value="拒绝" />
+                    </div>
+                </div>
+                <!-- 注册开始 -->
+                <div id="szyhm" style="display: none;">
+                    <div id="zclx_div">
+                        <script type="text/javascript">
+$(document).ready(function(){
+    $("input[name='zclx']").change(function(){
+        var zclx =$("input[name='zclx']:checked").val()
+        xzzclx(zclx);    
+    
+    });
+    var zcsbdca = -1;
+     $.formValidator.initConfig({formID:"dataForm",theme:'zc',onError:function(msg){$("#btSave").prop("disabled",false);alert(msg);},inIframe:true});
+     if(zcsbdca == 1){
+         $("#dlh").formValidator({onShow:"",onFocus:"",onCorrect:""}).inputValidator({min:18,max:18,onError:""}).ajaxValidator({
+             dataType : "json",
+             async : true,
+             type: "post",
+             url : "/jc/hyzc/checkDlh.htm",
+             success : function(data){
+                 if(data.status == 1) return true;
+                 if(data.status == 2) return "已被加入黑名单，禁止登录";
+                 return "统一社会信用代码已被注册，请点击<a class='link startt' href='/home/login.htm?dlh="+$("#dlh").val()+"'>直接登录</a>！";
+             },
+             buttons: $("#btSave"),
+             error: function(jqXHR, textStatus, errorThrown){
+                 alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);
+             },
+             onError : "该统一社会信用代码不可用，请更换",
+             onWait : "正在对统一社会信用代码进行校验，请稍候..."
+         });
+         $("#dwmc").formValidator({onShow:"",onFocus:"",onCorrect:""}).inputValidator({min:1,max:500,onError:""}).ajaxValidator({
+             cache: false,
+             dataType:"json",
+             async : true,
+             timeout:5000,
+             type: "post",
+             url : "/jc/gyszc/checkDwmc.htm",
+             success : function(data){
+                 var dwmc =$("#dwmc").val();
+                 var  txt= /[\(\)]/g;
+                 if(txt.test(dwmc)){
+                     return "公司名称中的括号请填写中文括号!";
+                 }
+                 if(data.status == 1) return true;
+                 if(data.status == 2) return "已被加入黑名单，禁止登录";
+                 if(data.status == 3) return data.fbsm;
+                 if(data.status == 4) return "该公司名已被注册，登录号为：<span class='hot'>"+data.dlh+"</span>，请确认";
+                 return "该公司名已被注册，请确认";
+             },
+             buttons: $("#btSave"),
+             error: function(jqXHR, textStatus, errorThrown){
+                 alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);
+             },
+             onError : "该公司名不可用，请更换公司名",
+             onWait : "正在对公司名进行校验，请稍候..."
+         });
+     }else{
+         $("#dlh").formValidator({onShow:"请输入统一社会信用代码",onFocus:"请输入统一社会信用代码",onCorrect:""}).inputValidator({min:18,max:18,onError:"您输入的统一社会信用代码不合要求，请确认"}).ajaxValidator({
+             dataType : "json",
+             async : true,
+             type: "post",
+             url : "/jc/hyzc/checkDlh.htm",
+             success : function(data){
+                 if(data.status == 1) return true;
+                 if(data.status == 2) return "已被加入黑名单，禁止登录";
+                 return "统一社会信用代码已被注册，请点击<a class='link startt' href='/home/login.htm?dlh="+$("#dlh").val()+"'>直接登录</a>！";
+             },
+             buttons: $("#btSave"),
+             error: function(jqXHR, textStatus, errorThrown){
+                 alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);
+             },
+             onError : "该统一社会信用代码不可用，请更换",
+             onWait : "正在对统一社会信用代码进行校验，请稍候..."
+         });
+         $("#dwmc").formValidator({onShow:"请填写工商局注册的公司名全称",onFocus:"请填写工商局注册的公司名全称",onCorrect:""}).inputValidator({min:1,max:500,onError:"您输入的公司名称长度不合要求,请确认"}).ajaxValidator({
+             cache: false,
+             dataType:"json",
+             async : true,
+             timeout:5000,
+             type: "post",
+             url : "/jc/gyszc/checkDwmc.htm",
+             success : function(data){
+                 var dwmc =$("#dwmc").val();
+                 var  txt= /[\(\)]/g;
+                 if(txt.test(dwmc)){
+                     return "公司名称中的括号请填写中文括号!";
+                 }
+                 if(data.status == 1) return true;
+                 if(data.status == 2) return "已被加入黑名单，禁止登录";
+                 if(data.status == 3) return data.fbsm;
+                 if(data.status == 4) return "该公司名已被注册，登录号为：<span class='hot'>"+data.dlh+"</span>，请确认";
+                 return "该公司名已被注册，请确认";
+             },
+             buttons: $("#btSave"),
+             error: function(jqXHR, textStatus, errorThrown){
+                 alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);
+             },
+             onError : "该公司名不可用，请更换公司名",
+             onWait : "正在对公司名进行校验，请稍候..."
+         });
+     }
+     
+         $("#password").formValidator({onShow:"8-20位字符，建议由字母、数字和符号两种以上组合",onFocus:"8-20位字符，建议由字母、数字和符号两种以上组合",onCorrect:""}).inputValidator({min:8,max:20,onError:"你输入的密码长度不合要求,请确认"});
+     
+     $("#pwd").formValidator({onShow:"请再次输入密码",onFocus:"请再次输入密码",onCorrect:""}).inputValidator({min:1,max:20,onError:"确认密码不能为空,请确认"}).compareValidator({desID:"password",operateor:"=",onError:"2次密码不一致,请确认"});
+     $("#yzm").formValidator({onShow:"请输入验证码",onFocus:"请输入验证码",onCorrect:""}).inputValidator({min:1,max:5,onError:"验证码不能为空"}).ajaxValidator({
+         dataType : "json",
+         async : true,
+         type: "post",
+         data:$('#dataForm').serialize(),
+         url : "/jc/hyzc/yzmyz.htm",
+         success : function(data){
+             if(data.status==1) return true;
+             return "验证码输入错误";
+         },
+         buttons: $("#btSave"),
+         error: function(jqXHR, textStatus, errorThrown){
+             alert("服务器没有返回数据，可能服务器忙，请重试"+errorThrown);
+         },
+         onError : "验证码输入错误",
+         onWait : "正在对验证码进行校验，请稍候..."
+     });
+     $("#dwdz").formValidator({onShow:"请输入公司地址",onFocus:"请输入公司地址",onCorrect:""}).inputValidator({min:1,max:100,onError:"公司地址不能为空,请确认"});
+     $("#lxr").formValidator({onShow:"2-20位字符，可由中文或英文组成",onFocus:"2-20位字符，可由中文或英文组成",onCorrect:""}).inputValidator({min:2,max:20,onError:"联系人姓名长度不合要求,请确认"});
+     $("#lxdh").formValidator({onShow:"请输入您的手机号码",onFocus:"请输入您的手机号码",onCorrect:""}).regexValidator({regExp:"^\\d{11}$",onError:"手机号码格式有误，请输入正确的手机号"});
+     $("#btSave").click(function(){                    
+         $("#dlh").prop("disabled", false);
+         $("#dwmc").prop("disabled", false);
+         
+         var bool = false;//定义变量，是否直接返回
+         
+         if (bool) {
+             //验证失败直接返回
+             return;
+         }
+         
+                 var encrypt = new JSEncrypt();
+                 var publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlzvfDCYv8ro0I7XRSdRtNq1/2krpYFBgP3EsUMC9Bqxch29hoQAKBnNa4paMaKgwIDQ8r8Egh8wu7A27Gy9zchPb9lgX1eX3X+eLroxi16oOQs4EImd7TicwiCpnr7SOZ8bAAyYHN+so4tRwPz2kFWrXCabVAjknJ59Y6bJr91wIDAQAB";
+                 if(publicKey==""){
+                     alert("加密密码，公钥不能为空！");
+                     return;
+                 }
+                 encrypt.setPublicKey(publicKey);
+                 var pwd = encrypt.encrypt($("#pwd").val());
+                 $("#jmpwd").val(pwd);
+             
+         var varAction = "/jc/hyzc/saveGys.htm" ;
+         $(this).prop("disabled",true);
+         $("#dataForm").attr("action",varAction).attr("target","_self").submit() ;
+     });
+     
+     initMsgTip();
+     $("#bsendMobileCode").click(function(){
+        var ipdxcs = $("#ipdxcs").val();
+        var fscsxz = 3;
+        if("1" == "1"){
+            fscsxz = "3";
+        }
+        var jybz = 1;
+        if(ipdxcs >= fscsxz){
+            $("#fsdxyzmkz").show();
+            var fsdxyzm= $("#fsdxyzm").val();
+            if(fsdxyzm == "" || fsdxyzm == null){
+                alert("发送短信验证码不能为空");
+                return false;
+            }
+            $.ajax({
+                dataType : "json",
+                async : false,
+                type: "post",
+                data:$('#dataForm').serialize(),
+                url : "/jc/hyzc/dxYzmyz.htm",
+                success : function(data){
+                    if(data.status==1) {
+                        return true;
+                    } else {
+                        alert("发送短信验证码输入错误");
+                        initMsgTip();
+                        jybz = 0;
+                    }
+                },
+                error: function(request) {
+                    alert("网络异常");
+                    initMsgTip();
+                    jybz = 0;
+                }
+            });
+        }
+        if(jybz == 1){
+            exeOfVali();
+        }
+     });
+     // 密码显示和隐藏
+     $('#passEye').on('click', function() {
+         var input = $('#password');
+         if (input.attr('type') === 'password') {
+             input.attr('type', 'text'); // 显示密码
+             $(this).removeClass('layui-icon-eye-invisible').addClass('layui-icon-eye'); // 切换图标为隐藏图标
+         } else {
+             input.attr('type', 'password'); // 隐藏密码
+             $(this).removeClass('layui-icon-eye').addClass('layui-icon-eye-invisible'); // 切换图标为显示图标
+         }
+     });
+     // 确认密码显示和隐藏
+     $('#pwdEye').on('click', function() {
+         var input = $('#pwd');
+         if (input.attr('type') === 'password') {
+             input.attr('type', 'text'); // 显示密码
+             $(this).removeClass('layui-icon-eye-invisible').addClass('layui-icon-eye'); // 切换图标为隐藏图标
+         } else {
+             input.attr('type', 'password'); // 隐藏密码
+             $(this).removeClass('layui-icon-eye').addClass('layui-icon-eye-invisible'); // 切换图标为显示图标
+         }
+     });
+});
+//切换注册类型
+function xzzclx(zclx){
+    var varAction = "/jc/hyzc/xzzclx.htm";
+    $.ajax({
+        type: "post",
+        url: varAction,
+        cache: false,
+        data:{'zclx':zclx},
+        async: false,
+        dataType:"html",
+        error: function(request) {
+            alert("网络异常");
+        },
+        success: function(data){
+           $("#zclx_div").html(data);
+           refreshVerify();
+        }
+    });
+}
+function onCompleteRet(pdata){
+    var data = $.base64.decode(pdata,true);
+    data = $.parseJSON(data);
+    if(data.status==1){
+        
+        readBusinessLicense(data.wjid)
+    } else {
+        alert(data.msg);
+    }
+}
+function readBusinessLicense(wjid){
+    $("#wjid").val(wjid);
+    $.ajax({
+        type: "post",
+        url: "/jc/hyzc/readBusinessLicense.htm",
+        cache: true,
+        data: $('#dataForm').serialize(),
+        async : false,//验证短信验证码，设为同步
+        timeout:5000,
+        dataType:"json",
+        error: function(request) {
+            alert("网络异常");
+            bool = true;
+        },
+        success: function(data){
+            if(data.status==1){
+                var map = data.map;
+                var dwmc = map['dwmc'];
+                var dlh = map['nsrsbh'];
+                
+                    var dz = map['dz'];
+                    $("#dwdz").val(dz);
+                    $("#dwdz").blur();
+                
+                $("#dwmc").val(dwmc);
+                $("#dlh").val(dlh);
+                $("#dlh").blur();
+                $("#dwmc").blur();
+                
+            }
+        }
+    });
+}
+</script>
+<input type="hidden" id="wjid" name="wjid" value="">
+<div class="item">
+    <span class="label"><span class="hot">*</span>统一社会信用代码：</span> 
+    <div class="fl item-ifo">
+        <div class="o-intelligent-regName">
+            <input id="dlh" name="dlh" class="text" type="text"  onkeyup="upperCase(this.id)"/> 
+                <i class="i-name"></i>
+        </div>
+        <div id="dlhTip" class="tip"></div>
+    </div>
+</div>
+<div class="item" style="margin:0;">
+    <span class="label">&nbsp;</span> 
+    <span class="label"></span> 
+    <div class="fl item-ifo">
+        <div class="o-intelligent-regName">
+        <span style="color:#da9501;" class="tip1">统一社会信用代码为您的登录账号</span>
+        </div>
+    </div>
+</div>
+<div class="item">
+    <span class="label"><span class="hot">*</span>公司名称：</span> 
+    <div class="fl item-ifo">
+        <div class="o-intelligent-regName">
+            <input id="dwmc" name="dwmc" class="text" type="text"/> 
+                </div>
+        <div id="dwmcTip" class="tip"></div>
+    </div>
+    <span class="label" id="checkdwmc" style="padding-left: 50px;text-align: left;"></span>
+</div>
+<div class="item">
+    <span class="label"><span class="hot">*</span>密码：</span> 
+    <div class="fl item-ifo">
+        <div class="o-intelligent-regName">
+            <input type="hidden" id="jmpassword" name="password" value="">
+            <input id="password" class="text" type="password" autoComplete="off" /> 
+            <i class="layui-icon layui-icon-eye-invisible" id="passEye"></i>
+        </div>
+        <div id="passwordTip" class="tip"></div>
+    </div>
+    <span class="label" id="checkpassword" style="padding-left: 50px;text-align: left;""></span>
+</div>
+<div class="item">
+    <span class="label"><span class="hot">*</span>确认密码：</span> 
+    <div class="fl item-ifo">
+        <div class="o-intelligent-regName">
+            <input type="hidden" id="jmpwd" name="pwd" value="">
+            <input id="pwd" class="text" type="password" autoComplete="off" /> 
+            <i class="layui-icon layui-icon-eye-invisible" id="pwdEye"></i>
+        </div>
+        <div id="pwdTip" class="tip"></div>
+    </div>
+    <span class="label" id="checkpwd" style="padding-left: 50px;text-align: left;"></span>
+</div>
+<div class="item">
+        <span class="label"><span class="hot">*</span>公司地址：</span> 
+        <div class="fl item-ifo">
+            <div class="o-intelligent-regName">
+                <input id="dwdz" name="dwdz" class="text" type="text" /> 
+            </div>
+            <div id="dwdzTip" class="tip"></div>
+        </div>
+        <span class="label" id="checkdwdz" style="padding-left: 50px;text-align: left;"></span>
+    </div>
+<div class="item">
+    <span class="label"><span class="hot">*</span>联系人姓名：</span> 
+    <div class="fl item-ifo">
+        <div class="o-intelligent-regName">
+            <input id="lxr" name="lxr" class="text" type="text" /> 
+        </div>
+        <div id="lxrTip" class="tip"></div>
+    </div>
+    <span class="label" id="checklxr" style="padding-left: 50px;text-align: left;"></span>
+</div>
+
+<div class="item">
+    <span class="label"><span class="hot">*</span>验证手机：</span> 
+    <div class="fl item-ifo">
+        <div class="o-intelligent-regName">
+            <input id="lxdh" name="lxdh" class="text" type="text" /> 
+        </div>
+        <div id="lxdhTip" class="tip"></div>
+    </div>
+    <span class="label" id="checklxdh" style="padding-left: 50px;text-align: left;"></span>
+</div>
+<div class="item">
+    <span class="label"><span class="hot">*</span>验证码：</span>
+    <div class="fl item-ifo">
+        <div class="o-intelligent-regName">
+            <input id="yzm" name="yzm" class="text" type="text"/>
+            <i class="i-pass"></i>
+        </div>
+        <div class="yzm" style="float:left;">
+            <img id="imgVerify" style="margin-top: 3px;margin-left: 2px;"  onclick="refreshVerify()" alt="验证码" class="hand" src="data:image/jpg;base64,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" />
+        </div>
+        <div id="yzmTip" class="tip" style="float:left;"></div>
+    </div>
+    
+</div>
+<div class="item">
+    <span class="label">&nbsp;&nbsp;&nbsp;</span> 
+    <div class="fl item-ifo">
+        <div class="o-intelligent-regName">
+            <input type="button" id="btSave" name="btSave"  class="register-btn" value="立即注册"/>
+        </div>
+    </div>
+    </div></div>
+                 
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

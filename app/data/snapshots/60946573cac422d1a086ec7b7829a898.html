@@ -1,0 +1,643 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+	<head>
+	<title>审计处</title>
+	
+<link type="text/css" href="/_css/_system/system.css" rel="stylesheet"/>
+<link type="text/css" href="/_upload/site/1/style/6/6.css" rel="stylesheet"/>
+<link type="text/css" href="/_upload/site/00/e3/227/style/204/204.css" rel="stylesheet"/>
+<link type="text/css" href="/_js/_portletPlugs/sudyNavi/css/sudyNav.css" rel="stylesheet" />
+<link type="text/css" href="/_js/_portletPlugs/simpleNews/css/simplenews.css" rel="stylesheet" />
+
+<script language="javascript" src="/_js/sudy-jquery-autoload.js" jquery-src="/_js/jquery-1.9.1.min.js" sudy-wp-context="" sudy-wp-siteId="227"></script>
+<script language="javascript" src="/_js/jquery-migrate.min.js"></script>
+<script language="javascript" src="/_js/jquery.sudy.wp.visitcount.js"></script>
+<script type="text/javascript" src="/_js/_portletPlugs/sudyNavi/jquery.sudyNav.js"></script>
+<link href="/_upload/tpl/01/be/446/template446/htmlRes/1/nankai_logo.ico" rel="shortcut icon">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link type="text/css" href="/_upload/tpl/01/be/446/template446/htmlRes/bjqs.css" rel="stylesheet">
+	<link type="text/css" href="/_upload/tpl/01/be/446/template446/htmlRes/demo.css" rel="stylesheet">
+	<link type="text/css" href="/_upload/tpl/01/be/446/template446/htmlRes/bootstrap.css" rel="stylesheet">
+	<link type="text/css" href="/_upload/tpl/01/be/446/template446/htmlRes/base.css" rel="stylesheet">
+	<link type="text/css" href="/_upload/tpl/01/be/446/template446/style.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="/_upload/tpl/01/be/446/template446/htmlRes/bootstrap.js"></script>
+	<script type="text/javascript" src="/_upload/tpl/01/be/446/template446/htmlRes/bjqs-1.3.js"></script>
+	<style type="text/css">
+.table tbody tr td {
+	border-top: none;
+}
+.tooltip.right .tooltip-arrow {
+	border-right-color: #337ab7;
+}
+.tooltip-inner {
+	background-color: #337ab7;
+}
+.height400 {
+	min-height: 400px;
+}
+.height350 {
+	min-height: 350px;
+}
+.text-center {
+	text-align: center;
+}
+.padding10 {
+	padding-bottom: 10px;
+}
+.clock {
+	font: bold 12px Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #bbbbbb;
+}
+/* clock */
+.clock {
+	width: 240px;
+	margin: 0 auto;
+	padding-top: 20px;
+	padding-bottom: 10px;
+	color:#7f006b;
+}
+.clock #Date {
+	font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	text-align: center;
+	text-shadow: 0 0 5px #fffff;
+}
+.clock ul {
+	width: 240px;
+	margin: 0 auto;
+	padding: 0px;
+	list-style: none;
+	text-align: center;
+}
+.clock ul li {
+	display: inline;
+	font-size: 16px;
+	text-align: center;
+	font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
+	text-shadow: 0 0 5px #ffffff;
+}
+#point {
+	position: relative;
+	-moz-animation: mymove 1s ease infinite;
+	-webkit-animation: mymove 1s ease infinite;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+ @-webkit-keyframes mymove {
+ 0% {
+opacity:1.0;
+text-shadow:0 0 20px #00c6ff;
+}
+ 50% {
+opacity:0;
+text-shadow:none;
+}
+ 100% {
+opacity:1.0;
+text-shadow:0 0 20px #00c6ff;
+}
+}
+ @-moz-keyframes mymove {
+ 0% {
+opacity:1.0;
+text-shadow:0 0 20px #00c6ff;
+}
+ 50% {
+opacity:0;
+text-shadow:none;
+}
+ 100% {
+opacity:1.0;
+text-shadow:0 0 20px #00c6ff;
+}
+}
+</style>
+	<script type="text/javascript">
+		$(function(){
+			/* $("#department ul li").mouseover(function(){
+				$(this).addClass("active").css("color","#ffffff");
+			});
+			$("#department ul li").mouseout(function(){
+				$(this).removeClass("active").css("color","#337ab7");
+			}); */
+			//幻灯
+			$("#banner-fade").bjqs({
+			    animtype      : "slide",
+			    height        : 220,
+			    width         : 293,
+			    responsive    : true,
+			    //randomstart   : true
+			});
+			//为了美观去掉左右导航
+			$(".bjqs-controls").hide();
+			//为长标题加省略号
+			$("#menu li").click(function(){
+				$(this).addClass("active");
+				$(this).siblings().removeClass("active");
+			});
+			$("#news tr td a").each(function(){
+				if($(this).text().length>20){
+					$(this).html($(this).html().substring(0,20)+"...");
+				}
+			});
+			$("#notice tr td a").each(function(){
+				if($(this).text().length>30){
+					$(this).html($(this).html().substring(0,30)+"...");
+				}
+			});
+			$("#cwfg li a").each(function(){
+				if($(this).text().length>10){
+					$(this).html($(this).html().substring(0,10)+"...");
+				}
+			});
+			$("#gcfg li a").each(function(){
+				if($(this).text().length>10){
+					$(this).html($(this).html().substring(0,10)+"...");
+				}
+			});
+			$("[data-toggle='tooltip']").tooltip({
+				animation:true,
+				placement:"right",
+				html:true,
+				container:"body"
+			});
+			
+			// 创建两个变量，一个数组中的月和日的名称
+			var monthNames = [ "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月" ]; 
+			var dayNames= ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"]
+		
+			// 创建一个对象newDate（）
+			var newDate = new Date();
+			// 提取当前的日期从日期对象
+			newDate.setDate(newDate.getDate());
+			//输出的日子，日期，月和年
+			$('#Date').html(newDate.getFullYear() + "年 " + monthNames[newDate.getMonth()] + ' ' + newDate.getDate() + "日 " + dayNames[newDate.getDay()]);
+		
+			setInterval( function() {
+				// 创建一个对象，并提取newDate（）在访问者的当前时间的秒
+				var seconds = new Date().getSeconds();
+				//添加前导零秒值
+				$("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+			},1000);
+			
+			setInterval( function() {
+				// 创建一个对象，并提取newDate（）在访问者的当前时间的分钟
+				var minutes = new Date().getMinutes();
+				// 添加前导零的分钟值
+				$("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
+		    },1000);
+	
+			setInterval( function() {
+				// 创建一个对象，并提取newDate（）在访问者的当前时间的小时
+				var hours = new Date().getHours();
+				// 添加前导零的小时值
+				$("#hours").html(( hours < 10 ? "0" : "" ) + hours);
+		    }, 1000);
+		});
+		function view_news(id){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showNews.action?id="+id);
+		}
+		function view_notice(id){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showNotice.action?id="+id);
+		}
+		function view_law(id){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showAuditLaw.action?id="+id);
+		}
+		function department(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showDepartmentAbstract.action");
+		}
+		function institution(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showInstitution.action");
+		}
+		function staff(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showStaff.action");
+		}
+		function contact_way(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showContactWay.action");
+		}
+		function project_audit(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showAuditGuid.action?subIndex=1");
+		}
+		function budget(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showAuditGuid.action?subIndex=2");
+		}
+		function balance(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showAuditGuid.action?subIndex=3");
+		}
+		function responsibility(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showAuditGuid.action?subIndex=4");
+		}
+		function special_funds(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showAuditGuid.action?subIndex=5");
+		}
+		function survey(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showAuditGuid.action?subIndex=6");
+		}
+		function research_funds(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showAuditGuid.action?subIndex=7");
+			
+		}
+		function research_signed(){
+			window.open("http://sjc.nankai.edu.cn:80/nkdxsjc/showAuditGuid.action?subIndex=8");
+		}
+	</script>
+	</head>
+	<body>
+<div class="container main_box" style="margin-bottom:5px;"> <img id="home_title" src="/_upload/tpl/01/be/446/template446/htmlRes/home_title.png">
+      <div frag="窗口1"> 
+    
+    <ul id="menu" class="nav nav-pills nav-bg" style="margin-bottom:5px;">
+          
+          <li> <a class="dropdown-toggle 2 i1" data-toggle="dropdown" href="http://sjc.nankai.edu.cn/main.htm"><span class="glyphicon glyphicon-home"></span>&nbsp;首页<span class="caret"></span></a> 
+         
+      </li>
+          
+          <li> <a class="dropdown-toggle 2 i2" data-toggle="dropdown" href="/13223/list.htm"><span class="glyphicon glyphicon-list"></span>&nbsp;最新动态<span class="caret"></span></a> 
+         
+      </li>
+          
+          <li> <a class="dropdown-toggle 2 i3" data-toggle="dropdown" href="javascript:void(0);"><span class="glyphicon glyphicon-th-large"></span>&nbsp;部门机构<span class="caret"></span></a> 
+        
+        <ul class="dropdown-menu">
+              
+              <li><a href="/13231/list.htm" target="_blank"><span class="glyphicon glyphicon-tags"></span>&nbsp;部门介绍</a> 
+             
+          </li>
+              
+              <li><a href="/13232/list.htm" target="_blank"><span class="glyphicon glyphicon-align-justify"></span>&nbsp;内设机构</a> 
+             
+          </li>
+              
+              <li><a href="/13233/list.htm" target="_blank"><span class="glyphicon glyphicon-user"></span>&nbsp;工作人员</a> 
+             
+          </li>
+              
+              <li><a href="/13234/list.htm" target="_blank"><span class="glyphicon glyphicon-phone-alt"></span>&nbsp;联系方式</a> 
+             
+          </li>
+              
+            </ul>
+         
+      </li>
+          
+          <li> <a class="dropdown-toggle 2 i4" data-toggle="dropdown" href="/13225/list.htm"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;通知公告<span class="caret"></span></a> 
+         
+      </li>
+          
+          <li> <a class="dropdown-toggle 2 i5" data-toggle="dropdown" href="/13226/list.htm"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;审计法规<span class="caret"></span></a> 
+        
+        <ul class="dropdown-menu">
+              
+              <li><a href="/13235/list.htm" target="_blank"><span class="glyphicon glyphicon-tag"></span>&nbsp;上级政策规定</a> 
+             
+          </li>
+              
+              <li><a href="/13236/list.htm" target="_blank"><span class="glyphicon glyphicon-tag"></span>&nbsp;学校制度规定</a> 
+             
+          </li>
+              
+            </ul>
+         
+      </li>
+          
+          <li> <a class="dropdown-toggle 2 i6" data-toggle="dropdown" href="/13227/list.htm"><span class="glyphicon glyphicon-hand-right"></span>&nbsp;服务指南<span class="caret"></span></a> 
+        
+        <ul class="dropdown-menu">
+              
+              <li><a href="/13237/list.htm" target="_blank"><span class="glyphicon glyphicon-wrench"></span>&nbsp;工程审计</a> 
+             
+          </li>
+              
+              <li><a href="/13238/list.htm" target="_blank"><span class="glyphicon glyphicon-pushpin"></span>&nbsp;预算执行</a> 
+             
+          </li>
+              
+              <li><a href="/13239/list.htm" target="_blank"><span class="glyphicon glyphicon-yen"></span>&nbsp;财务收支</a> 
+             
+          </li>
+              
+              <li><a href="/13240/list.htm" target="_blank"><span class="glyphicon glyphicon-alert"></span>&nbsp;经济责任</a> 
+             
+          </li>
+              
+              <li><a href="/13241/list.htm" target="_blank"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;专项资金</a> 
+             
+          </li>
+              
+              <li><a href="/13242/list.htm" target="_blank"><span class="glyphicon glyphicon-phone-alt"></span>&nbsp;审计调查</a> 
+             
+          </li>
+              
+              <li><a href="/13243/list.htm" target="_blank"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;科研经费</a> 
+             
+          </li>
+              
+              <li><a href="/13244/list.htm" target="_blank"><span class="glyphicon glyphicon-pencil"></span>&nbsp;科研审签</a> 
+             
+          </li>
+              
+            </ul>
+         
+      </li>
+          
+          <li> <a class="dropdown-toggle 2 i7" data-toggle="dropdown" href="/13228/list.htm"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;下载专区<span class="caret"></span></a> 
+         
+      </li>
+          
+          <li> <a class="dropdown-toggle 2 i8" data-toggle="dropdown" href="/13229/list.htm"><span class="glyphicon glyphicon-link"></span>&nbsp;友情链接<span class="caret"></span></a> 
+         
+      </li>
+          
+          <li> <a class="dropdown-toggle 2 i9" data-toggle="dropdown" href="http://sjc.nankai.edu.cn/nkdxsjc/index.action"><span class="glyphicon glyphicon-edit"></span>&nbsp;报审系统<span class="caret"></span></a> 
+         
+      </li>
+          
+         <!-- <li class="pull-right"><a href="http://sjc.nankai.edu.cn:80/nkdxsjc/tologin.action"><span class="glyphicon glyphicon-lock"></span>&nbsp;登录</a></li> -->
+        </ul>
+     
+  </div>
+      <div class="row">
+    <div class="col-md-9">
+          <div class="panel panel-primary">
+        <div class="panel-heading"> <span class="glyphicon glyphicon-th-list"></span>&nbsp;<strong>最新动态</strong><span class="pull-right">&nbsp;<span class="label label-info">More</span><a href ="http://sjc.nankai.edu.cn/13223/list.htm" target="_blank" style="color:#FFFFFF">&nbsp;&gt;&gt;</a></span> </div>
+        <div class="panel-body" style="padding:8px 0px;">
+              <div class="col-md-5" frag="窗口2"><div id="wp_news_w2"> 
+            <div id="banner-fade">
+                  <ul class="bjqs">
+                
+                <li><img src="/_upload/article/images/64/f4/d872e5d34535b93acfad20984599/4a34ba66-f80a-41b5-adae-8afb0d45b6d5.jpg"></li>
+                
+                <li><img src="/_upload/article/images/ce/c3/a190413944009b5eef1fe4b8acc5/67da6674-197e-4684-8578-eb4d730b9633.jpg"></li>
+                
+                <li><img src="/_upload/article/images/b2/77/dcb8f9124711a1a9ee1ca17c1904/5c1ad1fc-130c-4973-8010-7b46cb0ab777.jpg"></li>
+                
+                <li><img src="/_upload/article/images/27/83/0991287a4040bb6aa8b570ad8c0b/fd05f718-b07c-4d35-aa79-47d96c0ec413.jpg"></li>
+                
+                <li><img src="/_upload/article/images/16/3a/87f62dc74b1c826b8846762f6c9f/482b8ae3-586b-4bd7-a1b2-98d38d63b684.jpg"></li>
+                
+              </ul>
+                </div>
+          </div> 
+</div>
+              <div class="col-md-7"frag="窗口3">
+				<div class="tt clearfix">
+					<h3 class="tit"><span class="title" frag="标题">最新动态</span> </h3>
+					<div class="more_btn" frag="按钮" type="更多"> <a href="/13223/list.htm" class="w3_more"><span class="more_text" frag="按钮内容">MORE+</span></a> </div>
+				</div>
+				<div id="wp_news_w3"> 
+
+            <table id="news" class="table table-striped">
+                  
+                  <tr>
+                <td><a href="https://www.gov.cn/yaowen/liebiao/202501/content_6997893.htm" data-toggle="tooltip" title="习近平对审计工作作出重要指示强调 聚...">习近平对审计工作作出重要指示强调 聚...</a></td>
+                <td style="text-align:right;color:#444444"> 2025-01-11 </td>
+                <td style="text-align:right;"></td>
+              </tr>
+                  
+                  <tr>
+                <td><a href="https://www.audit.gov.cn/n5/n26/c10423410/content.html" data-toggle="tooltip" title="国务院关于2023年度中央预算执行和其他...">国务院关于2023年度中央预算执行和其他...</a></td>
+                <td style="text-align:right;color:#444444"> 2024-07-05 </td>
+                <td style="text-align:right;"></td>
+              </tr>
+                  
+                  <tr>
+                <td><a href="https://www.audit.gov.cn/n5/n25/c10423754/content.html" data-toggle="tooltip" title="审计署2024年第1号公告：中央部门单位2...">审计署2024年第1号公告：中央部门单位2...</a></td>
+                <td style="text-align:right;color:#444444"> 2024-07-05 </td>
+                <td style="text-align:right;"></td>
+              </tr>
+                  
+                  <tr>
+                <td><a href="/2024/0112/c13223a535272/page.htm" data-toggle="tooltip" title="全国审计工作会议在北京召开">全国审计工作会议在北京召开</a></td>
+                <td style="text-align:right;color:#444444"> 2024-01-12 </td>
+                <td style="text-align:right;"></td>
+              </tr>
+                  
+                  <tr>
+                <td><a href="https://content-static.cctvnews.cctv.com/snow-book/video.html?item_id=3877280804782867668&t=1704942965731&toc_style_id=video_default&share_to=wechat&track_id=cbb11db1-10f0-46c9-8abf-89c539ba78ce" data-toggle="tooltip" title="审计署部署2024年审计工作重点">审计署部署2024年审计工作重点</a></td>
+                <td style="text-align:right;color:#444444"> 2024-01-12 </td>
+                <td style="text-align:right;"></td>
+              </tr>
+                  
+                </table>
+				</div> 
+
+          </div>
+            </div>
+      </div>
+        </div>
+    <div class="col-md-3">
+          <div class="clock text-center">
+        <div id="Date"></div>
+        <ul>
+              <li id="hours"> </li>
+              <li id="point">:</li>
+              <li id="min"> </li>
+              <li id="point">:</li>
+              <li id="sec"> </li>
+            </ul>
+      </div>
+          <a href="https://sjdsj.nankai.edu.cn/ais/login/loginView.jsp" target="_blank"><img alt="审计大数据应用平台" src="/_upload/tpl/01/be/446/template446/htmlRes/entrance.png" class="padding10 img-responsive center-block"/></a> <a href="https://jssj.nankai.edu.cn" target="_blank"><img alt="建设工程竣工结算审计管理系统" src="/_upload/tpl/01/be/446/template446/htmlRes/fluid.png" class="padding10 img-responsive center-block"/></a> <a href="https://gcqgcsj.nankai.edu.cn/main.action" target="_blank"><img alt="建设工程全过程审计信息化平台" src="/_upload/tpl/01/be/446/template446/htmlRes/333.png" class="padding10 img-responsive center-block"/></a> </div>
+  </div>
+      <div class="row">
+    <div class="col-md-6">
+          <div class="panel panel-primary height350">
+        <div class="panel-heading"> <span class="glyphicon glyphicon-bullhorn"></span>&nbsp;<strong>通知公告</strong><span class="pull-right">&nbsp;<span class="label label-info">More</span><a href ="http://sjc.nankai.edu.cn/13225/list.htm" target="_blank" style="color:#FFFFFF">&nbsp;&gt;&gt;</a></span> </div>
+        <div class="panel-body" frag="窗口4">
+			<div class="tt clearfix">
+				<h3 class="tit"><span class="title" frag="标题">通知公告</span> </h3>
+				<div class="more_btn" frag="按钮" type="更多"> <a href="/13225/list.htm" class="w4_more"><span class="more_text" frag="按钮内容">MORE+</span></a> </div>
+			</div>
+			<div id="wp_news_w4"> 
+              <table id="notice" class="table  table-striped">
+            
+            <tr>
+                  <td><a href ="/2025/0407/c13225a566253/page.htm" data-toggle="tooltip" title="建设项目竣工结算审计管理系统资料填报指南 " class="tooltip-info">建设项目竣工结算审计管理系统资料填报指南 </a></td>
+                  <td style="text-align:right;color:#444444"> 2025-04-07 </td>
+                  <td style="text-align:right;"></td>
+                </tr>
+            
+            <tr>
+                  <td><a href ="/2022/1013/c13225a485429/page.htm" data-toggle="tooltip" title="工程竣工结算审计服务指南" class="tooltip-info">工程竣工结算审计服务指南</a></td>
+                  <td style="text-align:right;color:#444444"> 2022-10-13 </td>
+                  <td style="text-align:right;"></td>
+                </tr>
+            
+            <tr>
+                  <td><a href ="http://xb.nankai.edu.cn/upload/20191219160748/%E5%8D%97%E5%8F%91%E5%AD%97%E3%80%942019%E3%80%95162%E5%8F%B7%E5%85%B3%E4%BA%8E%E6%89%A9%E5%B1%95%E7%BB%8F%E6%B5%8E%E8%B4%A3%E4%BB%BB%E5%AE%A1%E8%AE%A1%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%80%9A%E7%9F%A5.pdf" data-toggle="tooltip" title="关于扩展经济责任审计对象的通知" class="tooltip-info">关于扩展经济责任审计对象的通知</a></td>
+                  <td style="text-align:right;color:#444444"> 2019-12-27 </td>
+                  <td style="text-align:right;"></td>
+                </tr>
+            
+            <tr>
+                  <td><a href ="/2016/1123/c13225a147569/page.htm" data-toggle="tooltip" title="南开大学关于开展内部控制基础性评价工作的通知" class="tooltip-info">南开大学关于开展内部控制基础性评价工作的通知</a></td>
+                  <td style="text-align:right;color:#444444"> 2016-11-23 </td>
+                  <td style="text-align:right;"></td>
+                </tr>
+            
+          </table>
+		</div> 
+
+              <br/>
+            </div>
+      </div>
+        </div>
+    <div class="col-md-6">
+          <div class="panel panel-primary height350">
+        <div class="panel-heading"> <span class="glyphicon glyphicon-folder-open"></span>&nbsp;<strong>法规政策</strong> </div>
+        <div class="panel-body">
+              <div class="col-md-6" style="border:1px dotted #ddd;" frag="窗口5">
+				<div class="tt clearfix">
+					<h3 class="tit"><span class="title" frag="标题">上级政策规定</span> </h3>
+					<div class="more_btn" frag="按钮" type="更多"> <a href="/13235/list.htm" class="w5_more"><span class="more_text" frag="按钮内容">MORE+</span></a> </div>
+				</div>
+				<div id="wp_news_w5"> 
+
+            <ul id="cwfg" class="list-group" >
+                  
+                  <li class="list-group-item"> <a href="/2025/0418/c13235a567256/page.htm" data-toggle="tooltip" title="中华人民共和国审计法...">中华人民共和国审计法...</a> </li>
+                  
+                  <li class="list-group-item"> <a href="/2023/0428/c13235a510728/page.htm" data-toggle="tooltip" title="审计署关于内部审计工...">审计署关于内部审计工...</a> </li>
+                  
+                  <li class="list-group-item"> <a href="/2016/1123/c13235a147600/page.htm" data-toggle="tooltip" title="教育部办公厅关于印发...">教育部办公厅关于印发...</a> </li>
+                  
+                  <li class="list-group-item"> <a href="/2015/0422/c13235a147598/page.htm" data-toggle="tooltip" title="国务院关于加强审计工...">国务院关于加强审计工...</a> </li>
+                  
+                  <li class="list-group-item"> <a href="/2015/0422/c13235a147597/page.htm" data-toggle="tooltip" title="关于印发《党政主要领...">关于印发《党政主要领...</a> </li>
+                  
+                </ul>
+			</div> 
+
+          </div>
+              <div class="col-md-6" style="border:1px dotted #ddd;" frag="窗口6">
+				<div class="tt clearfix">
+					<h3 class="tit"><span class="title" frag="标题">学校制度规定</span> </h3>
+					<div class="more_btn" frag="按钮" type="更多"> <a href="/13236/list.htm" class="w6_more"><span class="more_text" frag="按钮内容">MORE+</span></a> </div>
+				</div>
+				<div id="wp_news_w6"> 
+
+            <ul id="gcfg" class="list-group" >
+                  
+                  <li class="list-group-item"> <a href="/2025/0418/c13236a567268/page.htm" data-toggle="tooltip" title="南开大学审计发现问题...">南开大学审计发现问题...</a> </li>
+                  
+                  <li class="list-group-item"> <a href="/2024/0423/c13236a540818/page.htm" data-toggle="tooltip" title="南开大学中层领导人员...">南开大学中层领导人员...</a> </li>
+                  
+                  <li class="list-group-item"> <a href="/2024/0423/c13236a540817/page.htm" data-toggle="tooltip" title="南开大学中层领导人员...">南开大学中层领导人员...</a> </li>
+                  
+                  <li class="list-group-item"> <a href="/2024/0423/c13236a540814/page.htm" data-toggle="tooltip" title="南开大学建设工程竣工...">南开大学建设工程竣工...</a> </li>
+                  
+                  <li class="list-group-item"> <a href="/2024/0423/c13236a540813/page.htm" data-toggle="tooltip" title="南开大学建设工程全过...">南开大学建设工程全过...</a> </li>
+                  
+                </ul>
+			</div> 
+
+          </div>
+            </div>
+      </div>
+        </div>
+  </div>
+      <div class="row">
+    <div class="col-md-3">
+          <div class="panel panel-primary height400">
+        <div class="panel-heading"> <span class="glyphicon glyphicon-hand-right"></span>&nbsp;<strong>服务指南</strong><span class="pull-right">&nbsp;<span class="label label-info">More</span><a href="http://sjc.nankai.edu.cn/13227/list.htm" target="_blank" style="color:#FFFFFF">&nbsp;&gt;&gt;</a></span> </div>
+        <div id="help" class="panel-body" frag="窗口7">
+              <ul class="list-group">
+            
+            <li class="list-group-item yt"><a href="/13237/list.htm"><span class="glyphicon glyphicon-wrench"></span>&nbsp;工程审计</a></li>
+            
+            <li class="list-group-item yt"><a href="/13238/list.htm"><span class="glyphicon glyphicon-pushpin"></span>&nbsp;预算执行</a></li>
+            
+            <li class="list-group-item yt"><a href="/13239/list.htm"><span class="glyphicon glyphicon-yen"></span>&nbsp;财务收支</a></li>
+            
+            <li class="list-group-item yt"><a href="/13240/list.htm"><span class="glyphicon glyphicon-alert"></span>&nbsp;经济责任</a></li>
+            
+            <li class="list-group-item yt"><a href="/13241/list.htm"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;专项资金</a></li>
+            
+            <li class="list-group-item yt"><a href="/13242/list.htm"><span class="glyphicon glyphicon-phone-alt"></span>&nbsp;审计调查</a></li>
+            
+            <li class="list-group-item yt"><a href="/13243/list.htm"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;科研经费</a></li>
+            
+            <li class="list-group-item yt"><a href="/13244/list.htm"><span class="glyphicon glyphicon-pencil"></span>&nbsp;科研审签</a></li>
+            
+          </ul>
+            </div>
+      </div>
+        </div>
+    <div class="col-md-6">
+          <div class="panel panel-primary height400">
+        <div class="panel-heading"> <span class="glyphicon glyphicon-download-alt"></span>&nbsp;<strong>下载专区</strong><span class="pull-right">&nbsp;<span class="label label-info">More</span><a href="http://sjc.nankai.edu.cn/13228/list.htm" target="_blank" style="color:#FFFFFF">&nbsp;&gt;&gt;</a></span> </div>
+        <div class="panel-body">
+              <ul class="list-group" frag="窗口8"><div id="wp_news_w8"> 
+
+            
+            <li class="list-group-item"><a href="/2023/1214/c13228a531748/page.htm"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;招标工程未发生增减变化的说明（样表）</a> </li>
+            
+            <li class="list-group-item"><a href="/_upload/article/files/25/bb/2aea44f34e21814561b407f46aee/25458486-1a66-45e3-9e75-f5721bd0d3de.xls"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;施工内容及工程量确认表（样表）</a> </li>
+            
+            <li class="list-group-item"><a href="/_upload/article/files/6b/b3/f26e73bd476d8da4f98d5b04863c/cb44ff40-5dce-4d5d-a148-e4f33d26164e.docx"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;《内部控制报告表格》填写说明（详细版）</a> </li>
+            
+            <li class="list-group-item"><a href="/_upload/article/files/ef/9b/d998215e478f989acbad6d675643/02fed1d7-d8cb-48b2-91e9-e31d2d7ccce1.docx"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;《内部控制报告表格》填表说明</a> </li>
+            
+            <li class="list-group-item"><a href="/_upload/article/files/d6/1b/37996d7e467083495ab313fd201f/e0b8e003-8cd4-4015-8a16-adb915837868.xls"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;内部控制报告表格</a> </li>
+            
+            <li class="list-group-item"><a href="/_upload/article/files/19/37/d8d42b8e47b68c4a8dfe00066235/ce63e63f-f100-405e-ab2c-e5f0b2015729.zip"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;教育部办公厅关于向审计署提供电子数据的通知</a> </li>
+            
+            <li class="list-group-item"><a href="/_upload/article/files/62/83/3e0723554e2f8d02effb0918faa4/45f734b1-d730-4c66-9760-7722531f7753.doc"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;《教育部所属高校2018年度相关审计情况表》填表说明0105</a> </li>
+            
+            <li class="list-group-item"><a href="/_upload/article/files/15/ce/268436b544adb464072c60389503/78f4a985-a314-46ec-bb93-0917f668bc2a.xlsx"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;设备招标 2017 2018统计表</a> </li>
+            
+          </div> 
+</ul>
+            </div>
+      </div>
+        </div>
+    <div class="col-md-3">
+          <div class="panel panel-primary height400">
+        <div class="panel-heading"> <span class="glyphicon glyphicon-link"></span>&nbsp;<strong>友情链接</strong><span class="pull-right">&nbsp;<span class="label label-info">More</span><a href ="http://sjc.nankai.edu.cn/13229/list.htm" target="_blank" style="color:#FFFFFF">&nbsp;&gt;&gt;</a></span> </div>
+        <div class="panel-body">
+              <ul class="list-group" frag="窗口10"><div id="wp_news_w10"> 
+
+            
+            <li class="list-group-item"><a href="http://www.moe.gov.cn/" target="_blank">中华人民共和国教育部</a></li>
+            
+            <li class="list-group-item"><a href="https://www.audit.gov.cn/" target="_blank">中华人民共和国审计署</a></li>
+            
+            <li class="list-group-item"><a href="http://www.ciia.com.cn/index.html" target="_blank">中国审计学会</a></li>
+            
+            <li class="list-group-item"><a href="http://www.ciia.com.cn/index.html" target="_blank">中国内部审计协会</a></li>
+            
+            <li class="list-group-item"><a href="https://jysj.cee.edu.cn/" target="_blank">中国教育经济信息网</a></li>
+            
+            <li class="list-group-item"><a href="http://tjuaudit.tju.edu.cn/" target="_blank">天津大学审计处</a></li>
+            
+          </div> 
+</ul>
+            </div>
+      </div>
+        </div>
+  </div>
+    </div>
+<div class="bottom">
+      <p id="copyright"> 南开大学审计处版权所有 Copyright@2010-2015. All Rights Reserved </p>
+      <p id="address"> 地址：天津市卫津路94号 [300071] </p>
+    </div>
+</body>
+<script>
+  $(function(){
+	 $(".nav-bg > li").each(function(){
+		 var ts = $(this);
+		 if(ts.find(".dropdown-menu").length > 0){ 
+			 }else{
+				 ts.find(".caret").remove();
+				 ts.find(".dropdown-toggle").removeAttr("data-toggle");
+				 }
+		 })
+	  });
+</script>
+</html>
+
+ <img src="/_visitcount?siteId=227&type=1&columnId=12623" style="display:none" width="0" height="0"/>

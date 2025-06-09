@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>登录</title>
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/Site.css" rel="stylesheet" type="text/css" />
+    
+
+    
+    
+    
+</head>
+<body >
+    <header>
+        <nav class="navbar navbar-default navbar-nk">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/" style="display:none">
+                        <img alt="办公楼场地预定系统" src="/Content/images/logo.gif">
+                    </a>
+                    <h3><a href="/">办公楼场地预定系统</a></h3>
+                </div>
+                <nav id="navbar-search" class="navbar-search">
+                    <ul class="nav navbar navbar-right hidden">
+                        <li><a href="/User/Logout">退出</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </header>
+        
+
+
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default login-panel">
+            <div class="panel-heading">
+                登录系统
+            </div>
+            <div class="panel-body">
+            <div class="row">
+                
+
+            </div>
+<form action="/User/Login" class="form-horizontal" method="post"><input name="__RequestVerificationToken" type="hidden" value="eRiaJqfwW2ydTPUisgjB8QyBH35r1Ct7mwj6d9VrvJ5saYoljQBo7iP7WL5i-JQ8ELOTCMythE0Q_DoH_oJ9InHytDdEixy7MKilg3ZB_hg1" />                        <div class="form-group">
+                            <input name="username" type="text" class="form-control required" placeholder="请输入用户名" title="请输入用户名或工资号" />
+                        </div>
+                        <div class="form-group">
+                            <input name="password" type="password" class="form-control required" placeholder="请输入密码" title="请输入密码" />
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input name="code" type="text" class="form-control required" placeholder="请输入验证码" title="请输入验证码" />
+                                <label class="input-group-addon login-code"><img src="/Code.ashx" title="验证码" /> </label>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <button class="btn btn-success btn-block">登 录</button>
+                            </div>
+                            <div class="col-xs-6" style="display:none">
+
+
+                                <button class="btn btn-info btn-block" type="button" id="urp">Urp登录</button>
+                            </div>
+                        </div>
+</form>           
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer></footer>
+    <script type="text/javascript" src="/Scripts/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("body>.container:eq(0)").css("min-height",$(document).innerHeight()-$("header").outerHeight()-$("footer").outerHeight()-50);
+        })
+    </script>
+    
+    <script type="text/javascript" src="/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#urp").on("click", function () {
+                window.location.href='http://urp.nankai.edu.cn'
+            })
+            $(".login-panel").css("margin-top", $(".login-panel").parents("div.container").height() / 3 - 100);
+            $("form").validate({
+                errorClass: "error text-danger",
+                errorPlacement: function (error, element) { //指定错误信息位置
+                    element.parents("div.form-group:eq(0)").append(error);
+
+                    element.parents(".form-group").addClass("has-error");
+                },
+                success: function (label) {
+                    // set &nbsp; as text for IE
+                    label.parents(".form-group").removeClass("has-error");
+                    label.remove();
+                    //label.addClass("valid").text("Ok!")
+                }
+            });
+        })
+    </script>
+    
+  
+</body>
+</html>

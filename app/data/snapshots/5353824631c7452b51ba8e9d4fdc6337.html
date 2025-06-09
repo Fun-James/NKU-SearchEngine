@@ -1,0 +1,772 @@
+
+
+
+
+
+  
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+	<meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+	<meta http-equiv="Content-Security-Policy" content="object-src 'self'">
+<title>在线南开网上办事大厅</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" href="/nk_portal/favicon.ico" type="image/x-icon" />
+ <!-- about_hall -->
+<script type="text/javascript" src="/nk_portal/resources/js/jquery.min.js?version=0e7852ff-1ccb-4efb-a35c-01aad6bfdff7"></script>
+ 
+<script type="text/javascript" src="/nk_portal/resources/nku/js/tab.js?version=0e7852ff-1ccb-4efb-a35c-01aad6bfdff7"></script>
+<link href="/nk_portal/resources/nku/css/door.css?version=0e7852ff-1ccb-4efb-a35c-01aad6bfdff7" rel="stylesheet" type="text/css">
+ <!-- guide -->
+
+
+
+<link href="/nk_portal/resources/nku/Font-Awesome-3.2.1/css/font-awesome.min.css?version=0e7852ff-1ccb-4efb-a35c-01aad6bfdff7" rel="stylesheet" type="text/css">
+ <!-- index -->
+
+ <!-- service -->
+
+<script type="text/javascript" src="/nk_portal/resources/nku/js/jquery.featureList-1.0.0.js?version=0e7852ff-1ccb-4efb-a35c-01aad6bfdff7"></script>
+<script type="text/javascript" src="/nk_portal/resources/pagination/jquery.pagination.js?version=0e7852ff-1ccb-4efb-a35c-01aad6bfdff7"></script>
+<link href="/nk_portal/resources/pagination/pagination.css?version=0e7852ff-1ccb-4efb-a35c-01aad6bfdff7" rel="stylesheet" type="text/css" />
+
+
+
+
+<script>
+	var pageCurrent = 1 ;
+	var pageSize = 20;
+	var object = '';
+	var type = '';
+	var organize = '';
+	var keyword = '';
+	var open_type = '';
+	var open_org = '';
+	$(function() {
+       if("" == object){
+       	 $("#object_0").addClass("click"); 
+       }else{
+       	 $("#object_"+object).addClass("click"); //添加选中样式
+       }
+       
+       if("" == type){
+       	 $("#type_0").addClass("click"); //添加选中样式
+       }else{
+       	 $("#type_"+type).addClass("click");
+       }
+       
+       if("" == organize){
+       	 $("#organize_0").addClass("click"); //添加选中样式
+       }else{
+       	 $("#organize_"+organize).addClass("click");
+       }
+       if("1" == open_type){
+    	   var divEle= document.getElementById('j_more_close_type');
+           divEle.className='open_ul';//改变样式
+       }else{
+    	   var divEle= document.getElementById('j_more_close_type');
+           divEle.className='close_ul';//改变样式
+       }
+       if("1" == open_org){
+    	   var divEle= document.getElementById('j_more_close_org');
+       	   divEle.className='open_ul';//改变样式
+       }else{
+    	   var divEle= document.getElementById('j_more_close_org');
+       	   divEle.className='close_ul';//改变样式
+       }
+       object_function(); //服务对象
+       type_function();   //服务类别
+       org_function();    //服务部门
+       
+      /* var manage_url = "";
+   	   $("#manage_urls").attr("href",manage_url);*/
+      
+});
+
+//部门更多
+function changeclassorg(){
+   var divEle= document.getElementById('j_more_close_org');
+   if(divEle.className != 'open_ul'){
+	  divEle.className='open_ul';
+	  open_org = "1";
+   }else{
+	  divEle.className='close_ul';
+	  open_org = "0";
+   } 
+}
+
+//类别更多
+function changeclasstype(){
+ 	var divEle= document.getElementById('j_more_close_type');
+    if(divEle.className != 'open_ul'){
+    	divEle.className='open_ul';
+    	open_type = "1";
+    }else{
+	    divEle.className='close_ul';
+	    open_type = "0";
+    }  
+}
+
+//服务对象
+function object_function (){
+	 $(".service_class").click(function() {
+		$(this).siblings('li').removeClass('click');  // 删除其他兄弟元素的样式
+	    $(this).addClass('click');                    // 添加当前元素的样式  
+	    
+     	var object_id = $(this).attr("id");
+       	var object_ids = object_id.split("_"); 
+       	object_tag = object_ids[1];
+     	
+     	$('.type_class').each(function(){
+     		var type_class = $(this).attr("class");
+     		if(type_class == "type_class click"){
+     			var type_id = $(this).attr("id"); 
+     			var type_ids = type_id.split("_");
+     			type_tag = type_ids[1];
+     		}
+     	});
+
+     	$('.organize_class').each(function(){
+     		var org_class = $(this).attr("class");
+     		if(org_class == "organize_class click"){
+     			var org_id = $(this).attr("id");
+     			var org_tags = org_id.split("_");
+     			org_tag = org_tags[1];
+     		}
+     	});
+     	
+     	object = object_tag; 
+    	type = type_tag; 
+    	organize = org_tag;
+    	var newUrl = "/nk_portal/service?object="+object+"&type="+type+"&organize="+organize+"&keyword="+keyword+"&pageCurrent="+pageCurrent+"&pageSize="+pageSize+"&open_type="+open_type+"&open_org="+open_org;
+    	window.location.href = newUrl;
+    	//地址栏添加链接
+     	var stateObject = {};
+     	var title = "";
+     	history.pushState(stateObject,title,newUrl);
+     	
+	 });	
+ }
+ 
+//服务类别
+function type_function (){
+	 $(".type_class").click(function() {
+    	$(this).siblings('li').removeClass('click');  // 删除其他兄弟元素的样式
+        $(this).addClass('click');                    // 添加当前元素的样式
+    	var type_id = $(this).attr("id");
+      	var type_ids = type_id.split("_");
+      	type_tag = type_ids[1];
+    	$('.service_class').each(function(){
+    		var object_class = $(this).attr("class");
+    		if(object_class == "service_class click"){
+    			var object_id = $(this).attr("id");
+    			var object_ids = object_id.split("_");
+    			object_tag = object_ids[1];
+    		}
+    	});
+    	$('.organize_class').each(function(){
+    		var org_class = $(this).attr("class");
+    		if(org_class == "organize_class click"){
+    			var org_id = $(this).attr("id");
+    			var org_tags = org_id.split("_");
+    			org_tag = org_tags[1];
+    		}
+    	});
+    	object = object_tag; 
+    	type = type_tag; 
+    	organize = org_tag;
+     	
+     	var newUrl = "/nk_portal/service?object="+object+"&type="+type+"&organize="+organize+"&keyword="+keyword+"&pageCurrent="+pageCurrent+"&pageSize="+pageSize+"&open_type="+open_type+"&open_org="+open_org;
+     	window.location.href = newUrl;
+
+      	//地址栏添加链接
+     	var stateObject = {};
+     	var title = "";
+     	history.pushState(stateObject,title,newUrl);
+	 });	
+}
+ 
+//服务部门
+function org_function (){
+	 $(".organize_class").click(function() {
+    	$(this).siblings('li').removeClass('click');  // 删除其他兄弟元素的样式
+        $(this).addClass('click');                    // 添加当前元素的样式
+        var org_id = $(this).attr("id");
+		var org_tags = org_id.split("_");
+		org_tag = org_tags[1];
+    	
+    	$('.service_class').each(function(){
+    		var object_class = $(this).attr("class");
+    		if(object_class == "service_class click"){
+    			var object_id = $(this).attr("id");
+    			var object_ids = object_id.split("_");
+    			object_tag = object_ids[1];
+    		}
+    	});
+    	
+    	$('.type_class').each(function(){
+     		var type_class = $(this).attr("class");
+     		if(type_class == "type_class click"){
+     			var type_id = $(this).attr("id");
+     			var type_ids = type_id.split("_");
+     			type_tag = type_ids[1];
+     		}
+     	});
+    	
+    	object = object_tag; 
+    	type = type_tag; 
+    	organize = org_tag;
+     	
+     	var newUrl = "/nk_portal/service?object="+object+"&type="+type+"&organize="+organize+"&keyword="+keyword+"&pageCurrent="+pageCurrent+"&pageSize="+pageSize+"&open_type="+open_type+"&open_org="+open_org;
+     	window.location.href = newUrl;
+     	
+      	//地址栏添加链接
+      	var stateObject = {};
+     	var title = "";
+     	history.pushState(stateObject,title,newUrl); 
+	 });	
+} 
+
+</script>
+<script type="text/javascript">
+function getServiceUrl(){
+	$.ajax({
+		type:"post",
+		url:"/nk_portal/getUrl",
+		async: false,
+		success:function (data) {
+			$("#service_url").attr("href",data.nextToken);
+		}
+	});
+}
+
+
+function jump(str){
+	if('pre'== str){
+		pageCurrent--;
+		var newUrl = "/nk_portal/service?object="+object+"&type="+type+"&organize="+organize+"&keyword="+keyword+"&pageCurrent="+pageCurrent+"&pageSize="+pageSize;
+     	window.location.href = newUrl;
+	}
+	
+	if('next'== str){
+		pageCurrent++;
+		var newUrl = "/nk_portal/service?object="+object+"&type="+type+"&organize="+organize+"&keyword="+keyword+"&pageCurrent="+pageCurrent+"&pageSize="+pageSize;
+     	window.location.href = newUrl;
+	}
+}
+</script>
+</head>
+<body>
+	<div id="wrap">
+    	
+
+
+
+
+  
+
+
+
+<script type="text/javascript" src="/nk_portal/resources/nku/js/jquery.featureList-1.0.0.js?version=0e7852ff-1ccb-4efb-a35c-01aad6bfdff7"></script>
+
+<script type="text/javascript" src="/nk_portal/resources/nku/js/jquery.placeholder.js?version=0e7852ff-1ccb-4efb-a35c-01aad6bfdff7"></script>
+  <script>  
+     $(function(){  
+        /*  $('input[placeholder]').placeholder();   */
+    	 $("#keyword").placeholder();
+        
+        
+     });  
+</script>  
+ 
+
+<link href="/nk_portal/resources/nku/css/door.css?version=0e7852ff-1ccb-4efb-a35c-01aad6bfdff7" rel="stylesheet" type="text/css">
+<link href="/nk_portal/resources/nku/css/news.css?version=0e7852ff-1ccb-4efb-a35c-01aad6bfdff7" rel="stylesheet" type="text/css">
+
+<!--header-->
+		<div style="width:100%; background:#fff;">
+    	<div id="header">
+        	<a href="http://online.nankai.edu.cn/" target="_target">
+       			<img src="/nk_portal/resources/nku/images/logo.jpg" alt="" class="logo">
+            	<h1 class="header_title">在线南开网上办事大厅</h1>
+            </a>
+            <form action="service" class="search">
+            	<input type="text" name="keyword" id="keyword" value="" placeholder="请输入您想找的服务" class="text" >
+            	<input type="submit" class="btn" value="      ">
+            </form>
+            <p class="user"><a href="http://online.nankai.edu.cn/taskcenter/" target="_blank">用户登录</a></p>
+            <p class="school"><a href="http://www.nankai.edu.cn/" target="_blank">学校主页</a></p>
+        </div>
+        </div>
+        <!--//header-->
+
+     
+        <div id="service_content">
+        <div class="item_menu">
+        		<div style="width:1180px; margin:0 auto;">
+            	<ul style="width:75%; float:left;">
+                	<li ><a href="/nk_portal/index">首页</a></li>
+                    <li class="click"><a href="/nk_portal/service?object=0&type=0&organize=0&keyword=">服务中心</a></li>
+                    <li><a href="http://online.nankai.edu.cn/taskcenter/" target="_blank">个人中心</a></li>                 
+                </ul>
+                <ul style=" font-size: 12px;/*position: relative;right: 0;*/float: right; text-align:right;/*position: absolute;right: 0;*/width: 25%;">
+                	
+                	<li><a href="/nk_portal/about_hall">关于大厅</a></li>
+                  <!--   <li><a href="http://online.nankai.edu.cn/file/853070bb-8a92-4b2f-8333-17f49148314c" target="_blank">新手指南</a></li> -->
+                </ul>
+                </div>
+            </div>
+            <div class="item_list nav">
+            	<table class="item_list_center">
+                    <tr>
+                		<td>
+                        	<div class="tit">服务对象&nbsp;:</div>
+                        	<input type="hidden" id="service1"/>  
+		                    <input type="hidden" id="service2"/>  
+		                    <input type="hidden" id="service3"/>  
+                        </td>
+                		<td>
+                        	<ul class="object"> 
+                        		<li id="object_0" class="service_class"><a href="#">全部</a></li> 
+                        		
+                       				<li id="object_1" class="service_class">
+                       					<a href="javascript:void(0)">学生</a>
+                       				</li>
+                        		
+                       				<li id="object_2" class="service_class">
+                       					<a href="javascript:void(0)">教工</a>
+                       				</li>
+                        		
+                       				<li id="object_3" class="service_class">
+                       					<a href="javascript:void(0)">游客</a>
+                       				</li>
+                        		
+                    		</ul>
+                    	</td>
+                    </tr>
+                    <tr>
+                		<td style="display: block;">
+                        	<div class="tit">服务类别&nbsp;:</div>
+                        </td>
+                		<td>
+                    		<ul class="close_ul"  id="j_more_close_type"> 
+                        		<li id="type_0" class="type_class"><a href="#">全部</a></li>
+                        		
+                        			<li id="type_1" class="type_class">
+                        				<a href="javascript:void(0)" >学工管理</a>
+                        			</li>
+                        		
+                        			<li id="type_10" class="type_class">
+                        				<a href="javascript:void(0)" >教学教务</a>
+                        			</li>
+                        		
+                        			<li id="type_11" class="type_class">
+                        				<a href="javascript:void(0)" >科研服务</a>
+                        			</li>
+                        		
+                        			<li id="type_12" class="type_class">
+                        				<a href="javascript:void(0)" >组织人事</a>
+                        			</li>
+                        		
+                        			<li id="type_13" class="type_class">
+                        				<a href="javascript:void(0)" >医保服务</a>
+                        			</li>
+                        		
+                        			<li id="type_14" class="type_class">
+                        				<a href="javascript:void(0)" >资助服务</a>
+                        			</li>
+                        		
+                        			<li id="type_15" class="type_class">
+                        				<a href="javascript:void(0)" >综合服务</a>
+                        			</li>
+                        		
+                        			<li id="type_2" class="type_class">
+                        				<a href="javascript:void(0)" >财务服务</a>
+                        			</li>
+                        		
+                        			<li id="type_3" class="type_class">
+                        				<a href="javascript:void(0)" >出国出境</a>
+                        			</li>
+                        		
+                        			<li id="type_4" class="type_class">
+                        				<a href="javascript:void(0)" >房屋服务</a>
+                        			</li>
+                        		
+                        			<li id="type_5" class="type_class">
+                        				<a href="javascript:void(0)" >宿舍服务</a>
+                        			</li>
+                        		
+                        			<li id="type_6" class="type_class">
+                        				<a href="javascript:void(0)" >后勤服务</a>
+                        			</li>
+                        		
+                        			<li id="type_7" class="type_class">
+                        				<a href="javascript:void(0)" >户籍服务</a>
+                        			</li>
+                        		
+                        			<li id="type_8" class="type_class">
+                        				<a href="javascript:void(0)" >网络服务</a>
+                        			</li>
+                        		
+                        			<li id="type_9" class="type_class">
+                        				<a href="javascript:void(0)" >卫计服务</a>
+                        			</li>
+                        		
+                    		</ul>
+                    		<div class="j_search_more"><a onclick='changeclasstype()' >更多∨</a></div> 
+                    	</td>
+                    </tr>
+					<tr>
+                		<td style="display: block;">
+                        	<div class="tit">服务部门&nbsp;:</div>
+                        </td>
+                		<td>
+                        	<ul class="close_ul"  id="j_more_close_org"> 
+                        		<li id="organize_0" class="organize_class"><a href="#">全部</a></li>
+                        		
+                        			<li id="organize_10" class="organize_class">
+                        				<a href="javascript:void(0)" >学校办公室</a>
+                        			</li>
+                        		
+                        			<li id="organize_1" class="organize_class">
+                        				<a href="javascript:void(0)" >团委</a>
+                        			</li>
+                        		
+                        			<li id="organize_11" class="organize_class">
+                        				<a href="javascript:void(0)" >学生工作部</a>
+                        			</li>
+                        		
+                        			<li id="organize_12" class="organize_class">
+                        				<a href="javascript:void(0)" >研究生工作部</a>
+                        			</li>
+                        		
+                        			<li id="organize_13" class="organize_class">
+                        				<a href="javascript:void(0)" >研究生院</a>
+                        			</li>
+                        		
+                        			<li id="organize_14" class="organize_class">
+                        				<a href="javascript:void(0)" >党委网信办</a>
+                        			</li>
+                        		
+                        			<li id="organize_4B5FE88E-B215-48F5-8947-415D087694D0" class="organize_class">
+                        				<a href="javascript:void(0)" >党委宣传部</a>
+                        			</li>
+                        		
+                        			<li id="organize_2" class="organize_class">
+                        				<a href="javascript:void(0)" >人事处</a>
+                        			</li>
+                        		
+                        			<li id="organize_3" class="organize_class">
+                        				<a href="javascript:void(0)" >教务处</a>
+                        			</li>
+                        		
+                        			<li id="organize_4" class="organize_class">
+                        				<a href="javascript:void(0)" >国际学术交流处</a>
+                        			</li>
+                        		
+                        			<li id="organize_5" class="organize_class">
+                        				<a href="javascript:void(0)" >财务处</a>
+                        			</li>
+                        		
+                        			<li id="organize_6" class="organize_class">
+                        				<a href="javascript:void(0)" >发展委员会办公室</a>
+                        			</li>
+                        		
+                        			<li id="organize_7" class="organize_class">
+                        				<a href="javascript:void(0)" >校友工作办公室</a>
+                        			</li>
+                        		
+                        			<li id="organize_8" class="organize_class">
+                        				<a href="javascript:void(0)" >后勤保障部</a>
+                        			</li>
+                        		
+                        			<li id="organize_9" class="organize_class">
+                        				<a href="javascript:void(0)" >房产管理处</a>
+                        			</li>
+                        		
+                    		</ul>
+                            <div class="j_search_more"><a onclick='changeclassorg()' >更多∨</a></div> 
+                    	</td>
+                    </tr>	
+                </table>
+            </div>
+            
+             <div style=" width:100%; padding-top:20px; padding-bottom:10px; min-height:100%;">
+            <div class="service_nav">
+            <div id="service">
+           		  
+           		  	
+           		    
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=D0E74A30-9BD1-40AA-AFFE-ADDD2968E50C">
+		            			<div class="nav_box new_bg">
+			                		<img src="https://online.nankai.edu.cn/file/ce0289e8-634c-48f7-a4d9-cc985e703816" alt="" class="nav_img">
+			                    	<h2 class="nav_title">人事档案查阅申请</h2>
+			                    	<p class="tag">人事处</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+           		    
+     			
+           		  	
+           		    
+           		    
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=F49CC682-AD63-4CC0-B623-3EDBA47E9B4E">
+		            			<div class="nav_box">
+			                		<img src="https://online.nankai.edu.cn/file/6b804b5d-5a8e-4a4a-bae7-08ad7e4cbb2e" alt="" class="nav_img">
+			                    	<h2 class="nav_title">部门、学院合同执行</h2>
+			                    	<p class="tag">后勤保障部</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+     			
+           		  	
+           		    
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=57ED065B-EA3B-4C8C-AF5A-2911226AF251">
+		            			<div class="nav_box new_bg">
+			                		<img src="https://online.nankai.edu.cn/file/f83694c1-c8c9-4d0b-a64f-9619eece4e1d" alt="" class="nav_img">
+			                    	<h2 class="nav_title">发票遗失公示申请</h2>
+			                    	<p class="tag">财务处</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+           		    
+     			
+           		  	
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=F5D23109-B517-4853-95CD-8DDB0DC452CF">
+		            			<div class="nav_box hot_bg">
+			                		<img src="https://online.nankai.edu.cn/file/24dcf354-661a-4394-a56b-0609c0440cc7" alt="" class="nav_img">
+			                    	<h2 class="nav_title">在职证明申请，因私出国（境）...</h2>
+			                    	<p class="tag">人事处</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+           		    
+           		    
+     			
+           		  	
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=13A6ADC2-4555-4B62-B7C8-B54C7D9F26B4">
+		            			<div class="nav_box jian_bg">
+			                		<img src="https://online.nankai.edu.cn/file/38badb9b-f768-4966-8679-9621f2f5af07" alt="" class="nav_img">
+			                    	<h2 class="nav_title">学生长期出国项目申请</h2>
+			                    	<p class="tag">国际学术交流处</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+           		    
+           		    
+           		    
+     			
+           		  	
+           		    
+           		    
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=E2AA7569-9B51-4BC4-98FA-8B306A139EC7">
+		            			<div class="nav_box">
+			                		<img src="https://online.nankai.edu.cn/file/4896d057-7af2-440f-8b78-9249ce30ab30" alt="" class="nav_img">
+			                    	<h2 class="nav_title">工程管理[工程实施]</h2>
+			                    	<p class="tag">后勤保障部</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+     			
+           		  	
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=2D62A318-C777-4D65-A406-23FD09FDEBC8">
+		            			<div class="nav_box jian_bg">
+			                		<img src="https://online.nankai.edu.cn/file/75dcb650-0374-45e5-ae1c-dda73b97963a" alt="" class="nav_img">
+			                    	<h2 class="nav_title">工程管理[工程发起]</h2>
+			                    	<p class="tag">后勤保障部</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+           		    
+           		    
+           		    
+     			
+           		  	
+           		    
+           		    
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=033B4C0B-7E0F-4E9F-BCCB-110FAD227754">
+		            			<div class="nav_box">
+			                		<img src="https://online.nankai.edu.cn/file/c7a86743-35d2-4623-8c0b-cf45939cd7a0" alt="" class="nav_img">
+			                    	<h2 class="nav_title">工程管理[财务结算]</h2>
+			                    	<p class="tag">后勤保障部</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+     			
+           		  	
+           		    
+           		    
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=412D32F7-5427-424C-979B-4FB28D206E1A">
+		            			<div class="nav_box">
+			                		<img src="https://online.nankai.edu.cn/file/c827963d-1852-42a8-bc05-9ca7d67f4cea" alt="" class="nav_img">
+			                    	<h2 class="nav_title">后勤保障部工作事项会商记录</h2>
+			                    	<p class="tag">后勤保障部</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+     			
+           		  	
+           		    
+           		    
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=7B25722C-1AE4-449D-9471-407E3C7BD790">
+		            			<div class="nav_box">
+			                		<img src="https://online.nankai.edu.cn/file/e5b54094-723a-43fa-83f0-b39906fba21e" alt="" class="nav_img">
+			                    	<h2 class="nav_title">工程管理[合同会签]</h2>
+			                    	<p class="tag">后勤保障部</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+     			
+           		  	
+           		    
+           		    
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=3C4C4C3C-3025-4F33-8F3B-A59A25998569">
+		            			<div class="nav_box">
+			                		<img src="https://online.nankai.edu.cn/file/c382e390-12d8-48bc-9f33-b2650cf31ea6" alt="" class="nav_img">
+			                    	<h2 class="nav_title">工程管理[工程报审]</h2>
+			                    	<p class="tag">后勤保障部</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+     			
+           		  	
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=45353F32-2E99-4917-A35C-BDE614BEE578">
+		            			<div class="nav_box hot_bg">
+			                		<img src="https://online.nankai.edu.cn/file/a7564644-675c-4039-9785-e06c9066e4c5" alt="" class="nav_img">
+			                    	<h2 class="nav_title">公共数据服务平台数据使用申请...</h2>
+			                    	<p class="tag">党委网信办</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+           		    
+           		    
+     			
+           		  	
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=6DCC1D78-7F3D-477B-9FBA-3ECF228658CD">
+		            			<div class="nav_box hot_bg">
+			                		<img src="https://online.nankai.edu.cn/file/7bc4d7db-2797-4fcb-8b2a-5f924f8b3959" alt="" class="nav_img">
+			                    	<h2 class="nav_title">学生出国（境）申请</h2>
+			                    	<p class="tag">国际学术交流处</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+           		    
+           		    
+     			
+           		  	
+           		    
+           		    
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=5F5F89B2-B794-4B3F-A793-5EF94BDAC877">
+		            			<div class="nav_box">
+			                		<img src="https://online.nankai.edu.cn/file/74149154-637b-439e-8b31-ac897ac688ce" alt="" class="nav_img">
+			                    	<h2 class="nav_title">本科生海外学习奖学金推荐</h2>
+			                    	<p class="tag">国际学术交流处</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+     			
+           		  	
+           		    
+	           		  	
+		           		  	 <a href="/nk_portal/guide?id=DFD38318-EEA7-4871-98C6-23BB3B74F1F1">
+		            			<div class="nav_box hot_bg">
+			                		<img src="https://online.nankai.edu.cn/file/11c422e9-2935-4ee3-80e7-b6605cb39621" alt="" class="nav_img">
+			                    	<h2 class="nav_title">学生短期出国项目申请</h2>
+			                    	<p class="tag">国际学术交流处</p>
+			       	         	</div>
+	             			</a>
+	           		  	
+	           		  	
+           		  	
+           		    
+           		    
+     			
+            </div>
+            </div>
+            </div>
+            
+            <div style="clear:both;"></div>
+           
+ 			<div style="clear:both;"></div>
+ 			<div style="clear:both;"></div>
+            
+           
+        </div>
+        
+ <!--footer-->
+        <div id="footer">
+        	<div class="footer_center">            	
+                <p>
+                	Copyright ©  2017-2018南开大学 <br />
+                    地址：天津市卫津路94号&nbsp;&nbsp;&nbsp;&nbsp;
+                    [300071]&nbsp;&nbsp;&nbsp;&nbsp;
+                    津教备0061号&nbsp;&nbsp;&nbsp;&nbsp;
+                    津ICP备12003308号-1<br />
+                    推荐使用IE8及以上、火狐、谷歌等主流浏览器
+                </p>
+            </div>
+        </div>
+        <!--//footer-->
+         </div> 
+
+</body>
+</html>

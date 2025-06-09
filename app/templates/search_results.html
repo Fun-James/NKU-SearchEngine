@@ -123,25 +123,56 @@
                 </li>
                 {% endfor %}
             </ul>
-            
-            <!-- 添加分页功能 -->
+              <!-- 添加分页功能 -->
             {% if total_hits > 10 %}
-            <div class="pagination">                {% set total_pages = (total_hits / 10) | round(0, 'ceil') | int %}
+            <div class="pagination">
+                {% set total_pages = (total_hits / 10) | round(0, 'ceil') | int %}
+                
+                <!-- 首页和上一页 -->
                 {% if page > 1 %}
-                    <a href="{{ url_for('main.search_results', query=query, page=page-1, search_type=search_type) }}">&laquo; 上一页</a>
+                    <a href="{{ url_for('main.search_results', query=query, page=1, search_type=search_type) }}" class="page-btn" title="首页">首页</a>
+                    <a href="{{ url_for('main.search_results', query=query, page=page-1, search_type=search_type) }}" class="page-btn">&laquo; 上一页</a>
                 {% endif %}
                 
-                {% for p in range(max(1, page-2), min(page+3, total_pages+1)) %}
+                <!-- 页码显示逻辑 -->
+                {% set start_page = max(1, page-5) %}
+                {% set end_page = min(page+5, total_pages) %}
+                
+                <!-- 如果起始页不是第1页，显示第1页和省略号 -->
+                {% if start_page > 1 %}
+                    <a href="{{ url_for('main.search_results', query=query, page=1, search_type=search_type) }}" class="page-num">1</a>
+                    {% if start_page > 2 %}
+                        <span class="ellipsis">...</span>
+                    {% endif %}
+                {% endif %}
+                
+                <!-- 显示当前页前后的页码（增加显示更多页码：当前页前后5页，总共最多11页） -->
+                {% for p in range(start_page, end_page+1) %}
                     {% if p == page %}
                         <span class="current-page">{{ p }}</span>
                     {% else %}
-                        <a href="{{ url_for('main.search_results', query=query, page=p, search_type=search_type) }}">{{ p }}</a>
+                        <a href="{{ url_for('main.search_results', query=query, page=p, search_type=search_type) }}" class="page-num">{{ p }}</a>
                     {% endif %}
                 {% endfor %}
                 
-                {% if page < total_pages %}
-                    <a href="{{ url_for('main.search_results', query=query, page=page+1, search_type=search_type) }}">下一页 &raquo;</a>
+                <!-- 如果结束页不是最后一页，显示省略号和最后一页 -->
+                {% if end_page < total_pages %}
+                    {% if end_page < total_pages - 1 %}
+                        <span class="ellipsis">...</span>
+                    {% endif %}
+                    <a href="{{ url_for('main.search_results', query=query, page=total_pages, search_type=search_type) }}" class="page-num">{{ total_pages }}</a>
                 {% endif %}
+                
+                <!-- 下一页和尾页 -->
+                {% if page < total_pages %}
+                    <a href="{{ url_for('main.search_results', query=query, page=page+1, search_type=search_type) }}" class="page-btn">下一页 &raquo;</a>
+                    <a href="{{ url_for('main.search_results', query=query, page=total_pages, search_type=search_type) }}" class="page-btn" title="尾页">尾页</a>
+                {% endif %}
+                
+                <!-- 显示页码统计信息 -->
+                <span class="page-info">
+                    第 {{ page }} 页，共 {{ total_pages }} 页，总计 {{ total_hits }} 条结果
+                </span>
             </div>
             {% endif %}
         {% elif query %}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="csrf-param" content="_csrf-frontend">
+    <meta name="csrf-token" content="nBmTyUmKrgeaNfwrEUnDZz-N_RuiuWwgIVVXise0iQnwf76ZBOb9YMtWzGh8DLYzStnLbJqPX3htGBrgsd7teA==">
+    <title></title>
+    <link href="/assets/429a7746/css/bootstrap.css" rel="stylesheet">
+<link href="/css/site.css" rel="stylesheet">
+<link href="/studentui/css/login.css" rel="stylesheet">
+<link href="/studentui/css/FamilyInformation.css" rel="stylesheet">
+<link href="/studentui/css/password.css" rel="stylesheet">
+<link href="/studentui/css/common.css" rel="stylesheet">
+<link href="/studentui/css/punishment.css" rel="stylesheet">
+<link href="/studentui/css/school-msg.css" rel="stylesheet">
+<link href="/studentui/css/search-now.css" rel="stylesheet">
+<link href="/studentui/css/search.css" rel="stylesheet">
+<link href="/studentui/css/search404.css" rel="stylesheet">
+<link href="/studentui/css/searchNo.css" rel="stylesheet">
+<link href="/studentui/css/StatisticalFigure.css" rel="stylesheet">
+<link href="/studentui/css/student.css" rel="stylesheet">
+<link href="/studentui/css/StudentInfo.css" rel="stylesheet">
+<link href="/studentui/css/StudentInformation.css" rel="stylesheet">
+<link href="/studentui/css/StudentEmInformation.css" rel="stylesheet">
+<link href="/studentui/css/StudentLeft.css" rel="stylesheet">
+<link href="/studentui/css/StudentPubMed.css" rel="stylesheet">
+<link href="/studentui/css/StudentRevise.css" rel="stylesheet">
+<link href="/studentui/css/StudentScInformation.css" rel="stylesheet">
+<link href="/studentui/css/submit.css" rel="stylesheet">
+<link href="/studentui/css/TeacherInfo.css" rel="stylesheet">
+<link href="/studentui/css/TeacherPersonalInfo.css" rel="stylesheet">
+</head>
+<body>
+
+
+
+<div class="login" style="min-width: 960px; min-height: 560px;">
+    <div class="content clearfix">
+        <div class="content-left">
+            <div class="logo">
+                <img src="studentui/images/logo.png" alt=""/>
+                <p>南开大学学位信息采集系统</p>
+            </div>
+        </div>
+        <div class="shu"></div>
+        <div class="content-right">
+            <div class="login-form">
+                <h2>学生登录</h2>
+
+                <form id="login-form" action="/login" method="post">
+<input type="hidden" name="_csrf-frontend" value="nBmTyUmKrgeaNfwrEUnDZz-N_RuiuWwgIVVXise0iQnwf76ZBOb9YMtWzGh8DLYzStnLbJqPX3htGBrgsd7teA==">
+                
+                    <div class="form-group field-unm required">
+<div class="account clearfix"><span><label class="control-label" for="unm">账　号：</label></span><input type="text" id="unm" class="form-control" name="LoginForm[username]" value="" autofocus aria-required="true"></div><div><p class="help-block help-block-error"></p></div>
+</div>                       
+                    <div class="form-group field-pwd required">
+<div class="password clearfix"><span><label class="control-label" for="pwd">密　码：</label></span><input type="password" id="pwd" class="form-control" name="LoginForm[password]" value="" readonly autocomplete="off" aria-required="true"></div><div><p class="help-block help-block-error"></p></div>
+</div>               
+                    <div class="form-group field-loginform-varicode">
+<div class="code clearfix"><span><label class="control-label" for="loginform-varicode">验证码：</label></span> <input type="text" id="loginform-varicode" class="form-control" name="LoginForm[variCode]"> <img id="loginform-varicode-image" src="/site/captcha?v=6839f0b78ddbe2.12655197" alt="" style="height: 35px; width: 110px; margin: 0 20px; border-radius: 5px;"></div><div><p class="help-block help-block-error"></p></div>
+</div>
+                   
+                   
+                    
+                    <!-- <div class="form-group field-loginform-rememberme">
+<div class="checkbox">
+<label for="loginform-rememberme">
+<input type="hidden" name="LoginForm[rememberMe]" value="0"><input type="checkbox" id="loginform-rememberme" name="LoginForm[rememberMe]" value="1" checked>
+Remember Me
+</label>
+<p class="help-block help-block-error"></p>
+
+</div>
+</div> -->
+
+                    <!-- <br/> -->
+                    <!-- <div style="color:#ffffff;margin:1em 0">
+                        忘记密码： <a href="/site/request-password-reset">重置</a>                    </div> -->
+
+                    <div class="login-button">
+                        <button type="submit" id="loginbtn" class="btn" name="login-button">登录</button>                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../studentui/js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $('#loginbtn').on('click',function(){
+        
+        if (navigator.userAgent.indexOf("MSIE 8.0")>=1 || navigator.userAgent.indexOf("MSIE 7.0")>=1 || navigator.userAgent.indexOf("MSIE 6.0")>=1) {
+            if (!window.confirm("推荐使用chrome浏览器或浏览器极速模式，您现在使用浏览器的IE版本过低，可能有部分功能受限，您确定要登录吗？")) {
+                return false;
+            }
+        }
+
+        
+
+        var password = $("#pwd").val();   
+        var password_enc = btoa(password);
+        $("#pwd").val(password_enc);  
+
+
+        $("#unm").css("text-indent", "-9999px");  
+        var username = $("#unm").val();    
+        var username_enc = btoa(username);
+        $("#unm").val(username_enc); 
+       
+            
+    });
+
+    $("#pwd").on("click", function () {
+        $(this).attr("readonly", false)
+    })
+
+</script>
+<script src="/assets/66bf7bdb/jquery.js"></script>
+<script src="/assets/4f3c6bf8/yii.js"></script>
+<script src="/assets/4f3c6bf8/yii.validation.js"></script>
+<script src="/assets/4f3c6bf8/yii.captcha.js"></script>
+<script src="/assets/4f3c6bf8/yii.activeForm.js"></script>
+<script src="/studentui/js/echarts.min.js"></script>
+<script src="/studentui/js/china.js"></script>
+<script src="/studentui/js/StudentBasicInformation.js"></script>
+<script>jQuery(function ($) {
+jQuery('#loginform-varicode-image').yiiCaptcha({"refreshUrl":"\/site\/captcha?refresh=1","hashKey":"yiiCaptcha\/site\/captcha"});
+jQuery('#login-form').yiiActiveForm([{"id":"loginform-username","name":"username","container":".field-unm","input":"#unm","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"账户不能为空。"});}},{"id":"loginform-password","name":"password","container":".field-pwd","input":"#pwd","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"密码不能为空。"});}},{"id":"loginform-varicode","name":"variCode","container":".field-loginform-varicode","input":"#loginform-varicode","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.captcha(value, messages, {"hash":440,"hashKey":"yiiCaptcha/site/captcha","caseSensitive":false,"message":"验证码不正确。"});}},{"id":"loginform-rememberme","name":"rememberMe","container":".field-loginform-rememberme","input":"#loginform-rememberme","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.boolean(value, messages, {"trueValue":"1","falseValue":"0","message":"Remember Me的值必须要么为\"1\"，要么为\"0\"。","skipOnEmpty":1});}}], []);
+});</script></body>
+</html>

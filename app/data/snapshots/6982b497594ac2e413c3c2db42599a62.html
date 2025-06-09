@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="zh-cn"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="zh-cn"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="zh-cn"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="not-ie" lang="zh-cn">
+<!--<![endif]-->
+
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="content-language" content="zh-CN" />
+
+
+<title>南开大学教育基金会 | 管理后台</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="南开大学 教育基金会 百年南开 南开捐赠">
+<meta name="description" content="南开大学教育基金会官方网站！">
+
+
+<link href="/Public/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/Public/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/Public/static/vendor/matrix/css/matrix-style.css" />
+<link rel="stylesheet" href="/Public/static/vendor/matrix/css/matrix-media.css" />
+<link rel="stylesheet" href="/Public/static/jquery.gritter/css/jquery.gritter.matrix.css" />
+
+<!-- Font-Awesome 字体图标插件 -->
+<link href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="/Public/static/vendor/matrix/css/matrix-login.css" />
+
+    <style type="text/css">
+    h3.logo {
+        font-size: 36px;
+        margin: 20px 0px;
+    }
+    html,
+    body {
+        width: auto;
+        height: auto;
+        background: #fff;
+        overflow-y: scroll;
+    }
+    .clear{
+        clear: both;
+    }
+
+
+.navbar {
+    padding-top: 10px;
+    height: 80px;
+    background: #a0468c;
+    margin-bottom: 0px;
+    width: 100%;
+    min-width: 950px;
+}
+.navbar .nav-right {
+    margin-top: 20px;
+}
+.navbar .nav > li > a {
+    float: none;
+    padding: 5px 25px 30px;
+    color: #777777;
+    text-decoration: none;
+    color:white;
+    text-shadow:none;
+}
+.p-dir {font-size:0px;height:5px;width:950px;background:url('/Public/Portal/img/page-dir.png') no-repeat;}
+.p-dir.top {margin-top:50px;}
+.p-title {text-align:center;font-size:36px;font-family:"SimHei","Microsoft Yahei";padding:20px;line-height:36px;color:#a0468c;}
+
+
+
+
+
+
+
+
+
+
+    #loginbox {
+        /*position: relative;
+        min-height: 445px;*/
+        height: auto;
+        border-radius: 3px;
+        margin-top: 30px;
+
+    }
+    #loginbox .control-group{
+        padding: 5px 0px;
+        text-align: center;
+    }
+
+    #loginbox form{
+         background: none;
+         border:none;
+    }
+    #loginbox .controls {
+    padding: 0 ; 
+}
+
+
+
+
+
+
+    @media(min-width: 768px){
+        #loginbox .control-group .add-on, #loginbox .control-group input{
+            height: 30px !important;
+            line-height: 30px;
+        }
+        #loginbox .control-group .add-on{
+            padding: 4px 10px;
+            color: #a0468c;
+        }
+        .verifyimg,#submit-btn{
+            width: 337px;
+        }
+    }
+
+    @media(max-width: 767px){
+        .verifyimg,#submit-btn{
+            width: 196px;
+        }
+        #loginform{
+            min-height: 400px;
+        }
+    }
+
+
+    #loginbox form {
+        /*position: absolute;*/
+    }
+    #loginbox form#recoverform {
+        display: none;
+    }
+    .shadow {
+        box-shadow:2px 2px 10px #909090, -2px -2px 10px #909090;/* for opera or ie9 */
+    }
+
+    .verifyimg{
+        cursor: pointer;
+    }
+
+    </style>
+
+
+<link rel="stylesheet" href="/Public/Portal/css/yee-admin.css" />
+<link rel="stylesheet" href="/Public/yeethink/css/components.css">
+
+
+
+<!-- IE6-8 html5标签支持 -->
+<!--[if lt IE 9]>
+<script src="/Public/static/bootstrap/js/html5shiv.js"></script>
+<![endif]-->
+
+<!-- 老版本IE与现代浏览器加载不同版本jquery -->
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/Public/static/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+<script type="text/javascript" src="/Public/static/jquery-2.0.3.min.js"></script>
+<!--<![endif]-->
+
+<script type="text/javascript" src="/Public/static/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+
+</head>
+
+<body>
+    
+
+
+
+    <div class="navbar navbar-fixed-top" style="margin-left:0;position: fixed;">
+        <div class="">
+            <div class="container">
+                <a class="brand" href="#"><img src="/Public/Portal/dm/images/nkuef-foot.png"></a>
+
+                <ul class="nav nav-right pull-right">
+
+                    <!-- <li><a href="#" class="btn-login">登录</a></li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="max-width:950px;text-align:center;">
+        <div class="p-dir top" ></div>
+        <div class="p-title">管理登录</div>
+        <div class="p-dir"></div>
+        
+        <div class="p-form login-form">
+           
+
+            <div id="loginbox" style="width:50%">
+
+
+                <form id="loginform" class="form-vertical ajax-submit" action="/Portal/Public/login.html" method="POST">
+                
+                    <div class="control-group">
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on">账号:</span>
+                                <input class="input-xlarge" type="text" name="username" placeholder="登录名/邮箱/手机号">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on">密码:</span>
+                                <input class="input-xlarge" type="password" name="password" autocomplete="off" placeholder="登录密码" />
+                            </div>
+                        </div>
+                    </div>
+
+                                            <div class="control-group">
+                            <div class="controls">
+                                <div class="input-prepend">
+                                    <span class="add-on">验证:</span>
+                                    <input class="input-xlarge" type="text" name="verify" id="verify" placeholder="验证码(点击图片更换)"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <img class="verifyimg reload verify" alt="点击切换" src="/Portal/Public/verify.html" >
+                            </div>
+                        </div>                    
+                    <div class="form-actions" style="border:none;text-align:center;">
+                        <button type="submit" id="submit-btn" class="btn btn-info" style="background-color: #a0468c;">登录</button>
+                    </div>
+
+                    <div class="clear"></div>                       
+                </form>
+            </div>
+        </div>
+
+        <div class="p-dir"></div>
+
+
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+    <div id="footer" style="background-color: #883074; width: 100%; height:90px;bottom:0px;left:0px;">
+        <div class="container">
+
+            <div class="row">
+                
+                    <img alt="" src="/Public/Portal/dm/images/nkuef-foot.png" height="45" class="logo"  />
+                    <br/><br/>
+
+                    <p style="color:white">Powered by ©南开大学教育基金会</p>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /FOOTER -->
+
+
+
+
+
+    
+        <script src="/Public/static/vendor/matrix/js/excanvas.min.js"></script>
+        <script src="/Public/static/vendor/matrix/js/matrix.js"></script>
+        <script src="/Public/static/jquery.gritter/js/jquery.gritter.js"></script>
+        <script src="/Public/static/jquery.hotkey.min.js"></script>
+        
+        <script src="/Public/static/vendor/matrix/js/matrix.popover.js"></script>
+        <script src="/Public/yeethink/js/yee.js"></script>
+        <script type="text/javascript" src="/Public/Portal/js/yee-admin.js"></script>
+
+        
+    
+    <!-- 用于加载特有脚本 -->
+    
+    <script type="text/javascript">
+   
+    $(document).ready(function() {
+        var $login = $('#loginform');
+        var $recover = $('#recoverform');
+        var speed = 400;
+
+        
+
+        $('.reload').click(function(event) {
+            $(this).attr('src',$(this).attr('src')+"?_="+Math.random());
+        });
+    });
+    
+    $(document).ready(function() {
+        $('input[name="username"]').focus();
+        $(document).ajaxStop(function() {
+            $('.verifyimg').click();
+            $('#verify').focus().select();
+        });
+    });
+
+    $(document).ready(function() {
+        $('#phone-verify').click(function(){
+            var $verify = $(this);
+            var username = $('#loginform').find('[name="username"]').val();
+            if(username==''){
+                $.gritter.add({
+                    title: '提示消息',
+                    text: '请输入登录名/邮箱/手机号',
+                    sticky: false
+                });
+                return false;
+            }else if($verify.is('.sent')){
+                $.gritter.add({
+                    title: '提示消息',
+                    text: '您已获取验证码，请稍后再重新获取',
+                    sticky: false
+                });
+                return false;
+            }
+
+            $.ajax({
+                url: '/Portal/Public/phoneVerify.html',
+                type: 'POST',
+                data: {username: username},
+                error: function(){
+                    $.gritter.add({
+                        title: '提示消息',
+                        text: '发生未知错误',
+                        sticky: false
+                    });
+                },
+                success: function(json){
+                    var option = {
+                        title: '提示消息',
+                        text: json.info,
+                        sticky: false
+                    };
+                    if(json.status == 1){
+                        option['class_name'] = 'success';
+                        var time = 200;
+                        $verify.removeClass('sent');
+                        var phoneInterval = setInterval(function(){
+                            time = time-1;
+                            if(time<=0){
+                                $verify.removeClass('sent');
+                                $verify.text('重新获取手机验证码');
+                                clearInterval(phoneInterval);
+                            }
+                        }, 1000);
+                    }
+
+                    $.gritter.add(option);
+                }
+            });
+        });
+    });
+    </script>
+
+    <div class="hidden">
+        <!-- 用于加载统计代码等隐藏元素 -->
+        
+    </div>
+</body>
+
+</html>

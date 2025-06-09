@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>南开大学校园文化活动管理服务平台</title>
+	<link rel="stylesheet" type="text/css" href="/Public/css/activity.css">
+	<script type="text/javascript" src="/Public/js/jq3.1.1.js"></script>
+</head>
+<body>
+<!--头部-->
+<div class="headbg"><img src="/Public/images/headbg.png" /></div>
+<div class="head_box">
+ 	<img  class= "color" src="/Public/images/color.jpg" width="100%;" />
+	<div class="top">
+		<div class="top-head">
+			<a href="/index/index.aspx"><img src="/Public/images/logo1.png" class="logo" /></a>
+			<div class="right">
+				<form action="/index/orderlist.aspx" method="post">
+					<input type="text" name="keywords" value="" class="input" placeholder="搜索" />
+					<input type="submit" class="button" value="" />
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="top-nav">
+		<ul>
+			<li class='on' ><a href="/index/index.aspx">首页</a></li>
+			<li  ><a href="/index/orderlist.aspx">活动信息</a></li>
+			<li  ><a href="/index/notice.aspx">通知公告</a></li>
+			<li  ><a href="/index/shenpi.aspx">审批流程</a></li>
+			<li  ><a href="/index/zhidu.aspx">制度文件</a></li>
+			<li  ><a href="/index/aboutus.aspx">关于我们</a></li>
+		</ul>
+	</div>
+</div>
+<script>
+$(function(){
+	var height=$(window).height();
+	height = height-445;
+	$('.maintable').css('min-height',height);
+})
+</script>
+
+<!--banner-->
+<div class="banner-box">
+	<div class="banner">
+		<div class="flexslider" id="flexslider">
+			<ul class="slides">
+                <li style="background:url(/Uploads/2024-10-11/67092bf70d6c8.jpg) no-repeat center center;">
+					<a style=" display: block; width: 100%; height: 100%;" href="#" target="_blank" title="图片5"  ></a>
+				</li><li style="background:url(/Uploads/2024-10-15/670e7941416d1.png) no-repeat center center;">
+					<a style=" display: block; width: 100%; height: 100%;" href="#" target="_blank" title="图片3"  ></a>
+				</li>			</ul>
+			<script type="text/javascript" src="/Public/js/jquery.flexslider-min.js"></script>
+			<script>
+			$(function(){
+				$('#flexslider').flexslider({
+					directionNav: true,
+					pauseOnAction: false
+				});
+			});
+			</script>
+		</div>
+ 	</div>
+ 	<!-- 登录 -->
+ 	<div class="banner-login">
+		<div class="login">活动申请审批</div>
+		<div class="login-input">
+							<form action="/home/login/dologin.aspx" method="post" onSubmit="return docheck();">
+					<input type="hidden" name="activity" value="1">
+					<input type="hidden" name="oid" value="">
+					<input type="text" class="denglu" name="username" placeholder="账号" >
+					<input type="password" class="denglu" name="password" placeholder="密码" >
+					<input type="text" class="denglu code" name="verify" placeholder="验证码">
+					<a href="javascript:void(0);" title="点击刷新" class="yanzheng"><img src="/index/get_verify.aspx" onclick="this.src='/index/get_verify.aspx?'+Math.random()"/></a>
+					<input type="submit" value="立即登录" class="sub" />
+				</form>
+					</div>
+ 	</div>
+ </div>
+<!--bankuai-->
+<ul class="bankuai clearfix">
+	<li class="type1"><a href="/index/orderlist/type/1.aspx"><img src="/Public/images/type1.png" /><p>讲座论坛</p></a></li>
+    <li class="type4"><a href="/index/orderlist/type/4.aspx"><img src="/Public/images/type4.png" /><p>文艺演出</p></a></li>
+    <li class="type3"><a href="/index/orderlist/type/3.aspx"><img src="/Public/images/type3.png" /><p>体育活动</p></a></li>
+	<li class="type2"><a href="/index/orderlist/type/2.aspx"><img src="/Public/images/type6.png" /><p>实践活动</p></a></li>
+	<li class="type5"><a href="/index/orderlist/type/5.aspx"><img src="/Public/images/type5.png" /><p>综合活动</p></a></a></li>
+</ul>
+<!--main-->
+<div class="main clearfix">
+	<div class="left">
+		<div class="top">
+			<div class="title">最新活动</div>
+			<a href="/index/orderlist.aspx" class="more">
+				<p>更多</p>
+				<div class="jia">+</div>
+			</a>
+		</div>
+		<table class="table">
+			<tr class="blue">
+				<td width="320" style="text-align: left;">活动名称</td>
+				<td width="240">活动时间</td>
+				<td width="210">活动地点</td>
+			</tr>
+			<tr>
+				<td colspan="3" style="height: 10px;"></td>
+			</tr>
+			<tr>
+				<td style="text-align: left;"><a href="/index/orderview/id/22367.aspx" class="title">环境学院毕业晚会彩排</a></td>
+				<td>
+					2025-06-16 08:00					- 09:00				</td>
+				<td>津南校区大通学生中心小音乐厅</td>
+			</tr><tr>
+				<td style="text-align: left;"><a href="/index/orderview/id/22364.aspx" class="title">新传学院拍摄视频</a></td>
+				<td>
+					2025-06-03 09:00					- 11:00				</td>
+				<td></td>
+			</tr><tr>
+				<td style="text-align: left;"><a href="/index/orderview/id/22363.aspx" class="title">第83期培训营春季后备骨干培训班实践课程...</a></td>
+				<td>
+					2025-05-31 08:00					- 02:00				</td>
+				<td>津南校区大通学生中心A103</td>
+			</tr><tr>
+				<td style="text-align: left;"><a href="/index/orderview/id/22362.aspx" class="title">2025年周政毕业晚会</a></td>
+				<td>
+					2025-06-12 08:00					- 09:50				</td>
+				<td></td>
+			</tr><tr>
+				<td style="text-align: left;"><a href="/index/orderview/id/22361.aspx" class="title">急救培训活动</a></td>
+				<td>
+					2025-06-05 08:00					- 09:00				</td>
+				<td>八里台校区学生活动中心305（...</td>
+			</tr><tr>
+				<td style="text-align: left;"><a href="/index/orderview/id/22360.aspx" class="title">青志协换届面试</a></td>
+				<td>
+					2025-05-29 12:00					- 06:00				</td>
+				<td></td>
+			</tr><tr>
+				<td style="text-align: left;"><a href="/index/orderview/id/22359.aspx" class="title">环境学院毕业仪式</a></td>
+				<td>
+					2025-06-17 08:00					- 09:00				</td>
+				<td>津南校区大通学生中心小音乐厅</td>
+			</tr>		</table>
+	</div>
+	<div class="right">
+		<div class="top">
+			<div class="title">通知公告</div>
+			<a href="/index/notice.aspx" class="more">
+				<p>更多</p>
+				<div class="jia">+</div>
+			</a>
+		</div>
+		<ul class="list">
+			<li>
+				<a href="/index/ntview/id/34.aspx" class="title">南开大学学生活动中心音乐厅使用管理提示</a>
+				<p class="time">2024-08-30</p>
+			</li><li>
+				<a href="/index/ntview/id/20.aspx" class="title">南开大学学生社团工作服务指南（2022....</a>
+				<p class="time">2022-03-04</p>
+			</li><li>
+				<a href="/index/ntview/id/18.aspx" class="title">【20220213更新】学生社团活动申请...</a>
+				<p class="time">2022-02-13</p>
+			</li><li>
+				<a href="/index/ntview/id/16.aspx" class="title">南开大学校内体育场馆使用申请流程</a>
+				<p class="time">2021-09-22</p>
+			</li><li>
+				<a href="/index/ntview/id/12.aspx" class="title">关于南开大学学生课外活动审批流程的说明</a>
+				<p class="time">2021-03-16</p>
+			</li>		</ul>
+
+	</div>
+</div>
+<!--footer-->
+<div class="footer">COPYRIGHT &copy;2012-2018 nankai All rights reserved津ICP备12004888号</div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<title>登录</title>
+		<link rel="icon" type="image/x-icon" href="./static/images/ico/favicon.ico" />
+		
+	</head>
+
+	<body>
+		<!-- 登录中... -->
+
+		<script type="text/javascript" src="./static/js/jquery-3.5.1.js"></script>
+		<script type="text/javascript" src="./static/js/utils.js"></script>
+		<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+		
+		<script>
+		debugger;
+			//1.是否启用IP访问限制
+			var isInnerIP = false;
+			if(useIpFilter){
+				// 添加用户IP段限制功能
+				if("undefined" == typeof(returnCitySN)){
+					alert("提示:\n检测到您的浏览器安装的第三方扩展程序（插件、应用等）已阻止对此网页的访问!\n该第三方程序将会导致网页无法正常浏览!\n请您关闭第三方拦截程序后刷新!");
+					location.href = ssoLoginUrl;
+				}else{
+					console.log(returnCitySN);
+				}
+				$.each(ipWhiteList, function(key, val) {
+					var ipStart = ipToNumber(val.split("-")[0]),ipEnd = ipToNumber(val.split("-")[1]),userIP = ipToNumber(returnCitySN.cip);
+					if(ipStart <= userIP && userIP <= ipEnd){
+						isInnerIP = true;
+					}
+					if(isInnerIP){
+						return false;
+					}
+				});
+			}
+			
+			if(useIpFilter && !isInnerIP){
+				alert("您当前的访问IP未在授权范围内!");
+			}else{
+				//2.判断是否已经登录成功，登录信息还在有效期内
+				var token = getCookie(tokenKey);
+				if (token) {
+					location.href = "./index.html";
+				} else {
+					//根据不同的学校返回条件调用不同的方法
+					if (configKey == 'bucm') {
+					//2. SSO重定向 附带ticket票据
+						var id = getQueryString('id')
+						var un = getQueryString('un')
+						var strTime = getQueryString('strTime')
+						var verify = getQueryString('verify')
+						if (!(id && un && strTime && verify)) {
+							location.href = ssoLoginUrl;
+						}
+				
+						$.ajax({
+							type: "post",
+							url: ipPortUrl + "/sso/bucm/getUserInfo",
+							data: {
+								'id': id,
+								'un': un,
+								'strTime': strTime,
+								'verify': verify
+							},
+							dataType: "json",
+							success: function(result) {
+								if (result.code == 200) {
+									var token = result.token;
+									setSessionCookie(tokenKey, token, "");
+									token = getCookie(tokenKey);
+									if (token != null && token.length > 0) {
+										location.href = "./index.html"
+									} else {
+										console.log("获取Cookies中的token失败");
+										alert('网络异常');
+										clearCookie();
+										location.href = ssoLogoutUrl; 
+									}
+								} else {
+									alert(result.msg);
+									clearCookie();
+									location.href = ssoLogoutUrl; 
+								}
+							},
+							error: function(result) {
+								console.log("接口调用失败");
+								console.log(result);
+								alert('网络异常');
+								clearCookie();
+								location.href = ssoLogoutUrl; 
+							}
+						});
+					} else if (configKey == 'pku') {
+						var ticket = getQueryString(ticketKey)
+						if (ticket) {
+							$.ajax({
+								type: "post",
+								url: ipPortUrl + "/sso/getUserInfo",
+								data: {
+									'ticket': ticket
+								},
+								dataType: "json",
+								success: function(result) {
+									console.log("获取用户信息结果" + result);
+									if (result.code == 200) {
+										var token = result.token;
+										setSessionCookie(tokenKey, token, "");
+										token = getCookie(tokenKey);
+										if (token != null && token.length > 0) {
+											location.href = "./index.html"
+										} else {
+											console.log("获取Cookies中的token失败");
+											alert('网络异常');
+											clearCookie();
+											location.href = ssoLogoutUrl; 
+										}
+									} else {
+										console.log('sso 登录获取token失败');
+										alert(result.msg);
+										clearCookie();
+										location.href = ssoLogoutUrl; 
+									}
+								},
+								error: function(result) {
+									console.log("接口调用失败");
+									console.log(result);
+									alert('网络异常');
+									clearCookie();
+									location.href = ssoLogoutUrl; 
+								}
+							});
+						} else {
+							document.write(
+								"<form action='https://iaaa.pku.edu.cn/iaaa/oauth.jsp' method=post name='formx1' style='display:none'>");
+							document.write("<input type=hidden name='appID' value='softLegal'>");
+							document.write("<input type=hidden name='appName' value='北京大学正版软件管理系统'>");
+							document.write("<input type=hidden name='redirectUrl' value='http://162.105.221.157/sso.html'>");
+							document.write("</form>");
+							setTimeout("document.formx1.submit();", 1000);
+						}
+					} else {
+					debugger
+						//不同学校返回的票据字段也不一样，一般为：code或者ticket
+						var ticket = getQueryString(ticketKey);
+						if (ticket) {
+							$.ajax({
+								type: "post",
+								url: ipPortUrl + "/sso/getUserInfo",
+								data: {
+									'ticket': ((useIpFilter && ipWhiteList.length > 0)?(ticket + splitStr + returnCitySN.cip):ticket)
+								},
+								dataType: "json",
+								success: function(result) {
+									console.log("获取用户信息结果" + result);
+									if (result.code == 200) {
+										var token = result.token;
+										setSessionCookie(tokenKey, token, "");
+										token = getCookie(tokenKey);
+										if (token != null && token.length > 0) {
+											location.href = "./index.html"
+										} else {
+											console.log("获取Cookies中的token失败");
+											alert('网络异常');
+											clearCookie();
+											location.href = ssoLogoutUrl; 
+										}
+									} else {
+										clearCookie();
+										console.log('sso 登录失败!');
+										if(result.msg.indexOf("平台已到期") != -1){
+											alert("软件正版平台服务已到期，请联系管理员！");
+										}else{
+											alert(result.msg);
+										}
+										location.href = ssoLogoutUrl; 
+									}
+								},
+								error: function(result) {
+									console.log("接口调用失败");
+									console.log(result);
+									// alert('网络异常');
+									console.log('error');
+									clearCookie();
+									location.href = ssoLogoutUrl; 
+								}
+							});
+						} else {
+							CheckLoginMode();
+						}
+					}
+				}
+			}
+		</script>
+	</body>
+
+</html>

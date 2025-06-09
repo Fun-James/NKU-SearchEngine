@@ -1,0 +1,864 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>南开大学选调生系统</title>
+    <link rel="shortcut icon" href="../image/favicon.ico">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Keywords" content="选调生,选调生报名,选调生网,选调生政策,选调生考试,选调生遴选,选调生工作"/>
+    <meta name="Description" content="南开大学选调生政策、选调生风采展示，让在校大学生正确认识和选择选调生这条道路、推动选调生队伍更好为祖国和人民服务！"/>
+    <meta name="Robots" contect="all">
+    <link rel="icon" href="./xds/favicon.ico" type="image/x-icon">
+    <!-- <link href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="./xds/resources/css/slick.css">
+    <link href="./xds/resources/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/bootstrap-3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./xds/resources/css/index.css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.core.css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.bootstrap.css">
+    <link href="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./xds/resources/css/loaders.css">
+    <script type="text/javascript" src="./xds/bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="./xds/resources/js/vendor/district-picker/district.picker.css">
+    <link rel="stylesheet" href="./xds/bower_components/nivo-slider/themes/default/default.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="./xds/bower_components/nivo-slider/nivo-slider.css" type="text/css" media="screen">
+    <style type="text/css" media="screen">
+    .alertify-buttons {
+        padding: 14px 15px 15px;
+        background: #F5F5F5;
+        border-top: 1px solid #DDD;
+        border-radius: 0 0 6px 6px;
+        box-shadow: inset 0 1px 0 #FFF;
+    }
+    .alertify-message {
+        padding: 15px;
+        margin: 0;
+    }
+
+    .login-btn-item {
+        width: 100px;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .banner-content {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .min-h {
+        min-height: 400px;
+    }
+    .main-content {
+        padding-top: 0;
+    }
+    /* 轮播图高度 */
+    /* #slider img {
+        height: 410px !important;
+    } */
+    .index_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        width: 1200px;
+        margin: 16px auto 0;
+    }
+    .friendlink {
+        margin-bottom: 38px;
+    }
+    .index_items {
+        flex: 1;
+        background: #FFF;
+        overflow: hidden;
+    }
+    .index_items.one {
+        min-height: 320px;
+    }
+    .index_items.five {
+        overflow: visible;
+    }
+    .index_head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ECE7ED;
+        font-size: 14px;
+        padding-right: 12px;
+    }
+    .index_head a {
+        color: #812358;
+    }
+    .index_title {
+        padding: 10px 16px;
+        background-color: #812358;
+        position: relative;
+        color: #fff;
+        font-size: 16px;
+    }
+    .index_title_icon {
+        height: 20px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+    .index_title::after {
+        content: '';
+        position: absolute;
+        border-width: 0px 8px 6px 8px;
+        border-style: none solid solid solid;
+        border-color: transparent transparent #ECE7ED transparent;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+    }
+    .index_lists {
+        padding: 8px 0;
+    }
+    .index_lists.one {
+        padding: 0 12px 0 12px;
+    }
+    .index_lists.two {
+        display: flex;
+        padding: 20px 12px;
+        gap: 10px;
+    }
+    .index_lists.three {
+        display: flex;
+        padding: 20px 12px;
+        gap: 10px;
+        flex-flow: wrap;
+        min-height: 386px;
+    }
+    .index_lists.four {
+        display: flex;
+        display: flex;
+        gap: 8px;
+        padding: 12px 4px;
+    }
+    .index_lists.five {
+        display: flex;
+        display: flex;
+        gap: 12px;
+        padding: 23px 48px 16px;
+    }
+    .index_lists.two li {
+        /* flex: 1; */
+        width: calc((100% - 24px) / 3);
+        overflow: hidden;
+        border: 1px solid #EADFEB;
+        border-radius: 2px;
+        padding: 20px 12px;
+    }
+    .index_lists.three li {
+        width: calc(50% - 5px);
+        border: 1px solid #EADFEB;
+        border-radius: 2px;
+        padding: 10px 12px;
+        overflow: hidden;
+        height: 182px;
+    }
+    .index_li {
+        color: #333;
+        font-size: 14px;
+        width: 100%;
+    }
+    .index_li.one {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0;
+        border-bottom: 1px dashed #DEDEDE;
+        box-sizing: border-box;
+    }
+    .index_li.four {
+        width: 232px;
+        text-align: center;
+        display: inline-block;
+        font-size: 16px;
+        overflow: hidden;
+    }
+    .index_li.four img {
+        margin-top: 30px;
+    }
+    .index_li.four:hover {
+        box-shadow: 0px 3px 10px 0px rgba(195,195,195,0.7);
+        border-radius: 6px;
+    }
+    .index_li.four h4 {
+        font-size: 20px;
+        margin: 24px 0 20px 0;
+    }
+    .index_li:hover {
+        color: #812358;
+    }
+    .index_li_title {
+        flex: 1;
+        max-width: calc(100% - 100px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .index_li_tab {
+        background-color: #EADFEB;
+        color: #812358;
+        font-size: 12px;
+        padding: 2px 5px;
+        display: inline-block;
+        border-radius: 4px;
+        margin-right: 3px;
+    }
+    .index_li_btn {
+        text-align: center;
+        margin-top: 8px;
+    }
+    .timeblock {
+        white-space: nowrap;
+        width: 80px;
+    }
+    .index_card_title {
+        height: 25px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: bold;
+    }
+    .index_card_info {
+        color: #666666;
+        margin: 5px 0;
+        height: 40px;
+        text-indent: 2em;
+    }
+    .index_card_time {
+        text-align: right;
+    }
+    .index_zb_time {
+        margin: 5px 0;
+        color: #6666;
+    }
+    .index_zb_adress {
+        height: 40px;
+        word-break: break-all;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    .tag-right-noborder_2 {
+        width: 150px;
+        height: 150px;
+        position: relative;
+    }
+
+    .tag-right-noborder_2 img {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+    }
+    .more{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color:#812358;
+        font-size: 13px;
+    }
+    .more i{
+        margin-left: 2px;  
+    }
+    .dataleft{
+        position: absolute;
+        width: 50px;
+        left: 0;
+        top: 10px;
+        font-size: 12px;
+        color: #812358;
+        line-height: 20px;
+        text-align: center;
+    }
+    .dataleft span{
+        color:#812358!important;
+        font-size:18px;
+    }
+    .boxshow{
+        box-shadow: 0px 3px 10px 0px rgba(195,195,195,0.7);
+        border-radius: 6px;
+    }
+    .l {float:left}
+    .r {float:right;}
+    .actTime,.actNum {color:#878787;height:30px;line-height:30px;font-size:14px;background:url(/xds/resources/images/newtime.png) no-repeat left center;padding-left:25px;background-size:14px auto;}
+    .actNum {background:url(/xds/resources/images/person.png) no-repeat left center;background-size:14px auto;}
+    .slick3 .slick-dots{right: 36px;width:180px;bottom: 22px;}
+    .slick3 .slick-dots li button{width:8px;height:8px;}
+    .slick3 .slick-dots li button:before{width:8px;height:8px;line-height: 8px;color:initial;color: #CCCCCC;background: #CCCCCC;border-radius: 50%;}
+    .slick-dots li{margin: 0;}
+    .slick3 .slick-list{overflow: initial;}
+    .slick3 .slick-dots li.slick-active button:before{background:#812358;color:#812358;}
+    .slick3 .slick-prev{left: 590px;top: 310px;}
+    .slick3 .slick-next{right: 20px;top: 310px;}
+    .wks,.jxz,.yjs {background:#49B88C;border-radius:4px;display:inline-block;text-align:center;color:#fff;font-size:14px;padding:4px 12px;}
+    .wks {background: #EADFEB;color: #812358;}
+    .jxz {background:#49B88C;}
+    .yjs {background:#F5F5F5;color:#8C8C8C;}
+</style>
+</head>
+<body class="bodyloaded" style="background: #F0F1F6;">
+    <section class="header"></section>
+    <div class="main-content">
+        <section id="vueBox">
+            <div class="min-h">
+                <div id="wrapper" class="wrapper-banner">
+                    <div class="slider-wrapper theme-default">
+                        <div id="slider" class="nivoSlider">
+                            <a v-for="item in banners" target="_blank" :href="item.link"><img :src="item.pic_url_name | banner_src" alt=""></a>
+                        </div>
+                        <div class="nivo-controlNav"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="index_container">
+                <div class="index_items one">
+                    <h2 class="index_head">
+                        <span class="index_title">
+                            <img class="index_title_icon" src="/xds/resources/images/indexIcon/1.png" alt="">
+                            新闻资讯
+                        </span>
+                        <a href="informate.html?active=6">More ></a>
+                    </h2>
+                    <ul class="index_lists one">
+                        <template v-if="newlist5.length === 0">
+                            <h6 class="kong">
+                                <img src="xds/resources/images/is_kong1.png" alt="">
+                                <span>暂无数据</span>
+                            </h6>
+                        </template>
+                        <template v-else>
+                            <li v-for="item in newlist5" :title="item.title">
+                                <template v-if="item.content_url == ''">
+                                    <a class="index_li one" :href="'newsDetail.html?active=6&type=2&id='+item.id">
+                                        <div class="index_li_title">{{item.title}}</div>
+                                        <div class="timeblock">{{item.addtime|capitalize}}</div>
+                                    </a>
+                                </template>
+                                <template v-else>
+                                    <a class="index_li one" :href="item.content_url" :title="item.title" target="_blank">
+                                        <div class="index_li_title">{{item.title}}</div>
+                                        <div class="timeblock">{{item.addtime|capitalize}}</div>
+                                    </a>
+                                </template>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+                <div class="index_items one">
+                    <h2 class="index_head">
+                        <span class="index_title">
+                            <img class="index_title_icon" src="/xds/resources/images/indexIcon/2.png" alt="">
+                            通知公告
+                        </span>
+                        <a href="newsList.html?active=2">More ></a>
+                    </h2>
+                    <ul class="index_lists one">
+                        <template v-if="newlist6.length === 0">
+                            <h6 class="kong">
+                                <img src="xds/resources/images/is_kong1.png" alt="">
+                                <span>暂无数据</span>
+                            </h6>
+                        </template>
+                        <template v-else>
+                            <li v-for="item in newlist6" :title="item.title">
+                                <template v-if="item.content_url == ''">
+                                    <a class="index_li one" :href="'newsDetail.html?active=2&type=1&id='+item.id">
+                                        <div class="index_li_title">{{item.title}}</div>
+                                        <div class="timeblock">{{item.addtime|capitalize}}</div>
+                                    </a>
+                                </template>
+                                <template v-else>
+                                    <a class="index_li one" :href="item.content_url" :title="item.title" target="_blank">
+                                        <div class="index_li_title">{{item.title}}</div>
+                                        <div class="timeblock">{{item.addtime|capitalize}}</div>
+                                    </a>
+                                </template>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+            <div class="index_container">
+                <div class="index_items">
+                    <h2 class="index_head">
+                        <span class="index_title">
+                            <img class="index_title_icon" src="/xds/resources/images/indexIcon/4.png" alt="">
+                            活动报名
+                        </span>
+                        <a href="activitySign.html?active=11">More ></a>
+                    </h2>
+                    <ul class="index_lists two">
+                        <template v-if="activityList.length === 0">
+                            <h6 class="kong">
+                                <img src="xds/resources/images/is_kong1.png" alt="">
+                                <span>暂无数据</span>
+                            </h6>
+                        </template>
+                        <template v-else>
+                            <li v-for="item in activityList">
+                                <a class="index_li two" :href="'activitySignDetail.html?active=11&id='+item.id">
+                                    <div class="index_card_title" :title="item.title">
+                                        {{item.title.length > 36 ? `${item.title.slice(0, 36)} ...` : item.title}}
+                                    </div>
+                                    <div class="index_card_info">
+                                        {{item.remarks_formathtml.length > 46 ? `${item.remarks_formathtml.slice(0, 46)} ...` : item.remarks_formathtml}}
+                                    </div>
+                                    <div class="index_card_time" style="color: #333 !important;">{{item.starttime|time}} ~ {{item.endtime|time}}</div>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+            <div class="index_container">
+                <div class="index_items one">
+                    <h2 class="index_head">
+                        <span class="index_title">
+                            <img class="index_title_icon" src="/xds/resources/images/indexIcon/3.png" alt="">
+                            招录进展
+                        </span>
+                        <a href="proceedList.html?active=4">More ></a>
+                    </h2>
+                    <ul class="index_lists one" style="min-height: 414px;">
+                        <template v-if="newlist2.length === 0">
+                            <h6 class="kong">
+                                <img src="xds/resources/images/is_kong1.png" alt="">
+                                <span>暂无数据</span>
+                            </h6>
+                        </template>
+                        <template v-else>
+                            <li v-for="item in newlist2" :title="item.title">
+                                <template v-if="item.content_url == ''">
+                                    <a class="index_li one" :href="'newsDetail.html?active=4&type=2&id='+item.id" style="padding: 15px;">
+                                        <div class="index_li_title">{{item.title}}</div>
+                                        <div class="timeblock">{{item.addtime|capitalize}}</div>
+                                    </a>
+                                </template>
+                                <template v-else>
+                                    <a class="index_li one" :href="item.content_url" :title="item.title" target="_blank" style="padding: 15px;">
+                                        <div class="index_li_title">{{item.title}}</div>
+                                        <div class="timeblock">{{item.addtime|capitalize}}</div>
+                                    </a>
+                                </template>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+                <!-- <div class="index_items">
+                    <h2 class="index_head">
+                        <span class="index_title">
+                            <img class="index_title_icon" src="/xds/resources/images/indexIcon/5.png" alt="">
+                            直播讲座
+                        </span>
+                        <a href="activity.html?active=7">More ></a>
+                    </h2>
+                    <ul class="index_lists three">
+                        <template v-if="dataList.length === 0">
+                            <h6 class="kong">
+                                <img src="xds/resources/images/is_kong1.png" alt="">
+                                <span>暂无数据</span>
+                            </h6>
+                        </template>
+                        <template v-else>
+                            <li v-for="item in dataList">
+                                <a class="index_li three" :href="item.type==1?'kxdetail.html?id='+item.id:'activityDetail.html?id='+item.id">
+                                    <div class="index_card_title" :title="item.title">
+                                        <span class="index_li_tab" v-if="item.live_type==1">直 播</span>
+                                        <span class="index_li_tab" v-if="item.live_type==0">录 播</span>{{item.title.length > 36 ? `${item.title.slice(0, 36)} ...` : item.title}}
+                                    </div>
+                                    <template v-if="item.type==0">
+                                        <div class="index_zb_time">宣讲时间：{{item.starttime|time}} ~ {{item.endtime|time}}</div>
+                                        <div class="index_zb_time index_zb_adress">宣讲地点：{{item.address}}</div>
+                                    </template>
+                                    <template v-if="item.type==1">
+                                        <div class="index_zb_time">宣讲时间：{{item.starttime|time}} ~ {{item.endtime|time}}</div>
+                                        <div class="index_zb_time index_zb_adress">宣讲人：{{item.speaker_name}}</div>
+                                    </template>
+                                    <div class="index_li_btn">
+                                        <span v-if="nowTime<item.starttime" class="wks">未开始</span>
+                                        <span v-if="nowTime>item.starttime&&nowTime<item.endtime" class="jxz">进行中</span>
+                                        <span v-if="nowTime>item.starttime&&nowTime>item.endtime" class="yjs">已结束</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                </div> -->
+                <div class="index_items">
+                    <h2 class="index_head">
+                        <span class="index_title">
+                            <img class="index_title_icon" src="/xds/resources/images/indexIcon/6.png" alt="">
+                            选调宣讲
+                        </span>
+                        <a href="preach.html?active=9">More ></a>
+                    </h2>
+                    <ul class="index_lists three">
+                        <template v-if="preachList.length === 0">
+                            <h6 class="kong">
+                                <img src="xds/resources/images/is_kong1.png" alt="">
+                                <span>暂无数据</span>
+                            </h6>
+                        </template>
+                        <template v-else>
+                            <li v-for="item in preachList">
+                                <a class="index_li three" :href="'preachDetail.html?active=9&type=2&id='+item.id">
+                                    <div class="index_card_title" :title="item.title">
+                                        <span class="index_li_tab" v-if="item.live_type==1">直 播</span>{{item.title.length > 36 ? `${item.title.slice(0, 36)} ...` : item.title}}
+                                    </div>
+                                    <div class="index_zb_time">宣讲时间：{{item.starttime|time}} ~ {{item.endtime|time}}</div>
+                                    <div class="index_zb_time index_zb_adress">宣讲地点：{{item.address}}</div>
+                                    <div class="index_li_btn">
+                                        <span v-if="nowTime<item.starttime" class="wks">未开始</span>
+                                            <span v-if="nowTime>item.starttime&&nowTime<item.endtime" class="jxz">进行中</span>
+                                            <span v-if="nowTime>item.starttime&&nowTime>item.endtime" class="yjs">已结束</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+            <div class="index_container">
+                <div class="index_items">
+                    <h2 class="index_head">
+                        <span class="index_title">
+                            <img class="index_title_icon" src="/xds/resources/images/indexIcon/7.png" alt="">
+                            选调风采
+                        </span>
+                        <a href="bangList.html?active=0">More ></a>
+                    </h2>
+                    <ul class="index_lists four">
+                        <template v-if="bangfe1.length === 0">
+                            <h6 class="kong">
+                                <img src="xds/resources/images/is_kong1.png" alt="">
+                                <span>暂无数据</span>
+                            </h6>
+                        </template>
+                        <template v-else>
+                            <li v-for="item in bangfe1">
+                                <a class="index_li four" :href="'bangDetail.html?active=0&id='+item.id">
+                                    <div class="fc-avatar-container">
+                                        <div class="fc-avatar" style="width: 94px; height: 94px;border-radius: 50%;overflow: hidden;margin: 0 auto;">
+                                            <template v-if="item.headimg">
+                                                <img style="width: 100%; height: 100%;display: block;margin-top: 0;" :src="item.headimg_name | imgsrc"> 
+                                            </template>
+                                            <template v-else>
+                                                <img style="width: 100%; height: 100%;display: block;margin-top: 0;" src="./xds/resources/images/moren.png" alt="">
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <h4>{{item.realname}}</h4>
+                                    <p style="height: 50px;">
+                                        <span v-if="item.department_id_name">{{item.department_id_name}} |</span>
+                                        <span v-if="item.biye_name">{{item.biye_name}}届 |</span>
+                                        <span v-if="item.xueli_name">{{item.xueli_name}}毕业生</span>
+                                    </p>
+                                    <p v-if="!!item.work_province_name || !!item.work_city_name">
+                                        现工作于 {{item.work_province_name}} {{item.work_city_name}}
+                                    </p>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+            <div class="index_container friendlink">
+                <div class="index_items five">
+                    <h2 class="index_head">
+                        <span class="index_title">
+                            <img class="index_title_icon" src="/xds/resources/images/indexIcon/8.png" alt="">
+                            常用链接
+                        </span>
+                    </h2>
+                    <ul class="index_lists five">
+                        <template v-if="friendLinkList.length === 0">
+                            <h6 class="kong">
+                                <img src="xds/resources/images/is_kong1.png" alt="">
+                                <span>暂无数据</span>
+                            </h6>
+                        </template>
+                        <template v-else>
+                            <li v-for="place in friendLinkList">
+                                <div class="dropdown" v-if="place.cate_name != ''">
+                                    <div class="friend_title">{{place.cate_name}}</div>
+                                    <ul class="friend_link">
+                                        <li v-for="children in place.children">
+                                            <a :href="children.link" target="_blank">{{children.title}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!--右侧固定栏-->
+    <div class="suggest">
+        <a href="onlineQuestions.html?active=12">
+            <img style="width:16px;height:16px;" src="./xds/resources/images/indexIcon/10.png" alt="">在线提问
+        </a>
+    </div>
+    <div class="code_div">
+        <p class="tag-right-noborder_2"><img src="./xds/resources/images/jyb.jpg" alt=""></p>
+    </div>
+    <!-- footer -->
+    <section class="footer"></section>
+    <div class="wxb"></div>
+</body>
+</html>
+ <script src="./xds/resources/js/vendor/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script src="./xds/bower_components/nivo-slider/jquery.nivo.slider.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-paginator.js"></script>
+    <script src="./xds/resources/js/vendor/template.js"></script>
+    <script src="./xds/resources/js/vendor/template-util.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="./xds/bower_components/bootstrapValidator/dist/js/bootstrapValidator.js"></script>
+    <script src="./xds/resources/js/vendor/alertify/js/alertify.js"></script>
+    <script src="./xds/resources/js/vendor/ajaxfileupload.js"></script>
+    <script src="./xds/resources/js/vendor/district-picker/jquery.district.picker.js"></script>
+    <script src="./xds/resources/js/vendor/common.js"></script>
+    
+    <script src="./xds/resources/js/vendor/config.js"></script>
+    <script src="./xds/resources/js/vendor/api.js"></script>
+    <script src="./xds/resources/js/vendor/vue.min.js"></script>
+    <script src="./xds/resources/js/vendor/wx_get_openid.js"></script>
+    
+    <script src="./xds/bower_components/nivo-slider/jquery.nivo.slider.js"></script>
+    <script type="text/javascript" src="./xds/resources/js/index/index.js"></script>
+    <script src="./xds/resources/js/index/jquery.hoverdir.js"></script>
+    <script src="./xds/resources/js/index/modernizr.custom.97074.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.min.js"></script> -->
+    <script src="./xds/resources/js/vendor/slick.js"></script>
+<script>
+    $(".header").load("../public/header.html");
+    $(".footer").load("../public/footer.html");
+
+    function bangyangClick(obj){
+        var url = $(obj).attr("data-href");
+        window.location.href = url;
+    }
+    var nowTime=Number(JSON.stringify(Date.parse(new Date())).substr(0,10));
+    var now =parseInt(new Date().getTime()/1000);
+    var school_id = sessionStorage.getItem("school_id");
+    var userid = sessionStorage.getItem("userid");
+    var keywords = $.getUrlParam("keywords") || "";
+    var news3 = sessionStorage.getItem('news3');//招录进展
+    var news4 = sessionStorage.getItem('news4');//新闻资讯
+    var news6 = sessionStorage.getItem('news6');//通知公告
+    var vm = new Vue({
+        el: "#vueBox",
+        data: {
+            banners: [], //轮播图
+            newlist2: [], //招录进展
+            bangfe1:[], //榜样风采
+            bangfe2:[],
+            bangfe3:[],
+            newlist5: [], //新闻资讯
+            newlist6: [], //通知公告
+            dataList:[],
+            preachList:[],//选调宣讲
+            activityList: [], // 活动报名
+            friendLinkList: [], // 又亲链接
+            videolist:[],//视频列表
+            video_recom:[]//视频列表推荐
+        },
+        updated: function() {
+            $(".ul-pic-list ul.ul1 li").hover(function(){
+                $(this).addClass("boxshow")
+            },function(){
+                $(this).removeClass("boxshow")
+            })
+        },
+        filters: {
+            imgsrc:function(obj){
+                // return 'http:' + obj + '!150auto';
+                return obj;
+                // return 'http://162.105.209.116/public/upload/2019/11/16/1573884512-55.jpg';
+            },
+            videosrc:function(obj){
+                if(obj == ''|| obj == null || obj == undefined || obj =="0"){
+                    return 'xds/resources/images/video_mo.png';
+                }else{
+                    return obj;
+                }
+            },
+            banner_src: function(obj) {
+                if (obj == null || obj == "" || obj == undefined || obj == "0") {
+                    return "image/banner/banner1.png";
+                }
+                if (obj.indexOf('s1.jiuyeb') != -1) {
+                    return 'http:' + obj + '!y'
+                } else {
+                    return obj
+                }
+                // return 'http:' + obj + '!y';
+                // return obj;
+            },
+            zanwu:function(value) {
+                if(value == null || value=="" || value == undefined || value == "0"){
+                    return "暂无数据";
+                }else{
+                    return value;
+                }
+            },
+            capitalize: function(value) {
+                if (value == 0) {
+                    return "";
+                }
+                var date = new Date(value * 1000);
+                Y = date.getFullYear() + '-';
+                M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                D = (date.getDate()<10 ? '0'+date.getDate() : date.getDate() ) + ' ';
+                h = date.getHours() + ':';
+                m = date.getMinutes() + ':';
+                s = date.getSeconds();
+                return  Y + M + D;
+            },
+            time: function(value) {
+                    if (value == 0) {
+                        return "";
+                    }
+                    var date = new Date(value * 1000);
+                    Y = date.getFullYear() + '-';
+                    M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                    D = (date.getDate()<10?'0'+date.getDate():date.getDate()) + '  ';
+                    h = (date.getHours()<10?'0'+date.getHours():date.getHours()) + ':';
+                    m = (date.getMinutes()<10?'0'+date.getMinutes():date.getMinutes());
+                    return Y + M + D+h+m;
+                },
+                time2: function(value) {
+                    if (value == 0) {
+                        return "";
+                    }
+                    var date = new Date(value * 1000);
+                    Y = date.getFullYear() + '-';
+                    M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                    D = (date.getDate()<10?'0'+date.getDate():date.getDate()) + '  ';
+                    h = (date.getHours()<10?'0'+date.getHours():date.getHours()) + ':';
+                    m = (date.getMinutes()<10?'0'+date.getMinutes():date.getMinutes());
+                    return h+m;
+                },   
+        },
+    })
+
+    //banner图
+    http("POST", "/Schoolad/getlist", { "school_id": school_id, "cate_id": "1" }, function(e) {
+        vm.banners = e.data.list;
+        vm.$nextTick(function() {
+            $('#slider').nivoSlider({
+                pauseTime: 5000
+            });
+        })
+    })
+
+    //新闻资讯
+    http('POST', '/Article/getlist', {"school_id": school_id,"cate_id": news4,"page": 1,"size": 5,"show_type":1}, function (e) {
+        for (var i = 0; i < e.data.list.length; i++) {
+            e.data.list[i]['addtime1'] = timestampToTime(e.data.list[i].addtime, 1);
+            e.data.list[i]['addtime2'] = timestampToTime(e.data.list[i].addtime, 3);
+            vm.newlist5 = e.data.list;
+        }
+    });
+
+    //通知公告
+    http('POST', '/Article/getlist', {"school_id": school_id,"cate_id": news6,"page": 1,"size": 5,"show_type":1}, function (e) {
+        for (var i = 0; i < e.data.list.length; i++) {
+            e.data.list[i]['addtime1'] = timestampToTime(e.data.list[i].addtime, 1);
+            e.data.list[i]['addtime2'] = timestampToTime(e.data.list[i].addtime, 3);
+            vm.newlist6 = e.data.list;
+        }
+    });
+
+    //招录进展
+    http('POST', '/Article/getlist', {"school_id": school_id,"cate_id": news3,"page": 1,"size": 8,"show_type":1}, function (e) {
+        for (var i = 0; i < e.data.list.length; i++) {
+            e.data.list[i]['addtime1'] = timestampToTime(e.data.list[i].addtime, 8);
+            e.data.list[i]['addtime2'] = timestampToTime(e.data.list[i].addtime, 3);
+            vm.newlist2 = e.data.list;
+        }
+    });
+    //直播讲座
+    http('post','/Lecture/getlist',{"school_id":school_id,"show_type":1,"status":1,"type":1,"page":1,"size":4}, function(e){
+        vm.dataList= e.data.list;
+        vm.$nextTick(function () {
+            $('.slick2').slick({
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                autoplay: false,
+            });
+
+        })
+    });
+    //选调宣讲
+    http('post','/Lecture/getlist',{"school_id":school_id,"show_type":1,"status":1,"type":2,"page":1,"size":4}, function(e){
+        vm.preachList= e.data.list;
+    });
+    // 活动报名
+    http('post','/Lecture/getlist',{"school_id":school_id,"show_type":1,"status":1,"type":0,"page":1,"size":3}, function(e){
+        vm.activityList= e.data.list;
+    });
+    // 获取友情链接
+    http('POST', '/Schooladcategory/getlist', {"school_id": school_id}, function (e) {
+        vm.friendLinkList = e.data.list;
+    });
+    // 榜样
+    http('POST', '/Selectstu/getPastList', {"school_id": school_id,"page": 1,"size": 5}, function (e) {
+        vm.bangfe1 = e.data.list;
+        // vm.$nextTick(function () {
+        //     $('.slick').slick({
+
+        //         slidesToShow: 4,
+    
+        //         slidesToScroll: 1,
+    
+        //         autoplay: true,
+    
+        //         autoplaySpeed: 2000,
+    
+        //     });
+        // })
+    });
+
+    
+    http('post','/User/detail',{"id":userid},function(e){
+        sessionStorage.setItem("is_old_student", e.data.is_old_student);
+    })
+
+    $(document).on('mouseenter', '.dropdown', function () {
+        $(this).find(".friend_link").css("display", "block");
+    })
+    $(document).on('mouseleave', '.dropdown', function () {
+        $(this).find(".friend_link").css("display", "none");
+    })
+    $(".contact").hover(function(){
+        $(".contact_div").show();
+    },function(){
+        $(".contact_div").hide();
+    })
+    $(".codes").hover(function(){
+        $(".code_div").show();
+    },function(){
+        $(".code_div").hide();
+    });
+    $(document).ready(function(){
+        var wxpage = sessionStorage.getItem("wx");
+        var phone = sessionStorage.getItem("phone");
+        http("POST", "/School/detail", {"id":school_id}, function (e) {
+            if(wxpage=='false' && phone=='true'&& e.data.wx_domain){
+                $('.wxb').html('<a href=http://'+e.data.wx_domain+'/index.html style="width:32%;height:70px;line-height: 70px;font-size: 28px;border-radius: 5px;display:block;margin:80px auto;text-align: center;border:1px solid #3A71FB;color:#3A71FB;">查看微信版</a>')
+            }
+        })
+    })
+</script>

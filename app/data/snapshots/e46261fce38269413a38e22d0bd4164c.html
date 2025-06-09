@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="pragma" content="no-cache" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="telephone=no" name="format-detection" />
+<title>南开大学</title>
+<meta name="keywords" content="教师个人主页">
+<meta name="description" content="南开大学教师个人主页">
+
+<link type="text/css" href="/_css/_system/system.css" rel="stylesheet"/>
+<link type="text/css" href="/_upload/site/1/style/1/1.css" rel="stylesheet"/>
+<link type="text/css" href="/_upload/site/00/02/2/style/4/4.css" rel="stylesheet"/>
+<link type="text/css" href="/_js/_portletPlugs/sudyNavi/css/sudyNav.css" rel="stylesheet" />
+<link type="text/css" href="/_web/_platform/teacherHome/css/tecWebQuery.css" rel="stylesheet" />
+<link type="text/css" href="/_js/_portletPlugs/simpleNews/css/simplenews.css" rel="stylesheet" />
+
+<script language="javascript" src="/_js/jquery.min.js" sudy-wp-context="" sudy-wp-siteId="2"></script>
+<script language="javascript" src="/_js/jquery.sudy.wp.visitcount.js"></script>
+<script type="text/javascript" src="/_js/_portletPlugs/sudyNavi/jquery.sudyNav.js"></script>
+<script type="text/javascript" src="/_web/_platform/teacherHome/teaInfoMain/js/teaWebQuery.js"></script>
+<script type="text/javascript" src="/_web/_platform/teacherHome/teaInfoMain/js/tecSearch.js"></script>
+<script type="text/javascript" src="/_js/json/json2.js"></script>
+<script type="text/javascript" src="/_upload/tpl/00/01/1/template1/extends/extends.js"></script>
+<script type="text/javascript" src="/_upload/tpl/00/01/1/template1/js/jquery-slides-min.js"></script>
+
+<script type="text/javascript" src="/_js/json/json2.js"></script>
+<!--滚动样式-->
+<link rel="stylesheet" type="text/css" href="/_upload/tpl/00/01/1/template1/css/slick.min.css"/>
+<link rel="stylesheet" type="text/css" href="/_upload/tpl/00/01/1/template1/css/slick-theme.min.css"/>
+<link rel="stylesheet" href="/_upload/tpl/00/01/1/template1/t_style.css" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="/_upload/tpl/00/01/1/template1/css/search2/style.css" />
+<link rel="stylesheet" type="text/css" href="/_upload/tpl/00/01/1/template1/css/search2/selector.css" />
+
+<link rel="stylesheet" type="text/css" media="all" href="/_upload/tpl/00/01/1/template1/mobile.css" />  
+<link rel="stylesheet" type="text/css" media="all" href="/_upload/tpl/00/01/1/template1/media.css" />  
+<script type="text/javascript">
+        //搜索框
+	function loadTec_ClassifyContents(pageIndex) {
+		var keywords = $("#keyword").val();
+		keywords = encodeURI(encodeURI(keywords));
+		var careers = $("#wp_tw_careers").val();
+		careers = encodeURI(encodeURI(careers));
+		var departments = $('#wp_tw_departments').val();
+		var letters = $("#wp_tw_letters").val();
+		letters = encodeURI(encodeURI(letters));	
+		var url = '/jsflcx/list.htm' + '?keyword=' + keywords + '&selectedCareers=' + careers
+				+ '&selectedDepartments=' + departments + '&selectedletters=' + letters;
+		window.open(url,"_self");
+	}
+	function keyCodes(){
+		if(event.keyCode ==13){   
+		   document.getElementById("btns").click();
+		}   
+	}
+	$(function(){
+	    var btn =true;
+		$(".wp-paralist .selector").eq(0).find(".info_more").on("click",function(){
+			$(this).prev().toggleClass("add");
+			if(btn){
+			   $(this).html("收起<em></em>");
+			   btn =false;
+			}else{
+			   $(this).html("更多<em></em>");
+			  btn =true;
+			}
+		});
+	    var btns = true;
+		$(".wp-paralist .selector").eq(2).find(".info_more").on("click",function(){
+			$(this).prev().toggleClass("add");
+			if(btns){
+			   $(this).html("收起<em></em>");
+			   btns =false;
+			}else{
+			   $(this).html("更多<em></em>");
+			  btns =true;
+			}
+		});	
+      var num = w2imgJsons.length;
+	  var random_bg=Math.floor(Math.random()*num+0);
+	  console.log(w2imgJsons[random_bg].src);
+	  var imgSrc= w2imgJsons[random_bg].src;
+	  $(".bannercon img").attr("src",imgSrc);
+	  //$(".m-logbg").css({"background-image":"url("+imgSrc+")"});
+		
+	});
+</script>
+</head>
+<body class="main">
+<div class="wrapper head" id="header">
+	<div class="inner">
+  	<div class="head clearfix">
+	    <div class="head-left" frag="面板01">
+			<div class="sitelogo" frag="窗口01" portletmode="simpleSiteAttri">
+				<a href="/main.htm" title="返回南开大学首页"><img src="/_upload/tpl/00/01/1/template1/images/logo.png"/></a> 
+			</div>
+		</div>
+		<div class="head-mian">
+		</div>
+	    <div class="head-right" frag="面板03">
+			<div class="site-lang" frag="窗口03" >
+				
+					
+					<ul class="con">
+						
+						<li class="links i1"><a href="#" target="_self">学校主页</a></li>
+						
+						<li class="links i2"><a href="https://my2.nankai.edu.cn/_web/_platform/teacherHome/web/login.jsp" target="_self">用户登录</a></li>
+						
+						<li class="links i3"><a href="/zlxz/list.htm" target="_self">资料下载</a></li>
+						
+					</ul>	
+					
+								
+			</div>
+	   </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper wp-navi" id="nav">
+	<div class="inner">
+		<!-- 导航开始 -->
+		<div class="navbar" frag="面板1">
+			<div class="navbox" frag="窗口1" >
+				
+					<div class="navi-slide-head clearfix">
+					<h3 class="navi-slide-title"> 导航 </h3>
+					<a class="navi-slide-arrow"></a> </div>
+					
+					<ul class="wp-menu clearfix" data-nav-aside='{"title":"导航","index":1}'>
+						
+						<li class="menu-item i1 ">
+							<a class="menu-link " href="/main.htm" target="_self">网站主页</a>
+						</li>
+						
+						<li class="menu-item i2 ">
+							<a class="menu-link " href="/jsflcx/list.htm" target="_self">教师分类查询</a>
+						</li>
+						
+						<li class="menu-item i3 ">
+							<a class="menu-link " href="/rdzy/list.htm" target="_self">热点主页</a>
+						</li>
+						
+						<li class="menu-item i4 ">
+							<a class="menu-link " href="/zjgx/list.htm" target="_self">最近更新</a>
+						</li>
+						
+						<li class="menu-item i5 ">
+							<a class="menu-link " href="/tjgrzy/list.htm" target="_self">推荐个人主页</a>
+						</li>
+						
+					</ul>
+					
+				
+			</div>
+		</div>
+		<!-- 导航结束 -->
+	</div>
+</div>
+<div class="wrapper banner" id="banner">
+	<div class="inner">
+	    <div class="banner" frag="面板2">
+    	   <div class="bannerbox" frag="窗口2" portletmode="simpleNews">
+      	       <div id="wp_news_w2"> 
+
+                <script type="text/javascript">
+				  var w2imgJsons = [
+				    
+					{
+					  src:"/_upload/article/images/37/9b/88dc30e540f5adf49eb131335618/2287f0ff-fe8e-4bbc-9291-d13eb3ec6497.jpg",
+					  url:"/2017/1110/c49a312/page.htm"
+					},
+				    
+					{}
+				  ];
+				  w2imgJsons.pop();
+				 </script>
+			   </div> 
+
+            </div>
+		    <div class="bannercon"><img/></div>
+        </div>
+		<div class="wp-search clearfix">
+			<div class="search-left">
+			   
+					<div>
+						<div class="tit">教师查询</div>
+						<div class="con">
+							<div class="boxcon">
+								<div class="txtcon">
+								      <input id="keyword" name="keyword" type="text" alt="请输入姓名或者专业学科关键字查询" value="" onkeypress="return keyCodes()"/>
+								</div>
+							</div>
+							<div class="btns" id="btns" onclick="loadTec_ClassifyContents(1);">查找</div>
+						</div>
+					</div>
+				
+			</div>
+			<div class="search-right">
+				
+					<div>
+						<div class="nums">已有<span class="num wp_tw_total"></span>位老师开通了个人主页！</div>
+					</div>
+				
+			</div>
+		</div>
+		
+	</div>
+</div>
+<div class="wrapper main1" id="m-container1">
+	<div class="inner clearfix">
+		<div class="mod modbox clearfix">
+			<div class="ml" frag="面板11">
+				<div class="post post3 post-11 mbox">
+					 <div class="con">
+                        <div id="searchCondition" style="display: none">
+                            <input type="hidden" id="wp_tw_careers" name="careers" value=""/><input type="hidden" id="wp_tw_departments" name="departments" value=""/><input type="hidden" id="wp_tw_letters" name="letters" value=""/>
+                        </div>
+                        <div class="wp-paralist">
+
+                            <div class="selector s1">
+                                <div class="tit">
+                                    学院部门
+                                </div>
+                                <div class="main">
+                                    <ul class="departmentSelector">
+                                       <li id="tw_sc_letter_0" class="departments all selected checked">
+                                            不限
+                                       </li>
+                                    </ul>
+                                </div>
+								<div class="info_more">更多<em></em></div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="selector departmentSelectorDiv" style="display: none; background-color: #bfbfbf;">
+                                <div class="tit">
+                                    已选择：
+                                </div>
+                                <div class="main">
+                                    <ul class="selectedContent">
+                                        <li class="selectedDepartment"></li>
+                                        <div class="clear"></div>
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="selector s2">
+                                <div class="tit">
+                                    职称
+                                </div>
+                                <div class="main">
+                                    <ul class="careersSelector">
+                                        <li id="tw_sc_career_0" class="careers all selected checked">
+                                            不限
+                                        </li>
+                                    </ul>
+                                </div>
+								<div class="info_more">更多<em></em></div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="selector careersSelectorDiv" style="display: none; background-color: #bfbfbf;">
+                                <div class="tit">
+                                    已选择：
+                                </div>
+                                <div class="main">
+                                    <ul class="selectedContent">
+                                        <li class="selectedCareer"></li>
+                                        <div class="clear"></div>
+                                    </ul>
+                                </div>
+								
+                                <div class="clear"></div>
+                            </div>
+                            <div class="selector s3">
+                                <div class="tit">
+                                    姓氏首字母
+                                </div>
+                                <div class="main">
+                                    <ul class="letterSelector">
+                                        <li id="tw_sc_letter_0" class="letters all selected checked">
+                                            不限
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="selector letterSelectorDiv" style="display: none; background-color: #bfbfbf;">
+                                <div class="tit">
+                                    已选择：
+                                </div>
+                                <div class="main">
+                                    <ul class="selectedContent">
+                                        <li class="selectedLetter"></li>
+                                        <div class="clear"></div>
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+				</div>				
+			</div>
+			
+			
+		</div>
+	</div>				
+</div>
+<div class="wrapper main2" id="m-container2">
+	<div class="inner clearfix">
+		<div class="mod modbox clearfix">
+			<div class="ml" frag="面板21">
+				<div class="post post3 post-21 mbox" frag="窗口21" portletmode="simpleNews">
+					<div class="tt">
+						<h3 class="tit"><span class="title" frag="标题">热点主页</span></h3>
+						<div class="more_btn" frag="按钮" type="更多" link="http://my.nankai.edu.cn/rdzy/list.htm">    <a href="http://my.nankai.edu.cn/rdzy/list.htm" class="w21_more"><span class="more_text" frag="按钮内容">&gt;</span></a></div>
+					</div>
+					<div class="con">
+							<div class="news_list clearfix teach_list">
+								
+							</div>
+						
+				   </div>
+				</div>				
+			</div>
+		</div>
+	</div>				
+</div>
+<div class="wrapper main3" id="m-container3">
+	<div class="inner clearfix">
+		<div class="mod modbox clearfix">
+			<div class="ml" frag="面板31">
+				<div class="post post2 post-31 mbox" frag="窗口31" portletmode="departmentList">
+					<div class="tt">
+						<h3 class="tit"><span class="title" frag="标题" title="学院部门">    学院部门</span></h3>
+						<div class="more_btn" frag="按钮" type="更多" link="http://my.nankai.edu.cn/xylb/list.htm">    <a href="http://my.nankai.edu.cn/xylb/list.htm" class="w31_more"><span class="more_text" frag="按钮内容">&gt;</span></a></div>
+					</div>
+					<div class="con">
+						<div class="org">
+<ul class="tp-article-list clearfix" id="deptLists_w31"></ul>
+</div>
+<script> 
+ $().ready(function(){ 
+ getOrgData(1,2,"#deptLists_w31","/_wp3services/generalQuery?queryObj=teacherHome&t=0.4635887795980411",10,12,"/ssjglm/list.htm",1,1,0,1,0,"/_web/_platform/teacherHome/manage/fetchDepartClassify.do?_p=YXM9MiZ0PTEmZD00JnA9MSZtPVNOJg__");
+    }); 
+</script> 
+
+				   </div>
+				</div>				
+			</div>
+		</div>
+	</div>				
+</div>
+<div class="wrapper main4" id="m-container4">
+	<div class="inner clearfix">
+		<div class="mod modbox clearfix">
+			<div frag="面板42">
+				<div class="post post1 post-42 mbox" frag="窗口42" portletmode="simpleNews">
+					<div class="tt">
+						<h3 class="tit"><span class="title" frag="标题" title="最新更新">    最新更新</span></h3>
+						<div class="more_btn" frag="按钮" type="更多" link="http://my.nankai.edu.cn/zjgx/list.htm">    <a href="http://my.nankai.edu.cn/zjgx/list.htm" class="w42_more"><span class="more_text" frag="按钮内容">&gt;</span></a></div>
+					</div>
+					<div class="con">
+						
+						 <ul class="news_list clearfix" id="hotLists_w42">
+											 
+						 </ul>						
+						
+				   </div>
+				</div>				
+			</div>
+		</div>
+	</div>				
+</div>
+
+
+<div class="wrapper" id="footer">
+  <div class="footer-inner">
+    <div class="inner clearfix">
+      <div class="foot-left">
+        <p>
+          南开大学 版权所有 @2017<br />
+          天津市卫津路94号<br />
+          [300071] 津教备0061号<br />
+          津ICP备12003308号-1
+        </p>
+      </div>
+		<div class="er_img" >
+			<ul class="news_list">
+				<li class="news clearfix">
+					<div class="news_imgs">
+						<img src="/_upload/tpl/00/01/1/template1/images/erimg.png" width="120" height="120"/>
+					</div>
+					<div class="news_wz">
+						<div class="news_title"></div>
+					</div>
+				</li>			
+			</ul>
+		</div>
+
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/_upload/tpl/00/01/1/template1/js/main.js"></script>
+</body>
+<script type="text/javascript" src="/_upload/tpl/00/01/1/template1/js/slick.min.js"></script>
+<script type="text/javascript" src="/_upload/tpl/00/01/1/template1/js/comcus.js"></script>
+
+<script type="text/javascript" src="/_upload/tpl/00/01/1/template1/js/selector-career.js"></script>
+<script type="text/javascript" src="/_upload/tpl/00/01/1/template1/js/selector-department.js"></script>
+<script type="text/javascript" src="/_upload/tpl/00/01/1/template1/js/selector-letter.js"></script>
+
+<!--//底部结束-->
+<script type="text/javascript" src="/_upload/tpl/00/01/1/template1/js/app.js"></script>
+<script type="text/javascript">
+$(function(){
+	// 初始化SDAPP
+	new SDAPP({
+		"menu":{
+			type:"aside,slide"
+		}
+	});
+});
+</script>
+</html>
+
+ <image src="/_visitcount?siteId=2&type=1&columnId=2" style="display:none" width="0" height="0"></image>

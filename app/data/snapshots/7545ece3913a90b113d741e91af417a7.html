@@ -1,0 +1,56 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>管理员登录</title>
+<link href="skin/default/style.css?1" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../scripts/jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //检测IE
+        if ('undefined' == typeof (document.body.style.maxHeight)) {
+            window.location.href = 'ie6update.html';
+        }
+    });
+</script>
+</head>
+
+<body class="loginbody">
+<form method="post" action="./login.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="bCioXzifmyef6Vtns5dZ3noqc6pmwWV+fDrfdhlWPPH8//9uIYMqbaYxjgRvH5imOxkoxElZcg0xIKxX8wdNNEnsBttMLbv91Xs3WIl2gOg=" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="82312306" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="LMc6CpPqaL0AypfUbDbrbUS8Jn+bLtX+Y0o92uyv+ve01bzkpw9qi0ljNq1vrxd4IOjoU/Jmj2tAdKZaYmDb/uC/BmfuZQa1+Mos3Eie50Tux0kHvAgPuEuVVXXlGF14VJ0aKR8AZs9jFT/uNqAbJZFPx5tlZcUt1SxwYsk2ixw=" />
+</div>
+<div class="login-wrap" >
+    <div class="login-logo"><h1 style="color:#fff;font-size:35px;padding-top:10px;font-weight:500;">电子信息与光学工程学院内部教学科研管理系统</h1></div>
+    
+  <div class="login-form" style="margin: auto;width: 280px;">
+    <div class="col">
+      <input name="txtUserName" type="text" id="txtUserName" class="login-input" placeholder="用户名或账号..." title="管理员账号" />
+      <label class="icon user" for="txtUserName"></label>
+    </div>
+    <div class="col">
+      <input name="txtPassword" type="password" autocomplete="off" id="txtPassword" class="login-input" placeholder="密码..." title="管理员密码" />
+      <label class="icon pwd" for="txtPassword"></label>
+    </div>
+    <div class="col">
+      <input type="submit" name="btnSubmit" value="登 录" id="btnSubmit" class="login-btn" />
+    </div>
+  </div>
+  <div class="login-tips"><i></i><p id="msgtip">请输入用户名和密码</p></div>
+</div>
+
+<div class="copy-right">
+</div>
+</form>
+</body>
+</html>

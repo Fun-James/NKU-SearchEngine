@@ -1,0 +1,563 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    
+    
+    <title>项目信息公开</title>
+    <link rel="shortcut icon" href="/system/img/favicon.ico">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="keywords" content="科研创新服务平台,北京易普拉格科技股份有限公司">
+    <meta name="description" content="科研创新服务平台">
+    <!-- 其含义是，首先强制浏览器使用webkit内核（极速内核），如果浏览器没有webkit内核，则按照用户浏览器所支持的最新的ie的trident内核渲染页面（ie兼容内核），否则按照当前浏览器的标准内核渲染（ie标准内核） -->
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <link rel="stylesheet" href="/system/theme/css/theme-default.css">
+
+    <!-- path : /publicity/publicityList.jsp -->
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/system/script/jquery-3.4.1.min.js" charset="UTF-8"></script>
+    <script src="/system/script/sload.js" charset="UTF-8"></script>
+    <script src="/system/script/theme.js" charset="UTF-8"></script>
+    <link href="/system/script/admui/themes/global/css/bootstrap.min.css" rel="stylesheet" charset="UTF-8">
+    <script src="/system/script/admui/vendor/bootstrap/bootstrap.min.js" charset="UTF-8"></script>
+    <link href="/system/css/self.min.css" rel="stylesheet" charset="UTF-8">
+    <link href="/system/css/common.css" rel="stylesheet" charset="UTF-8">
+    <link href="/system/css/icon.css" rel="stylesheet" charset="UTF-8">
+    <script src="/system/script/ep.js" charset="UTF-8"></script>
+    <link href="/system/css/frame.css" rel="stylesheet" type="text/css">
+
+    <link href="/publicity/js/layui/css/layui.css" rel="stylesheet" charset="UTF-8">
+    <script src="/publicity/js/publicityPub.js" charset="UTF-8"></script>
+    <script src="/publicity/js/layui/layui.js" charset="UTF-8"></script>
+    <script src="/publicity/js/jquery.nicescroll.min.js" charset="UTF-8"></script>
+    <style>
+        /*.layui-btn {*/
+        /*	display: unset;*/
+        /*	white-space: unset;*/
+        /*}*/
+        @font-face {
+            font-family: "JetBrains Mono";
+            src: url("/font/JetBrainsMono.ttf") format('truetype');;
+        }
+
+        body {
+            font-family: "JetBrains Mono";
+        }
+
+        .table td, .table th {
+            vertical-align: inherit;
+        }
+
+        .layui-laypage-count, .layui-laypage-prev, .layui-laypage-next {
+            border-radius: 10px;
+        }
+
+        .layui-laypage span {
+            background-color: unset;
+        }
+
+        .layui-laypage-prev {
+            margin-right: 5px !important;
+        }
+
+        .layui-laypage-next {
+            margin-left: 5px !important;
+        }
+
+        label {
+            margin-bottom: unset;
+        }
+
+        .form-group {
+            margin-bottom: unset;
+        }
+
+        @media (min-width: 480px) {
+            .modal-dialog {
+                max-width: 917px;
+                margin: 0px auto;
+            }
+        }
+
+        .cell_th {
+            font-weight: bolder;
+            font-size: 15px;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 32px;
+            padding: .286rem .858rem;
+            font-size: 1rem;
+            line-height: 1.57142857;
+            color: #76838f;
+            background-color: #fff;
+            border: 1px solid #bfbfbf;
+            border-radius: .215rem;
+            box-shadow: none;
+            -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+        }
+
+        .formLabelCell label {
+            margin-top: 0px !important;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+
+        .m-panel-heading {
+            position: relative;
+            background-color: #0d8ee9;
+            height: 45px !important;
+            line-height: 45px !important;
+            border-width: 2px !important;
+            box-shadow: 0 1px 2px #d9d9d9 !important;
+            border-color: #ffce55 !important;
+        }
+
+        .m-ep-toolbar {
+            border-width: 2px !important;
+            box-shadow: 0 1px 2px #d9d9d9 !important;
+            border-color: #0d8ee9 !important;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        #m-table tr,th {
+            border-top: 2px solid #ff151c;
+            border-bottom: 1px solid #0d8ee9;
+            padding: 5px 15px;
+        }
+    </style>
+    <script type="text/javascript">
+        var curProjectId = '';
+        $(function () {
+            $("body").niceScroll({
+                cursorcolor: "#424242", //光标颜色
+                cursoropacitymin: 0, //当光标处于非活动状态时更改不透明度（scrollabar“hidden”状态），范围从1到0
+                cursoropacitymax: 1, //在光标处于活动状态时更改不透明度（scrollabar“可见”状态），范围从1到0
+                cursorwidth: "5px", //光标宽度（像素）
+                cursorborder: "1px solid #fff", //光标边框的css定义
+                cursorborderradius: "5px", //光标的边框半径（以像素为单位）
+                zindex: "auto", //更改滚动条div的z索引
+                scrollspeed: 60, //滚动速度
+                mousescrollstep: 40, //鼠标滚轮滚动速度（像素）
+                boxzoom: false, //启用框内容缩放
+                dblclickzoom: true, //（仅当boxzoom=true时）双击方框时缩放激活
+                gesturezoom: true, //（仅当boxzoom=真且使用触摸设备时）在缩小/缩小框时激活缩放
+                autohidemode: true //隐藏滚动条的工作方式
+            });
+
+            refreshPage();
+            
+            ep.datetimepicker($('input[datepicker=9f240a40-d4bd-41ae-9853-50db28a2fccc]'));
+            ep.datetimepicker($('input[datepicker=3c3bd6ff-b154-4059-b9e7-5a4e80e4bd8f]'));
+        });
+
+        function queryZXProject(this_) {
+            if (event.keyCode == 13) {
+                ep.doquery(this_);
+            }
+        }
+
+        function refreshPage() {
+            var refreshTime = 60 * 60 * 1000;
+            setInterval(function () {
+                window.location.reload()
+            }, refreshTime);
+        }
+
+        function showPublicity(id) {
+           var url = "/business/zXProjectAction!to_publicity.action?projectId=" + id;
+            window.open(url);
+           /*  $.post("/business/zXProjectAction!to_publicity.action", {projectId: id}, function (data) {
+                $("#pageContainer").html(data);
+                $("#showView").show();
+                curProjectId = id;
+            });  */
+        }
+
+        function refleshPage(el) {
+            $("input[name='chargerName']").val("");
+            $("input[name='name']").val("");
+            $("input[name='beginDate']").val("");
+            $("input[name='endDate']").val("");
+            ep.doquery(el);
+        }
+    </script>
+</head>
+<!-- 访问链接：/publicity/vprojectSearch -->
+<body style="background-color: #f2f2f2; padding-top: 0px; text-align: center;overflow-y: scroll;">
+<form action="/publicity/zXProjectSearch" id="vprojectForm" method="post">
+    <div class="panel-heading m-panel-heading"
+         style="position: relative; background-color: #0d8ee9; height: 45px; line-height: 45px;">
+        <div class="panel-title">
+            <span class="title" style="vertical-align: middle;">
+                <span style="height: 40px; line-height: 40px;">
+                    <img src="/system/img/logo.png" style="height: 32px;width: 32px;">
+                </span>
+                <span style="height: 40px; line-height: 40px; font-size: 18px;color: white;">南开大学项目信息公开</span>
+            </span>
+        </div>
+    </div>
+    <!-- 查询区域开始 -->
+    <div eprole="ep-toolbar">
+        <table eprole="table-form" id="m-table" class="table-condensed form-horizontal">
+            <tbody>
+            <tr eprole="row">
+                <td eprole="cell" width="15%" colspan="1" style="vertical-align: middle;">
+                    <div class="form-group form-group-sm ep-full">
+                        <input type="text" name="name" id="name_" value="" onkeypress="queryZXProject(this);"
+                               class="form-control" placeholder="项目名称"/>
+                    </div>
+                </td>
+
+                <td eprole="cell" width="15%" colspan="1" style="vertical-align: middle;">
+                    <div class="form-group form-group-sm ep-full">
+                        <input type="text" name="chargerName" id="chargerName_" value=""
+                               onkeypress="queryZXProject(this);"
+                               class="form-control" placeholder="负责人"/>
+                    </div>
+                </td>
+                
+                <td width="12.5%" class="formLabelCell">
+                	<label for="beginDate_">实施开始时间:</label>
+                </td>
+                <td eprole="cell" width="15%" colspan="1" style="vertical-align: middle;">
+                    <div class="form-group form-group-sm ep-full">
+                       	<input type="date" name="beginDate" id="beginDate_" value=""
+                               onkeypress="queryZXProject(this);"
+                               class="form-control"/>
+                    </div>
+                </td>
+                <td width="12.5%" class="formLabelCell">
+                	<label for="endDate_">实施结束时间:</label>
+                </td>
+				<td eprole="cell" width="15%" colspan="1" style="vertical-align: middle;">
+                    <div class="form-group form-group-sm ep-full">
+                        	<input type="date" name="endDate" id="endDate_" value=""
+                               onkeypress="queryZXProject(this);"
+                               class="form-control"/>
+                    </div>
+                </td>
+				 
+                
+                <td rowspan="4" style="vertical-align:middle;">
+                    <div class="btn-group" style="float: right">
+                        <button type="button" class="btn btn-default btn-search-toolbar btn-lg" id="queryButton" onclick="ep.doquery(this);">查询</button>&nbsp;
+                        <button type="button" class="btn btn-default btn-search-toolbar btn-lg" id="refreshButton" onclick="refleshPage(this);">重置</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 查询区域结束 -->
+
+    <div eprole="fieldset" legend="项目信息公开" style="margin-bottom: 50px;">
+        <table class="table table-striped table-bordered table-hover grid border-none" style="table-layout: fixed;">
+            <tbody>
+            <tr class="ep-col-number">
+                <td style="text-align: center;" class="viewFormLabelCell cell_th">序号</td>
+                <td style="text-align: center; width: 400px" class="viewFormLabelCell cell_th">项目名称</td>
+                <td style="text-align: center;" class="viewFormLabelCell cell_th">项目负责人</td>
+                <td style="text-align: center;" class="viewFormLabelCell cell_th">项目批准号</td>
+                <td style="text-align: center;" class="viewFormLabelCell cell_th">立项时间</td>
+            </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">1</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f94266cc101942a2703a836b3')"
+                           class="">大型枢纽港口减污降碳协同治理与技术示范</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">刘妍</td>
+                    <td style="text-align: center;vertical-align: middle;">2024YFC3712302 </td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-12-01</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">2</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f970fdaf201971acd49db2485')"
+                           class="">溶剂催化加速空穴传输材料氧化反应及在钙钛矿太阳电池中的应用研究</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">郭冰</td>
+                    <td style="text-align: center;vertical-align: middle;">62404222</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-30</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">3</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f96d35a9c01970a55395e6b9a')"
+                           class="">探索F1Fo-ATP合成酶形成线粒体通透     性转换孔机制及药物开发策略</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">贡红日</td>
+                    <td style="text-align: center;vertical-align: middle;">无</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-26</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">4</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f96d35a9c01970b409bb678c4')"
+                           class="">基于废弃纤维纺制品碳化的柔性纤维锂电池</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">赵庆</td>
+                    <td style="text-align: center;vertical-align: middle;">2024YFB3814500</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-26</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">5</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f9642fec20196d17b0417223e')"
+                           class="">中医健脾补肾解毒方案干预核心 环节预防结直肠癌复发转移的循证评价与优势人群特征研究</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">苏小敏</td>
+                    <td style="text-align: center;vertical-align: middle;">2024ZD0521203</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-15</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">6</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f96d35a9c0196f5dca56a5917')"
+                           class="">中美全面竞争及应对措施</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">葛顺奇</td>
+                    <td style="text-align: center;vertical-align: middle;">无</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-14</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">7</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f96d35a9c0196f5e030d65936')"
+                           class="">XXX及中美贸易战态势分析</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">刘程</td>
+                    <td style="text-align: center;vertical-align: middle;">无</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-14</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">8</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f96d35a9c0196f5e2ee13594f')"
+                           class="">XX对华政策及亚太局势</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">刘兴华</td>
+                    <td style="text-align: center;vertical-align: middle;">无</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-14</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">9</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f96d35a9c0196f5e7b4155964')"
+                           class="">特朗普政府关税政策对我国主要行业和产业部门的影响及应对</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">张千</td>
+                    <td style="text-align: center;vertical-align: middle;">无</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-14</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">10</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f96d35a9c0196f5f3a16d59eb')"
+                           class="">崛起大国的历史与中国——中美贸易前途分析</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">佟家栋</td>
+                    <td style="text-align: center;vertical-align: middle;">无</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-14</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">11</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f9642fec20196c3503c2e64a8')"
+                           class="">高真实感元宇宙空气-布料耦合仿真关键方法技术</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">任博</td>
+                    <td style="text-align: center;vertical-align: middle;">62441218</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-12</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">12</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f9642fec20196adfcd7a1592d')"
+                           class="">面向SDGs的全球南方典型城市空间形态降温减碳影响机制与优化调控</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">曹植</td>
+                    <td style="text-align: center;vertical-align: middle;">W2412159</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-08</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">13</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f9642fec20196adf4b39558ea')"
+                           class="">防控抗性杂草的超高效磺酰脲除草剂的合理设计、活性评价以及分子 机制研究</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">王建国</td>
+                    <td style="text-align: center;vertical-align: middle;">W2412124</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-08</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">14</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f9642fec20196a9d000932376')"
+                           class="">经典名方“从郁论治”一体化调控代谢重编程改善糖脂代谢紊乱机制全景解析</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">姜民</td>
+                    <td style="text-align: center;vertical-align: middle;">2024ZD0530700</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-07</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">15</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f9642fec20196a4a206e05ebc')"
+                           class="">代管人才-周传政</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">周传政</td>
+                    <td style="text-align: center;vertical-align: middle;">第9批</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-06</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">16</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f9642fec20196a49f94a55eb3')"
+                           class="">代管人才-刘永胜</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">刘永胜</td>
+                    <td style="text-align: center;vertical-align: middle;">第9批</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-06</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">17</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f9642fec20196a49cc1fd5ea2')"
+                           class="">代管人才-黄毅</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">黄毅</td>
+                    <td style="text-align: center;vertical-align: middle;">第9批</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-06</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">18</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f9642fec20196a499c93f5e71')"
+                           class="">代管人才-王玉明</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">王玉明</td>
+                    <td style="text-align: center;vertical-align: middle;">第9批</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-06</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">19</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f9642fec20196a39c1e135080')"
+                           class="">曲率与拓扑及精细不变量的研究</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">张伟平</td>
+                    <td style="text-align: center;vertical-align: middle;">2024YFA1013202</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-05-06</td>
+                </tr>
+            
+                <tr class="ep-col-number">
+                    <td style="text-align: center;vertical-align: middle;">20</td>
+                    <td style="text-align: left;vertical-align: middle;">
+                        <a style="cursor: pointer;color: #0d8ee9" onclick="showPublicity('5e9ead3f96d35a9c0196f0e22c6c1445')"
+                           class="">亚太价值链的重构与合作前景</a>
+                    </td>
+                    <td style="text-align: center;vertical-align: middle;">APEC研究中心</td>
+                    <td style="text-align: center;vertical-align: middle;">25JJD790004</td>
+                   
+                   <td style="text-align: center;vertical-align: middle;">2025-04-30</td>
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+    
+        
+        
+            <input type="hidden" name="curPage" id="curPage">
+            </legend>
+            <div id="page"></div>
+        
+    
+</form>
+<div class="modal" id="showView" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered bd-example-modal-lg">
+        <div class="modal-content">
+            <div class="modal-body" id="pageContainer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage, layer = layui.layer;
+        laypage.render({
+            elem: 'page',
+            count: '18598',
+            curr: "1",
+            limit: 20,
+            layout: ['count', 'prev', 'page', 'next', 'skip'],
+            theme: '#0d8ee9',
+            jump: function (obj, first) {
+                if (!first) {
+                    $("#curPage").val(obj.curr);
+                    $("#vprojectForm").submit();
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

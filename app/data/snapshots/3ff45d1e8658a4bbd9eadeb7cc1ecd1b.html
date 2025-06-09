@@ -1,0 +1,699 @@
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>忘记密码</title>
+<meta name="viewport"
+	content="width=device-width,user-scalable=yes,minimum-scale=1.0,maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge">
+<link rel="stylesheet" href="/newfindPassword/css/elementUi.css">
+<link rel="stylesheet" href="/newfindPassword/css/logo.css" />
+<link rel="stylesheet" href="/newfindPassword/css/hoverToolTips.css" />
+</head>
+<body>
+	<style>
+.resetPwd {
+	background: #5a5357 !important;
+	cursor: not-allowed;
+}
+</style>
+	<div class="loginSection" id="app">
+		<div class="banner"></div>
+		<div class="login_box">
+			<h4 class="login_logo">
+				<img src="/newfindPassword/img/logo.png" alt="" class="logoImg">
+				<span class="line"></span> <span>统一身份认证平台</span>
+			</h4>
+			<div class="login_main">
+				<div class="login_left">
+					<h5>找回密码</h5>
+					<!-- 找回密码 -->
+					<div v-show="forget_pwd" style="display: none;">
+						<el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+						<el-row :gutter="10"> <el-col :span="24"> <el-form-item
+							label="" prop="user"> <el-input
+							placeholder="请输入您的门户账号" prefix-icon="el-icon-user-solid"
+							v-model="ruleForm.user"> </el-input> </el-form-item> </el-col> <el-col :span="16">
+						<el-form-item label="" prop="code1"> <el-input
+							placeholder="请输入验证码" prefix-icon="el-icon-success"
+							v-model="ruleForm.code1"> </el-input> </el-form-item> </el-col> <el-col :span="8">
+						<img @click="rest_code()" style="cursor: pointer;"
+							title="点击重新获取验证码" src="/newfindPassword/validateCode/validate_code.jsp" alt=""
+							class="codeImg"> </el-col> <el-col :span="24"> <el-form-item
+							label="" prop="user"> <el-select
+							v-model="ruleForm.value" @change="select_change"
+							placeholder="请选择" style="width: 100%;"> <el-option
+							v-for="item in ruleForm.options" :key="item.value"
+							:label="item.label" :value="item.value"> </el-option> </el-select> </el-form-item> </el-col> <el-col
+							:span="24"> <el-form-item label="" prop="tel">
+						<el-input id="zh" placeholder="请输入手机号" v-model="ruleForm.tel">
+						</el-input> </el-form-item> </el-col> <el-col :span="16"> <el-form-item label=""
+							prop="code2"> <el-input id="vcode"
+							placeholder="请输入手机验证码" v-model="ruleForm.code2"> </el-input> </el-form-item> </el-col> <el-col
+							:span="8"> <el-button class="gain_btn get_vcode"
+							@click="getuserCode()">获取验证码</el-button> </el-col> <el-col :span="24">
+						<el-button class="gain_btn radios" @click="to_setPassword()">确定</el-button>
+						</el-col> </el-row> </el-form>
+						<a href="javascript:;" class="link_text" @click="to_feishu()">通过飞书扫码找回密码</a>
+
+					</div>
+					<!-- 重置密码 -->
+					<div v-show="new_pwd" style="display: none;">
+					
+						<el-form :model="new_pwd_Form" :rules="new_pwd_rules" ref="new_pwd_Form"> 
+							<el-row :gutter="10">
+							<el-col :span="24">
+							<el-form-item label="" prop="user">
+								<el-input id="zh" placeholder="请输入手机号" v-model="ruleForm.ertel">
+
+							</el-form-item> 
+							</el-col>
+							<el-col :span="24">
+							<el-form-item label="" prop="user">
+								 <el-input id="vcode" placeholder="请输入手机验证码" v-model="ruleForm.ercode2" style="width: 60%;"> </el-input>
+								 <el-button class="gain_btn get_er_vcode" @click="getusererCode()" style="width: 38%;">获取验证码</el-button>
+							</el-form-item> 
+							</el-col>
+							
+							<el-col :span="24">
+							<el-form-item label="" prop="user">
+								<el-input type="password" @focus="show_tip" @blur="hide_tip" @input="change_tip" placeholder="请输入密码" v-model="new_pwd_Form.pwd1"> </el-input> 
+							</el-form-item> 
+							</el-col>
+							<el-col :span="24">
+								<el-form-item label="" prop="user"> 
+									<el-input type="password" placeholder="请再次输入密码" v-model="new_pwd_Form.pwd2">
+									</el-input> 
+								</el-form-item> 
+							</el-col> 
+							<el-col :span="24"> 
+								<el-button class="gain_btn radios savePassword" @click="resetPwd">确定</el-button>
+							</el-col> 
+							</el-row> 
+						</el-form>
+
+					</div>
+
+				</div>
+				<div class="common_hoverToolTip" v-show="showTip" style="display: none;">
+					<div class="toolTip_content">
+						<h5 class="toolTip_title">强制规则（管理员设定）</h5>
+						<ul class="toolTip_list">
+							<li><img src="/imgs/success.png" alt=""
+								class="toolTip_imgs"> <span>1、{{pwd_format}}</span></li>
+							<li><img src="/imgs/success.png" alt=""
+								class="toolTip_imgs"> <span>2、连续3位及以上数字不能连号（例如123、654）；</span>
+							</li>
+							<li><img src="/imgs/success.png" alt=""
+								class="toolTip_imgs"> <span>3、连续3位及以上字母不能连续（例如abc、gfe）；</span>
+							</li>
+							<li><img src="/imgs/success.png" alt=""
+								class="toolTip_imgs"> <span>4、密码不能包含连续3个及以上相同字符（例如aaa、111）</span>
+							</li>
+							<li><img src="/imgs/success.png" alt=""
+								class="toolTip_imgs"> <span>5、密码不能包含账号</span></li>
+							<li><img src="/imgs/success.png" alt=""
+								class="toolTip_imgs"> <span>6、密码不能包含用户姓名大小写全拼</span></li>
+							<li><img src="/imgs/success.png" alt=""
+								class="toolTip_imgs"> <span>7、密码长度不少于{{pwd_minlen}}位</span>
+							</li>
+							<li v-if="pwd_rule==2"><img
+								src="/imgs/success.png" alt=""
+								class="toolTip_imgs"> <span>8、特殊字符包括：_^~!@#$%^&*.,+/&lt;&gt;?:\";'{}`()</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="login_right">
+					<h6 class="remarks_title">使用帮助和说明</h6>
+					<ul class="remarks_content">
+						<li>1.绑定过邮箱或者手机的用户均可通过本页面找回密码，推荐优先通过手机找回密码。</li>
+						<li>2.在填写帐号步骤中，请在门户账号一栏里面填写门户账号，一般是学号或职工号。</li>
+						<li>3.通过手机或者邮箱获取的验证码完成验证后即可填写您想重置密码。</li>
+						<li>4.推荐使用Chrome浏览器，如果使用的是360浏览器，请切换到极速模式。</li>
+						<li>
+							5.若手机号、邮箱或飞书扫码均无法使用，需要本人持有效身份证件到服务中心重置密码（地址：八里台服务楼103，津南综合业务西楼师生服务大厅16-17号窗口）。
+						</li>
+						<li>6.找回密码遇到的其他问题请联系管理员处理，联系电话：23508231、85358890转网信办、85358000，联系邮箱：xxbxxb@nankai.edu.cn。</li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="/newfindPassword/js/md5.js"></script>
+	<script type="text/javascript" src="/newfindPassword/js/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="/newfindPassword/js/vue.js"></script>
+	<script type="text/javascript" src="/newfindPassword/js/elementUi.js"></script>
+	<script type="text/javascript" src="/newfindPassword/js/jsencrypt.js"></script>
+	<script>
+	var encrypt=new JSEncrypt();
+	encrypt.setPublicKey(publickKey);
+		var wx_find_scan_page_url = 'https://feishu.nankai.edu.cn/qrcodelogin/login.html?appid=nk00162263601214';
+		
+		new Vue(
+				{
+					el : '#app',
+					data : {
+						forget_pwd : true,
+						new_pwd : false,
+						Scan_code : false,
+						pwd_minlen : '',
+						pwd_format : '',
+						pwd_rule : '',
+						pingYin : '',
+						showTip : false,
+						vode_fail:false,
+						ruleForm : {
+							user : '',
+							code1 : '',
+							tel : '',
+							code2 : '',
+							ertel:'',
+							ercode2:'',
+							value : "letter",
+							options : [ {
+								value : 'letter',
+								label : '通过短信找回'
+							},{
+								value : 'mailbox',
+								label : '通过邮箱找回'
+							}],
+						},
+						rules : {},
+						new_pwd_Form : {
+							pwd1 : '',
+							pwd2 : ''
+						},
+						new_pwd_rules : {}
+					},
+
+					watch : {},
+					mounted : function() {
+						
+					},
+					methods : {
+						change_tip : function() {
+
+							//var uri = window.location.href.substring(0,window.location.href.indexOf("newfindPassword"));
+							if (this.new_pwd_Form.pwd1.trim().length < Number(this.pwd_minlen)) {
+								jQuery(".toolTip_list li").eq(6).find("img").attr("src", "/imgs/error.png");
+							} else {
+								jQuery(".toolTip_list li").eq(6).find("img").attr("src", "/imgs/success.png");
+							}
+							if (this.pwd_rule == 1) {
+								if (this.new_pwd_Form.pwd1.indexOf(" ") != -1) {//包含空格
+									jQuery(".toolTip_list li").eq(0).find("img").attr("src","/imgs/error.png");
+								} else {
+									var reg = new RegExp(/^(?![^A-Z]+$)(?![^a-z]+$)(?!\D+$)/);
+									if (!(reg.test(this.new_pwd_Form.pwd1.trim()) && this.new_pwd_Form.pwd1.trim() != "")) {
+										jQuery(".toolTip_list li").eq(0).find("img").attr("src","/imgs/error.png");
+									} else {
+										jQuery(".toolTip_list li").eq(0).find("img").attr("src","/imgs/success.png");
+									}
+								}
+							} else if (this.pwd_rule == 2) {
+								if (this.new_pwd_Form.pwd1.indexOf(" ") != -1) {//包含空格
+									jQuery(".toolTip_list li").eq(0).find("img").attr("src","/imgs/error.png");
+								} else {
+									var reg_1 = /^(?![^A-Z]+$)(?![^a-z]+$)(?!\D+$)/;
+									var reg_2 = /[_^~!@#$%^&*.,+/<>?:\";'{}`()]/;
+									if (!(reg_1.test(this.new_pwd_Form.pwd1.trim())&& reg_2.test(this.new_pwd_Form.pwd1.trim()) && this.new_pwd_Form.pwd1.trim() != "")) {
+										jQuery(".toolTip_list li").eq(0).find("img").attr("src","/imgs/error.png");
+									} else {
+										jQuery(".toolTip_list li").eq(0).find("img").attr("src","/imgs/success.png");
+									}
+								}
+							} else {
+								if (this.new_pwd_Form.pwd1.trim() == ""|| this.new_pwd_Form.pwd1.indexOf(" ") != -1) {
+									jQuery(".toolTip_list li").eq(0).find("img").attr("src","/imgs/error.png");
+								} else {
+									jQuery(".toolTip_list li").eq(0).find("img").attr("src","/imgs/success.png");
+								}
+							}
+							if (this.new_pwd_Form.pwd1.trim().indexOf(this.ruleForm.user.trim()) != -1) {
+								jQuery(".toolTip_list li").eq(4).find("img").attr("src", "/imgs/error.png");
+							} else {
+								jQuery(".toolTip_list li").eq(4).find("img").attr("src", "/imgs/success.png");
+							}
+							if (this.new_pwd_Form.pwd1.trim().toLocaleUpperCase().indexOf(this.pingYin) != -1) {
+								jQuery(".toolTip_list li").eq(5).find("img").attr("src", "/imgs/error.png");
+							} else {
+								jQuery(".toolTip_list li").eq(5).find("img").attr("src", "/imgs/success.png");
+							}
+							//var tag1 = /\d((?<=0)1|(?<=1)2|(?<=2)3|(?<=3)4|(?<=4)5|(?<=5)6|(?<=6)7|(?<=7)8|(?<=8)9){2}/;
+							var tag1 = /(0(?=1)|1(?=2)|2(?=3)|3(?=4)|4(?=5)|5(?=6)|6(?=7)|7(?=8)|8(?=9)){2}\d/;
+							//var tag2 = /\d((?<=9)8|(?<=8)7|(?<=7)6|(?<=6)5|(?<=5)4|(?<=4)3|(?<=3)2|(?<=2)1|(?<=1)0){2}/;
+							var tag2 = /(9(?=8)|8(?=7)|7(?=6)|6(?=5)|5(?=4)|4(?=3)|3(?=2)|2(?=1)|1(?=0)){2}\d/;
+							if (tag1.test(this.new_pwd_Form.pwd1.trim())|| tag2.test(this.new_pwd_Form.pwd1.trim())) {
+								jQuery(".toolTip_list li").eq(1).find("img").attr("src", "/imgs/error.png");
+							} else {
+								jQuery(".toolTip_list li").eq(1).find("img").attr("src", "/imgs/success.png");
+							}
+							//var tag2_1 = /\w((?<=a)b|(?<=b)c|(?<=c)d|(?<=d)e|(?<=e)f|(?<=f)g|(?<=g)h|(?<=h)i|(?<=i)j|(?<=j)k|(?<=k)l|(?<=l)m|(?<=m)n|(?<=n)o|(?<=o)p|(?<=p)q|(?<=q)r|(?<=r)s|(?<=s)t|(?<=t)u|(?<=u)v|(?<=v)w|(?<=w)x|(?<=x)y|(?<=y)z){2}/;
+							var tag2_1 = /(a(?=b)|b(?=c)|c(?=d)|d(?=e)|e(?=f)|f(?=g)|g(?=h)|h(?=i)|i(?=j)|j(?=k)|k(?=l)|l(?=m)|m(?=n)|n(?=o)|o(?=p)|p(?=q)|q(?=r)|r(?=s)|s(?=t)|t(?=u)|u(?=v)|v(?=w)|w(?=x)|x(?=y)|y(?=z)){2}\w/;
+							//var tag2_2 = /\w((?<=A)B|(?<=B)C|(?<=C)D|(?<=D)E|(?<=E)F|(?<=F)G|(?<=G)H|(?<=H)I|(?<=I)J|(?<=J)K|(?<=k)L|(?<=L)M|(?<=M)N|(?<=N)O|(?<=O)P|(?<=P)Q|(?<=Q)R|(?<=R)S|(?<=S)T|(?<=T)U|(?<=U)V|(?<=V)W|(?<=W)X|(?<=X)Y|(?<=Y)Z){2}/;
+							var tag2_2 = /(A(?=B)|B(?=C)|C(?=D)|D(?=E)|E(?=F)|F(?=G)|G(?=H)|H(?=I)|I(?=J)|J(?=K)|K(?=L)|L(?=M)|M(?=N)|N(?=O)|O(?=P)|P(?=Q)|Q(?=R)|R(?=S)|S(?=T)|T(?=U)|U(?=V)|V(?=W)|W(?=X)|X(?=Y)|Y(?=Z)){2}\w/;
+							//var tag3_1 = /\w((?<=z)y|(?<=y)x|(?<=x)w|(?<=w)v|(?<=v)u|(?<=u)t|(?<=t)s|(?<=s)r|(?<=r)q|(?<=q)p|(?<=p)o|(?<=o)n|(?<=n)m|(?<=m)l|(?<=l)k|(?<=k)j|(?<=j)i|(?<=i)h|(?<=h)g|(?<=g)f|(?<=f)e|(?<=e)d|(?<=d)c|(?<=c)b|(?<=b)a){2}/;
+							var tag3_1 = /(z(?=y)|y(?=x)|x(?=w)|w(?=v)|v(?=u)|u(?=t)|t(?=s)|s(?=r)|r(?=q)|q(?=p)|p(?=o)|o(?=n)|n(?=m)|m(?=l)|l(?=k)|k(?=j)|j(?=i)|i(?=h)|h(?=g)|g(?=f)|f(?=e)|e(?=d)|d(?=c)|c(?=b)|b(?=a)){2}\w/;
+							//var tag3_2 = /\w((?<=Z)Y|(?<=Y)X|(?<=X)W|(?<=W)V|(?<=V)U|(?<=U)T|(?<=T)S|(?<=S)R|(?<=R)Q|(?<=Q)P|(?<=P)O|(?<=O)N|(?<=N)M|(?<=M)L|(?<=L)K|(?<=K)J|(?<=J)I|(?<=I)H|(?<=H)G|(?<=G)F|(?<=F)E|(?<=E)D|(?<=D)C|(?<=C)B|(?<=B)A){2}/;
+							var tag3_2 = /(Z(?=Y)|Y(?=X)|X(?=W)|W(?=V)|V(?=U)|U(?=T)|T(?=S)|S(?=R)|R(?=Q)|Q(?=P)|P(?=O)|O(?=N)|N(?=M)|M(?=L)|L(?=K)|K(?=J)|J(?=I)|I(?=H)|H(?=G)|G(?=F)|F(?=E)|E(?=D)|D(?=C)|C(?=B)|B(?=A)){2}\w/;
+							if (tag2_1.test(this.new_pwd_Form.pwd1.trim())|| tag2_2.test(this.new_pwd_Form.pwd1.trim())|| tag3_1.test(this.new_pwd_Form.pwd1.trim())|| tag3_2.test(this.new_pwd_Form.pwd1.trim())) {
+								jQuery(".toolTip_list li").eq(2).find("img").attr("src", "/imgs/error.png");
+							} else {
+								jQuery(".toolTip_list li").eq(2).find("img").attr("src", "/imgs/success.png");
+							}
+							var tag3_1 = /([0-9])\1{2}/;
+							var tag3_2 = /([0-9a-zA-Z])\1{2}/;
+							if (tag3_1.test(this.new_pwd_Form.pwd1.trim())|| tag3_2.test(this.new_pwd_Form.pwd1.trim())) {
+								jQuery(".toolTip_list li").eq(3).find("img").attr("src", "/imgs/error.png");
+							} else {
+								jQuery(".toolTip_list li").eq(3).find("img").attr("src", "/imgs/success.png");
+							}
+							var tag4 = /[_^~!@#$%^&*.,+/<>?:\";'{}`()]/;
+							if (this.pwd_rule == 2&& !tag4.test(this.new_pwd_Form.pwd1.trim())) {
+								jQuery(".toolTip_list li").eq(7).find("img").attr("src", "/imgs/error.png");
+							} else {
+								jQuery(".toolTip_list li").eq(7).find("img").attr("src", "/imgs/success.png");
+							}
+						},
+						show_tip : function() {
+							this.showTip = true;
+							this.change_tip();
+						},
+						hide_tip : function() {
+							this.showTip = false;
+						},
+						//erci
+						getusererCode:function(){
+							var self = this;
+							if(this.ruleForm.ertel.trim()!=""&&this.ruleForm.value.trim()!=""){
+								$.ajax({
+										url:"/sso/newfindPassword/getErCode",
+										type:"post",
+										data:{
+											tel : this.ruleForm.ertel.trim()
+										},
+										dataType:"json",
+										success:function(data){
+											if(data[0].state==true){
+												var n = 120;
+												$(".get_er_vcode span").html(n);
+												$(".get_er_vcode").addClass("get_vcoded");
+												var time = setInterval(function() {
+													if (n > 0) {
+														n--;
+														$(".get_er_vcode span").html(n);
+													} else {
+														$(".get_er_vcode span").html(
+																"获取验证码");
+														$(".get_er_vcode").removeClass(
+																"get_vcoded");
+														clearInterval(time);
+													}
+
+												}, 1000);
+											}else{
+												self.tip(data[0].msg, "error");
+											}
+										},error:function(e){}
+									});
+							}else{
+								this.tip("请输入手机号", "error");
+							}
+						},
+						//获取验证码
+						getuserCode : function() {
+							if ($(".get_vcode").hasClass("get_vcoded")) {
+								return;
+							}
+							var self = this;
+							var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+							if (this.ruleForm.user.trim() == "") {
+								this.tip("账号不能为空", "error");
+								return;
+							}
+							if (this.ruleForm.code1.trim() == "") {
+								this.tip("验证码不能为空", "error");
+								return;
+							}
+							if (this.ruleForm.value == "") {
+								this.tip("登录方式不能为空", "error");
+								return;
+							}
+							//手机
+							if (this.ruleForm.value == "letter"
+									&& this.ruleForm.tel.trim() == "") {
+								this.tip("手机号不能为空", "error");
+								return;
+							}
+							//邮件
+							if (this.ruleForm.value == "mailbox"
+									&& this.ruleForm.tel.trim() == "") {
+								this.tip("邮箱账号不能为空", "error");
+								return;
+							}
+							if (this.ruleForm.value == "mailbox"
+									&& this.ruleForm.tel.trim() != "") {
+
+								if (!reg.test(this.ruleForm.tel.trim())) {
+									this.tip("邮箱格式不正确", "error");
+									return;
+								}
+							}
+
+							$.ajax({
+								url : "/sso/newfindPassword/getCode",
+								type : "post",
+								data : {
+									zh : encrypt.encrypt(this.ruleForm.user.trim()),
+									code : this.ruleForm.code1.trim(),
+									type : this.ruleForm.value.trim(),
+									tel : encrypt.encrypt(this.ruleForm.tel.trim())
+								},
+								dataType : "json",
+								success : function(data) {
+									if (!data[0].state) {
+										self.tip(data[0].msg, "error");
+										self.rest_code();
+										self.vode_fail = false;
+									} else {
+										self.vode_fail = true;
+										var n = 120;
+										$(".get_vcode span").html(n);
+										$(".get_vcode").addClass("get_vcoded");
+										var time = setInterval(function() {
+											if (n > 0) {
+												n--;
+												$(".get_vcode span").html(n);
+											} else {
+												$(".get_vcode span").html(
+														"获取验证码");
+												$(".get_vcode").removeClass(
+														"get_vcoded");
+												clearInterval(time);
+											}
+
+										}, 1000);
+									}
+								},
+								error : function(e) {
+								}
+							});
+						},
+						//提示
+						tip : function(message, type) {
+							$(".savePassword").removeClass("resetPwd");
+							this.$message({
+								message : message,
+								type : type
+							});
+						},
+						//重置验证码
+						rest_code : function() {
+							$(".codeImg").attr("src","/newfindPassword/validateCode/validate_code.jsp?t="+ new Date().getTime());
+						},
+						//下拉选change事件
+						select_change : function(value) {
+
+							this.ruleForm.user = "";
+							this.ruleForm.code1 = "";
+							this.ruleForm.tel = "";
+							this.ruleForm.code2 = "";
+							this.rest_code();
+							if (value == "letter") {
+								$("#zh").attr("placeholder", "请输入手机号");
+								$("#vcode").attr("placeholder", "请输入手机验证码");
+							} else {
+								$("#zh").attr("placeholder", "请输入邮箱账号");
+								$("#vcode").attr("placeholder", "请输入邮箱验证码");
+							}
+
+						},
+						//去设置密码
+						to_setPassword : function() {
+							var self = this;
+							
+							if (this.ruleForm.user.trim() == "") {
+								this.tip("账号不能为空", "error");
+								return;
+							}
+							if (this.ruleForm.code1.trim() == "") {
+								this.tip("验证码不能为空", "error");
+								return;
+							}
+							if (this.ruleForm.value == "") {
+								this.tip("登录方式不能为空", "error");
+								return;
+							}
+							//手机
+							if (this.ruleForm.value == "letter"
+									&& this.ruleForm.tel.trim() == "") {
+								this.tip("手机号不能为空", "error");
+								return;
+							}
+							//邮件
+							if (this.ruleForm.value == "mailbox"&& this.ruleForm.tel.trim() == "") {
+								this.tip("邮箱账号不能为空", "error");
+								return;
+							} else if (this.ruleForm.value == "mailbox"&& this.ruleForm.tel.trim() != "") {
+								var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+								if (!reg.test(this.ruleForm.tel.trim())) {
+									this.tip("邮箱格式不正确", "error");
+									return;
+								}
+							}
+
+							if (this.ruleForm.value == "letter"&& this.ruleForm.code2.trim() == "") {
+								this.tip("手机验证码不能为空", "error");
+								return;
+							}
+							if (this.ruleForm.value == "mailbox"&& this.ruleForm.code2.trim() == "") {
+								this.tip("邮箱验证码不能为空", "error");
+								return;
+							}
+							$.ajax({
+								url : "/sso/newfindPassword/toRestPassword",
+								data : {
+									zh : encrypt.encrypt(this.ruleForm.user.trim()),
+									type : this.ruleForm.value.trim(),
+									tel : encrypt.encrypt(this.ruleForm.tel.trim()),
+									vcode : this.ruleForm.code2.trim()
+								},
+								type : "post",
+								dataType : "json",
+								success : function(data) {
+
+									if (!data[0].state) {
+										self.tip(data[0].msg, "error");
+										self.rest_code();
+									} else {
+										self.pwd_minlen = data[0].PASSWORD_MINLENGTH;
+										self.pingYin = data[0].pingYin;
+										if (data[0].PASSWORD_FORMAT == "1") {
+											self.pwd_rule = 1;
+											self.pwd_format = "密码复杂度：由英文字母（区分大小写）、数字组成（不能包含空格）；";
+										} else if (data[0].PASSWORD_FORMAT == "2") {
+											self.pwd_rule = 2;
+											self.pwd_format = "密码复杂度：必须包含三种字符：大写字母、小写字母和数字，推荐包含特殊字符；";
+											$(".common_hoverToolTip").css("height","380px");
+											$(".common_hoverToolTip").css("top","205px");
+										} else {
+											self.pwd_rule = 0;
+											self.pwd_format = "密码复杂度：无要求（不能包含空格）；";
+
+										}
+										self.forget_pwd = false;
+										self.new_pwd = true;
+									}
+
+								},
+								error : function(e) {
+								}
+							});
+
+						},
+						//去飞书扫码
+						to_feishu : function() {
+							if (wx_find_scan_page_url != ""&& wx_find_scan_page_url != 'null') {
+								window.open(wx_find_scan_page_url);
+							} else {
+								alert("未配置扫一扫地址，请联系管理员");
+							}
+						},
+						// 重置密码
+						resetPwd : function() {
+							if(this.ruleForm.ertel.trim()==""){
+								this.tip("手机号不能为空", "error");
+								return;
+							}
+							if(this.ruleForm.ercode2.trim()==""){
+								this.tip("验证码不能为空", "error");
+								return;
+							}
+							if ($(".savePassword").hasClass("resetPwd")) {
+								return;
+							}
+							$(".savePassword").addClass("resetPwd");
+
+							var self = this;
+							if (this.new_pwd_Form.pwd1.trim() == "") {
+								this.tip("密码不能为空", "error");
+								return;
+							}
+
+							if (this.new_pwd_Form.pwd1.trim().length < Number(this.pwd_minlen)) {
+								this.tip("密码长度不能小于" + this.pwd_minlen + "位",
+										"error");
+								return;
+							}
+							if (this.ruleForm.value == "") {
+								this.tip("登录方式不能为空", "error");
+								return;
+							}
+							//手机
+							if (this.ruleForm.ertel.trim() == "") {
+								this.tip("手机号不能为空", "error");
+								return;
+							}
+							
+							//erci
+							if(this.ruleForm.ertel.trim()==""){
+								this.tip("验证码", "error");
+								return;
+							}
+							
+							if (this.pwd_rule == 1) {
+								if (this.new_pwd_Form.pwd1.indexOf(" ") != -1) {//包含空格
+									this.tip("密码不能包含空格", "error");
+									return;
+								} else {
+									var reg = new RegExp(
+											/^(?![^A-Z]+$)(?![^a-z]+$)(?!\D+$)/);
+									if (!reg.test(this.new_pwd_Form.pwd1.trim())) {
+										this.tip("不符合密码复杂度规则", "error");
+										return;
+									}
+								}
+
+							} else if (this.pwd_rule == 2) {
+								if (this.new_pwd_Form.pwd1.indexOf(" ") != -1) {//包含空格
+									this.tip("密码不能包含空格", "error");
+									return;
+								} else {
+									var reg_1 = /^(?![^A-Z]+$)(?![^a-z]+$)(?!\D+$)/;
+									var reg_2 = /[_^~!@#$%^&*.,+/<>?:\";'{}`()]/;
+									if (!(reg_1.test(this.new_pwd_Form.pwd1.trim())
+											&& reg_2.test(this.new_pwd_Form.pwd1.trim()) 
+											&& this.new_pwd_Form.pwd1.trim() != "")) {
+										this.tip("不符合密码复杂度规则", "error");
+										return;
+									}
+								}
+
+							} else {
+								if (this.new_pwd_Form.pwd1.trim() == ""
+										|| this.new_pwd_Form.pwd1.indexOf(" ") != -1) {
+									this.tip("密码不能为空且不能包含空格", "error");
+									return;
+								} 
+							}
+
+							if (this.new_pwd_Form.pwd1.trim().indexOf(
+									this.ruleForm.user.trim()) != -1) {
+								this.tip("密码不能包含账号", "error");
+								return;
+							}
+							if (this.new_pwd_Form.pwd1.trim().toLocaleUpperCase().indexOf(this.pingYin) != -1) {
+								this.tip("密码不能包含用户姓名大小写全拼", "error");
+								return;
+							}
+							//var tag1 = /\d((?<=0)1|(?<=1)2|(?<=2)3|(?<=3)4|(?<=4)5|(?<=5)6|(?<=6)7|(?<=7)8|(?<=8)9){2}/;
+							//var tag2 = /\d((?<=9)8|(?<=8)7|(?<=7)6|(?<=6)5|(?<=5)4|(?<=4)3|(?<=3)2|(?<=2)1|(?<=1)0){2}/;
+							var tag1 = /(0(?=1)|1(?=2)|2(?=3)|3(?=4)|4(?=5)|5(?=6)|6(?=7)|7(?=8)|8(?=9)){2}\d/;
+							var tag2 = /(9(?=8)|8(?=7)|7(?=6)|6(?=5)|5(?=4)|4(?=3)|3(?=2)|2(?=1)|1(?=0)){2}\d/;
+							if (tag1.test(this.new_pwd_Form.pwd1.trim())||tag2.test(this.new_pwd_Form.pwd1.trim())) {
+								this.tip("连续3位及以上数字不能连号（例如123、654）", "error");
+								return;
+							}
+							//var tag2_1 = /\w((?<=a)b|(?<=b)c|(?<=c)d|(?<=d)e|(?<=e)f|(?<=f)g|(?<=g)h|(?<=h)i|(?<=i)j|(?<=j)k|(?<=k)l|(?<=l)m|(?<=m)n|(?<=n)o|(?<=o)p|(?<=p)q|(?<=q)r|(?<=r)s|(?<=s)t|(?<=t)u|(?<=u)v|(?<=v)w|(?<=w)x|(?<=x)y|(?<=y)z){2}/;
+							//var tag2_2 = /\w((?<=A)B|(?<=B)C|(?<=C)D|(?<=D)E|(?<=E)F|(?<=F)G|(?<=G)H|(?<=H)I|(?<=I)J|(?<=J)K|(?<=k)L|(?<=L)M|(?<=M)N|(?<=N)O|(?<=O)P|(?<=P)Q|(?<=Q)R|(?<=R)S|(?<=S)T|(?<=T)U|(?<=U)V|(?<=V)W|(?<=W)X|(?<=X)Y|(?<=Y)Z){2}/;
+							//var tag3_1 = /\w((?<=z)y|(?<=y)x|(?<=x)w|(?<=w)v|(?<=v)u|(?<=u)t|(?<=t)s|(?<=s)r|(?<=r)q|(?<=q)p|(?<=p)o|(?<=o)n|(?<=n)m|(?<=m)l|(?<=l)k|(?<=k)j|(?<=j)i|(?<=i)h|(?<=h)g|(?<=g)f|(?<=f)e|(?<=e)d|(?<=d)c|(?<=c)b|(?<=b)a){2}/;
+							//var tag3_2 = /\w((?<=Z)Y|(?<=Y)X|(?<=X)W|(?<=W)V|(?<=V)U|(?<=U)T|(?<=T)S|(?<=S)R|(?<=R)Q|(?<=Q)P|(?<=P)O|(?<=O)N|(?<=N)M|(?<=M)L|(?<=L)K|(?<=K)J|(?<=J)I|(?<=I)H|(?<=H)G|(?<=G)F|(?<=F)E|(?<=E)D|(?<=D)C|(?<=C)B|(?<=B)A){2}/;
+							var tag2_1 = /(a(?=b)|b(?=c)|c(?=d)|d(?=e)|e(?=f)|f(?=g)|g(?=h)|h(?=i)|i(?=j)|j(?=k)|k(?=l)|l(?=m)|m(?=n)|n(?=o)|o(?=p)|p(?=q)|q(?=r)|r(?=s)|s(?=t)|t(?=u)|u(?=v)|v(?=w)|w(?=x)|x(?=y)|y(?=z)){2}\w/;
+							var tag2_2 = /(A(?=B)|B(?=C)|C(?=D)|D(?=E)|E(?=F)|F(?=G)|G(?=H)|H(?=I)|I(?=J)|J(?=K)|K(?=L)|L(?=M)|M(?=N)|N(?=O)|O(?=P)|P(?=Q)|Q(?=R)|R(?=S)|S(?=T)|T(?=U)|U(?=V)|V(?=W)|W(?=X)|X(?=Y)|Y(?=Z)){2}\w/;
+							var tag3_1 = /(z(?=y)|y(?=x)|x(?=w)|w(?=v)|v(?=u)|u(?=t)|t(?=s)|s(?=r)|r(?=q)|q(?=p)|p(?=o)|o(?=n)|n(?=m)|m(?=l)|l(?=k)|k(?=j)|j(?=i)|i(?=h)|h(?=g)|g(?=f)|f(?=e)|e(?=d)|d(?=c)|c(?=b)|b(?=a)){2}\w/;
+							var tag3_2 = /(Z(?=Y)|Y(?=X)|X(?=W)|W(?=V)|V(?=U)|U(?=T)|T(?=S)|S(?=R)|R(?=Q)|Q(?=P)|P(?=O)|O(?=N)|N(?=M)|M(?=L)|L(?=K)|K(?=J)|J(?=I)|I(?=H)|H(?=G)|G(?=F)|F(?=E)|E(?=D)|D(?=C)|C(?=B)|B(?=A)){2}\w/;
+							if (tag2_1.test(this.new_pwd_Form.pwd1.trim())|| tag2_2.test(this.new_pwd_Form.pwd1.trim())|| tag3_1.test(this.new_pwd_Form.pwd1.trim())|| tag3_2.test(this.new_pwd_Form.pwd1.trim())) {
+								this.tip("连续3位及以上字母不能连续（例如abc、gfe）", "error");
+								return;
+							}
+
+							var tag3_1 = /([0-9])\1{2}/;
+							var tag3_2 = /([0-9a-zA-Z])\1{2}/;
+							if (tag3_1.test(this.new_pwd_Form.pwd1.trim())|| tag3_2.test(this.new_pwd_Form.pwd1.trim())) {
+								this.tip("密码不能包含连续3个及以上相同字符（例如aaa、111）","error");
+								return;
+							}
+							var tag4 = /[_^~!@#$%^&*.,+/<>?:\";'{}`()]/;
+							if (this.pwd_rule == 2&& !tag4.test(this.new_pwd_Form.pwd1.trim())) {
+								this.tip("必须包含特殊字符(如：_^~!@#$%^&*.,+/<>?:\";'{}`())","error");
+								return;
+							}
+							if (this.new_pwd_Form.pwd2.trim() == "") {
+								this.tip("确认密码不能为空", "error");
+								return;
+							}
+
+							if (this.new_pwd_Form.pwd1 != this.new_pwd_Form.pwd2) {
+								this.tip("两次输入密码不一致", "error");
+								return;
+							}
+							$.ajax({
+								url : "/sso/newfindPassword/resetPassword",
+								data : {
+									uid:encrypt.encrypt(this.ruleForm.user.trim()),
+									newPassword : hex_md5(this.new_pwd_Form.pwd1
+											.trim()),
+									codePassword : hex_md5(this.new_pwd_Form.pwd2
+											.trim()),
+									ercicode:this.ruleForm.ercode2.trim(),
+									ertel:this.ruleForm.ertel.trim()
+								},
+								type : "post",
+								dataType : "json",
+								success : function(data) {
+									if (data[0].state) {
+										$(".savePassword").removeClass("resetPwd");
+										var i = 3;
+										self.tip('修改密码成功，'+ i+ ' s后跳转登录页',"success");
+										setInterval(
+												function() {
+													if (i > 0) {
+														i--;
+														$(".el-message__content").text('修改密码成功，'+ i+ ' s后跳转登录页');
+													} else {
+														//window.location.href = "/";
+														window.location.href = 'https://sso1.nankai.edu.cn';
+													}
+
+												}, 1000);
+									} else {
+										self.tip(data[0].msg, "error");
+									}
+								},
+								error : function(e) {
+								}
+							});
+						},
+
+					}
+				})
+	</script>
+</body>
+
+</html>

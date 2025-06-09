@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>南开大学物理学院</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="copyright" content="">
+    <meta name="author" content="">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <base href="http://phy.less.nankai.edu.cn/public/">
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.css" rel="stylesheet">
+    <link href="assets/css/nivo-slider.css" rel="stylesheet">
+    <link href="assets/css/site.css" rel="stylesheet">
+    <script type="text/javascript" charset="utf-8" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="assets/js/jquery.nivo.slider.js"></script>
+    <script type="text/javascript" charset="utf-8" src="assets/js/jquery.dotdotdot.js"></script>   
+    <script data-main="assets/js/main.js" src="assets/js/require.js"></script>
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5.js"></script>
+    <script src="assets/js/respond.js"></script>
+    <![endif]-->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/icon/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/icon/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/icon/apple-touch-icon-72.png">
+    <link rel="shortcut icon" href="assets/icon/favicon.png">
+</head>
+<body class="layout-index">
+    <div id="wrap">
+        <div id="body"><div class="container-fluid layout-index">
+					<div class="col-md-12 col-xs-12 u-box no-padding ">
+			<img src="http://phy.less.nankai.edu.cn/public/!category/icon/1/南开大学物理.png" width="100%" style="overflow: hidden;" />		</div>
+					<div class="col-md-12 col-xs-12 u-box no-padding ">
+			<nav class="navbar navbar-default" role="navigation" style="margin:0px;border:0px;background: none;">
+    <div class="navbar-header">
+        <button class="navbar-toggle btn btn-ok btn-block" type="button" data-toggle="collapse" data-target="#example-navbar-collapse" style="margin-right: 0px;color: #999;">
+            导航菜单        </button>
+    </div>
+    <div class="collapse navbar-collapse" id="example-navbar-collapse" style="padding: 0px">
+        <ul class="nav navbar-nav" id="navbar" style="margin: 0px">
+                        <li class="active"><a href="http://phy.less.nankai.edu.cn/public/">首页</a></li>
+                        	<li class="">
+            		<a href="http://phy.less.nankai.edu.cn/public/category/instruction">平台简介</a>
+            	</li>
+                        	            	<li class="">
+            		<a href="http://phy.less.nankai.edu.cn/public/category/rtyuiknb">人员情况</a>
+            	</li>
+                        	            	<li class="">
+            		<a href="http://phy.less.nankai.edu.cn/public/category/equipment">仪器列表</a>
+            	</li>
+                        	            	<li class="">
+            		<a href="http://phy.less.nankai.edu.cn/public/category/guizhang">规章制度</a>
+            	</li>
+                        	            	<li class="">
+            		<a href="http://phy.less.nankai.edu.cn/public/category/biaozhun">收费标准</a>
+            	</li>
+                        	            	<li class="">
+            		<a href="http://phy.less.nankai.edu.cn/public/category/ziliao">资料下载</a>
+            	</li>
+                        	            	<li class="">
+            		<a href="http://phy.less.nankai.edu.cn/public/category/women">联系我们</a>
+            	</li>
+                        	        </ul>
+    </div>
+</nav>
+<script type="text/javascript">
+(function($){
+    var reloadMenu = function () {
+        var container = $('#navbar')
+            , lis = $('#navbar > li')
+        if ($(window).width() >= 768) {
+            lis.css('width', (container.width() - lis.length * 2 - 20 ) / lis.length)
+        }
+        else {
+            lis.css('width', 'auto')
+        }
+    }
+    $(window).resize(reloadMenu)
+    reloadMenu()
+})(jQuery)
+</script>		</div>
+					<div class="col-md-4 col-xs-12 u-box  float_left">
+			<div class="search" style="height: 40px;">
+	<form action="search" method="get">
+        <div class="input-group">
+        	<div class="input-group-btn search-btn-group">
+        		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text">仪器</span>
+                        <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-domain" role="menu" aria-labelledby="button">
+                	<li><a value="equipment">仪器</a></li>
+                	<li><a value="all">全文</a></li>
+                </ul>
+                <input type="hidden" name="search_type" value="equipment" />
+        	</div>
+            <input id="search-input" class="form-control search-input" type="text" placeholder="请输入关键词" name="keywords">
+            <span class="input-group-addon">
+                <button class="btn search-btn" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+    <script>
+        require(['main'], function($){
+            $('.search .search-btn-group').on('click', '.dropdown-menu a', function (e) {
+                var me = $(this)
+                    , value = me.attr('value')
+                    , text = me.html()
+                $('.search .dropdown-toggle span.text').html(text)
+                $('.search input[name=search_type]').attr('value', value)
+
+            })
+        })
+    </script>
+</div>		</div>
+					<div class="col-md-4 col-xs-12 u-box  float_right">
+			<div class="module-box-six"  style="height: 410px;">
+	<div class="title">
+		<div class="row">
+			<div class="col-xs-6">
+				<i class="fa "></i>
+				<span>平台动态</span>
+			</div>
+			<div class="col-xs-6">
+				<div class="pull-right">
+					<a href="http://phy.less.nankai.edu.cn/public/category/ieijg">
+						更多&#160;<i class="fa fa-angle-double-right"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+				<ul>
+						<li class="post">
+				<a href="http://phy.less.nankai.edu.cn/public/post/16">
+					<span class="it">关于大仪平台切换新统一身份认证的通</span>
+				</a>
+			</li>
+					</ul>
+			</div>
+</div>		</div>
+					<div class="col-md-4 col-xs-12 u-box  float_right">
+			<div id="wrapper" style="height: 410px">
+	<div class="slider-wrapper theme-default">
+    	<div id="slider" class="nivoSlider">
+						<img src="http://phy.less.nankai.edu.cn/public/!category/icon/5/前台banner_0004_7.jpg" alt="" height="410px" data-thumb="http://phy.less.nankai.edu.cn/public/!category/icon/5/前台banner_0004_7.jpg" />
+						<img src="http://phy.less.nankai.edu.cn/public/!category/icon/5/聚焦离子束显微镜_副本.png" alt="" height="410px" data-thumb="http://phy.less.nankai.edu.cn/public/!category/icon/5/聚焦离子束显微镜_副本.png" />
+						<img src="http://phy.less.nankai.edu.cn/public/!category/icon/5/前台banner_0000_11.jpg" alt="" height="410px" data-thumb="http://phy.less.nankai.edu.cn/public/!category/icon/5/前台banner_0000_11.jpg" />
+						<img src="http://phy.less.nankai.edu.cn/public/!category/icon/5/前台banner_0002_9.jpg" alt="" height="410px" data-thumb="http://phy.less.nankai.edu.cn/public/!category/icon/5/前台banner_0002_9.jpg" />
+						<img src="http://phy.less.nankai.edu.cn/public/!category/icon/5/扫描电子显微镜_副本.png" alt="" height="410px" data-thumb="http://phy.less.nankai.edu.cn/public/!category/icon/5/扫描电子显微镜_副本.png" />
+						<img src="http://phy.less.nankai.edu.cn/public/!category/icon/5/显微镜原子力_副本.jpg" alt="" height="410px" data-thumb="http://phy.less.nankai.edu.cn/public/!category/icon/5/显微镜原子力_副本.jpg" />
+					</div>
+	</div>
+</div>
+<style type="text/css">
+	.nivo-main-image { height:410px !important; }
+	.nivo-slice,.nivo-slice img { height:410px !important; }
+</style>
+<script type="text/javascript" charset="utf-8" src="assets/js/jquery.nivo.slider.js"></script>
+<script>
+(function(){
+	$('#slider').nivoSlider({
+		effect: 'fade',
+		slices: 15,
+		boxCols: 6,
+		boxRows: 4,
+		animSpeed: 500,
+		pauseTime: 5000,
+		directionNav:false,
+		directionNavHide:false,
+		controlNav: '',
+		controlNavThumbs: true, // Use thumbnails for Control Nav  
+		afterLoad: function() {
+			$('.nivoSlider img').css({
+				'max-height' : '410px',
+				'min-height' : '410px'
+           	})
+		}
+	});
+})(jQuery);
+</script>		</div>
+					<div class="col-md-4 col-xs-12 u-box  ">
+			<div class="login-box-two" style="height: 360px">
+	<div class="title-font">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="name">进入仪器预约系统</div>
+			</div>
+		</div>
+	</div>
+	<div class="content" id="login-content">
+		<form class="login-form" method="post" role="form" action="http://phy.less.nankai.edu.cn/lims/login/">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">
+						<i class="fa fa-user"></i>
+					</div>
+					<input type="text" class="form-control" id="inputUser" name="token" placeholder="用户名">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">
+						<i class="fa fa-lock"></i>
+					</div>
+					<input type="password" class="form-control" id="inputpwd" name="password" placeholder="密码">
+				</div>
+			</div>
+		  	<div class="login-btn">
+			 	<div class="row">
+			 		<div class="col-md-6 col-md-offset-3">
+				 		<button type="submit" name="submit" value="登录" class="btn btn-default btn-block">
+				 		登录</button>
+				 	</div>
+			 	</div>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+require(['main'], function ($) {
+  var remote_url = "http://" + "phy.less.nankai.edu.cn:80" + "/lims/current_user";
+  $.ajax({
+    url: remote_url,
+    dataType: 'jsonp',
+    jsonp: 'callback',
+    success: function(result) {
+      if(!result.name || !result.img) return;
+      $.ajax({
+        url: "ajax/user/current",
+        data: {
+          'name':result.name,
+          'img':result.img
+        }
+      }).done(function(data) {
+        $('div#login-content').html(data);
+      });
+    }
+  });
+})
+</script>
+		</div>
+					<div class="col-md-4 col-xs-12 u-box  float_left">
+			<div class="module-box-one" style="height: 300px !important;">
+	<div class="title">
+		<div class="tname">
+			<div class="row">
+				<div class="col-xs-6">
+					<i class="fa "></i>
+					<span>联系我们</span>
+				</div>
+				<div class="col-xs-6">
+					<div class="pull-right">
+						<a href="http://phy.less.nankai.edu.cn/public/category/women" class="more">
+							更多&#160;<i class="fa fa-angle-double-right"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content row">
+					<div class="post-clamp">
+				<div>
+	<a font-size:14px;"="" style="white-space: normal; box-sizing: border-box;">
+	<p class="connectus" style="white-space:normal;box-sizing:border-box;margin-top:10px;margin-bottom:10px;padding:0px;filter:none;font-size:14px;caret-color:#333333;color:#333333;font-family:;" "="">
+		地址：天津市南开区卫津路94号
+	</p>
+	<p class="connectus" style="white-space:normal;box-sizing:border-box;margin-top:10px;margin-bottom:10px;padding:0px;filter:none;font-size:14px;caret-color:#333333;color:#333333;font-family:;" "="">
+		邮编：300071
+	</p>
+	<p class="connectus" style="white-space:normal;box-sizing:border-box;margin-top:10px;margin-bottom:10px;padding:0px;filter:none;font-size:14px;caret-color:#333333;color:#333333;font-family:;" "="">
+		电话：022-23501594
+	</p>
+</a> 
+	<p class="connectus" style="white-space:normal;box-sizing:border-box;margin-top:10px;margin-bottom:10px;padding:0px;filter:none;font-size:14px;caret-color:#333333;color:#333333;font-family:;" "="">
+		<a font-size:14px;"="" style="white-space: normal; box-sizing: border-box;">意见建议及反馈投诉邮箱：zhaoweilu</a><a font-size:14px;"="" style="font-size: 12px; line-height: 1.5; box-sizing: border-box;">@nankai.edu.cn</a> 
+	</p>
+</div>
+<div>
+	<a font-size:14px;"="" style="white-space: normal; box-sizing: border-box;"><br />
+</a> 
+</div>
+<div>
+	<a font-size:14px;"="" style="white-space: normal; box-sizing: border-box;"><br />
+</a> 
+</div>
+<div>
+	<a font-size:14px;"="" style="white-space: normal; box-sizing: border-box;"><br />
+</a> 
+</div>			</div>
+			</div>
+</div>
+		</div>
+					<div class="col-md-4 col-xs-12 u-box  ">
+			<div class="link-box-two" style="height: 300px;background-color: #FFFFFF">
+	<div class="content vertical"  >
+					<a href="" class="item" style="color: #000000">
+									<i class="fa fa-bookmark"></i>
+								相关链接			</a>
+					<a href="http://ptrk.less.nankai.edu.cn" class="item" style="color: #000000">
+								南开大学仪器管理平台统一入口			</a>
+					<a href="http://sbc.nankai.edu.cn/sfw_cms/e?page=cms.index" class="item" style="color: #000000">
+								南开大学实验室设备处			</a>
+					<a href="http://physics.nankai.edu.cn" class="item" style="color: #000000">
+								南开大学物理学院			</a>
+					<a href="http://www.nankai.edu.cn" class="item" style="color: #000000">
+								南开大学			</a>
+			</div>
+</div>		</div>
+					<div class="col-md-4 col-xs-12 u-box  float_right">
+			<div class="module-box-five" style="height: 300px;">
+	<div class="title">
+		<div class="row">
+			<div class="col-xs-6">
+				<i class="fa "></i>
+				<span>仪器介绍</span>
+			</div>
+			<div class="col-xs-6">
+				<div class="pull-right">
+					<a href="http://phy.less.nankai.edu.cn/public/category/yiqijieshao">
+						更多&#160;<i class="fa fa-angle-double-right"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+				<ul>
+						<li class="post">
+				<a href="http://phy.less.nankai.edu.cn/public/post/10">
+					<span class="it">钛宝石激光器系统</span>
+				</a>
+			</li>
+						<li class="post">
+				<a href="http://phy.less.nankai.edu.cn/public/post/14">
+					<span class="it">紫外分光光度计</span>
+				</a>
+			</li>
+						<li class="post">
+				<a href="http://phy.less.nankai.edu.cn/public/post/13">
+					<span class="it">半导体器件分析仪</span>
+				</a>
+			</li>
+						<li class="post">
+				<a href="http://phy.less.nankai.edu.cn/public/post/12">
+					<span class="it">长焦高分辨光谱仪</span>
+				</a>
+			</li>
+						<li class="post">
+				<a href="http://phy.less.nankai.edu.cn/public/post/11">
+					<span class="it">掺铒光纤飞秒激光器</span>
+				</a>
+			</li>
+					</ul>
+			</div>
+</div>		</div>
+	</div>
+<script type="text/javascript">
+(function($){
+	//针对于所有需要防止多行溢出的元素进行控制
+	$('.post-clamp').each(function(k, v){
+		$(v).dotdotdot({
+			after: 'a.clink'
+		})
+	})
+
+	//Link的高度设定
+	$('.link-box-one').each(function(k, v){
+		var me = $(v)
+			, width = parseFloat(me.outerWidth() - 1)
+			, height = parseFloat(me.outerHeight() - 40 )
+			, count = me.find('.item').length
+		me.find('.item').css({
+			'width': parseFloat((width - 5 * (count - 1)) / count) + 'px'
+			, 'line-height': height + 'px'
+		})
+	})
+})(jQuery);
+</script>
+
+</div>
+    </div>
+</body>
+<footer>
+    <div class="footer">
+        <div style="margin:20px" class="text-center">
+    <h5 style="font-weight:normal" class="text-muted">Research Gets Easier.</h5>
+    <h5 style="font-weight:normal;vertical-align: center;" class="text-muted">
+    	<span class="label label-primary">1.0.2</span>
+    	LabScout LIMS-CF - 基理科技 - 运维支持 -     	<a href="http://phy.less.nankai.edu.cn/public/admin">管理后台</a>
+    </h5>
+</div>    </div>
+</footer>
+</html>

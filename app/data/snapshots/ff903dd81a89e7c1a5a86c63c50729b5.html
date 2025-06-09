@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/Publiczyfw/css/home.css?1939278012" rel="stylesheet" type="text/css" />
+<script  type="text/javascript" src="/Publiczyfw/js/jq16.js"></script>
+<title>南开大学志愿服务平台</title>
+<meta http-equiv="keywords" content="南开大学志愿服务平台">
+<meta http-equiv="description" content="南开大学志愿服务平台">
+</head>
+<body>
+<script type="text/javascript">
+	function writetxt(){
+		var stype=$('select[name=stype] option:selected').val();
+		if(!stype){
+			alert("请选择搜索类别");
+			return false;
+		}
+		return true;
+	}
+	$(function(){
+		var stypeselected=$('select[name=stype] option:selected').val();
+		if(stypeselected==1){
+			var url="/Index/huodong";
+		}
+		if(stypeselected==2){
+			var url="/Index/jidi";
+		}
+		if(stypeselected==3){
+			var url="/Index/news";
+		}
+		$('#headerform').attr('action',url);
+		$('select[name=stype]').change(function(){
+			var stype=$(this).val();
+			if(stype==1){
+				var url="/Index/huodong";
+			}
+			if(stype==2){
+				var url="/Index/jidi";
+			}
+			if(stype==3){
+				var url="/Index/news";
+			}
+			$('#headerform').attr('action',url);
+		})
+	})
+</script>
+<div class="top">
+	<div class="topin">
+		<a class="logo" href="http://zyfw.nankai.edu.cn" ><img src = "/Publiczyfw/images/logo_home.png"></a>
+		<div class="topsearch">
+			<form action="/index/huodong.aspx" method="post" onsubmit="return writetxt();" id="headerform">
+				<select name="stype">
+					<option value="1" >活动</option>
+					<option value="2" >基地</option>
+					<option value="3" >新闻</option>
+				</select>
+				<input type="text" name="keywords" class="stext" value="">
+				<input type="submit" class="sbtn" value="搜索">
+            </form>
+		</div>
+	</div>
+</div>
+<div class="topnav">
+	<ul>
+		<li><a href="http://zyfw.nankai.edu.cn" class='current'>首页</a></li>
+		<li><a href="/index/huodong.aspx" >参加活动</a></li>
+		<li><a href="/index/jidi.aspx" >基地建设</a></li>
+		<li><a href="/index/news.aspx" >志愿新闻</a></li>
+		<li><a href="/index/diary.aspx" >志愿日记</a></li>
+		<li><a href="/index/notice.aspx" >通知公告</a></li>
+		<li><a href="/index/jiang.aspx" >获奖荣誉</a></li>
+	</ul>
+</div>
+
+<div class="bannerbox clearfix">
+	<div class="index-banner">
+		<div class="flexslider">
+			<ul class="slides">
+				<li style="background:url(/Uploads/banner/2018-04-22/5adc21b29c671.jpg) no-repeat center;width: 100%; float:left; position:relative; opacity:0; display:block; height: 430px;"><a target="blank" href=" http://zyfw.nankai.edu.cn/ "></a></li><li style="background:url(/Uploads/banner/2018-06-13/5b20ee8e1ee0a.jpg) no-repeat center;width: 100%; float:left; position:relative; opacity:0; display:block; height: 430px;"><a target="blank" href=" http://zyfw.nankai.edu.cn/ "></a></li>			</ul>
+		</div>
+	</div>
+	<div class="loginbox">
+				<ul>
+			<li class="current">团队登录</li>
+			<li style="width:158px;border-left:1px solid #ddd;" onclick="window.location.href='/login/index.aspx'">志愿者登录</li>
+		</ul>
+		<form method="post" action="/login/dologin.aspx">
+			<input type="hidden" name="type" value="2" >
+			<div class="dl"><input type="text" name="username" placeholder="账号" autocomplete="off"/></div>
+			<div class="dl"><input type="password" name="password" placeholder="密码" autocomplete="new-password"/></div>
+			<div class="dl"><input type="text" name="verify" placeholder="验证码" autocomplete="off" style="width:105px;" /><a href="javascript:void(0);" title="看不清？点击换一个"><img src="/login/get_verify.aspx"  width="138" height="43" onclick="this.src=this.src+'?'+Math.random"/></a></div>
+			<div class="dl" style="margin-bottom:0;"><input type="submit" value="登录"></div>
+            		</form>
+			</div>
+	<script>
+		$(function(){
+			$('div.login li').click(function(){
+				var index = $(this).index();
+				zhi = index+1;
+				$("input[name=type]").val(zhi);
+				$('.login li').removeClass('current');
+				$('.login li').eq(index).addClass('current');
+				if(index==0){
+					$(".ps1").css('display','block');
+					$(".ps2").css('display','none');
+				}else{
+					$(".ps1").css('display','none');
+					$(".ps2").css('display','block');
+				}
+			});
+		})
+	</script>
+</div>
+<script type="text/javascript" src="/Publiczyfw/js/jquery.flexslider-min.js"></script>
+<script>
+$(function(){
+	$('.flexslider').flexslider({
+		directionNav: true,
+		pauseOnAction: false
+
+	});
+});
+</script>
+<div class="index-part1 clearfix">
+	<div class="left">
+		<p class="index-title index-title-hd">志愿活动<a target="_blank" href="/index/huodong.aspx" class="more"></a></p>
+		<table border=0>
+			<tr>
+				<th width='500' style="padding-left:20px;">活动名称</th>
+				<th width='150' style="text-align:center;">活动开始时间</th>
+				<th width='100' style="text-align:center;">活动报名</th>
+			</tr>
+			<tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11070.aspx" title="校友工作办公室寒假志愿者招募（第53期）">校友工作办公室寒假志愿者招募（第53期）</a></td>
+				<td style="text-align:center;">2025-06-14 08:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11070.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11069.aspx" title="校友工作办公室寒假志愿者招募（第52期）">校友工作办公室寒假志愿者招募（第52期）</a></td>
+				<td style="text-align:center;">2025-06-07 08:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11069.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11077.aspx" title="南京中华学校、南京一中参观南开校园活动">南京中华学校、南京一中参观南开校园活动</a></td>
+				<td style="text-align:center;">2025-06-06 18:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11077.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11079.aspx" title="24-25-2风湖里小学志愿活动（第十三期）（第13期）">24-25-2风湖里小学志愿活动（第十三期）（第13期）</a></td>
+				<td style="text-align:center;">2025-06-05 14:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11079.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11075.aspx" title="院楼整理志愿者招募">院楼整理志愿者招募</a></td>
+				<td style="text-align:center;">2025-06-05 14:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11075.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11078.aspx" title="24-25-2福利院英语教学（第十二期）（第12期）">24-25-2福利院英语教学（第十二期）（第12期）</a></td>
+				<td style="text-align:center;">2025-06-05 13:30</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11078.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11080.aspx" title="24-25-2天津市外国语学校志愿活动（第七期）（第7期）">24-25-2天津市外国语学校志愿活动（第七期）（第7期）</a></td>
+				<td style="text-align:center;">2025-06-05 12:30</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11080.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11001.aspx" title="关于2025五大道金融论坛志愿者招募">关于2025五大道金融论坛志愿者招募</a></td>
+				<td style="text-align:center;">2025-06-05 08:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11001.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11068.aspx" title="山海科普信箱志愿活动">山海科普信箱志愿活动</a></td>
+				<td style="text-align:center;">2025-06-03 18:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11068.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11074.aspx" title="院楼整理志愿者招募">院楼整理志愿者招募</a></td>
+				<td style="text-align:center;">2025-06-03 14:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11074.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/10753.aspx" title="六月绘本分享">六月绘本分享</a></td>
+				<td style="text-align:center;">2025-06-01 13:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/10753.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11076.aspx" title="南开大学附属医院导诊（第25期）（第25期）">南开大学附属医院导诊（第25期）（第25期）</a></td>
+				<td style="text-align:center;">2025-06-01 08:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11076.aspx">不可报名				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/11060.aspx" title="八里台校医院志愿服务">八里台校医院志愿服务</a></td>
+				<td style="text-align:center;">2025-06-01 08:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/11060.aspx">可报名</a>				</td>
+			</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/10789.aspx" title="南开大学医院6月份志愿者活动">南开大学医院6月份志愿者活动</a></td>
+				<td style="text-align:center;">2025-06-01 08:00</td>
+				<td style="text-align:center;">
+					<a target="_blank" href="/index/hdview/id/10789.aspx">不可报名				</td>
+			</tr>		</table>
+	</div>
+	<div class="right">
+		<p class="index-title index-title-notice">通知公告<a target="_blank" href="/index/notice.aspx" class="more"></a></p>
+		<ul class="notice" style="margin-bottom:20px;">
+			<li>
+				<a target="_blank" href="/index/newsview/id/1156.aspx" title="南开大学志愿服务平台使用指南链接">南开大学志愿服务平台使用指南链接</a>
+				<span>03-06</span>
+			</li><li>
+				<a target="_blank" href="/index/newsview/id/6815.aspx" title="关于南开大学2022年度疫情防控专项志愿者表彰的公示">关于南开大学2022年度疫情防控专项志愿者表彰的公示</a>
+				<span>09-17</span>
+			</li><li>
+				<a target="_blank" href="/index/newsview/id/745.aspx" title="中国志愿者协会≠中国青年志愿者协会! 大家注意哦">中国志愿者协会≠中国青年志愿者协会! 大家注意哦</a>
+				<span>02-19</span>
+			</li><li>
+				<a target="_blank" href="/index/newsview/id/5886.aspx" title="关于南开大学疫情防控专项志愿者表彰的公示">关于南开大学疫情防控专项志愿者表彰的公示</a>
+				<span>10-28</span>
+			</li><li>
+				<a target="_blank" href="/index/newsview/id/14.aspx" title="关于核对南开大学服务春运“暖冬行动”志愿者志愿时长录入系统的通知">关于核对南开大学服务春运“暖冬行动”志愿者志愿时长录入系统的通知</a>
+				<span>04-10</span>
+			</li><li>
+				<a target="_blank" href="/index/newsview/id/13.aspx" title="2020年南开大学“暖冬行动”志愿服务队联系方式">2020年南开大学“暖冬行动”志愿服务队联系方式</a>
+				<span>01-05</span>
+			</li>		</ul>
+		<p class="index-title index-title-news">志愿新闻<a target="_blank" href="/index/news.aspx" class="more"></a></p>
+		<ul class="news">
+					</ul>
+	</div>
+</div>
+<div class="index-part2">
+	<div class="left">
+		<p class="index-title index-title-yx">院系活动详情<a target="_blank" href="/index/xueyuan.aspx" class="more"></a></p>
+				<div class="xueyuan">
+			<div class="xyname" >
+				<p>外国语学院</p>
+			</div>
+			<div class="num">
+				<p>活动数：634</p>
+				<p>服务时长：42751</p>
+				<p>服务次数：11170</p>
+			</div>
+			<a target="_blank" href="/index/huodong/xueyuan/16.aspx" class="dian"></a>
+		</div>
+				<div class="xueyuan">
+			<div class="xyname" >
+				<p>经济学院</p>
+			</div>
+			<div class="num">
+				<p>活动数：437</p>
+				<p>服务时长：53866.5</p>
+				<p>服务次数：9205</p>
+			</div>
+			<a target="_blank" href="/index/huodong/xueyuan/8.aspx" class="dian"></a>
+		</div>
+				<div class="xueyuan">
+			<div class="xyname" >
+				<p>电子信息与光学工程学院</p>
+			</div>
+			<div class="num">
+				<p>活动数：380</p>
+				<p>服务时长：64883.1</p>
+				<p>服务次数：14022</p>
+			</div>
+			<a target="_blank" href="/index/huodong/xueyuan/11.aspx" class="dian"></a>
+		</div>
+				<div class="xueyuan">
+			<div class="xyname" >
+				<p>计算机学院</p>
+			</div>
+			<div class="num">
+				<p>活动数：348</p>
+				<p>服务时长：46279.4</p>
+				<p>服务次数：10474</p>
+			</div>
+			<a target="_blank" href="/index/huodong/xueyuan/25.aspx" class="dian"></a>
+		</div>
+				<div class="xueyuan">
+			<div class="xyname" >
+				<p>商学院</p>
+			</div>
+			<div class="num">
+				<p>活动数：345</p>
+				<p>服务时长：41574.3</p>
+				<p>服务次数：5980</p>
+			</div>
+			<a target="_blank" href="/index/huodong/xueyuan/9.aspx" class="dian"></a>
+		</div>
+				<div class="xueyuan">
+			<div class="xyname" >
+				<p>周恩来政府管理学院</p>
+			</div>
+			<div class="num">
+				<p>活动数：272</p>
+				<p>服务时长：36953</p>
+				<p>服务次数：6891</p>
+			</div>
+			<a target="_blank" href="/index/huodong/xueyuan/13.aspx" class="dian"></a>
+		</div>
+			</div>
+	<div class="right">
+		<p class="index-title index-title-jx" style="">获奖荣誉<a target="_blank" href="/index/jiang.aspx" class="more"></a></p>
+		<a href="/index/jiang/sel_cate/1.aspx" class="jiang" style="margin-top:30px;">优秀志愿者</a>
+		<a href="/index/jiang/sel_cate/2.aspx" class="jiang">十佳志愿者</a>
+		<a href="/index/jiang/sel_cate/3.aspx" class="jiang">十佳志愿服务组织者</a>
+		<a href="/index/jiang/sel_cate/4.aspx" class="jiang">优秀志愿服务组织者</a>
+		<a href="/index/jiang/sel_cate/5.aspx" class="jiang">优秀志愿服务团体</a>
+		<a href="/index/jiang/sel_cate/6.aspx" class="jiang">优秀志愿服务项目</a>
+		<a href="/index/jiang/sel_cate/7.aspx" class="jiang">优秀志愿服务基地</a>
+	</div>
+</div>
+
+
+<div class="index-friend">
+	<span>友情链接：</span>
+	<a target="_blank" href="http://nktw.nankai.edu.cn/">共青团南开大学委员会</a><a target="_blank" href="http://www.nankai.edu.cn/">南开大学</a></div>
+
+<div class="footer">
+	<div class="footerin">
+		<div style="width:785px;margin-right:75px;">
+			<h1>关于我们</h1>
+			<p>南开大学志愿服务平台立足于本校公益，以“奉献、友爱、互助、进步”为理念，负责各学院青协工作引导、各类型志愿活动开展、志愿者招募、校内公益活动资讯推送等工作。</p>
+		</div>
+		<div style="width:100px;margin-left:40px;float:right;">
+			<img src="/Publiczyfw/images/weixin.png" >
+			<p class="center">官方微信</p>
+		</div>
+		<div style="width:100px;float:right;">
+			<img src="/Publiczyfw/images/weibo.png" >
+			<p class="center">官方微博</p>
+		</div>
+	</div>
+</div>
+<div class="bottom">
+	<p class="bottomin">
+		南开大学志愿服务平台 天津市卫津路94号 [300071] 津教备0061号 津ICP备12003308号-1
+	</p>
+</div>
+</body>
+<script>
+$(function(){
+	//控制网页table的高度
+	var h = document.documentElement.clientHeight;
+	h = h-320;
+	$('.main2').css('min-height',h);
+	$('.userbg').css('min-height',h);
+	//当网页尺寸变化时，控制网页table的高度
+	window.onresize = function(){
+		var h = document.documentElement.clientHeight;
+		h = h-320;
+		$('.main2').css('min-height',h);
+		$('.userbg').css('min-height',h);
+	}
+})
+
+function hd_showtr(classname,val){
+	if(val==0){
+		$('.'+classname).css('display','none');
+	}else{
+		$('.'+classname).css('display','');
+	}
+}
+</script>
+</html>

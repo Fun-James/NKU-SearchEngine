@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" name="viewport" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title  data-l10n-id="南开大学档案综合管理系统">南开大学档案综合管理系统</title>
+<link rel="shortcut icon" type="image/x-icon" 
+    
+						href="/img/favicon.ico"
+			
+     />
+<link href="Flat-UI/css/vendor/bootstrap/css/bootstrap.min.css?t=20191225" rel="stylesheet">
+<link rel="stylesheet" href="css/jquery-ui.min.css?t=20191225" />
+<link rel="stylesheet" href="css/bootstrap-datetimepicker.css?t=20191225" />
+
+ <link href="http://nkda.nankai.edu.cn:80//loadDefaultSkinCss.do?defaultSkinId=232227&previewSkinId=" type="text/css" rel="stylesheet" />
+<link href="http://nkda.nankai.edu.cn:80//loadSkinCss.do?defaultSkinId=232227&previewSkinId=" type="text/css" rel="stylesheet" /><!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<script src="js/html5shiv.min.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+</head>
+<style>
+	.modal-header .close{
+		margin-top:-10px;
+	}
+	.modal-header h3{
+	    margin-top: -5px;
+	}
+</style>
+
+<body
+  	
+						class="bgLoginColor"
+			
+						>
+<input type="hidden" id="getTips" value="noTips">
+<input type="hidden" id="getPath" value="http://nkda.nankai.edu.cn:80/">
+<input type="hidden" id="previewSkinId" value="">
+<input type="hidden" id="sysname" value="南开大学档案综合管理系统">
+<div
+
+	 class="xn-container"
+	>
+      <div class="login">
+      	<div class="xn-login-lgTitle">
+            <div class="xn-login-name">
+			<span class="xn-imglogin0"></span>
+                <span class="xn-login-bhsysname">
+                	<span class="xn-login-titleSY xn-login-ml25 xn-login-fs22" data-l10n-id="南开大学档案综合管理系统" >南开大学档案综合管理系统</span><span class="xn-login-enTitle">Shanghai University Digital Archives File management system</span>
+                </span>
+				</div>
+        </div>
+        <div
+        	
+						class="login-screen"
+					>
+          	<div
+            	
+						class="login-icon"
+					>
+            <img src="Flat-UI/img/login/yuyue.png" alt="Archives Management System" /> </div>
+	         <div class="login-form" id="login-form">
+				<div style="float: right; padding-right: 10px;padding-top: 5px">
+								<a href="https://iam.nankai.edu.cn/api/cas/login?service=http://nkda.nankai.edu.cn/cas/index.do" style="color: #114488; font-size: 15px;">一卡通账号登录</a>
+							</div>
+						<div class="xn-login-loginTitle" data-l10n-id="欢迎登录">欢迎登录</div>
+					<div class="form-group xn-login-h23 xn-login-fgroup1">
+				             <input type="text" class="form-control login-field" placeholder="用户名" autocomplete="off" id="login-account"/>
+							<label class="login-field-icon fui-user" for="login-name"></label>
+								</div>
+				           <div class="form-group xn-login-h23 xn-login-fgroup2">
+				             <input type="password" class="form-control login-field" placeholder="密码" id="login-password" autocomplete="off"/>
+							<label class="login-field-icon fui-lock" for="login-pass"></label>
+								</div>
+				           <div id="showCodeRow"
+				           	
+				                   	class="form-group xn-login-dtyzm xn-uhide"
+				                   >
+				             <input type="text" class="form-control login-field xn-ufl xn-uc-l" placeholder="验证码"   id="login-code"/>
+				             <img id="cimg" class="xn-uc-l1" src="changeCode.do" title="看不清楚，换一张" onclick="changeCode()"/> </div>
+                             <div class="xn-logo-zcwjmm">
+                             	<span>没有账户？注册</span>
+                                <span>忘记密码</span>
+                             </div>
+						<a class="btn btn-primary btn-lg btn-block xn-login-w88 xn-mauto" onclick="severCheck()" id="submit"  data-l10n-id="登录">登录</a>
+							<div class="xn-logo-dxsmdl">
+                             	<span>扫码登录</span>
+                                <span>短信验证登录</span>
+                                <span>数字证书登录</span>
+                           </div>
+                           <div class="xn-logo-fwrx"><span>服务热线：665-038-88</span></div>
+	                </div>
+	         <div style="clear:both"></div>
+        </div>
+        <div
+		
+			class="xn-login-lgBottom"
+			>
+          	<h4 class="xn-login-fs9 xn-login-fb2 xn-login-mt27 xn-tx-c xn-c1"   >
+                    <span data-l10n-id="南京轩恩软件开发有限公司">南京轩恩软件开发有限公司</span></h4>
+						</div>
+      </div>
+    </div>  
+  <div id="xn-checkpassword" class="modal-small xn-uhide fade in" data-backdrop="static" aria-hidden="true">
+	<div class="modal-header">
+        <!--关闭按钮-->
+        <button data-dismiss="modal" class="xn-close" type="button">&times;</button>
+		<h3 data-l10n-id="首次登录重置密码">首次登录请重置密码</h3>
+			</div>
+    <div class="modal-body">
+    	<form id="form1" name="form1">
+          <table border="0" cellspacing="0" cellpadding="0" width="100%">
+            <tbody>
+            <tr>
+              <td align="right" data-l10n-id="用户名：" title="用户名：">用户名：</td>
+              <td align="left"><input type="text" name="newaccount" id="newaccount" autocomplete="off" class="span2 text2" readonly unselectable='on'></td>
+            </tr>
+                        <tr>
+              <td align="right" data-l10n-id="原密码：" title="原密码：">原密码：</td>
+              <td align="left"><input type="password" name="oldpassword" id="oldpassword" autocomplete="off" class="span2 text2"></td>
+            </tr>
+            <tr>
+              <td align="right" data-l10n-id="新密码：" title="新密码：">新密码：</td>
+              <td align="left"><input type="password" name="newpassword" id="newpassword" autocomplete="off" class="span2 text2"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td align="center" id="isDisplay" class="xn-c3 xn-uhide" data-l10n-id="密码须大于8位且含字母（大小写）数字及符号" title="密码须大于8位且含字母（大小写）数字及符号">密码须大于8位且含字母（大小写）数字及符号</td>
+            </tr>
+            <tr>
+              <td align="right" data-l10n-id="确认密码：" title="确认密码：">确认密码：</td>
+              <td align="left"><input type="password" name="confirmPassword" autocomplete="off" id="confirmPassword" class="span2 text2"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <a type="submit" id="updatePassword" class="btn btn-success xn-btn-commit" onclick=resetPassword() data-l10n-id="保存">保存</a>
+              </td>
+            </tr>
+          </tbody></table>
+        </form>
+    </div>
+</div>
+<div id="VerifyphoneNumber" class="modal-mini xn-uhide" data-backdrop="static" aria-hidden="true">
+	<div class="modal-header">
+    	<!--关闭按钮-->
+        <button data-dismiss="modal" class="xn-close" type="button">&times;</button>
+        <h3 data-l10n-id="账号安全验证">账号安全验证</h3>
+    </div>
+    <div class="modal-body">
+    	<table border="0" cellspacing="0" cellpadding="0" class="userTable" id="tPkuYkth">
+			<tr>
+				<td align="right" width="25%"></td>
+				<td align="left"  width="65%"></td>
+			</tr>
+			<tr>
+                <td align="right" width="25%">短信验证码</td>
+				<td align="left"  width="65%"><input type="text" class="span2 text2" id="verify_yzm" /><span   id="sendVerCode" onclick="sendVerCode()">获取验证码</span></td>
+			</tr>
+		</table>
+    </div>
+    <div class="modal-footer">
+        <a onClick="verifyConfim()" class="btn btn-green" href="javascript:void(0)" data-l10n-id="确定">确定</a>
+    </div>
+</div>
+<div id="accountRegister" class="modal-mini xn-uhide" data-backdrop="static" aria-hidden="true">
+	<div class="modal-header">
+		<!--关闭按钮-->
+		<button data-dismiss="modal" class="xn-close" type="button">&times;</button>
+		<h3 data-l10n-id="注册账号">注册账号</h3>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="form-group">
+				<label for="registName" class="control-label"></span><span class="xn-c3">*</span>姓名:</label>
+				<input type="text" class="form-control" id="registName">
+			</div>
+			<div class="form-group">
+				<label for="ssbmdef" class="control-label"></span><span class="xn-c3">*</span>部门:</label>
+				<select class="form-control" id="ssbmdef">
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="registPhone" class="control-label"></span><span class="xn-c3">*</span>电话:</label>
+				<input type="text" class="form-control" id="registPhone">
+			</div>
+			<div class="form-group">
+				<label for="registcd" class="control-label"></span><span class="xn-c3">*</span>军官号:</label>
+				<input type="text" class="form-control" id="registcd">
+			</div>
+			<div class="form-group">
+				<label for="registPassword" class="control-label"></span><span class="xn-c3">*</span>密码:</label>
+				<input type="password" class="form-control" id="registPassword">
+			</div>
+			<div class="form-group">
+				<label for="registPwd" class="control-label"></span><span class="xn-c3">*</span>确认密码:</label>
+				<input type="password" class="form-control" id="registPwd">
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a onClick="accountRegister()" class="btn btn-green" href="javascript:void(0)" data-l10n-id="注册">注册</a>
+	</div>
+</div>
+<div id="archiving" class="modal fade in" data-backdrop="static" role="dialog" aria-labelledby="selectRoleModalLabel" aria-hidden="true" style="width:640px;left:38%;top:8%;background:#fff;height:400px;"></div>
+<div id="dowunUsbkeyPlugin" class="modal-mini xn-uhide" data-backdrop="static" aria-hidden="true">
+	<div class="modal-header">
+		<!--关闭按钮-->
+		<button data-dismiss="modal" class="xn-close" type="button">&times;</button>
+		<h3 data-l10n-id="USB-KEY登录插件插件下载">USB-KEY登录插件下载</h3>
+	</div>
+	<div class="modal-body">
+		<table  cellspacing="0" cellpadding="0" style="padding-left: 110px; border-collapse: separate">
+			<tr>
+				<td align="center">
+					<h4>请先下载并安装登录插件</h4>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<a href="/usbKey/ZFDetectServer-1.0.0.exe" style="color:blue;" data-l10n-id="下载USB-KEY登录插件">下载USB-KEY登录插件</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+</div>
+<script src="js/jquery.min.js?t=20191225"></script> 
+<script type="text/javascript" src="js/i18n/jquery.i18n.properties.1.2.7.min.js?t=20191225"></script>
+<script src="Flat-UI/js/vendor/video.js?t=20191225"></script> 
+<script src="Flat-UI/js/flat-ui.min.js?t=20191225"></script>
+<script src="http://nkda.nankai.edu.cn:80/js/jquery-ui.min.js" type="text/javascript"></script> 
+<script src="js/jquery.tips.js?t=20191225"></script> 
+<script src="js/placeHolder.js?t=20191225"></script> 
+<script src="js/bootstrap-datepicker.js?t=20191225" type="text/javascript"></script>
+<script src="js/ux/login.js?t=20191229"></script>
+<script type="text/javascript" src="js/sm4.index.js?t=20191225"></script>
+</body>
+</html>

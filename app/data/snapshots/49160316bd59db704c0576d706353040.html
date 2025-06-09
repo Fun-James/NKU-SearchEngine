@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>南开大学学生就业指导中心</title>
+<link rel="stylesheet" href="/Public/css/admin_login.css"/>
+<script type="text/javascript" src="/Public/js/jquery-1.11.1.js"></script>
+</head>
+
+<body>
+<body class="login">
+<div class="login_main">
+	<img src="https://career.nankai.edu.cn/Uploads/2018-09-12/5b98f3a6e8a4a.png" class="logo">		<div class="login_nav clearfix">
+        <a class="studenta" href="/login/login/type/1.html">学生</a>
+		<a class="companya bj" href="/login/login/type/2.html">企业</a>
+		<a class="teachera" href="/api/login.html">教师</a>
+		<a class="collegea" href="/api/login.html">学院/部门</a>
+	</div>
+        	<div class="login_con_box_std" id="login_con_box_com">
+	 <form method="post" action="/login/dologin.html">
+	 <input type="hidden" name="type" value="2" />
+	 <input type="text" name="username" class="login_input1" value="请输入企业注册邮箱或企业名称" autocomplete="off"  onfocus="this.value=''" onblur="if(this.value==''){this.value='请输入企业注册邮箱或企业名称'}" />
+	<input type="text" class="login_input1" id="password21" value="请输入密码"  autocomplete="off" onfocus="hidecom();" />
+	<input type="password" name="password" class="login_input1" id="password22" autocomplete="off" onfocus="this.value=''" onblur="if(this.value==''){showcom();}" style="display:none;"/>
+	 <input type="text" name="verify" class="login_input2" value="验证码" autocomplete="off" onfocus="this.value=''" onblur="if(this.value==''){this.value='验证码'}" />
+	 <a href="javascript:void(0);" title="看不清？点击换一个" class="veritytu" id="yzm2"><img src="/Public/code_math.php" width="105" height="40" onclick="this.src=this.src+'?'+Math.random();"/></a>
+
+	 <div class="cb"><input type="checkbox"  checked="checked" class="cbox"/>&nbsp;记住账号<a href="/login/forget.html">忘记密码？</a></div>
+	 <input type="submit" value="登录" class="loginin"/>
+	 </form>
+	<div class="zhuce"><a href="/login/register.html">没有账号？立即注册</a></div>
+	<script type="text/javascript">
+	function hidecom(){
+	    $('#password21').css('display','none');
+		$('#password22').css('display','block');
+		$('#password22').focus();
+	}
+	function showcom(){
+	    $('#password21').css('display','block');
+		$('#password22').css('display','none');
+	}
+	</script>
+	</div>
+                <div style="clear:both"></div>
+	<div style="line-height:20px; color:#ffffff; font-size:12px; margin-top:10px;">建议使用360浏览器的极速模式、谷歌浏览器、火狐浏览器等非IE浏览器登录！</div>
+    
+	</div>
+<div class="blackbg"></div>
+<div class="t_log_box js_more_box1">
+	<div class="nei">
+	<p>学生忘记密码，请联系学院管理员重置密码！</p>
+	<a href="javascript:void(0)" class="nei_btn js_close">关闭</a>
+	</div>
+</div>
+<div class="t_log_box js_more_box2">
+	<div class="nei">
+	<p>企业忘记密码，请联系客服电话022-87432058/87432059</p>
+	<a href="javascript:void(0)" class="nei_btn js_close">关闭</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+    function Forget_stu(){
+		$(".blackbg").show();
+		$(".js_more_box1").show();
+		var wSreenHeight=$(window).height();
+		var wSreenWidth=$(window).width();
+		var lHeight=$(".js_more_box1").height();
+		var lWidth=$(".js_more_box1").width();
+		var top=(wSreenHeight-lHeight)/2;
+		var left=(wSreenWidth-lWidth)/2;
+		$(".js_more_box1").css({"top":top,"left":left});
+	}
+	function Forget_com(){
+		$(".blackbg").show();
+		$(".js_more_box2").show();
+		var wSreenHeight=$(window).height();
+		var wSreenWidth=$(window).width();
+		var lHeight=$(".js_more_box2").height();
+		var lWidth=$(".js_more_box2").width();
+		var top=(wSreenHeight-lHeight)/2;
+		var left=(wSreenWidth-lWidth)/2;
+		$(".js_more_box2").css({"top":top,"left":left});
+	}
+    $(".js_close").bind("click",function(){
+		$(".blackbg").hide();
+		$(".js_more_box1").hide();
+		$(".js_more_box2").hide();
+	})      
+</script>
+</body>
+</html>

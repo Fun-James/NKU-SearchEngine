@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1">
+    <meta name="renderer" content="webkit">
+    <link rel="icon" href="./xds/favicon.ico" type="image/x-icon">
+    <link href="./xds/resources/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/bootstrap-3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./xds/resources/css/index.css" />
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.core.css">
+    <link rel="stylesheet" href="./xds/resources/js/vendor/alertify/css/alertify.bootstrap.css">
+    <link href="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./xds/resources/css/loaders.css">
+    <script type="text/javascript" src="./xds/bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="./xds/resources/js/vendor/district-picker/district.picker.css">
+    <title>南开大学选调生系统</title>
+    <style type="text/css" media="screen">
+    .alertify-buttons {
+        padding: 14px 15px 15px;
+        background: #F5F5F5;
+        border-top: 1px solid #DDD;
+        border-radius: 0 0 6px 6px;
+        box-shadow: inset 0 1px 0 #FFF;
+    }
+
+    .alertify-message {
+        padding: 15px;
+        margin: 0;
+    }
+
+    .login-btn-item {
+        width: 100px;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+    </style>
+    <style type="text/css">
+    .slh {
+        height: 45px;
+        overflow: hidden;
+        color:#595959;
+        margin-bottom:8px;
+    }
+    .slh>div{
+        float: right;
+        margin-left: -5px;
+        width: 100%;
+        word-break: break-all;
+    }
+    .slh::before {
+        float: left;
+        width: 5px;
+        content: '';
+        height: 40px;
+    }
+    
+    .slh::after {
+        float: right;
+        content: "...";
+        height: 20px;
+        line-height: 20px;
+        /* 为三个省略号的宽度 */
+        width: 3em;
+        /* 使盒子不占位置 */
+        margin-left: -3em;
+        /* 移动省略号位置 */
+        position: relative;
+        left: 102%;
+        top: -20px;
+        padding-right: 47px;
+        background-color: #FFF;
+    }
+    .zl-time{
+        margin-right:32px;
+    }
+    .times img{
+        height: 14px;
+        vertical-align: -1px;
+        margin-right:4px;
+    }
+    .times span{
+        margin-right: 30px;
+    }
+    .views{
+        color:#666;
+        text-align:right;
+        line-height: 30px;
+        font-size: 13px;
+    }
+    .views i{
+        color:#812358;
+        font-style: normal;
+    }
+    .baoItem{
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: block;
+        border-radius: 0px 8px 0 8px;
+        padding:0 10px;
+        height:24px;
+        line-height: 24px;
+        text-align: center;
+        border: 1px solid #812358;
+        color:#812358;
+        font-size: 12px;
+    }
+    .article-item .item-intro .item-title{
+        width: 93%;
+        white-space: normal;
+    }
+    .article-item .item-intro {
+        height:auto!important
+    }
+    .hotcont{
+        height:30px;
+        border-bottom:1px solid #812358;
+        margin-bottom:10px;
+    }
+    .hotcont img{
+        vertical-align: bottom;
+        cursor: pointer;
+    }
+    .hotcont span{
+        color:#812358;
+        font-size:16px;
+        margin-left:10px;
+    }
+    .organization{
+        margin-right:30px;
+    }
+    .imgbox li{
+        height: 50px;
+    }
+    .xjtype{color:#812358;}
+    .zb {float:left;color:#812358;border:1px solid #812358;height:20px;width:42px;text-align:center;display:block;margin-right:6px;border-radius: 5px;font-size:12px;}
+    .awks,.ajxz,.ayjs {
+        background:#FAAC14;
+        border-radius:0px 12px 0px 12px;
+        width:80px;
+        height:33px;
+        line-height: 33px;
+        display:inline-block;
+        text-align:center;
+        color:#fff;
+        font-size:14px;
+    }
+    .ajxz {background:#52C41A;}
+    .ayjs {background:#D0D0D0;}
+    [v-cloak] {
+        display: none;
+    }
+    .search_input {
+        border: 1px solid #812358;
+        margin: 24px 40px;
+        height: 48px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+    }
+    .search_input input[type='text'] {
+        margin: 0;
+        border: 0;
+        height: 100%;
+        padding: 0 20px;
+        flex: 1;
+        outline: none;
+    }
+    .search_input input[type='button'] {
+        width: 160px;
+        background-color: #812358;
+        color: #FFF;
+        margin: 0;
+        border: 0;
+        height: 100%;
+        font-size: 16px;
+    }
+    .article-item {
+        padding: 20px 0;
+    }
+    .article-item .item-intro .list_item {
+        width: auto;
+    }
+    .article-item .item-intro .list_title {
+        width: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .list_title_text {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        font-size: 20px;
+    }
+    </style>
+</head>
+
+<body class="body" style="background: #F0F1F6;">
+    <section class="header"></section>
+    <div class="main-content" id="gridBody" v-cloak>
+        <div class="banner-content badg" style="padding-top:0;padding-bottom:0;">
+            <form id="search-form" class="form-horizontal clearfix"></form>
+            <div class="search_input">
+                <input type="text" id="search_keywords" :value="keywords" />
+                <input type="button" value="搜 索" class="searchBtn" />
+            </div>
+            <div style="overflow: hidden">
+                <ul style="width:100%;padding: 0 40px;">
+                     <li  class="article-item clearfix" v-for="item in newlist1">
+                        <div class="item-pic pull-left">
+                            <a :href="'activitySignDetail.html?active=11&type=0&id='+item.id" class="item-title">
+                            <div class="date-time text-c">
+                                <span>{{item.addtime | day}}</span>
+                                <div class="fen"></div>
+                                {{item.addtime | month}}
+                            </div>
+                            </a>
+                        </div>
+                        <div class="item-intro" style="min-height: 100px;">
+                            <div class="item-title list_item" style="margin:0px;">
+                                <a :href="'activitySignDetail.html?active=11&type=0&id='+item.id" class="item-title list_title">
+                                    <span class="list_title_text" :title="item.title">
+                                        <i v-if="item.is_top == '1'">顶</i> {{item.title}}
+                                    </span>
+                                    <span v-if="nowTime<item.starttime" class="awks">未开始</span>
+                                    <span v-if="nowTime>item.starttime&&nowTime<item.endtime" class="ajxz">进行中</span>
+                                    <span v-if="nowTime>item.starttime&&nowTime>item.endtime" class="ayjs">已结束</span>
+                                </a>
+                            </div>
+                            <div class="slh">
+                                <div v-html="item.remarks_formathtml"></div>
+                            </div>
+                            <div class="times">
+                                <template v-if="stu_id&&stu_id!=''">
+                                    <a :href="'http://xdsadmin.nankai.edu.cn/index/video_play?id='+item.id+'&userid='+stu_id" class="zb" v-if="item.isend==1&&item.is_have_video==1">回放</a>
+                                </template>
+                                <template v-else>
+                                    <a href="javascript:void(0)" onclick="alertify.error('请先登录后再看回放')" class="zb" v-if="item.isend==1&&item.is_have_video==1">回放</a>
+                                </template>  
+                                <img src="xds/resources/images/newtime.png" alt=""> 
+                                <template v-if="item.type==0">
+                                    <span>{{item.starttime | time}} - {{item.endtime | time}}</span>
+                                    <img src="xds/resources/images/adress.png" alt=""> 
+                                    <span>{{item.address}}</span>
+                                </template>
+                                <template v-if="item.type==1">
+                                    <span>{{item.starttime | time}} - {{item.endtime | time}}</span>
+                                    <img src="xds/resources/images/person.png" alt="">
+                                    <span class="organization">{{item.speaker_name}}</span>
+                                </template>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div align="center" class="clearfix">
+                <div class="pages_wrapper" id="footpage"></div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <section class="footer"></section>
+    <script src="./xds/resources/js/vendor/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script src="./xds/bower_components/nivo-slider/jquery.nivo.slider.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-paginator.js"></script>
+    <script src="./xds/resources/js/vendor/template.js"></script>
+    <script src="./xds/resources/js/vendor/template-util.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.js"></script>
+    <script src="./xds/resources/js/vendor/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="./xds/bower_components/bootstrapValidator/dist/js/bootstrapValidator.js"></script>
+    <script src="./xds/resources/js/vendor/alertify/js/alertify.js"></script>
+    <script src="./xds/resources/js/vendor/ajaxfileupload.js"></script>
+    <script src="./xds/resources/js/vendor/district-picker/jquery.district.picker.js"></script>
+    <script src="./xds/resources/js/vendor/common.js"></script>
+    <script src="./xds/resources/js/vendor/page2.js "></script>
+    <script src="./xds/resources/js/vendor/config.js"></script>
+    <script src="./xds/resources/js/vendor/api.js"></script>
+    <script src="./xds/resources/js/vendor/vue.min.js"></script>
+    <script src="./xds/resources/js/vendor/wx_get_openid.js"></script>
+</body>
+<script>
+
+$(".header").load("../public/header.html");
+$(".footer").load("../public/footer.html");
+var school_id = sessionStorage.getItem("school_id");
+var stu_id = sessionStorage.getItem('userid')||'';
+var keywords = $.getUrlParam("keywords") || "";
+var nowTime=Number(JSON.stringify(Date.parse(new Date())).substr(0,10));
+var size = 15;
+var cpage = $.getUrlParam("page");
+cpage = parseInt(cpage);
+if(!cpage || cpage < 1){
+    cpage = 1;
+}
+var vm = new Vue({
+    el: "#gridBody",
+    data: {
+        newlist1: [], //招录公告
+        total:0,
+        pagesize:size,
+        keywords: keywords
+    },
+    updated:function(){
+        var onPagechange = function (page) {
+            window.location.href = "activitySign.html?active=11&page="+page+"&keywords="+keywords;
+        }
+        var obj = {
+            wrapid: 'footpage', //页面显示分页器容器id
+            total: vm.total, //总条数
+            pagesize: vm.pagesize, //每页显示10条
+            currentPage: cpage, //当前页
+            onPagechange: onPagechange,
+            //btnCount:7 页数过多时，显示省略号的边界页码按钮数量，可省略，且值是大于5的奇数
+        }
+        if (vm.allpage > 0) {
+            console.log(obj);
+            pagination.init(obj);
+        }
+        $(".imgbox li").hover(function(){
+            $(this).find(".date-time").show();
+        },function(){
+            $(this).find(".date-time").hide();
+        })
+
+        $('#gridBody').css('min-height',$(window).height()-360);
+    },
+    filters: {
+        year:function(value) {
+            if (value == 0) {
+                return "";
+            }
+            var date = new Date(value * 1000);
+            Y = date.getFullYear();
+            return Y;
+        },
+        month:function(value) {
+            if (value == 0) {
+                return "";
+            }
+            var date = new Date(value * 1000);
+            M = date.getMonth();
+            var month = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+            return month[M]+"月";
+        },
+        day:function(value) {
+            if (value == 0) {
+                return "";
+            }
+            var date = new Date(value * 1000);
+            D = date.getDate();
+            return D;
+        },
+        time:function(value){
+            if (value == 0) {
+                return "";
+            }
+            var date = new Date(value * 1000);
+            Y = date.getFullYear() + '-';
+            M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+            D = (date.getDate()< 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+            h = (date.getHours() < 10 ? '0' + (date.getHours()) : date.getHours())  + ':';
+            m = (date.getMinutes() < 10 ? '0' + (date.getMinutes()) : date.getMinutes()) ;
+            s = date.getSeconds();
+            return Y + M + D+h+m;
+        },
+    },
+})
+
+//选调生公告
+http('POST', '/Lecture/getlist', {
+    "status":1,
+    "school_id": school_id,
+    'user_id':stu_id,
+    "page": cpage,
+    "size": size,
+    "show_type":1,
+    "keywords":vm.keywords,
+    "type":0
+}, function(e) {
+    vm.newlist1 = e.data.list;
+    vm.total = e.data.count;
+    vm.allpage = e.data.allpage;
+});
+$(document).on("click", ".searchBtn", function() {
+    var title1 = $("#search_keywords").val();
+    keywords = title1;
+    window.location.href = "activitySign.html?active=11&keywords=" + keywords;
+})
+</script>
+</html>

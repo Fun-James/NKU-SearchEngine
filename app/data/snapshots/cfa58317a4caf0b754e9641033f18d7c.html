@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>南开大学金融学院招聘系统</title>
+  </head>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+  </style>
+  <body>
+    <iframe
+      id="iframes"
+      frameborder="0"
+      style="width: 100vw;min-height: 100vh"
+    ></iframe>
+  </body>
+  <script type="text/javascript">
+    let iframes = document.getElementById("iframes");
+    iframes.removeAttribute("src");
+    iframes.setAttribute("src", window.location.origin + "/static/html/index.html#/");
+  </script>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/Publicshsj/css/home.css?1223326801" rel="stylesheet" type="text/css" />
+<script  type="text/javascript" src="/Publicshsj/js/jquery-1.11.1.js"></script>
+<title>南开大学社会实践管理平台</title>
+<meta http-equiv="keywords" content="南开大学社会实践管理平台">
+<meta http-equiv="description" content="南开大学社会实践管理平台">
+</head>
+<body>
+<script>
+    $(function(){
+        var stypeselected=$('select[name=stype] option:selected').val();
+        seturl(stypeselected);
+    $('select[name=stype]').change(function(){
+        var stype=$(this).val();
+        seturl(stype);
+    })
+    function writetxt(){
+        var stype=$('select[name=stype] option:selected').val();
+        if(!stype){
+            alert("请选择搜索类别");
+            return false;
+        }
+        return true;
+    }
+    function seturl(stype){
+        if(stype==1){
+            var url="/Index/huodong/sstx/2";
+        }
+        if(stype==2){
+            var url="/Index/huodong/sstx/1";
+        }
+        if(stype==3){
+            var url="/Index/jidi";
+        }
+        if(stype==4){
+            var url="/Index/shuwu";
+        }
+        if(stype==5){
+            var url="/Index/news";
+        }
+        $('#headerform').attr('action',url);
+    }
+})
+</script>
+<div class="top">
+	<div class="topin">
+		<a class="logo" href="http://shsj.nankai.edu.cn" ><img src = "/Publicshsj/images/logo_home.png"></a>
+		<div class="topsearch">
+			<form action="/index/huodong/sstx/2.aspx" method="post" onsubmit="return writetxt();" id="headerform">
+				<select name="stype">
+					<option value="1" >实践活动</option>
+                    <option value="2" >师生同行</option>
+                    <option value="3" >基地</option>
+                    <option value="4" >书屋</option>
+					<option value="5" >新闻</option>
+				</select>
+				<input type="text" name="keywords" class="stext" value="">
+				<input type="submit" class="sbtn" value="搜索">
+            </form>
+		</div>
+	</div>
+</div>
+<div class="topnav">
+	<ul>
+		<li><a href="http://shsj.nankai.edu.cn" class='current'>首页</a></li>
+		<li><a href="/index/huodong/sstx/2.aspx" >参加活动</a></li>
+        <li><a href="/index/huodong/sstx/1.aspx" >师生同行</a></li>
+        <li><a href="/index/news.aspx" >实践新闻</a></li>
+        <li><a href="/index/video.aspx" >实践影像</a></li>
+		<li><a href="/index/jidi.aspx" >基地建设</a></li>
+        <li><a href="/index/shuwu.aspx" >南开书屋</a></li>
+        <li><a href="/index/notice.aspx" >通知公告</a></li>
+        <li><a href="/index/honor.aspx" >荣誉称号</a></li>
+	</ul>
+</div>
+
+<div class="bannerbox clearfix">
+    <div class="index-banner">
+        <div class="flexslider">
+            <ul class="slides">
+                <li style="background:url(/Uploads/banner/2018-06-08/5b1a1eba2d381.jpg) no-repeat center;width: 100%; float:left; position:relative; opacity:0; display:block; height: 430px;"><a target="blank" href=" javascript:void(0) "></a></li><li style="background:url(/Uploads/banner/2019-04-17/5cb6d1726a6b5.jpg) no-repeat center;width: 100%; float:left; position:relative; opacity:0; display:block; height: 430px;"><a target="blank" href=" http://shsj.nankai.edu.cn/Home/Index/newsview?id=5674 "></a></li>            </ul>
+        </div>
+    </div>
+    <div class="loginbox">
+                <table class="login-tab" border=0>
+                <tr><th>登录</th></tr>
+                <tr><td align="center" style=" line-height:40px;">欢迎访问南开大学社会实践平台！<br />请登录平台查看详情！</td></tr>
+                <tr><td>
+                    <a href="/login/index.aspx" class="jinru" >学生登录</a>
+                    <a href="/login/index.aspx" class="jinru" style="margin-top:30px;">教师登录</a>
+                </td></tr>
+            </table>
+            </div>
+    <script>
+        $(function(){
+            $('div.login li').click(function(){
+                var index = $(this).index();
+                zhi = index+1;
+                $("input[name=type]").val(zhi);
+                $('.login li').removeClass('current');
+                $('.login li').eq(index).addClass('current');
+                if(index==0){
+                    $(".ps1").css('display','block');
+                    $(".ps2").css('display','none');
+                    $(".ps3").css('display','none');
+                }else if(index==1){
+                    $(".ps1").css('display','none');
+                    $(".ps2").css('display','block');
+                    $(".ps3").css('display','none');
+                }else if(index==2){
+                    $(".ps1").css('display','none');
+                    $(".ps2").css('display','none');
+                    $(".ps3").css('display','block');
+                }
+            });
+        })
+    </script>
+</div>
+<script type="text/javascript" src="/Publicshsj/js/jquery.flexslider-min.js"></script>
+<script>
+$(function(){
+	$('.flexslider').flexslider({
+		directionNav: true,
+		pauseOnAction: false
+
+	});
+});
+</script>
+<div class="index-part1 clearfix">
+	<div class="left">
+		<p class="index-title index-title-sj">实践活动<a target="_blank" href="/index/huodong.aspx" class="more"></a></p>
+		<table border=0>
+			<tr>
+				<th width='500' style="padding-left:20px;">活动名称</th>
+				<th width='155'>活动开始时间</th>
+								<th width='90'>活动报名</th>
+							</tr>
+			<tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/22506.aspx">为家人做饭、创意全家福、家乡特色民俗体验、拍摄家风主题vlo...</a></td>
+				<td>2026-01-28 08:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/22506.aspx">不可报名				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/22694.aspx">参观武汉革命博物馆</a></td>
+				<td>2026-01-15 09:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/22694.aspx">不可报名				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/22886.aspx">去八路军办事处体味红色革命精神</a></td>
+				<td>2026-01-14 14:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/22886.aspx">不可报名				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/23211.aspx">丰年齐聚新春 家风家俗飘香</a></td>
+				<td>2026-01-13 08:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/23211.aspx">不可报名				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/23067.aspx">孝亲敬长，弘扬孝道精神</a></td>
+				<td>2026-01-13 08:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/23067.aspx">不可报名				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/22707.aspx">浓情春节，爱在我家  </a></td>
+				<td>2026-01-13 08:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/22707.aspx">不可报名				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/23328.aspx">“以文化人，读南开书”——寒假读书实践活动</a></td>
+				<td>2026-01-10 09:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/23328.aspx">不可报名				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/25594.aspx">天津的红色印记：从历史遗址看红色文化的传承与当代影响</a></td>
+				<td>2025-08-22 08:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/25594.aspx">不可报名				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/25709.aspx">“探寻岭南脉络·湾区文旅新篇——构筑南沙湾区文旅新高地”</a></td>
+				<td>2025-08-19 08:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/25709.aspx">可报名</a>				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/25592.aspx">赋予边境地区改革发展“三个意义”的新时代兴边富民政策实践研究...</a></td>
+				<td>2025-08-18 08:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/25592.aspx">不可报名				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/25539.aspx">“网红”青年女书记：数字时代的新型乡村治理主 体研究——基于...</a></td>
+				<td>2025-08-15 08:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/25539.aspx">不可报名				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/25700.aspx">探访杭嘉湖地区红色路线对青少年爱国主义教育的影响及优化路径研...</a></td>
+				<td>2025-08-01 08:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/25700.aspx">不可报名				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/25683.aspx">寻迹红色根脉·铸魂时代新人</a></td>
+				<td>2025-08-01 08:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/25683.aspx">可报名</a>				</td>
+							</tr><tr>
+				<td style="padding-left:20px;"><a class="title" target="_blank" href="/index/hdview/id/25623.aspx">全球同行：青年视角下的人类命运共同体实践计划&quot;</a></td>
+				<td>2025-08-01 08:00</td>
+								<td>
+					<a target="_blank" href="/index/hdview/id/25623.aspx">不可报名				</td>
+							</tr>		</table>
+	</div>
+	<div class="right">
+		<div class="right">
+		<p class="index-title index-title-notice">通知公告<a target="_blank" href="/index/notice.aspx" class="more"></a></p>
+		<ul class="notice" style="margin-bottom:20px;">
+			<li>
+				<a target="_blank" href="/index/newsview/id/22062.aspx" title="关于2024年“莲子计划”实践团队入选结果的通知">关于2024年“莲子计划”实践团队入选结果的通知</a>
+				<span>06-21</span>
+			</li><li>
+				<a target="_blank" href="/index/newsview/id/22036.aspx" title="关于2024年“莲子计划”课题报名情况的说明">关于2024年“莲子计划”课题报名情况的说明</a>
+				<span>05-19</span>
+			</li><li>
+				<a target="_blank" href="/index/newsview/id/21818.aspx" title="2024年申请人社会实践填报指南">2024年申请人社会实践填报指南</a>
+				<span>03-11</span>
+			</li><li>
+				<a target="_blank" href="/index/newsview/id/16092.aspx" title="关于“莲子计划”实践团队入选结果的通知">关于“莲子计划”实践团队入选结果的通知</a>
+				<span>06-22</span>
+			</li><li>
+				<a target="_blank" href="/index/newsview/id/16073.aspx" title="2023年申请人社会实践填报指南">2023年申请人社会实践填报指南</a>
+				<span>05-31</span>
+			</li><li>
+				<a target="_blank" href="/index/newsview/id/16072.aspx" title="关于开展2023年“师生同行”社会实践活动的预通知及相关附件">关于开展2023年“师生同行”社会实践活动的预通知及相关附件</a>
+				<span>05-30</span>
+			</li>		</ul>
+		<p class="index-title index-title-news">志愿新闻<a target="_blank" href="/index/news.aspx" class="more"></a></p>
+		<ul class="news">
+					</ul>
+	</div>
+	</div>
+</div>
+<div class="index-tongji clearfix">
+	<a class="zyz" style="cursor:default;"><span>25638</span>学生</a>
+	<a class="tt" style="cursor:default;"><span>1291</span>教师</a>
+	<a class="hd" style="cursor:default;"><span>20453</span>实践活动</a>
+	<a class="sc" style="cursor:default;margin-right:0px;"><span>2218700.4</span>实践时长</a>
+</div>
+<div class="index-part3 clearfix">
+	<p class="index-title index-title-sw" style="">南开书屋<a target="_blank" href="/index/shuwu.aspx" class="more"></a></p>
+	<a target="_blank" href="/index/swview/id/531.aspx" class="cs"  >
+		<img src="/Uploads/jidi/2021-09-06/61359c899de11_thumb.jpg" >
+		<p>凤仪南开书屋</p>
+	</a><a target="_blank" href="/index/swview/id/540.aspx" class="cs"  >
+		<img src="/Uploads/jidi/2021-08-30/612c475a2e663_thumb.jpg" >
+		<p>姜堰区马庄中心小学南开书屋</p>
+	</a><a target="_blank" href="/index/swview/id/567.aspx" class="cs"  >
+		<img src="/Uploads/jidi/2021-10-09/616183d17d142_thumb.jpg" >
+		<p>甘肃省庆阳市宁县焦村镇中心幼儿园书屋</p>
+	</a><a target="_blank" href="/index/swview/id/564.aspx" class="cs"  style="margin-right:0"  >
+		<img src="/Uploads/jidi/2021-09-14/6140967374ab4_thumb.jpg" >
+		<p>甘肃宁县高尉小学南开书屋</p>
+	</a></div>
+<div class="index-friend">
+	<span>友情链接：</span>
+	<a target="_blank" href="http://nktw.nankai.edu.cn/">共青团南开大学委员会</a><a target="_blank" href="http://www.nankai.edu.cn/">南开大学</a></div>
+
+
+<div class="footer">
+	<div class="footerin">
+		<div style="width:785px;margin-right:75px;">
+			<h1>关于我们</h1>
+			<p>南开大学“师生同行”社会实践计划，以“同行”为载体，推动“同学”“同研”“同讲”，引导师生将“知中国、服务中国”的南开爱国传统深化发展为“爱中华、复兴中华”的实际行动，现已成为师生“受教育、长才干、作贡献”的互动平台。</p>
+		</div>
+		<!-- <div style="width:140px;margin-right:140px;">
+			<h1>友情链接</h1>
+			<a>南开大学</a>
+			<a>共青团南开大学委员会</a>
+			<a>中国学生服务联合会</a>
+		</div> -->
+		<div style="width:100px; float:right;">
+			<img src="/Publicshsj/images/weixin.jpg" >
+			<p class="center">官方微信</p>
+		</div>
+		<div style="width:100px; display:none;">
+			<img src="/Publicshsj/images/weibo.png" >
+			<p class="center">官方微博</p>
+		</div>
+	</div>
+</div>
+<div class="bottom">
+	<p class="bottomin">
+		南开大学社会实践平台 天津市卫津路94号 [300071] 津教备0061号 津ICP备12003308号-1
+	</p>
+</div>
+</body>
+<script>
+$(function(){
+	//控制网页table的高度
+	var h = document.documentElement.clientHeight;
+	h = h-320;
+	$('.main2').css('min-height',h);
+	$('.userbg').css('min-height',h);
+	//当网页尺寸变化时，控制网页table的高度
+	window.onresize = function(){
+		var h = document.documentElement.clientHeight;
+		h = h-320;
+		$('.main2').css('min-height',h);
+		$('.userbg').css('min-height',h);
+	}
+})
+</script>
+</html>
