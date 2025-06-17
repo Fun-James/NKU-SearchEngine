@@ -605,7 +605,7 @@ def search_results():
                 processed_results = []
                 
                 for hit in hit_list:
-                    source = hit['_source']
+                    source = hit['_source']                    
                     result = {
                         'url': source['url'],
                         'title': source.get('title', ''),
@@ -614,7 +614,8 @@ def search_results():
                         'is_attachment': source.get('is_attachment', False),
                         'file_type': source.get('file_type', '') if source.get('is_attachment', False) else '',
                         'mime_type': source.get('mime_type', 'text/html'),
-                        'filename': source.get('filename', '')
+                        'filename': source.get('filename', ''),
+                        'snapshot_path': source.get('snapshot_path')  # 添加快照路径
                     }
                     
                     # 处理标题高亮
@@ -991,3 +992,64 @@ def get_personalization_info():
             'total_role_keywords': len(role_keywords)
         }
     })
+
+@main.route('/snapshot/<path:snapshot_id>')
+def view_snapshot(snapshot_id):
+    """展示网页快照"""
+    import os
+    from flask import send_from_directory, abort, render_template_string
+    
+    # 获取快照文件夹路径
+    snapshot_folder = current_app.config.get('SNAPSHOT_FOLDER')
+    if not snapshot_folder:
+        abort(404)
+    
+    # 确保快照ID是安全的文件名（防止路径遍历攻击）
+    if '..' in snapshot_id or '/' in snapshot_id or '\\' in snapshot_id:
+        abort(404)
+    
+    # 构建快照文件路径
+    snapshot_file = f"{snapshot_id}.html"
+    snapshot_path = os.path.join(snapshot_folder, snapshot_file)
+    
+    # 检查文件是否存在
+    if not os.path.exists(snapshot_path):
+        abort(404)
+    
+    try:
+        # 读取快照文件内容
+        with open(snapshot_path, 'r', encoding='utf-8') as f:
+            snapshot_content = f.read()
+        
+        # 添加快照页面的头部信息
+        snapshot_header = '''
+        <div style="background-color: #f0f0f0; padding: 10px; border-bottom: 2px solid #ccc; font-family: Arial, sans-serif;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h3 style="margin: 0; color: #333;">🔍 网页快照</h3>
+                <p style="margin: 5px 0; color: #666;">
+                    这是该网页在被爬虫抓取时的备份版本。当前页面可能已经发生变化。
+                    <a href="javascript:history.back()" style="color: #1a73e8; text-decoration: none; margin-left: 20px;">
+                        ← 返回搜索结果
+                    </a>
+                </p>
+            </div>
+        </div>
+        '''
+        
+        # 如果快照内容包含<body>标签，在其后插入头部信息
+        if '<body>' in snapshot_content.lower():
+            snapshot_content = snapshot_content.replace('<body>', f'<body>{snapshot_header}', 1)
+        elif '<html>' in snapshot_content.lower():
+            # 如果没有body标签但有html标签，在html标签后插入
+            snapshot_content = snapshot_content.replace('<html>', f'<html>{snapshot_header}', 1)
+        else:
+            # 如果都没有，在内容开头插入
+            snapshot_content = snapshot_header + snapshot_content
+        
+        # 返回快照内容
+        from flask import Response
+        return Response(snapshot_content, mimetype='text/html')
+        
+    except Exception as e:
+        current_app.logger.error(f"Error reading snapshot file {snapshot_path}: {e}")
+        abort(500)

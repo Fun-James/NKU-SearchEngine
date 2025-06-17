@@ -233,10 +233,32 @@ def fetch_page(url, max_retries=1, allowed_domains=None):  # 修改 max_retries 
             # 明确释放BeautifulSoup对象和response内容以节省内存
             del soup
             response_text = response.text  # 保存需要的内容
-            del response  # 释放response对象            # 临时保存快照路径（不实际保存文件，减少磁盘I/O）
+            del response  # 释放response对象            # 生成快照路径并保存快照文件
             snapshot_path = None
-            # 注释掉快照保存功能以减少内存和磁盘压力
-            # 如果需要快照功能，可以考虑只保存重要页面或定期清理
+            try:
+                import hashlib
+                import os
+                from config import Config
+                
+                # 为URL生成唯一的文件名
+                url_hash = hashlib.md5(url.encode('utf-8')).hexdigest()
+                snapshot_filename = f"{url_hash}.html"
+                
+                # 确保快照目录存在
+                snapshot_folder = Config.SNAPSHOT_FOLDER
+                os.makedirs(snapshot_folder, exist_ok=True)
+                
+                # 保存快照文件
+                snapshot_file_path = os.path.join(snapshot_folder, snapshot_filename)
+                with open(snapshot_file_path, 'w', encoding='utf-8') as f:
+                    f.write(response_text)
+                
+                snapshot_path = url_hash  # 存储文件名（不包含.html扩展名）
+                print(f"快照已保存: {snapshot_filename}")
+                
+            except Exception as e:
+                print(f"保存快照失败 {url}: {e}")
+                snapshot_path = None
 
             return {
                 'url': url,  # 保留原始URL
@@ -272,10 +294,32 @@ def fetch_page(url, max_retries=1, allowed_domains=None):  # 修改 max_retries 
                     response_text_https = response.text
                     del soup
                     del response
-                    
-                    # 临时保存快照路径（HTTPS回退时也不保存快照）
+                      # 生成快照路径并保存快照文件（HTTPS回退）
                     snapshot_path_https = None
-                    # 注释掉HTTPS回退时的快照保存
+                    try:
+                        import hashlib
+                        import os
+                        from config import Config
+                        
+                        # 为URL生成唯一的文件名
+                        url_hash = hashlib.md5(url.encode('utf-8')).hexdigest()
+                        snapshot_filename = f"{url_hash}.html"
+                        
+                        # 确保快照目录存在
+                        snapshot_folder = Config.SNAPSHOT_FOLDER
+                        os.makedirs(snapshot_folder, exist_ok=True)
+                        
+                        # 保存快照文件
+                        snapshot_file_path = os.path.join(snapshot_folder, snapshot_filename)
+                        with open(snapshot_file_path, 'w', encoding='utf-8') as f:
+                            f.write(response_text_https)
+                        
+                        snapshot_path_https = url_hash  # 存储文件名（不包含.html扩展名）
+                        print(f"快照已保存（HTTPS回退）: {snapshot_filename}")
+                        
+                    except Exception as e:
+                        print(f"保存快照失败（HTTPS回退） {url}: {e}")
+                        snapshot_path_https = None
 
                     return {
                         'url': url,
@@ -686,59 +730,7 @@ def process_nankai_special_urls(url, link_text=None):
                 if re.search(r'\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$', filename, re.IGNORECASE):
                     return filename
     
-    # 处理南开大学常见的上传文件URL模式
-    # 例如: http://jwc.nankai.edu.cn/_upload/article/files/d7/c8/67bb3d2a48a6ab0f01e0697673df/14193c8f-1179-4175-8852-311d3c0093a4.doc
-    if '/_upload/article/files/' in url or '/upload/article/files/' in url:
-        # 检查链接文本是否包含文件描述信息
-        if link_text and len(link_text) > 5:
-            # 只使用链接文本中的有效部分（避免太长）
-            clean_text = re.sub(r'[\\/*?:"<>|]', '_', link_text[:100])
-            
-            # 获取文件扩展名
-            _, ext = os.path.splitext(basename)
-            if not ext or ext.lower() not in ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx']:
-                # 如果链接文本暗示了文件类型，添加相应扩展名
-                if '文档' in link_text or 'word' in link_text.lower():
-                    ext = '.doc'
-                elif '表格' in link_text or 'excel' in link_text.lower():
-                    ext = '.xls'
-                elif '演示' in link_text or 'ppt' in link_text.lower():
-                    ext = '.ppt'
-                elif '附件' in link_text:
-                    ext = '.doc'  # 默认使用doc
-                else:
-                    ext = '.doc'  # 默认文档类型
-                    
-            return f"{clean_text}{ext}"
     
-    # 从URL中提取哈希值或ID部分，然后查找是否包含"附件"字样
-    hash_match = re.search(r'/([a-f0-9\-]{8,})\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$', url, re.IGNORECASE)
-    if hash_match and link_text:
-        # 查找链接文本或周围上下文中是否包含"附件"字样
-        attachment_match = re.search(r'附件\d+[- ](.*)', link_text)
-        if attachment_match:
-            # 清理并使用附件文本
-            attachment_text = attachment_match.group(1).strip()
-            file_ext = hash_match.group(2)
-            return f"附件-{attachment_text}.{file_ext}"
-    
-    # 如果URL中包含特定格式模式
-    if '/feb482194347a6fa415f145d8178/' in url:
-        # 这是您图片中显示的特定模式
-        # 尝试从URL最后部分提取有意义的信息
-        basename = os.path.basename(path)
-        _, ext = os.path.splitext(basename)
-        
-        # 检查是否能找到实际附件名称
-        if "附件1-2025年度天津市教育工作重点调研课题指南" in link_text:
-            return "附件1-2025年度天津市教育工作重点调研课题指南.docx"
-        elif "附件2-天津市教育工作重点调研课题申报表" in link_text:
-            return "附件2-天津市教育工作重点调研课题申报表.doc"
-        elif "附件3-2025年度天津市教育工作重点调研课题申报汇总表" in link_text:
-            return "附件3-2025年度天津市教育工作重点调研课题申报汇总表.xls"
-    
-    return None
-
 def extract_meaningful_filename(url, link_text=None, context=None):
     """从URL和链接文本中提取有意义的文件名
     

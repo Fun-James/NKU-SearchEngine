@@ -85,9 +85,14 @@
             
             <ul class="results-list">
                 {% for result in results %}
-                <li class="result-item">
-                    <h2>
-                        <a href="{{ result.url }}" target="_blank">
+                <li class="result-item">                    <h2>
+                        <a href="{{ result.url }}" 
+                           target="_blank" 
+                           {% if result.snapshot_path and not (result.is_attachment or search_type == 'document') %}
+                           data-snapshot-available="true"
+                           data-result-index="{{ loop.index }}"
+                           {% endif %}
+                           class="result-link">
                             {% if "[" in result.title and "]" in result.title %}
                                 {{ result.title | safe }}
                             {% else %}
@@ -106,9 +111,19 @@
                             {% if result.file_type and result.file_type != '未知文档' %}
                                 <span class="file-type">文件类型: {{ result.file_type }}</span>
                             {% endif %}
-                        </p>                    {% endif %}
-                    <p class="result-url">{{ result.url }}</p>
-                    <p class="result-snippet">{{ result.snippet | safe }}</p>
+                        </p>                    {% endif %}                    <p class="result-url">{{ result.url }}</p>
+                    <p class="result-snippet">{{ result.snippet | safe }}</p>                      <!-- 快照链接 - 被动显示逻辑 -->
+                    <div class="result-actions" id="actions-{{ loop.index }}">
+                        {% if result.snapshot_path and not (result.is_attachment or search_type == 'document') %}
+                            <!-- 快照链接初始隐藏，只在需要时显示 -->
+                            <div class="snapshot-container" id="snapshot-container-{{ loop.index }}" style="display: none;">
+                                <span class="url-inaccessible">原页面无法访问，</span>
+                                <a href="{{ url_for('main.view_snapshot', snapshot_id=result.snapshot_path) }}" 
+                                   class="snapshot-link" 
+                                   target="_blank">查看网页快照</a>
+                            </div>
+                        {% endif %}
+                    </div>
                     
                     <!-- 个性化分数显示（调试信息） -->
                     {% if result.personalized_score is defined and result.personalized_score > 0 %}
@@ -179,7 +194,111 @@
             <p>没有找到与 "{{ query }}" 相关的结果。</p>
         {% else %}
              <p>请输入关键词进行搜索。</p>
-        {% endif %}
-    </div>
+        {% endif %}    </div>
+
+<script>
+// 被动快照显示逻辑
+document.addEventListener('DOMContentLoaded', function() {
+    // 监听所有结果链接的点击事件
+    const resultLinks = document.querySelectorAll('.result-link[data-snapshot-available="true"]');
+    
+    resultLinks.forEach(link => {
+        const resultIndex = link.getAttribute('data-result-index');
+        const originalUrl = link.href;
+        
+        // 添加点击事件监听器
+        link.addEventListener('click', function(event) {
+            // 不阻止默认行为，让链接正常打开
+            // 但是设置一个延时检查，如果用户返回页面，可能说明链接有问题
+            setTimeout(() => {
+                checkIfUserReturned(resultIndex, originalUrl);
+            }, 3000); // 3秒后检查
+        });
+        
+        // 也可以监听链接的错误事件（当图片或其他资源加载失败时）
+        link.addEventListener('error', function() {
+            showSnapshotOption(resultIndex);
+        });
+    });
+    
+    // 添加"显示快照"按钮到每个有快照的结果
+    resultLinks.forEach(link => {
+        const resultIndex = link.getAttribute('data-result-index');
+        const actionsDiv = document.getElementById(`actions-${resultIndex}`);
+        
+        if (actionsDiv) {
+            // 创建一个小按钮让用户主动选择查看快照
+            const showSnapshotBtn = document.createElement('button');
+            showSnapshotBtn.textContent = '页面打不开？试试快照';
+            showSnapshotBtn.className = 'show-snapshot-btn';
+            showSnapshotBtn.style.cssText = `
+                background: none;
+                border: none;
+                color: #1a73e8;
+                text-decoration: underline;
+                cursor: pointer;
+                font-size: 12px;
+                padding: 2px 4px;
+                margin-left: 10px;
+            `;
+            
+            showSnapshotBtn.onclick = function() {
+                showSnapshotOption(resultIndex);
+                this.style.display = 'none';
+            };
+            
+            actionsDiv.appendChild(showSnapshotBtn);
+        }
+    });
+});
+
+// 检查用户是否返回了页面（可能表示链接有问题）
+function checkIfUserReturned(resultIndex, url) {
+    // 这个功能在实际浏览器环境中比较难实现
+    // 我们主要依赖用户主动点击"试试快照"按钮
+}
+
+// 显示快照选项
+function showSnapshotOption(resultIndex) {
+    const snapshotContainer = document.getElementById(`snapshot-container-${resultIndex}`);
+    if (snapshotContainer) {
+        snapshotContainer.style.display = 'block';
+    }
+}
+
+// 监听页面焦点事件，当用户从其他标签页返回时可能表示链接有问题
+let linkClickTimes = {};
+
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+        // 页面重新获得焦点，检查是否是因为链接问题返回的
+        const now = Date.now();
+        Object.keys(linkClickTimes).forEach(resultIndex => {
+            const clickTime = linkClickTimes[resultIndex];
+            if (now - clickTime < 10000 && now - clickTime > 1000) {
+                // 1-10秒内返回，可能是链接有问题
+                const showSnapshotBtn = document.querySelector(`#actions-${resultIndex} .show-snapshot-btn`);
+                if (showSnapshotBtn) {
+                    showSnapshotBtn.style.backgroundColor = '#fff3cd';
+                    showSnapshotBtn.style.border = '1px solid #ffeaa7';
+                    showSnapshotBtn.textContent = '链接有问题？点击查看快照';
+                }
+            }
+            delete linkClickTimes[resultIndex];
+        });
+    }
+});
+
+// 记录链接点击时间
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('result-link')) {
+        const resultIndex = event.target.getAttribute('data-result-index');
+        if (resultIndex) {
+            linkClickTimes[resultIndex] = Date.now();
+        }
+    }
+});
+</script>
+
 </body>
 </html>

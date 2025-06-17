@@ -11,10 +11,11 @@
   - 支持复杂查询语法（AND、OR、NOT运算）
   - 支持短语搜索（使用引号）
   - 提供高级搜索表单
+  - 支持文档搜索、聚类、智能建议、个性化排序等
 - **用户体验**：
   - 搜索结果高亮显示
   - 搜索结果聚类
-  - 搜索建议和拼写纠正
+  - 搜索建议和拼写纠正（基于pypinyin、pycorrector）
   - 搜索结果分页
   - 搜索历史记录
   - 响应式网页设计
@@ -31,22 +32,39 @@ hw4/                      # 项目根目录
 │   │   └── spider.py     # 爬虫实现
 │   ├── indexer/          # 索引模块
 │   │   ├── __init__.py
-│   │   └── es_indexer.py # ES索引器
-│   ├── main/             # 主要蓝图
+│   │   ├── es_indexer.py # ES索引器
+│   │   └── search_history_indexer.py # 搜索历史索引
+│   ├── main/             # 主要蓝图及功能模块
 │   │   ├── __init__.py
 │   │   ├── routes.py     # 路由定义
-│   │   ├── query_parser.py    # 查询解析
+│   │   ├── query_parser.py    # 查询解析（旧）
+│   │   ├── query_parser_new.py # 查询解析（新）
 │   │   ├── result_clustering.py  # 结果聚类
-│   │   └── search_suggestion.py  # 搜索建议
+│   │   ├── search_suggestion.py  # 搜索建议
+│   │   ├── intelligent_search_suggestion.py # 智能建议
+│   │   ├── personalized_ranking.py # 个性化排序
+│   │   └── document_search.py # 文档搜索
 │   ├── static/           # 静态文件
 │   │   ├── css/
+│   │   │   └── style.css
 │   │   └── js/
+│   │       └── search.js
 │   ├── templates/        # 模板文件
+│   │   ├── index.html
+│   │   ├── login.html
+│   │   ├── search_results.html
+│   │   ├── search_history.html
+│   │   └── errors/
+│   │       ├── 404.html
+│   │       ├── 500.html
+│   │       └── 503.html
 │   └── data/             # 数据目录
+│       └── search_history.json
 ├── config.py             # 配置文件
 ├── run.py                # 运行入口
 ├── crawl_and_index.py    # 爬取和索引脚本
-└── requirements.txt      # 项目依赖
+├── requirements.txt      # 项目依赖
+└── ...  # 其他脚本
 ```
 
 ## 安装与配置

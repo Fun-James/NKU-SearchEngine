@@ -62,11 +62,11 @@ def create_index_if_not_exists(es, index_name):
                     "title": {"type": "text", "analyzer": "nku_analyzer", "search_analyzer": "ik_smart"},
                     "content": {"type": "text", "analyzer": "nku_analyzer", "search_analyzer": "ik_smart"},
                     "anchor_text": {"type": "text", "analyzer": "nku_analyzer", "search_analyzer": "ik_smart"},
-                    "pagerank": {"type": "rank_feature"},
-                    "last_modified": {"type": "date"},
-                    "file_type": {"type": "keyword"},  # 新增字段，用于存储文件类型
-                    "mime_type": {"type": "keyword"},  # 新增字段，用于存储MIME类型
-                    "is_document": {"type": "boolean"}, # 新增字段，标记是否为文档
+                    #"pagerank": {"type": "rank_feature"},
+                    "last_modified": {"type": "date"},                    "file_type": {"type": "keyword"},  # 新增字段，用于存储文件类型
+                    "mime_type": {"type": "keyword"}, 
+                    "is_document": {"type": "boolean"},
+                    "snapshot_path": {"type": "keyword"}, 
                     
                     # Completion Suggester 字段
                     "title_suggest": {
@@ -186,10 +186,10 @@ def bulk_index_documents(es, index_name, documents, max_retries=3):
             "_source": {
                 "url": doc.get('url'),
                 "title": title,
-                "content": doc.get('content', ''),
-                "is_attachment": is_attachment,
+                "content": doc.get('content', ''),                "is_attachment": is_attachment,
                 "file_type": file_type,
                 "mime_type": mime_type,
+                "snapshot_path": doc.get('snapshot_path'),  # 新增快照路径字段
                 "anchor_texts": [
                     {
                         "text": a.get('text', ''),

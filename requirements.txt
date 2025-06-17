@@ -1,12 +1,14 @@
-requests>=2.27.1
-beautifulsoup4>=4.11.1
-elasticsearch>=7.17.0,<8.0.0
-Flask>=2.0.1
-jieba>=0.42.1
-python-dotenv>=0.19.2
-# 以下库用于改善搜索体验
-lxml>=4.8.0  # 用于更快的HTML解析
-Werkzeug>=2.0.0  # Flask依赖
-urllib3>=1.26.9  # requests和elasticsearch的依赖
-pypinyin>=0.40.0
-pycorrector>=0.5.0
+requests>=2.27.1           # 网页请求
+beautifulsoup4>=4.11.1     # HTML解析
+elasticsearch>=7.17.0,<8.0.0 # ES客户端
+Flask>=2.0.1               # Web框架
+jieba>=0.42.1              # 中文分词
+python-dotenv>=0.19.2      # 环境变量管理
+lxml>=4.8.0                # 更快的HTML解析
+Werkzeug>=2.0.0            # Flask依赖
+urllib3>=1.26.9            # requests和elasticsearch依赖
+pypinyin>=0.40.0           # 拼音支持（搜索建议/纠错）
+pycorrector>=0.5.0         # 拼写纠正
+# 如有用到用户认证/表单等功能，可补充如下依赖：
+# flask-login>=0.6.2        # 用户登录管理
+# flask-wtf>=1.0.1          # 表单处理
